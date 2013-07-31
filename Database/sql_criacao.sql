@@ -1,24 +1,36 @@
 
+CREATE SEQUENCE tipo_projeto_id_tipo_proj_seq_1;
+
 CREATE TABLE tipo_projeto (
-                id_tipo_proj INTEGER NOT NULL,
+                id_tipo_proj INTEGER NOT NULL DEFAULT nextval('tipo_projeto_id_tipo_proj_seq_1'),
                 descricao VARCHAR(40) NOT NULL,
                 CONSTRAINT id_tipo_proj_pk PRIMARY KEY (id_tipo_proj)
 );
 
 
+ALTER SEQUENCE tipo_projeto_id_tipo_proj_seq_1 OWNED BY tipo_projeto.id_tipo_proj;
+
+CREATE SEQUENCE projeto_id_proj_seq;
+
 CREATE TABLE projeto (
-                id_proj INTEGER NOT NULL,
+                id_proj INTEGER NOT NULL DEFAULT nextval('projeto_id_proj_seq'),
                 id_tipo_proj INTEGER NOT NULL,
                 CONSTRAINT id_pk PRIMARY KEY (id_proj)
 );
 
 
+ALTER SEQUENCE projeto_id_proj_seq OWNED BY projeto.id_proj;
+
+CREATE SEQUENCE permissao_id_perm_seq;
+
 CREATE TABLE permissao (
-                id_perm INTEGER NOT NULL,
+                id_perm INTEGER NOT NULL DEFAULT nextval('permissao_id_perm_seq'),
                 descricao VARCHAR(30) NOT NULL,
                 CONSTRAINT id_perm_pk PRIMARY KEY (id_perm)
 );
 
+
+ALTER SEQUENCE permissao_id_perm_seq OWNED BY permissao.id_perm;
 
 CREATE TABLE usuario (
                 login VARCHAR(30) NOT NULL,
