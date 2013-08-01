@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/gipa_database</property>
+    <property name="hibernate.connection.username">postgres</property>
+    <property name="hibernate.connection.password">postgres</property>
+    
+    <!-- Pool de conexões via C3P0 -->
+    <property name="hibernate.c3p0.min_size">1</property> <!-- Mínimo de conexões no pool -->
+    <property name="hibernate.c3p0.max_size">7</property> <!-- Máximo de conexões no pool -->
+    <property name="hibernate.c3p0.timeout">300</property> <!-- Tempo máximo de duração de um comando (segundos) -->
+    <property name="hibernate.c3p0.max_statements">50</property> <!-- Máximo de comandos executando simultâneamente -->
+    <property name="hibernate.c3p0.idle_test_period">120</property> <!-- Intervalo entre verificaçẽos de conexões ativas -->
+    <property name="hibernate.c3p0.acquire_increment">1</property> <!-- Tempo entre uma tentativa e outra de conseguir adquirir uma conexão -->
+  </session-factory>
+</hibernate-configuration>
