@@ -22,7 +22,7 @@
     <column id="COL4" populated="true" UUID="231f258b-0e40-4883-8cda-0a3f5af583d4" autoIncrement="false" autoIncrementSequenceName="usuario_nome_seq" defaultValue="" name="Nome" nullable="0" physicalName="nome" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL5" populated="true" UUID="88698da0-e623-4aa0-9c1b-73503d73f5d2" autoIncrement="false" autoIncrementSequenceName="tipo_autorizacao_id_seq" defaultValue="" name="ID" nullable="0" physicalName="id" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+    <column id="COL5" populated="true" UUID="88698da0-e623-4aa0-9c1b-73503d73f5d2" autoIncrement="false" autoIncrementSequenceName="tipo_autorizacao_id_perm_seq" defaultValue="" name="ID" nullable="0" physicalName="id_perm" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
     </folder>
@@ -51,7 +51,7 @@
     <folder id="FOLTAB82" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
     </folder>
     <folder id="FOLTAB84" populated="true" name="Indices" physicalName="Indices" type="4">
-    <index id="IDX11" populated="true" UUID="f9a6e7a7-b200-4207-9184-d58a54423d08" clustered="false" name="id_perm_pk" physicalName="id_pk" primaryKeyIndex="true" unique="false" >
+    <index id="IDX11" populated="true" UUID="f9a6e7a7-b200-4207-9184-d58a54423d08" clustered="false" name="id_perm_pk" physicalName="id_perm_pk" primaryKeyIndex="true" unique="false" >
      <index-column id="IDC12" populated="true" UUID="de9e6369-88fb-4993-91d1-cb68c54946df" ascendingOrDescending="UNSPECIFIED" column-ref="COL9" name="ID" physicalName="id_perm" />
     </index>
    </folder>
@@ -68,7 +68,7 @@
     <folder id="FOLTAB132" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
     </folder>
     <folder id="FOLTAB134" populated="true" name="Indices" physicalName="Indices" type="4">
-    <index id="IDX15" populated="true" UUID="14c5097b-2adb-4be9-a16e-8828bd5f1c7d" clustered="false" name="login_pk" physicalName="login_pk" primaryKeyIndex="true" unique="false" >
+    <index id="IDX15" populated="true" UUID="14c5097b-2adb-4be9-a16e-8828bd5f1c7d" clustered="false" name="pr_reitor_login_pk" physicalName="pr_reitor_login_pk" primaryKeyIndex="true" unique="false" >
      <index-column id="IDC16" populated="true" UUID="5d0c55ea-1a96-491c-82c5-dde022078e3f" ascendingOrDescending="UNSPECIFIED" column-ref="COL14" name="login" physicalName="login" />
     </index>
    </folder>
@@ -76,7 +76,7 @@
   <table id="TAB17" populated="true" UUID="6c9005d1-6461-4afe-94b7-b370c1c3dc50" name="Aluno" objectType="TABLE" physicalName="aluno" >
    <remarks></remarks>
    <folder id="FOLTAB171" populated="true" name="Columns" physicalName="Columns" type="1">
-    <column id="COL18" populated="true" UUID="6de7a099-dba1-4cd5-9620-9ec657da1367" autoIncrement="false" autoIncrementSequenceName="usuario_login_seq" defaultValue="" name="login" nullable="0" physicalName="login" precision="30" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL18" populated="true" UUID="6de7a099-dba1-4cd5-9620-9ec657da1367" autoIncrement="false" autoIncrementSequenceName="aluno_login_seq" defaultValue="" name="login" nullable="0" physicalName="login" precision="30" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
     </folder>
@@ -85,7 +85,7 @@
     <folder id="FOLTAB172" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
     </folder>
     <folder id="FOLTAB174" populated="true" name="Indices" physicalName="Indices" type="4">
-    <index id="IDX19" populated="true" UUID="2fd33bee-61c9-47c8-b5ef-59123066e545" clustered="false" name="login_pk" physicalName="login_pk" primaryKeyIndex="true" unique="false" >
+    <index id="IDX19" populated="true" UUID="2fd33bee-61c9-47c8-b5ef-59123066e545" clustered="false" name="aluno_login_pk" physicalName="aluno_login_pk" primaryKeyIndex="true" unique="false" >
      <index-column id="IDC20" populated="true" UUID="6e007b5b-3ce8-4f39-b932-1354f670ab29" ascendingOrDescending="UNSPECIFIED" column-ref="COL18" name="login" physicalName="login" />
     </index>
    </folder>
@@ -93,7 +93,7 @@
   <table id="TAB21" populated="true" UUID="fc16505b-bb4b-4900-a574-157e00ad7fb3" name="Professor" objectType="TABLE" physicalName="professor" >
    <remarks></remarks>
    <folder id="FOLTAB211" populated="true" name="Columns" physicalName="Columns" type="1">
-    <column id="COL22" populated="true" UUID="eccd51a0-e096-4d12-8cae-604cf319078f" autoIncrement="false" autoIncrementSequenceName="usuario_login_seq" defaultValue="" name="login" nullable="0" physicalName="login" precision="30" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL22" populated="true" UUID="eccd51a0-e096-4d12-8cae-604cf319078f" autoIncrement="false" autoIncrementSequenceName="professor_login_seq" defaultValue="" name="login" nullable="0" physicalName="login" precision="30" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
     </folder>
@@ -102,7 +102,7 @@
     <folder id="FOLTAB212" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
     </folder>
     <folder id="FOLTAB214" populated="true" name="Indices" physicalName="Indices" type="4">
-    <index id="IDX23" populated="true" UUID="2f1bb8fe-8337-455d-be54-c622d0aa164b" clustered="false" name="login_pk" physicalName="login_pk" primaryKeyIndex="true" unique="false" >
+    <index id="IDX23" populated="true" UUID="2f1bb8fe-8337-455d-be54-c622d0aa164b" clustered="false" name="professor_login_pk" physicalName="professor_login_pk" primaryKeyIndex="true" unique="false" >
      <index-column id="IDC24" populated="true" UUID="62ad5405-1e7b-4ba4-a5f7-902281e6c048" ascendingOrDescending="UNSPECIFIED" column-ref="COL22" name="login" physicalName="login" />
     </index>
    </folder>
@@ -110,7 +110,7 @@
   <table id="TAB25" populated="true" UUID="6634f9a0-5ba8-4c6e-98c7-d8d93ea4a226" name="Coordenador" objectType="TABLE" physicalName="coordenador" >
    <remarks></remarks>
    <folder id="FOLTAB251" populated="true" name="Columns" physicalName="Columns" type="1">
-    <column id="COL26" populated="true" UUID="67d2e828-4151-4418-b265-1b8699eb8b27" autoIncrement="false" autoIncrementSequenceName="usuario_login_seq" defaultValue="" name="login" nullable="0" physicalName="login" precision="30" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL26" populated="true" UUID="67d2e828-4151-4418-b265-1b8699eb8b27" autoIncrement="false" autoIncrementSequenceName="coordenador_login_seq" defaultValue="" name="login" nullable="0" physicalName="login" precision="30" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
     </folder>
@@ -119,7 +119,7 @@
     <folder id="FOLTAB252" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
     </folder>
     <folder id="FOLTAB254" populated="true" name="Indices" physicalName="Indices" type="4">
-    <index id="IDX27" populated="true" UUID="ec1a4b14-d7f8-499a-b64f-de1d1b921497" clustered="false" name="login_pk" physicalName="login_pk" primaryKeyIndex="true" unique="false" >
+    <index id="IDX27" populated="true" UUID="ec1a4b14-d7f8-499a-b64f-de1d1b921497" clustered="false" name="coordenador_login_ok" physicalName="coordenador_login_ok" primaryKeyIndex="true" unique="false" >
      <index-column id="IDC28" populated="true" UUID="00ea85cb-7567-437c-941b-2b95d02f794e" ascendingOrDescending="UNSPECIFIED" column-ref="COL26" name="login" physicalName="login" />
     </index>
    </folder>
@@ -147,10 +147,10 @@
   <table id="TAB34" populated="true" UUID="f11eccc8-f7d2-4d82-89f0-344287ee5a3c" name="Participante" objectType="TABLE" physicalName="participante" >
    <remarks></remarks>
    <folder id="FOLTAB341" populated="true" name="Columns" physicalName="Columns" type="1">
-    <column id="COL35" populated="true" UUID="c7281d0d-f24a-45e9-be44-c2cc43b4c025" autoIncrement="false" autoIncrementSequenceName="projeto_id_seq" defaultValue="" name="ID" nullable="0" physicalName="id" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+    <column id="COL35" populated="true" UUID="c7281d0d-f24a-45e9-be44-c2cc43b4c025" autoIncrement="false" autoIncrementSequenceName="projeto_id_particip_seq" defaultValue="" name="ID" nullable="0" physicalName="id_particip" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
-    <column id="COL36" populated="true" UUID="a03a8a65-0e90-4d8d-8435-b7c158cc7dd7" autoIncrement="false" autoIncrementSequenceName="usuario_login_seq" defaultValue="" name="login" nullable="0" physicalName="login" precision="30" primaryKeySeq="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL36" populated="true" UUID="a03a8a65-0e90-4d8d-8435-b7c158cc7dd7" autoIncrement="false" autoIncrementSequenceName="usuario_login_seq_1" defaultValue="" name="login" nullable="0" physicalName="login" precision="30" primaryKeySeq="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
     </folder>
@@ -160,7 +160,7 @@
     </folder>
     <folder id="FOLTAB344" populated="true" name="Indices" physicalName="Indices" type="4">
     <index id="IDX37" populated="true" UUID="174e4957-a2e7-4f47-a702-bb88cb25b187" clustered="false" name="part_proj_pk" physicalName="part_proj_pk" primaryKeyIndex="true" unique="false" >
-     <index-column id="IDC38" populated="true" UUID="18a5c886-0ef6-449f-96ca-deeeec22115c" ascendingOrDescending="UNSPECIFIED" column-ref="COL35" name="ID" physicalName="id" />
+     <index-column id="IDC38" populated="true" UUID="18a5c886-0ef6-449f-96ca-deeeec22115c" ascendingOrDescending="UNSPECIFIED" column-ref="COL35" name="ID" physicalName="id_particip" />
      <index-column id="IDC39" populated="true" UUID="713fc68d-63ea-4ed5-9ec3-71843d9eadbe" ascendingOrDescending="UNSPECIFIED" column-ref="COL36" name="login" physicalName="login" />
     </index>
    </folder>
@@ -168,7 +168,7 @@
   <table id="TAB40" populated="true" UUID="2ae582a3-5739-43b4-ab76-bbd200495e2f" name="Tipo_Projeto" objectType="TABLE" physicalName="tipo_projeto" >
    <remarks></remarks>
    <folder id="FOLTAB401" populated="true" name="Columns" physicalName="Columns" type="1">
-    <column id="COL41" populated="true" UUID="f90d37ba-95fd-4473-bc9b-d3664893d1fa" autoIncrement="true" autoIncrementSequenceName="tipo_projeto_id_tipo_proj_seq" defaultValue="" name="ID_TIPO_PROJ" nullable="0" physicalName="id_tipo_proj" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+    <column id="COL41" populated="true" UUID="f90d37ba-95fd-4473-bc9b-d3664893d1fa" autoIncrement="true" autoIncrementSequenceName="tipo_projeto_id_tipo_proj_seq_1" defaultValue="" name="ID_TIPO_PROJ" nullable="0" physicalName="id_tipo_proj" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
     <column id="COL42" populated="true" UUID="bf74d15d-eee9-4c39-8e76-fdec1b671103" autoIncrement="false" autoIncrementSequenceName="tipo_projeto_descricao_seq" defaultValue="" name="Descrição" nullable="0" physicalName="descricao" precision="40" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
@@ -212,7 +212,7 @@
    </relationship>
   </relationships>
  </target-database>
- <ddl-generator type="ca.sqlpower.architect.ddl.GenericDDLGenerator" allow-connection="true"> </ddl-generator>
+ <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="false" target-schema="public"> </ddl-generator>
  <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  <create-kettle-job-settings filePath="" jobName="" schemaName="" kettleJoinType="0" savingToFile="true" />
  <play-pen zoom="1.0" viewportX="0" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
