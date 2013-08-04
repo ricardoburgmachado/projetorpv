@@ -1,11 +1,13 @@
-
 package br.com.model;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.HashMap;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class Projeto {
-    
+
     private int id;
     private String titulo;
     private String palavrasChave;
@@ -13,16 +15,16 @@ public class Projeto {
     private TipoProjeto tipoProjeto;
     private ArrayList participantes;
     private Professor professor;
-    private String arquivo;
-    private Map custeio;
-    private Map capital;
+    //private String arquivo;
+    private MultipartFile arquivo;
+
+    ArrayList<Custo> custeios;
+    ArrayList<Custo> capitais;
+
     private String areaConhecimento;
     private Campus campus;
+    private boolean sigilo;
 
-    
-    
-    
-    
     /**
      * @return the id
      */
@@ -124,45 +126,72 @@ public class Projeto {
     /**
      * @return the arquivo
      */
-    public String getArquivo() {
+    public MultipartFile getArquivo() {
         return arquivo;
     }
 
     /**
      * @param arquivo the arquivo to set
      */
-    public void setArquivo(String arquivo) {
+    public void setArquivo(MultipartFile arquivo) {
         this.arquivo = arquivo;
     }
 
     /**
-     * @return the custeio
+     * Método utilizado no cadastro de um projeto
+     * @param custeioVal
+     * @param custeioDesc 
      */
-    public Map getCusteio() {
-        return custeio;
+    public void setCusteios(String[] custeioVal, String[] custeioDesc) {
+        this.custeios = new ArrayList<Custo>();
+        for (int i = 0; i < custeioVal.length; i++) {
+            if(valorValido(custeioVal[i]) && descricaoValida(custeioDesc[i])){
+                this.custeios.add(new Custo(TipoCusto.CUSTEIO, custeioDesc[i], Double.parseDouble(custeioVal[i])));
+            }
+        } 
     }
-
+    
+    public ArrayList<Custo> getCusteios(){
+        return this.custeios;
+    }
+    
+    public ArrayList<Custo> getCapitais(){
+        return this.capitais;
+    }
+    
+    
     /**
-     * @param custeio the custeio to set
+     * Método utilizado no cadastro de um projeto
+     * @param custeioVal
+     * @param custeioDesc 
      */
-    public void setCusteio(Map custeio) {
-        this.custeio = custeio;
+    public void setCapitais(String[] capitalVal, String[] capitalDesc) {
+        this.capitais = new ArrayList<Custo>();
+        for (int i = 0; i < capitalVal.length; i++) {
+            if(valorValido(capitalVal[i]) && descricaoValida(capitalDesc[i])){
+                this.capitais.add(new Custo(TipoCusto.CAPITAL, capitalDesc[i], Double.parseDouble(capitalVal[i])));
+            }
+        } 
     }
 
-    /**
-     * @return the capital
-     */
-    public Map getCapital() {
-        return capital;
+    public boolean valorValido(String valor) {
+        try {
+            double temp = Double.parseDouble(valor);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
-    /**
-     * @param capital the capital to set
-     */
-    public void setCapital(Map capital) {
-        this.capital = capital;
+    public boolean descricaoValida(String desc) {       
+        if(!desc.isEmpty() && desc != ""){
+            return true;
+        }else{
+            return false;
+        }
     }
-
+    
+    
     /**
      * @return the areaConhecimento
      */
@@ -190,6 +219,19 @@ public class Projeto {
     public void setCampus(Campus campus) {
         this.campus = campus;
     }
-    
-    
+
+    /**
+     * @return the sigilo
+     */
+    public boolean getSigilo() {
+        return sigilo;
+    }
+
+    /**
+     * @param sigilo the sigilo to set
+     */
+    public void setSigilo(boolean sigilo) {
+        this.sigilo = sigilo;
+    }
+
 }

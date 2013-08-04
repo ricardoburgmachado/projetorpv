@@ -1,3 +1,4 @@
+<%@page import="br.com.model.TipoProjeto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -16,10 +17,10 @@
         <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" />
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>        
-        <script type="text/javascript" src="assets/prettify.js"></script>        
+         
         <script type="text/javascript" src="<c:url value="recursos/js/multiselect/src/jquery.multiselect.js"/>" ></script>
         <script type="text/javascript" src="<c:url value="recursos/js/multiselect/src/jquery.multiselect.filter.js"/>" ></script>
-        <script type="text/javascript" src="<c:url value="recursos/js/multiselect/assets/prettify.js"/>" ></script>
+
         <link rel="stylesheet" href="<c:url value="recursos/js/multiselect/jquery.multiselect.css"/>" />        
         <script type="text/javascript">
             $(function() {
@@ -80,6 +81,7 @@
 
             <div id="conteudo_interno">
 
+                
                 <form:form action="projeto_adiciona" modelAttribute="projeto" id="form_addprojeto" enctype="multipart/form-data">
                     <h1>Adicionar Projeto</h1>                                                                                                  
 
@@ -87,68 +89,64 @@
 
 
                         <!-- PRESTAR ATENÇÃO AQUI, DEVE SER RECUPERADO O ID DO PROFESSOR QUE ESTARÁ NA SESSÃO -->
-                        <input type="hidden" name="professor.id" />       
+                        <input type="hidden" name="id" value=1 />       
 
-                        
-                        <label for="nome">Título:</label>
+
+                        <label>Título:</label>
                         <span class="obrigatorio">*Campo obrigatório</span>
                         <input type="text" name="titulo" required="required" />       
 
-                        <label for="nome">Palavras chave:</label>
+                        <label>Palavras chave:</label>
                         <textarea name=palavrasChave cols=35 rows=3></textarea>
 
-                        <label for="nome">Resumo:</label>
+                        <label>Resumo:</label>
                         <textarea style="height: 85px; width: 500px" name=resumo cols=35 rows=5></textarea>
 
                         <span style="clear: both; display: block"></span>
 
-                        <label for="nome">Participantes:</label><br/><br/>                                                
-                        <select id="partipantes_aluno" name="demo">
-                            <option value="option1">Option 1</option>
-                            <option value="option2">Option 2</option>
-                            <option value="option3">Option 3</option>
-                            <option value="option4">Option 4</option>
-                            <option value="option5">Option 5</option>
-                            <option value="option6">Option 6</option>
-                            <option value="option7">Option 7</option>
-                        </select>
+                        <span class="bloco">
+                            <label for="nome">Participantes (alunos):</label><br/><br/>                                                
+                            <select id="partipantes_aluno" name="participantes">
+                                <option value="1">Joãozinho</option>
+                                <option value="2">Maria</option>
+                                <option value="3">Juliano</option>
+                                <option value="4">Kátia</option>                                
+                            </select>
+                        </span>
 
-
-                        <select id="partipantes_professor" name="demo">
-                            <option value="option1">Option 1</option>
-                            <option value="option2">Option 2</option>
-                            <option value="option3">Option 3</option>
-                            <option value="option4">Option 4</option>
-                            <option value="option5">Option 5</option>
-                            <option value="option6">Option 6</option>
-                            <option value="option7">Option 7</option>
-                        </select>
+                        <span class="bloco">
+                            <label for="nome">Participantes (professores):</label><br/><br/>                                                
+                            <select id="partipantes_professor" name="participantes">
+                                <option value="1">Fávio</option>
+                                <option value="2">Sérgio</option>
+                                <option value="3">Ivone</option>
+                            </select>
+                        </span>
 
                         <span style="clear: both; display: block;"></span>
 
                         <span class="bloco">
                             <label for="nome">Área de conhecimento:</label><br/><br/> 
-                            <select id="area_conhecimento" name="demo">
-                                <option value="option1">Option 1</option>
-                                <option value="option2">Option 2</option>
-                                <option value="option3">Option 3</option>
-                                <option value="option4">Option 4</option>
-                                <option value="option5">Option 5</option>
-                                <option value="option6">Option 6</option>
-                                <option value="option7">Option 7</option>
+                            <select id="area_conhecimento" name="areaConhecimento">
+                                <option selected="selected" value="">Selecione uma área</option>
+                                <option value="1">Engenharia de Software</option>
+                                <option value="2">Engenharia Elétrica</option>
+                                <option value="3">Ciência da Computação</option>
+                                <option value="4">Engeharia Civil</option>
+                                <option value="5">Engenharia Mecânica</option>
+                                <option value="6">Engenharia Florestal</option>
+                                <option value="7">Sistemas de Informação</option>
                             </select>
                         </span>
 
                         <span class="bloco">
                             <label  for="nome">Tipo projeto:</label><br/><br/> 
-                            <select id="tipo_projeto" name="demo">
-                                <option value="option1">Option 1</option>
-                                <option value="option2">Option 2</option>
-                                <option value="option3">Option 3</option>                                
+                            <select id="tipo_projeto" name="tipoProjeto">
+                                <option value="<%=TipoProjeto.PESQUISA %>">Pesquisa</option>
+                                <option value="<%=TipoProjeto.ENSINO %>">Ensino</option>
+                                <option value="<%=TipoProjeto.EXTENSAO %>">Extensão</option>                                
                             </select>
                         </span>
-
-
 
 
                         <span style="clear: both; display: block;"></span>
@@ -156,26 +154,29 @@
                         <span class="bloco">
                             <label for="custeios">Custo (custeio):</label>
                             <div class="custeios">
-                                <p class="campoCusteio" style="display: block; float: left; border: none; width: 270px; ">
-                                    <input style="width: 100px; display: block; float: left" type="text" name="custeio[]" />
-                                    <a style="width: 150px; text-decoration: none; color: red; display: block; float: left; margin-top: 10px" href="#" class="removerCusteio">Remover</a>
+                                <p class="campoCusteio" style="display: block; float: left; border: none; width: 347px; margin-top: 5px">
+                                    <input style="width: 75px; display: block; float: left" type="text" name="custeio_val_x" />
+                                    <textarea style="width: 150px; height: 35px; display: block; float: left; clear: none; margin-left: 10px; margin-top: 0px" name=custeio_desc_x cols=35 rows=3></textarea>
+                                    <a style="width: 100px; text-decoration: none; color: black; display: block; float: left; margin-top: 10px; margin-left: 5px" href="#" class="removerCusteio">Remover</a>
                                 </p>
                             </div>
                             <p>
-                                <a style="display: block; clear: both; text-decoration: none; color: green" href="#" class="adicionarCusteio">Adicionar Custeio</a>
+                                <a style="display: block; clear: both; text-decoration: none; color: black" href="#" class="adicionarCusteio">Adicionar Custeio</a>
                             </p>
                         </span>
 
                         <span class="bloco">
                             <label for="capitais">Custo (capital):</label>
                             <div class="capitais">
-                                <p class="campoCapital" style="display: block; float: left; border: none; width: 270px; ">
-                                    <input style="width: 100px; display: block; float: left" type="text" name="capital[]" />
-                                    <a style="width: 150px; text-decoration: none; color: red; display: block; float: left; margin-top: 10px" href="#" class="removerCapital">Remover</a>
+
+                                <p class="campoCapital" style="display: block; float: left; border: none; width: 347px; margin-top: 5px">
+                                    <input style="width: 75px; display: block; float: left" type="text" name="capital_val_x" />
+                                    <textarea style="width: 150px; height: 35px; display: block; float: left; clear: none; margin-left: 10px; margin-top: 0px" name=capital_desc_x cols=35 rows=3></textarea>
+                                    <a style="width: 100px; text-decoration: none; color: black; display: block; float: left; margin-top: 10px; margin-left: 5px" href="#" class="removerCapital">Remover</a>
                                 </p>
                             </div>
                             <p>
-                                <a style="display: block; clear: both; text-decoration: none; color: green" href="#" class="adicionarCapital">Adicionar Capital</a>
+                                <a style="display: block; clear: both; text-decoration: none; color: black" href="#" class="adicionarCapital">Adicionar Capital</a>
                             </p>
                         </span>
 
@@ -185,7 +186,7 @@
 
 
                         <label for="nome">Anexo (arquivo .PDF):</label>
-                        <input style="font-size: 10px; font-weight: normal; border: none; cursor: pointer" type="file" name="arquivo"/> 
+                        <input style="font-size: 10px; font-weight: normal; border: none; cursor: pointer" type="file" name="arquivo_xx"/> 
 
                         <span style="clear: both; display: block; "></span>
 

@@ -232,9 +232,10 @@ ol#menurel li a {
     
     display:block;
     float:left;
-    width:240px;
+    width:360px;
     font-weight:bold;    
-    color:#303030;   
+    color:#303030; 
+ 
 }
 
 #conteudo_interno #form_addprojeto fieldset input {
