@@ -105,8 +105,8 @@
                         <span style="clear: both; display: block"></span>
 
                         <span class="bloco">
-                            <label for="nome">Participantes (alunos):</label><br/><br/>                                                
-                            <select id="partipantes_aluno" name="participantes">
+                            <label>Participantes (alunos):</label><br/><br/>                                                
+                            <select id="partipantes_aluno" name="participantes_aluno" multiple="multiple">
                                 <option value="1">Joãozinho</option>
                                 <option value="2">Maria</option>
                                 <option value="3">Juliano</option>
@@ -116,7 +116,7 @@
 
                         <span class="bloco">
                             <label for="nome">Participantes (professores):</label><br/><br/>                                                
-                            <select id="partipantes_professor" name="participantes">
+                            <select id="partipantes_professor" name="participantes_professor" multiple="multiple">
                                 <option value="1">Fávio</option>
                                 <option value="2">Sérgio</option>
                                 <option value="3">Ivone</option>

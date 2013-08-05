@@ -13,7 +13,7 @@ public class Projeto {
     private String palavrasChave;
     private String resumo;
     private TipoProjeto tipoProjeto;
-    private ArrayList participantes;
+    private ArrayList<Usuario> participantes;
     private Professor professor;
     //private String arquivo;
     private MultipartFile arquivo;
@@ -98,17 +98,19 @@ public class Projeto {
     /**
      * @return the participantes
      */
-    public ArrayList getParticipantes() {
+    public ArrayList<Usuario> getParticipantes() {
         return participantes;
     }
 
     /**
      * @param participantes the participantes to set
      */
-    public void setParticipantes(ArrayList participantes) {
+    public void setParticipantes(ArrayList<Usuario> participantes) {
         this.participantes = participantes;
     }
 
+   
+    
     /**
      * @return the professor
      */

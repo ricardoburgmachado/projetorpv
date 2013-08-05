@@ -4,17 +4,18 @@ package br.com.model;
  *
  * @author Ricardo
  */
-public class Professor extends Usuario {
+public class Aluno extends Usuario{
     
     private String login;
     private String nome;
-    private int siape;
-
+    private int matricula;
+    private String senha;
+    
     /**
      * @return the id
      */
     public String getLogin() {
-        return login;
+        return this.login;
     }
 
     /**
@@ -39,17 +40,31 @@ public class Professor extends Usuario {
     }
 
     /**
-     * @return the siape
+     * @return the matricula
      */
-    public int getSiape() {
-        return siape;
+    public int getMatricula() {
+        return matricula;
     }
 
     /**
-     * @param siape the siape to set
+     * @param matricula the matricula to set
      */
-    public void setSiape(int siape) {
-        this.siape = siape;
+    public void setMatricula(int matricula) {
+        this.matricula = matricula;
+    }
+
+    /**
+     * @return the senha
+     */
+    public String getSenha() {
+        return senha;
+    }
+
+    /**
+     * @param senha the senha to set
+     */
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
     
 }

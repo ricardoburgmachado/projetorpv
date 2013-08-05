@@ -45,8 +45,8 @@ public class ProjetoController {
         System.out.println("TITULO: " + p_projeto.getTitulo());
         System.out.println("PALAVRAS CHAVE: " + p_projeto.getPalavrasChave());
         System.out.println("RESUMO: " + p_projeto.getResumo());
-        System.out.println("PARTICIPANTES(alunos): " + p_projeto.getParticipantes());
-        System.out.println("PARTICIPANTES(professores): " + p_projeto.getParticipantes());
+        //System.out.println("PARTICIPANTES(alunos): " + p_projeto.getParticipantes());
+        //System.out.println("PARTICIPANTES(professores): " + p_projeto.getParticipantes());
         System.out.println("ÁREA CONHECIMENTO: " + p_projeto.getAreaConhecimento());
         System.out.println("TIPO PROJETO: " + p_projeto.getTipoProjeto());
 
@@ -55,6 +55,14 @@ public class ProjetoController {
         String[] capitais_val = request.getParameterValues("capital_val_x");
         String[] capitais_desc = request.getParameterValues("capital_desc_x");
 
+        String[] participantes_aluno = request.getParameterValues("participantes_aluno");
+        String[] participantes_prof = request.getParameterValues("participantes_professor");
+        
+        for (int i = 0; i < participantes_aluno.length; i++) {
+            System.out.println("PARTICIPANTE(ALUNO)[" + i + "] " + participantes_aluno[i]);
+        }
+        
+        
         p_projeto.setCusteios(custeios_val, custeios_desc);
         p_projeto.setCapitais(capitais_val, capitais_desc);
 
