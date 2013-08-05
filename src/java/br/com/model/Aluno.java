@@ -10,6 +10,7 @@ public class Aluno extends Usuario{
     private String nome;
     private int matricula;
     private String senha;
+    private TipoAutorizacao tipoAut;
     
     /**
      * @return the id
@@ -65,6 +66,20 @@ public class Aluno extends Usuario{
      */
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    /**
+     * @return the tipoAut
+     */
+    public TipoAutorizacao getTipoAut() {
+        return tipoAut;
+    }
+
+    /**
+     * @param tipoAut the tipoAut to set
+     */
+    public void setTipoAut(TipoAutorizacao tipoAut) {
+        this.tipoAut = tipoAut;
     }
     
 }
