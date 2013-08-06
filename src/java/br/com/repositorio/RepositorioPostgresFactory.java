@@ -4,18 +4,15 @@
  */
 package br.com.repositorio;
 
-import br.com.dao.UsuarioHibernate;
-
 /**
  *
  * @author rafael
  */
-public class RepositorioHibernateFactory implements AbstractRepositorioFactory{
+public class RepositorioPostgresFactory implements AbstractRepositorioFactory{
 
     @Override
     public RepositorioUsuario createRepositorioUsuario() {
-        
-        return new RepositorioUsuario(new UsuarioHibernate());
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

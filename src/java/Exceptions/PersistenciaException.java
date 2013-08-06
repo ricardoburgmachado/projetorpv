@@ -8,6 +8,8 @@ package Exceptions;
  *
  * @author rafael
  */
+
+
 public class PersistenciaException extends RuntimeException {
     
     private Exception exception;
