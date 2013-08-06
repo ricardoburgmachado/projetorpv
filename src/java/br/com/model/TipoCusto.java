@@ -10,5 +10,17 @@ package br.com.model;
  * @author Ricardo
  */
 public enum TipoCusto {
+
     CUSTEIO, CAPITAL;
+
+    public static TipoCusto fromString(String text) {
+        if (text != null) {
+            for (TipoCusto c : TipoCusto.values()) {
+                if (text.equalsIgnoreCase(c.toString())) {
+                    return c;
+                }
+            }
+        }
+        return null;
+    }
 }

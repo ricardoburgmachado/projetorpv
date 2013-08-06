@@ -1,5 +1,7 @@
 package br.com.controller;
 
+import br.com.dao.PersistenciaFactoryPostgres;
+import br.com.dao.RepositorioProjeto;
 import br.com.model.Projeto;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -58,9 +60,9 @@ public class ProjetoController {
         String[] participantes_aluno = request.getParameterValues("participantes_aluno");
         String[] participantes_prof = request.getParameterValues("participantes_professor");
         
-        for (int i = 0; i < participantes_aluno.length; i++) {
-            System.out.println("PARTICIPANTE(ALUNO)[" + i + "] " + participantes_aluno[i]);
-        }
+        //for (int i = 0; i < participantes_aluno.length; i++) {
+        //    System.out.println("PARTICIPANTE(ALUNO)[" + i + "] " + participantes_aluno[i]);
+        //}
         
         
         p_projeto.setCusteios(custeios_val, custeios_desc);
@@ -82,7 +84,11 @@ public class ProjetoController {
         if (!arquivo.isEmpty() && idRetornadoBD != -1) {
             //processarArquivo(idRetornadoBD, arquivo);
         }
-
+        
+        //RepositorioProjeto rpProjeto = new PersistenciaFactoryPostgres().createPersistenciaProjeto();
+        //System.out.println("CONEXÃO:    "+rpProjeto);
+        
+        
         return new ModelAndView("projeto_adiciona");
     }
 
@@ -113,6 +119,23 @@ public class ProjetoController {
     public ModelAndView projetoAdicionaShow() {
 
         return new ModelAndView("projeto_adiciona");
+    }
+    
+    /**
+     * Método que apenas carrega o formulário para edição de projetos
+     *
+     * @return ModelAndView
+     */
+    @RequestMapping(value = "/projeto_edita_show")
+    public ModelAndView projetoEditaShow() {
+
+        return new ModelAndView("projeto_edita");
+    }
+    
+    @RequestMapping(value = "/projeto_edita")
+    public ModelAndView projetoEdita() {
+
+        return new ModelAndView("projeto_lista");
     }
 
 }

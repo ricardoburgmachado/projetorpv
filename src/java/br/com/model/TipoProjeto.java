@@ -11,4 +11,15 @@ package br.com.model;
  */
 public enum TipoProjeto {
     PESQUISA, EXTENSAO, ENSINO;
+    
+    public static TipoProjeto fromString(String text) {
+        if (text != null) {
+            for (TipoProjeto c : TipoProjeto.values()) {
+                if (text.equalsIgnoreCase(c.toString())) {
+                    return c;
+                }
+            }
+        }
+        return null;
+    }
 }
