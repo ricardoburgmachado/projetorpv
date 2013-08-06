@@ -1,4 +1,15 @@
 
+CREATE SEQUENCE public.papel_id_papel_seq;
+
+CREATE TABLE public.papel (
+                id_papel INTEGER NOT NULL DEFAULT nextval('public.papel_id_papel_seq'),
+                descricao VARCHAR(30) NOT NULL,
+                CONSTRAINT papel_pk PRIMARY KEY (id_papel)
+);
+
+
+ALTER SEQUENCE public.papel_id_papel_seq OWNED BY public.papel.id_papel;
+
 CREATE SEQUENCE public.area_conhecimento_id_area_seq_1;
 
 CREATE TABLE public.area_conhecimento (
@@ -32,39 +43,6 @@ CREATE TABLE public.tipo_projeto (
 
 ALTER SEQUENCE public.tipo_projeto_id_tipo_proj_seq_1 OWNED BY public.tipo_projeto.id_tipo_proj;
 
-CREATE SEQUENCE public.permissao_id_perm_seq;
-
-CREATE TABLE public.permissao (
-                id_perm INTEGER NOT NULL DEFAULT nextval('public.permissao_id_perm_seq'),
-                descricao VARCHAR(30) NOT NULL,
-                CONSTRAINT id_perm_pk PRIMARY KEY (id_perm)
-);
-
-
-ALTER SEQUENCE public.permissao_id_perm_seq OWNED BY public.permissao.id_perm;
-
-CREATE TABLE public.usuario (
-                login VARCHAR(30) NOT NULL,
-                senha VARCHAR(16) NOT NULL,
-                nome VARCHAR(50) NOT NULL,
-                id_perm INTEGER NOT NULL,
-                id_campus INTEGER NOT NULL,
-                CONSTRAINT login_pk PRIMARY KEY (login)
-);
-
-
-CREATE TABLE public.coordenador (
-                login VARCHAR(30) NOT NULL,
-                CONSTRAINT coordenador_login_ok PRIMARY KEY (login)
-);
-
-
-CREATE TABLE public.professor (
-                LOGIN_PROFESSOR VARCHAR(30) NOT NULL,
-                CONSTRAINT professor_login_pk PRIMARY KEY (LOGIN_PROFESSOR)
-);
-
-
 CREATE SEQUENCE public.projeto_id_proj_seq;
 
 CREATE TABLE public.projeto (
@@ -73,7 +51,6 @@ CREATE TABLE public.projeto (
                 TITULO VARCHAR(100),
                 PALAVRAS_CHAVE VARCHAR(100),
                 RESUMO VARCHAR(2000),
-                LOGIN_PROFESSOR VARCHAR(30) NOT NULL,
                 sigilo BOOLEAN DEFAULT false NOT NULL,
                 id_area INTEGER NOT NULL,
                 CONSTRAINT id_pk PRIMARY KEY (id_proj)
@@ -96,6 +73,40 @@ CREATE TABLE public.Custo (
 
 ALTER SEQUENCE public.custo_id_seq OWNED BY public.Custo.ID;
 
+CREATE SEQUENCE public.permissao_id_perm_seq;
+
+CREATE TABLE public.permissao (
+                id_perm INTEGER NOT NULL DEFAULT nextval('public.permissao_id_perm_seq'),
+                descricao VARCHAR(30) NOT NULL,
+                CONSTRAINT id_perm_pk PRIMARY KEY (id_perm)
+);
+
+
+ALTER SEQUENCE public.permissao_id_perm_seq OWNED BY public.permissao.id_perm;
+
+CREATE TABLE public.papel_permissao (
+                id_perm INTEGER NOT NULL,
+                id_papel INTEGER NOT NULL,
+                CONSTRAINT papel_permissao_pk PRIMARY KEY (id_perm, id_papel)
+);
+
+
+CREATE TABLE public.usuario (
+                login VARCHAR(30) NOT NULL,
+                senha VARCHAR(16) NOT NULL,
+                nome VARCHAR(50) NOT NULL,
+                id_campus INTEGER NOT NULL,
+                CONSTRAINT login_pk PRIMARY KEY (login)
+);
+
+
+CREATE TABLE public.usuario_papel (
+                id_papel INTEGER NOT NULL,
+                login VARCHAR(30) NOT NULL,
+                CONSTRAINT usuario_papel_pk PRIMARY KEY (id_papel, login)
+);
+
+
 CREATE TABLE public.participante (
                 id_particip INTEGER NOT NULL,
                 login VARCHAR(30) NOT NULL,
@@ -103,17 +114,19 @@ CREATE TABLE public.participante (
 );
 
 
-CREATE TABLE public.aluno (
-                login VARCHAR(30) NOT NULL,
-                CONSTRAINT aluno_login_pk PRIMARY KEY (login)
-);
+ALTER TABLE public.papel_permissao ADD CONSTRAINT papel_papel_permissao_fk
+FOREIGN KEY (id_papel)
+REFERENCES public.papel (id_papel)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
 
-
-CREATE TABLE public.pro_reitor (
-                login VARCHAR(30) NOT NULL,
-                CONSTRAINT pr_reitor_login_pk PRIMARY KEY (login)
-);
-
+ALTER TABLE public.usuario_papel ADD CONSTRAINT papel_usuario_papel_fk
+FOREIGN KEY (id_papel)
+REFERENCES public.papel (id_papel)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
 
 ALTER TABLE public.projeto ADD CONSTRAINT area_conhecimento_projeto_fk
 FOREIGN KEY (id_area)
@@ -136,55 +149,6 @@ ON DELETE RESTRICT
 ON UPDATE RESTRICT
 NOT DEFERRABLE;
 
-ALTER TABLE public.usuario ADD CONSTRAINT tipo_autorizacao_usuario_fk
-FOREIGN KEY (id_perm)
-REFERENCES public.permissao (id_perm)
-ON DELETE RESTRICT
-ON UPDATE RESTRICT
-NOT DEFERRABLE;
-
-ALTER TABLE public.pro_reitor ADD CONSTRAINT usuario_pro_reitor_fk
-FOREIGN KEY (login)
-REFERENCES public.usuario (login)
-ON DELETE CASCADE
-ON UPDATE CASCADE
-NOT DEFERRABLE;
-
-ALTER TABLE public.aluno ADD CONSTRAINT usuario_aluno_fk
-FOREIGN KEY (login)
-REFERENCES public.usuario (login)
-ON DELETE CASCADE
-ON UPDATE CASCADE
-DEFERRABLE INITIALLY IMMEDIATE;
-
-ALTER TABLE public.professor ADD CONSTRAINT usuario_professor_fk
-FOREIGN KEY (LOGIN_PROFESSOR)
-REFERENCES public.usuario (login)
-ON DELETE CASCADE
-ON UPDATE CASCADE
-NOT DEFERRABLE;
-
-ALTER TABLE public.coordenador ADD CONSTRAINT usuario_coordenador_fk
-FOREIGN KEY (login)
-REFERENCES public.usuario (login)
-ON DELETE CASCADE
-ON UPDATE CASCADE
-NOT DEFERRABLE;
-
-ALTER TABLE public.participante ADD CONSTRAINT usuario_participante_fk
-FOREIGN KEY (login)
-REFERENCES public.usuario (login)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
-ALTER TABLE public.projeto ADD CONSTRAINT professor_projeto_fk
-FOREIGN KEY (LOGIN_PROFESSOR)
-REFERENCES public.professor (LOGIN_PROFESSOR)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
 ALTER TABLE public.participante ADD CONSTRAINT projeto_participante_fk
 FOREIGN KEY (id_particip)
 REFERENCES public.projeto (id_proj)
@@ -195,6 +159,27 @@ NOT DEFERRABLE;
 ALTER TABLE public.Custo ADD CONSTRAINT projeto_custo_fk
 FOREIGN KEY (id_proj)
 REFERENCES public.projeto (id_proj)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.papel_permissao ADD CONSTRAINT permissao_papel_permissao_fk
+FOREIGN KEY (id_perm)
+REFERENCES public.permissao (id_perm)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.participante ADD CONSTRAINT usuario_participante_fk
+FOREIGN KEY (login)
+REFERENCES public.usuario (login)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.usuario_papel ADD CONSTRAINT usuario_usuario_papel_fk
+FOREIGN KEY (login)
+REFERENCES public.usuario (login)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
