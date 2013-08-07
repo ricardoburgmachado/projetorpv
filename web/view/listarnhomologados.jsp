@@ -10,6 +10,68 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <script type="text/javascript">
+function createXMLHttpRequest(){
+  // See http://en.wikipedia.org/wiki/XMLHttpRequest
+  // Provide the XMLHttpRequest class for IE 5.x-6.x:
+  if( typeof XMLHttpRequest === "undefined" ) XMLHttpRequest = function() {
+    try { return new ActiveXObject("Msxml2.XMLHTTP.6.0"); } catch(e) {}
+    try { return new ActiveXObject("Msxml2.XMLHTTP.3.0");
+                        } catch (e) {
+                        }
+                        try {
+                            return new ActiveXObject("Msxml2.XMLHTTP");
+                        } catch (e) {
+                        }
+                        try {
+                            return new ActiveXObject("Microsoft.XMLHTTP");
+                        } catch (e) {
+                        }
+                        throw new Error("This browser does not support XMLHttpRequest.")
+                    };
+                return new XMLHttpRequest();
+            }
+
+            var AJAX = createXMLHttpRequest();
+
+            function handler() {
+                if (AJAX.readyState === 4 && AJAX.status === 200) {
+                    var json = eval('(' + AJAX.responseText + ')');
+                    var tbhtml = "";
+                    for (var i = 0; i < json.length; i++) {
+                        tbhtml += "<tr>";
+                        
+                        tbhtml += "<th>";
+                        tbhtml += json.id;
+                        tbhtml += "</th>";
+                        
+                        tbhtml += "<th>";
+                        tbhtml += json.titulo;
+                        tbhtml += "</th>";
+                        
+                        tbhtml += "<th>";
+                        tbhtml += json.resumo;
+                        tbhtml += "</th>";
+                        
+                        tbhtml += "<th>";
+                        tbhtml += json.professor;
+                        tbhtml += "</th>";
+                        
+                        tbhtml += "</tr>";
+                    }
+                    //Editar a tabela
+                } /*else if (AJAX.readyState === 4 && AJAX.status !== 200) {
+                    alert('Something went wrong...');
+                }*/
+            }
+
+            function show() {
+                AJAX.onreadystatechange = handler;
+                AJAX.open("GET", "clpph.jsp");
+                AJAX.send("");
+            }
+            ;
+        </script>
     </head>
     <body>
         <h1>GIPA</h1>
@@ -17,6 +79,7 @@
             <caption>Projetos para Homologar</caption>
             <thead>
                 <tr>
+                    <th>Id</th>
                     <th>Título</th>
                     <th>Resumo</th>
                     <th>Professor</th>
