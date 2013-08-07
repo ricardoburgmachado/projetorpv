@@ -7,7 +7,6 @@ package br.com.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 /**
  *
@@ -15,7 +14,16 @@ import java.util.Properties;
  */
 public class ConnectionFactory {
 
-    public static Connection createConnectionPostgres() {
+    private static ConnectionFactory connectionFactory = new ConnectionFactory();
+    
+    private ConnectionFactory(){}
+    
+    public static ConnectionFactory getInstance(){
+        
+        return connectionFactory;
+    }
+    
+    public Connection createConnectionPostgres() {
 
         Connection con = null;
 

@@ -22,6 +22,6 @@ public class RepositorioUsuario {
     
     public Usuario autenticaUsuario(String login, String senha) throws PersistenciaException{
         
-        return null;
+        return usuarioDAO.autentica(login, senha);
     }
 }
