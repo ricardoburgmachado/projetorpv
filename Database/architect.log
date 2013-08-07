@@ -24156,3 +24156,57 @@ NOT DEFERRABLE
 53842 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
 53842 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
 53842 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column login: VARCHAR(30)
+0    [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ArchitectUtils  - Log4J configured successfully
+451  [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Beginning to read/merge new pl.ini data
+584  [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Finished reading file.
+584  [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Beginning to read/merge new pl.ini data
+696  [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Finished reading file.
+1087 [AWT-EventQueue-0] ERROR ca.sqlpower.architect.swingui.SwingUIProjectLoader  - Error parsing project file's olap schemas!
+org.xml.sax.SAXParseException; lineNumber: 65; columnNumber: 2; The content of elements must consist of well-formed character data or markup.
+	at org.apache.xerces.parsers.AbstractSAXParser.parse(Unknown Source)
+	at ca.sqlpower.architect.olap.MondrianXMLReader.parse(MondrianXMLReader.java:103)
+	at ca.sqlpower.architect.swingui.SwingUIProjectLoader.load(SwingUIProjectLoader.java:212)
+	at ca.sqlpower.architect.swingui.SwingUIProjectLoader.load(SwingUIProjectLoader.java:185)
+	at ca.sqlpower.architect.swingui.ArchitectSwingSessionContextImpl.createSession(ArchitectSwingSessionContextImpl.java:194)
+	at ca.sqlpower.architect.swingui.ArchitectFrame$25.run(ArchitectFrame.java:1399)
+	at java.awt.event.InvocationEvent.dispatch(Unknown Source)
+	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
+	at java.awt.EventQueue.access$200(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
+	at java.awt.EventQueue.dispatchEvent(Unknown Source)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.run(Unknown Source)
+0    [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ArchitectUtils  - Log4J configured successfully
+428  [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Beginning to read/merge new pl.ini data
+561  [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Finished reading file.
+562  [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Beginning to read/merge new pl.ini data
+676  [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Finished reading file.
+934  [AWT-EventQueue-0] ERROR ca.sqlpower.architect.swingui.SwingUIProjectLoader  - Error parsing project file's olap schemas!
+org.xml.sax.SAXParseException; lineNumber: 65; columnNumber: 2; The content of elements must consist of well-formed character data or markup.
+	at org.apache.xerces.parsers.AbstractSAXParser.parse(Unknown Source)
+	at ca.sqlpower.architect.olap.MondrianXMLReader.parse(MondrianXMLReader.java:103)
+	at ca.sqlpower.architect.swingui.SwingUIProjectLoader.load(SwingUIProjectLoader.java:212)
+	at ca.sqlpower.architect.swingui.SwingUIProjectLoader.load(SwingUIProjectLoader.java:185)
+	at ca.sqlpower.architect.swingui.ArchitectSwingSessionContextImpl.createSession(ArchitectSwingSessionContextImpl.java:194)
+	at ca.sqlpower.architect.swingui.ArchitectFrame$25.run(ArchitectFrame.java:1399)
+	at java.awt.event.InvocationEvent.dispatch(Unknown Source)
+	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
+	at java.awt.EventQueue.access$200(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
+	at java.awt.EventQueue.dispatchEvent(Unknown Source)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.run(Unknown Source)
