@@ -1,7 +1,0 @@
-user=postgres
-
-password=postgres
-
-driverPostgres=org.postgresql.Driver
-
-urlPostgres=jdbc:postgresql://localhost:5432/banco_gipa

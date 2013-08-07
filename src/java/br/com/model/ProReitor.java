@@ -5,7 +5,7 @@ public class ProReitor extends Usuario{
     private String login;
     private String senha;
     private String nome;
-    private TipoAutorizacao tipoAut;
+    private Permissao tipoAut;
 
     /**
      * @return the login
@@ -52,14 +52,14 @@ public class ProReitor extends Usuario{
     /**
      * @return the tipoAut
      */
-    public TipoAutorizacao getTipoAut() {
+    public Permissao getTipoAut() {
         return tipoAut;
     }
 
     /**
      * @param tipoAut the tipoAut to set
      */
-    public void setTipoAut(TipoAutorizacao tipoAut) {
+    public void setTipoAut(Permissao tipoAut) {
         this.tipoAut = tipoAut;
     }
 

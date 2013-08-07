@@ -18,6 +18,11 @@ public class PersistenciaFactoryPostgres extends AbstractPersistenciaFactory {
         return new RepositorioProjeto(new DBProjeto(ConnectionFactory.createConnectionPostgres()));
     }
 
+    @Override
+    public RepositorioUsuario createPersistenciaUsuario() {
+
+        return new RepositorioUsuario(new DBUsuario(ConnectionFactory.createConnectionPostgres()));
+    }
     
     
 }

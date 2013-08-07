@@ -3,11 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Ricardo/Desktop/Dropbox/DiretorioNetBeans/ProjetoRPV/web/WEB-INF/spring/springmvc-servlet.xml</file>
-            <file>file:/C:/Users/Ricardo/Desktop/Dropbox/DiretorioNetBeans/ProjetoRPV/web/view/index.jsp</file>
-            <file>file:/C:/Users/Ricardo/Desktop/Dropbox/DiretorioNetBeans/ProjetoRPV/web/recursos/js/funcoes.js</file>
             <file>file:/C:/Users/Ricardo/Desktop/Dropbox/DiretorioNetBeans/ProjetoRPV/web/view/projeto_adiciona.jsp</file>
-            <file>file:/C:/Users/Ricardo/Desktop/Dropbox/DiretorioNetBeans/ProjetoRPV/web/recursos/css/style.css</file>
+            <file>file:/C:/Users/Ricardo/Desktop/Dropbox/DiretorioNetBeans/ProjetoRPV/src/java/br/com/controller/ProjetoController.java</file>
+            <file>file:/C:/Users/Ricardo/Desktop/Dropbox/DiretorioNetBeans/ProjetoRPV/src/java/br/com/dao/UsuarioDAO.java</file>
+            <file>file:/C:/Users/Ricardo/Desktop/Dropbox/DiretorioNetBeans/ProjetoRPV/src/java/br/com/model/Permissao.java</file>
+            <file>file:/C:/Users/Ricardo/Desktop/Dropbox/DiretorioNetBeans/ProjetoRPV/src/java/br/com/dao/DBUsuario.java</file>
+            <file>file:/C:/Users/Ricardo/Desktop/Dropbox/DiretorioNetBeans/ProjetoRPV/src/java/br/com/dao/RepositorioProjeto.java</file>
+            <file>file:/C:/Users/Ricardo/Desktop/Dropbox/DiretorioNetBeans/ProjetoRPV/src/java/br/com/dao/ProjetoDAO.java</file>
+            <file>file:/C:/Users/Ricardo/Desktop/Dropbox/DiretorioNetBeans/ProjetoRPV/src/java/br/com/dao/DBProjeto.java</file>
+            <file>file:/C:/Users/Ricardo/Desktop/Dropbox/DiretorioNetBeans/ProjetoRPV/src/java/br/com/model/TipoProjeto.java</file>
+            <file>file:/C:/Users/Ricardo/Desktop/Dropbox/DiretorioNetBeans/ProjetoRPV/src/java/br/com/model/TipoCusto.java</file>
         </group>
     </open-files>
 </project-private>

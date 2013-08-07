@@ -2,6 +2,9 @@ package br.com.controller;
 
 import br.com.dao.PersistenciaFactoryPostgres;
 import br.com.dao.RepositorioProjeto;
+import br.com.dao.RepositorioUsuario;
+import br.com.model.Papel;
+import br.com.model.Permissao;
 import br.com.model.Projeto;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -60,10 +63,11 @@ public class ProjetoController {
         String[] participantes_aluno = request.getParameterValues("participantes_aluno");
         String[] participantes_prof = request.getParameterValues("participantes_professor");
         
-        //for (int i = 0; i < participantes_aluno.length; i++) {
-        //    System.out.println("PARTICIPANTE(ALUNO)[" + i + "] " + participantes_aluno[i]);
-        //}
-        
+        /*
+        for (int i = 0; i < participantes_aluno.length; i++) {
+            System.out.println("PARTICIPANTE(ALUNO)[" + i + "] " + participantes_aluno[i]);
+        }
+        */
         
         p_projeto.setCusteios(custeios_val, custeios_desc);
         p_projeto.setCapitais(capitais_val, capitais_desc);
@@ -118,7 +122,13 @@ public class ProjetoController {
     @RequestMapping(value = "/projeto_adiciona_show")
     public ModelAndView projetoAdicionaShow() {
 
-        return new ModelAndView("projeto_adiciona");
+        RepositorioUsuario reposit = new PersistenciaFactoryPostgres().createPersistenciaUsuario();        
+        RepositorioProjeto repositPro = new PersistenciaFactoryPostgres().createPersistenciaProjeto();        
+        ModelAndView mv = new ModelAndView("projeto_adiciona");
+        mv.addObject("partipantes_aluno", reposit.listar(Papel.ALUNO));
+        mv.addObject("partipantes_professor", reposit.listar(Papel.PROFESSOR));
+        mv.addObject("area_conhecimento", repositPro.listarAreas());
+        return mv;
     }
     
     /**

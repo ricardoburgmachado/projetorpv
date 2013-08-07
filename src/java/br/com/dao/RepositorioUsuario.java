@@ -5,8 +5,8 @@
  */
 package br.com.dao;
 
-import br.com.model.AreaConhecimento;
 import br.com.model.Papel;
+import br.com.model.Permissao;
 import br.com.model.Usuario;
 import java.util.ArrayList;
 
@@ -14,29 +14,22 @@ import java.util.ArrayList;
  *
  * @author Ricardo
  */
-public class RepositorioProjeto {
-    
-     private ProjetoDAO projDAO;
+public class RepositorioUsuario {
+
+    private UsuarioDAO usuDao;
 
     /**
      * Construtor
-     * @param projetoDAO 
+     *
+     * @param UsuarioDAO
      */
-    public RepositorioProjeto(ProjetoDAO pDAO) {
-
-        this.projDAO = pDAO;
-    }
-    
-    
-    public ArrayList<AreaConhecimento> listarAreas(){  
-        //return usuDao.listar(p);
-        return projDAO.listarAreas();
+    public RepositorioUsuario(UsuarioDAO uDAO) {
+        this.usuDao = uDAO;
     }
 
-    
-    
-    
-    
+    public ArrayList<Usuario> listar(Papel p){  
+        return usuDao.listar(p);
+    }
     
     
     

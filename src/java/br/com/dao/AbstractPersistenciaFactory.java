@@ -15,6 +15,7 @@ public abstract class AbstractPersistenciaFactory {
     
     public abstract RepositorioProjeto createPersistenciaProjeto();
     
+    public abstract RepositorioUsuario createPersistenciaUsuario();
    
     
    

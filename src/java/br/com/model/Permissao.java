@@ -9,13 +9,13 @@ package br.com.model;
  *
  * @author Ricardo
  */
-public enum TipoAutorizacao {
+public enum Permissao {
 
-    ADMIN, COMUM, BASICO;
-
-    public static TipoAutorizacao fromString(String text) {
+    //ADMIN, COMUM, BASICO;
+    x, y;
+    public static Permissao fromString(String text) {
         if (text != null) {
-            for (TipoAutorizacao c : TipoAutorizacao.values()) {
+            for (Permissao c : Permissao.values()) {
                 if (text.equalsIgnoreCase(c.toString())) {
                     return c;
                 }

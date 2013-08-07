@@ -10,7 +10,7 @@ public class Aluno extends Usuario{
     private String nome;
     private int matricula;
     private String senha;
-    private TipoAutorizacao tipoAut;
+    private Permissao tipoAut;
     
     /**
      * @return the id
@@ -71,14 +71,14 @@ public class Aluno extends Usuario{
     /**
      * @return the tipoAut
      */
-    public TipoAutorizacao getTipoAut() {
+    public Permissao getTipoAut() {
         return tipoAut;
     }
 
     /**
      * @param tipoAut the tipoAut to set
      */
-    public void setTipoAut(TipoAutorizacao tipoAut) {
+    public void setTipoAut(Permissao tipoAut) {
         this.tipoAut = tipoAut;
     }
     

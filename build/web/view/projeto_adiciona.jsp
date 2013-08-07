@@ -17,7 +17,7 @@
         <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" />
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>        
-         
+
         <script type="text/javascript" src="<c:url value="recursos/js/multiselect/src/jquery.multiselect.js"/>" ></script>
         <script type="text/javascript" src="<c:url value="recursos/js/multiselect/src/jquery.multiselect.filter.js"/>" ></script>
 
@@ -25,20 +25,16 @@
         <script type="text/javascript">
             $(function() {
 
-                $("#partipantes_professor").multiselect().multiselectfilter();
-                /*
-                 $("#partipantes_professor").multiselect({
-                 multiple: true,
-                 header: "Selecione professor(es)",
-                 noneSelectedText: "Selecione professor(es)",
-                 selectedList: 1
-                 });
-                 */
+                $("#partipantes_professor").multiselect({
+                    multiple: true,
+                    header: "Selecione professor(es)",
+                    noneSelectedText: "Selecione professor(es)"
+                }).multiselectfilter();
                 $("#partipantes_aluno").multiselect({
                     multiple: true,
                     header: "Selecione aluno(s)",
                     noneSelectedText: "Selecione aluno(s)",
-                });
+                }).multiselectfilter();
                 $("#area_conhecimento").multiselect({
                     multiple: false,
                     header: "Selecione uma área ",
@@ -81,7 +77,7 @@
 
             <div id="conteudo_interno">
 
-                
+
                 <form:form action="projeto_adiciona" modelAttribute="projeto" id="form_addprojeto" enctype="multipart/form-data">
                     <h1>Adicionar Projeto</h1>                                                                                                  
 
@@ -105,21 +101,35 @@
                         <span style="clear: both; display: block"></span>
 
                         <span class="bloco">
-                            <label>Participantes (alunos):</label><br/><br/>                                                
+                            <label>Participantes (alunos):</label><br/><br/>
+                            <!--
                             <select id="partipantes_aluno" name="participantes_aluno" multiple="multiple">
                                 <option value="1">Joãozinho</option>
                                 <option value="2">Maria</option>
                                 <option value="3">Juliano</option>
                                 <option value="4">Kátia</option>                                
                             </select>
+                            -->
+                            <select id="partipantes_aluno" name="participantes_aluno" multiple="multiple">
+                                <c:forEach items="${partipantes_aluno}" var="aluno">                               
+                                    <option value=${aluno.login}>${aluno.nome}</option>
+                                </c:forEach>
+                            </select>
                         </span>
 
                         <span class="bloco">
-                            <label for="nome">Participantes (professores):</label><br/><br/>                                                
+                            <label for="nome">Participantes (professores):</label><br/><br/>                      
+                            <!--
                             <select id="partipantes_professor" name="participantes_professor" multiple="multiple">
                                 <option value="1">Fávio</option>
                                 <option value="2">Sérgio</option>
                                 <option value="3">Ivone</option>
+                            </select>
+                            -->
+                            <select id="partipantes_professor" name="participantes_professor" multiple="multiple">
+                                <c:forEach items="${partipantes_professor}" var="professor">                               
+                                    <option value=${professor.login}>${professor.nome}</option>
+                                </c:forEach>
                             </select>
                         </span>
 
@@ -127,6 +137,7 @@
 
                         <span class="bloco">
                             <label for="nome">Área de conhecimento:</label><br/><br/> 
+                            <!--
                             <select id="area_conhecimento" name="areaConhecimento">
                                 <option selected="selected" value="">Selecione uma área</option>
                                 <option value="1">Engenharia de Software</option>
@@ -137,14 +148,20 @@
                                 <option value="6">Engenharia Florestal</option>
                                 <option value="7">Sistemas de Informação</option>
                             </select>
+                            -->
+                            <select id="area_conhecimento" name="areaConhecimento">
+                                <c:forEach items="${area_conhecimento}" var="area">                               
+                                    <option value=${area.id}>${area.area}</option>
+                                </c:forEach>
+                            </select>
                         </span>
 
                         <span class="bloco">
                             <label  for="nome">Tipo projeto:</label><br/><br/> 
                             <select id="tipo_projeto" name="tipoProjeto">
-                                <option value="<%=TipoProjeto.PESQUISA %>">Pesquisa</option>
-                                <option value="<%=TipoProjeto.ENSINO %>">Ensino</option>
-                                <option value="<%=TipoProjeto.EXTENSAO %>">Extensão</option>                                
+                                <option value="<%=TipoProjeto.PESQUISA%>">Pesquisa</option>
+                                <option value="<%=TipoProjeto.ENSINO%>">Ensino</option>
+                                <option value="<%=TipoProjeto.EXTENSAO%>">Extensão</option>                                
                             </select>
                         </span>
 
