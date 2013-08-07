@@ -16,28 +16,27 @@ public abstract class Usuario {
     private String login;
     private String senha;
     private String nome;
+    private Campus campus;
     private List<Permissao> permissoes;
 
-    public Usuario(String login, String senha, String nome, List<Permissao> permissoes) {
+    public Usuario(String login, String senha, String nome, Campus campus, List<Permissao> permissoes) {
         this.login = login;
         this.senha = senha;
         this.nome = nome;
+        this.campus = campus;
         this.permissoes = permissoes;
     }
 
-    public Usuario(String login, String senha, String nome) {
-        this.login = login;
-        this.senha = senha;
-        this.nome = nome;
-        permissoes = new LinkedList<>();
+    public Usuario(String login, String senha, String nome, Campus campus) {
+        this(login, senha, nome, campus, new LinkedList<Permissao>());
     }
 
     public Usuario(String login, String senha) {
-        this(login, senha, null);
+        this(login, senha, null, null);
     }
 
-    public Usuario(String nome) {
-        this(null, null, nome);
+    public Usuario(String nome, Campus campus) {
+        this(null, null, nome, campus);
     }
 
     public String getLogin() {
@@ -82,8 +81,16 @@ public abstract class Usuario {
         this.permissoes.remove(permissao);
     }
 
+    public Campus getCampus() {
+        return campus;
+    }
+
+    public void setCampus(Campus campus) {
+        this.campus = campus;
+    }
+
     @Override
     public String toString() {
-        return "Usuario{" + "login=" + login + ", senha=" + senha + ", nome=" + nome + ", permissoes=" + permissoes + '}';
+        return "Usuario{" + "login=" + login + ", senha=" + senha + ", nome=" + nome + ", campus=" + campus + ", permissoes=" + permissoes + '}';
     }
 }

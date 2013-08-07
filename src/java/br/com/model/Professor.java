@@ -12,21 +12,20 @@ import java.util.List;
  */
 public class Professor extends Usuario{
 
-    public Professor(String login, String senha, String nome, List<Permissao> permissoes) {
-        super(login, senha, nome, permissoes);
+    public Professor(String login, String senha, String nome, Campus campus, List<Permissao> permissoes) {
+        super(login, senha, nome, campus, permissoes);
     }
 
-    public Professor(String login, String senha, String nome) {
-        super(login, senha, nome);
+    public Professor(String login, String senha, String nome, Campus campus) {
+        super(login, senha, nome, campus);
     }
 
     public Professor(String login, String senha) {
         super(login, senha);
     }
 
-    public Professor(String nome) {
-        super(nome);
+    public Professor(String nome, Campus campus) {
+        super(nome, campus);
     }
- 
-    
+
 }

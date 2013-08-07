@@ -6,6 +6,7 @@ package br.com.dao;
 
 import Exceptions.PersistenciaException;
 import br.com.model.Aluno;
+import br.com.model.Campus;
 import br.com.model.Coordenador;
 import br.com.model.Permissao;
 import br.com.model.ProReitor;
@@ -39,19 +40,12 @@ public class DBUsuario implements UsuarioDAO {
 
         try {
 
-            stmt = con.prepareStatement("select * from usuario inner join usuario_papel using (login) inner join papel using(id_papel) inner join papel_permissao using (id_papel) inner join permissao using(id_perm) where login=? and senha=?");
+            stmt = con.prepareStatement("select login, senha, nome, campus, papel.descricao as papel, permissao.descricao as permissao from usuario inner join usuario_papel using (login) inner join papel using(id_papel) inner join papel_permissao using (id_papel) inner join permissao using(id_perm) where login=? and senha=?");
             stmt.setString(1, login);
             stmt.setString(2, senha);
         } catch (SQLException sqle) {
 
             throw new PersistenciaException("Não foi possível acessar o banco de dados para autenticação", sqle);
-        } finally {
-
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                throw new PersistenciaException("Erro ao terminar conexão com o banco de dados", ex);
-            }
         }
 
         try {
@@ -61,7 +55,7 @@ public class DBUsuario implements UsuarioDAO {
         } catch (SQLException sqle) {
 
             throw new PersistenciaException("Erro ao buscar por usuário no banco de dados", sqle);
-        }
+        } 
     }
 
     private Usuario createUsuario(ResultSet result) throws PersistenciaException {
@@ -76,15 +70,16 @@ public class DBUsuario implements UsuarioDAO {
 
         try {
 
-            String papelUsuario = result.getString("papel.descricao");
+            String papelUsuario = result.getString("papel");
             Usuario user = instanceUsuario(papelUsuario);
             user.setLogin(result.getString("login"));
             user.setNome(result.getString("nome"));
             user.setSenha(result.getString("senha"));
+            user.setCampus(Campus.valueOf(result.getString("campus")));
 
             do {
 
-                user.addPermissao(Permissao.valueOf(result.getString("permissao.descricao")));
+                user.addPermissao(Permissao.valueOf(result.getString("permissao")));
             } while (result.next());
 
             return user;
@@ -99,13 +94,13 @@ public class DBUsuario implements UsuarioDAO {
         papel = papel.toLowerCase();
 
         if (papel.equals("aluno")) {
-            return new Aluno("");
+            return new Aluno("", Campus.ALEGRETE);
         } else if (papel.equals("coordenador")) {
-            return new Coordenador("");
+            return new Coordenador("", Campus.ALEGRETE);
         } else if (papel.equals("proreitor")) {
-            return new ProReitor("");
+            return new ProReitor("", Campus.ALEGRETE);
         } else if (papel.equals("professor")) {
-            return new Professor("");
+            return new Professor("", Campus.ALEGRETE);
         }
 
         return null;

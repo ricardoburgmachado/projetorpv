@@ -8,7 +8,8 @@ package br.com.model;
  *
  * @author rafael
  */
-public enum Permissao {
+public enum Campus {
     
-    CRUD_PROJETO;
+    ALEGRETE;
+    
 }

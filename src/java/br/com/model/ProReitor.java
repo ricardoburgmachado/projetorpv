@@ -12,21 +12,20 @@ import java.util.List;
  */
 public class ProReitor extends Usuario {
 
-    public ProReitor(String login, String senha, String nome, List<Permissao> permissoes) {
-        super(login, senha, nome, permissoes);
+    public ProReitor(String login, String senha, String nome, Campus campus, List<Permissao> permissoes) {
+        super(login, senha, nome, campus, permissoes);
     }
 
-    public ProReitor(String login, String senha, String nome) {
-        super(login, senha, nome);
+    public ProReitor(String login, String senha, String nome, Campus campus) {
+        super(login, senha, nome, campus);
     }
 
     public ProReitor(String login, String senha) {
         super(login, senha);
     }
 
-    public ProReitor(String nome) {
-        super(nome);
+    public ProReitor(String nome, Campus campus) {
+        super(nome, campus);
     }
-    
-    
+
 }
