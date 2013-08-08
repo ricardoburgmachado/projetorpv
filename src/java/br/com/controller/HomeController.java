@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.controller;
 
 import org.springframework.stereotype.Controller;
@@ -10,15 +6,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
- * @author rafael
+ * @author Ricardo
  */
-
 @Controller
 public class HomeController {
     
-    @RequestMapping(value={"", "/"})
+    
+    @RequestMapping(value ={"", "/"})
     public ModelAndView home(){
-        
+    
         return new ModelAndView("index");
     }
     

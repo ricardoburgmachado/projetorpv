@@ -1,13 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package Exceptions;
 
-/**
- *
- * @author rafael
- */
+package Exceptions;
 
 
 public class PersistenciaException extends RuntimeException {
