@@ -5,6 +5,7 @@ INSERT INTO area_conhecimento(id_area, area)VALUES(3, 'Engenharia Civil');
 /***************************** FIM cadastro area conhecimento **********************/
 
 /***************************** INICIO cadastro campus **********************/
+/**
 INSERT INTO campus(id_campus, nome)VALUES(1, 'ALEGRETE');
 INSERT INTO campus(id_campus, nome)VALUES(2, 'URUGUAINA');
 INSERT INTO campus(id_campus, nome)VALUES(3, 'CACAPAVA_DO_SUL');
@@ -15,6 +16,7 @@ INSERT INTO campus(id_campus, nome)VALUES(7, 'JAGUARAO');
 INSERT INTO campus(id_campus, nome)VALUES(8, 'SANTANA_DO_LIVRAMENTO');
 INSERT INTO campus(id_campus, nome)VALUES(9, 'SAO_BORJA');
 INSERT INTO campus(id_campus, nome)VALUES(10, 'SAO_GABRIEL');
+**/
 /***************************** FIM cadastro campus **********************/
 
 /***************************** INICIO cadastro CUSTO **********************/
@@ -43,46 +45,48 @@ INSERT INTO permissao(id_perm, descricao)VALUES(2, 'y');
 /***************************** FIM cadastro PAPEL PERMISSÃO **********************/
 
 /***************************** INICIO cadastro usuarios **********************/
-INSERT INTO usuario(login, senha, nome, id_campus)VALUES('joao', 'joao', 'joão da silva',1);
-INSERT INTO usuario(login, senha, nome, id_campus)VALUES('maria', 'maria', 'maria da silva',1);
-INSERT INTO usuario(login, senha, nome, id_campus)VALUES('alfredo', 'alfredo', 'alfredo picareta',2);
-INSERT INTO usuario(login, senha, nome, id_campus)VALUES('joaquim', 'joaquim', 'joaquim santos',1);
-INSERT INTO usuario(login, senha, nome, id_campus)VALUES('rafael', 'rafael', 'rafael santos',1);
-INSERT INTO usuario(login, senha, nome, id_campus)VALUES('rogerio', 'rogerio', 'rogerio',1);
-INSERT INTO usuario(login, senha, nome, id_campus)VALUES('ivone', 'ivone', 'ivone',1);
-INSERT INTO usuario(login, senha, nome, id_campus)VALUES('ricardo', 'ricardo', 'ricardo machado',1);
-INSERT INTO usuario(login, senha, nome, id_campus)VALUES('fabio', 'fabio', 'fábio',1);
-INSERT INTO usuario(login, senha, nome, id_campus)VALUES('wolmir', 'wolmir', 'wolmir',1);
-INSERT INTO usuario(login, senha, nome, id_campus)VALUES('jose', 'jose', 'José',1);
-INSERT INTO usuario(login, senha, nome, id_campus)VALUES('paulo', 'paulo', 'Paulo',1);
-INSERT INTO usuario(login, senha, nome, id_campus)VALUES('carlos', 'carlos', 'Carlos',1);
+/** o atributo id é auto increment **/
+
+INSERT INTO usuario(login, senha, nome, campus)VALUES('joao', 'joao', 'joão da silva','ALEGRETE');
+INSERT INTO usuario(login, senha, nome, campus)VALUES('maria', 'maria', 'maria da silva','ALEGRETE');
+INSERT INTO usuario(login, senha, nome, campus)VALUES('alfredo', 'alfredo', 'alfredo picareta','ALEGRETE');
+INSERT INTO usuario(login, senha, nome, campus)VALUES('joaquim', 'joaquim', 'joaquim santos','ALEGRETE');
+INSERT INTO usuario(login, senha, nome, campus)VALUES('rafael', 'rafael', 'rafael santos','ALEGRETE');
+INSERT INTO usuario(login, senha, nome, campus)VALUES('rogerio', 'rogerio', 'rogerio','ALEGRETE');
+INSERT INTO usuario(login, senha, nome, campus)VALUES('ivone', 'ivone', 'ivone','ALEGRETE');
+INSERT INTO usuario(login, senha, nome, campus)VALUES('ricardo', 'ricardo', 'ricardo machado','ALEGRETE');
+INSERT INTO usuario(login, senha, nome, campus)VALUES('fabio', 'fabio', 'fábio','ALEGRETE');
+INSERT INTO usuario(login, senha, nome, campus)VALUES('wolmir', 'wolmir', 'wolmir','ALEGRETE');
+INSERT INTO usuario(login, senha, nome, campus)VALUES('jose', 'jose', 'José','ALEGRETE');
+INSERT INTO usuario(login, senha, nome, campus)VALUES('paulo', 'paulo', 'Paulo','ALEGRETE');
+INSERT INTO usuario(login, senha, nome, campus)VALUES('carlos', 'carlos', 'Carlos','ALEGRETE');
 
 /***************************** FIM cadastro usuarios **********************/
 
 /***************************** INICIO cadastro participantes **********************/
 /**
-INSERT INTO participante(id_particip , login)VALUES(1, 'joao');
-INSERT INTO participante(id_particip , login)VALUES(2, 'maria');
+INSERT INTO participante(id_particip , id_usuario)VALUES(1, 1);
+INSERT INTO participante(id_particip , id_usuario)VALUES(2, 5);
 **/
 /***************************** FIM cadastro participantes **********************/
 
 
 
 /***************************** INICIO cadastro usuario papel **********************/
-INSERT INTO usuario_papel(id_papel, login)VALUES(1, 'joao');
-INSERT INTO usuario_papel(id_papel, login)VALUES(2, 'maria');
-INSERT INTO usuario_papel(id_papel, login)VALUES(3, 'alfredo');
-INSERT INTO usuario_papel(id_papel, login)VALUES(3, 'joaquim');
-INSERT INTO usuario_papel(id_papel, login)VALUES(3, 'rafael');
-INSERT INTO usuario_papel(id_papel, login)VALUES(3, 'rogerio');
-INSERT INTO usuario_papel(id_papel, login)VALUES(4, 'ivone');
-INSERT INTO usuario_papel(id_papel, login)VALUES(4, 'ricardo');
-INSERT INTO usuario_papel(id_papel, login)VALUES(4, 'fabio');
-INSERT INTO usuario_papel(id_papel, login)VALUES(5, 'wolmir');
-INSERT INTO usuario_papel(id_papel, login)VALUES(5, 'jose');
-INSERT INTO usuario_papel(id_papel, login)VALUES(5, 'paulo');
-INSERT INTO usuario_papel(id_papel, login)VALUES(5, 'carlos');
-
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(1, 1);
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(2, 2);
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(3, 5);
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(3, 4);
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(3, 13);
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(3, 12);
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(4, 12);
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(4, 11);
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(4, 10);
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(5, 9);
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(5, 8);
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(5, 7);
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(5, 6);
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(5, 3);
 
 /***************************** FIM cadastro usuario papel **********************/
 

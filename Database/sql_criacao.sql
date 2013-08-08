@@ -21,17 +21,6 @@ CREATE TABLE public.area_conhecimento (
 
 ALTER SEQUENCE public.area_conhecimento_id_area_seq_1 OWNED BY public.area_conhecimento.id_area;
 
-CREATE SEQUENCE public.campus_id_campus_seq_1;
-
-CREATE TABLE public.campus (
-                id_campus INTEGER NOT NULL DEFAULT nextval('public.campus_id_campus_seq_1'),
-                nome VARCHAR(50),
-                CONSTRAINT id_campus_pk PRIMARY KEY (id_campus)
-);
-
-
-ALTER SEQUENCE public.campus_id_campus_seq_1 OWNED BY public.campus.id_campus;
-
 CREATE SEQUENCE public.projeto_id_proj_seq;
 
 CREATE TABLE public.projeto (
@@ -81,26 +70,31 @@ CREATE TABLE public.papel_permissao (
 );
 
 
+CREATE SEQUENCE public.usuario_id_usuario_seq;
+
 CREATE TABLE public.usuario (
-                login VARCHAR(30) NOT NULL,
-                senha VARCHAR(16) NOT NULL,
+                id_usuario INTEGER NOT NULL DEFAULT nextval('public.usuario_id_usuario_seq'),
+                login VARCHAR(30),
+                senha VARCHAR(16),
                 nome VARCHAR(50) NOT NULL,
-                id_campus INTEGER NOT NULL,
-                CONSTRAINT login_pk PRIMARY KEY (login)
+                campus VARCHAR(50),
+                CONSTRAINT login_pk PRIMARY KEY (id_usuario)
 );
 
 
+ALTER SEQUENCE public.usuario_id_usuario_seq OWNED BY public.usuario.id_usuario;
+
 CREATE TABLE public.usuario_papel (
+                id_usuario INTEGER NOT NULL,
                 id_papel INTEGER NOT NULL,
-                login VARCHAR(30) NOT NULL,
-                CONSTRAINT usuario_papel_pk PRIMARY KEY (id_papel, login)
+                CONSTRAINT usuario_papel_pk PRIMARY KEY (id_usuario, id_papel)
 );
 
 
 CREATE TABLE public.participante (
+                id_usuario INTEGER NOT NULL,
                 id_particip INTEGER NOT NULL,
-                login VARCHAR(30) NOT NULL,
-                CONSTRAINT part_proj_pk PRIMARY KEY (id_particip, login)
+                CONSTRAINT part_proj_pk PRIMARY KEY (id_usuario, id_particip)
 );
 
 
@@ -121,13 +115,6 @@ NOT DEFERRABLE;
 ALTER TABLE public.projeto ADD CONSTRAINT area_conhecimento_projeto_fk
 FOREIGN KEY (id_area)
 REFERENCES public.area_conhecimento (id_area)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
-ALTER TABLE public.usuario ADD CONSTRAINT campus_usuario_fk
-FOREIGN KEY (id_campus)
-REFERENCES public.campus (id_campus)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
@@ -154,15 +141,15 @@ ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
 ALTER TABLE public.participante ADD CONSTRAINT usuario_participante_fk
-FOREIGN KEY (login)
-REFERENCES public.usuario (login)
+FOREIGN KEY (id_usuario)
+REFERENCES public.usuario (id_usuario)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
 ALTER TABLE public.usuario_papel ADD CONSTRAINT usuario_usuario_papel_fk
-FOREIGN KEY (login)
-REFERENCES public.usuario (login)
+FOREIGN KEY (id_usuario)
+REFERENCES public.usuario (id_usuario)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
