@@ -10,7 +10,8 @@
                 
     <mvc:resources mapping="/recursos/**" 
                    location="/recursos/"
-                   cache-period="120"/>
+
+                   cache-period="5"/>
     
     
     <mvc:annotation-driven />

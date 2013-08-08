@@ -1,0 +1,9 @@
+package br.com.model;
+
+
+public enum Campus {
+    
+    ALEGRETE, URUGUAINA, CACAPAVA_DO_SUL, BAGE, 
+    DOM_PEDRITO, ITAQU, JAGUARAO, SANTANA_DO_LIVRAMENTO, 
+    SAO_BORJA, SAO_GABRIEL;
+}
