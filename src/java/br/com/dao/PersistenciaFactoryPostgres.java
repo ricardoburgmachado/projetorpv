@@ -15,13 +15,13 @@ public class PersistenciaFactoryPostgres extends AbstractPersistenciaFactory {
     @Override
     public RepositorioProjeto createPersistenciaProjeto() {
 
-        return new RepositorioProjeto(new DBProjeto(ConnectionFactory.createConnectionPostgres()));
+        return new RepositorioProjeto(new DBProjeto(ConnectionFactory.getInstance().createConnectionPostgres()));
     }
 
     @Override
     public RepositorioUsuario createPersistenciaUsuario() {
 
-        return new RepositorioUsuario(new DBUsuario(ConnectionFactory.createConnectionPostgres()));
+        return new RepositorioUsuario(new DBUsuario(ConnectionFactory.getInstance()));
     }
     
     

@@ -10,7 +10,16 @@ import java.sql.SQLException;
  */
 public class ConnectionFactory {
 
-    public static Connection createConnectionPostgres() {
+    private static ConnectionFactory connectionFactory = new ConnectionFactory();
+    
+    private ConnectionFactory(){}
+    
+    public static ConnectionFactory getInstance(){
+        
+        return connectionFactory;
+    }
+    
+    public Connection createConnectionPostgres() {
 
         Connection con = null;
 

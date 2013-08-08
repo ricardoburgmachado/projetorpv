@@ -1,85 +1,26 @@
 package br.com.model;
 
+import java.util.List;
+
 /**
  *
- * @author Ricardo
+ * @author rafael
  */
-public class Aluno extends Usuario{
-    
-    private String login;
-    private String nome;
-    private int matricula;
-    private String senha;
-    private Permissao tipoAut;
-    
-    /**
-     * @return the id
-     */
-    public String getLogin() {
-        return this.login;
+public class Aluno extends Usuario {
+
+    public Aluno(String login, String senha, String nome, Campus campus, List<Permissao> permissoes) {
+        super(login, senha, nome, campus, permissoes);
     }
 
-    /**
-     * @param id the id to set
-     */
-    public void setLogin(String l) {
-        this.login = l;
+    public Aluno(String login, String senha, String nome, Campus campus) {
+        super(login, senha, nome, campus);
     }
 
-    /**
-     * @return the nome
-     */
-    public String getNome() {
-        return nome;
+    public Aluno(String login, String senha) {
+        super(login, senha);
     }
 
-    /**
-     * @param nome the nome to set
-     */
-    public void setNome(String nome) {
-        this.nome = nome;
+    public Aluno(String nome, Campus campus) {
+        super(nome, campus);
     }
-
-    /**
-     * @return the matricula
-     */
-    public int getMatricula() {
-        return matricula;
-    }
-
-    /**
-     * @param matricula the matricula to set
-     */
-    public void setMatricula(int matricula) {
-        this.matricula = matricula;
-    }
-
-    /**
-     * @return the senha
-     */
-    public String getSenha() {
-        return senha;
-    }
-
-    /**
-     * @param senha the senha to set
-     */
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    /**
-     * @return the tipoAut
-     */
-    public Permissao getTipoAut() {
-        return tipoAut;
-    }
-
-    /**
-     * @param tipoAut the tipoAut to set
-     */
-    public void setTipoAut(Permissao tipoAut) {
-        this.tipoAut = tipoAut;
-    }
-    
 }

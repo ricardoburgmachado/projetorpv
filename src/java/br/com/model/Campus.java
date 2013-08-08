@@ -1,6 +1,5 @@
 package br.com.model;
 
-
 public enum Campus {
     
     ALEGRETE, URUGUAINA, CACAPAVA_DO_SUL, BAGE, 
