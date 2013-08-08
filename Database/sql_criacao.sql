@@ -21,17 +21,6 @@ CREATE TABLE public.area_conhecimento (
 
 ALTER SEQUENCE public.area_conhecimento_id_area_seq_1 OWNED BY public.area_conhecimento.id_area;
 
-CREATE SEQUENCE public.campus_id_campus_seq_1;
-
-CREATE TABLE public.campus (
-                id_campus INTEGER NOT NULL DEFAULT nextval('public.campus_id_campus_seq_1'),
-                nome VARCHAR(50),
-                CONSTRAINT id_campus_pk PRIMARY KEY (id_campus)
-);
-
-
-ALTER SEQUENCE public.campus_id_campus_seq_1 OWNED BY public.campus.id_campus;
-
 CREATE SEQUENCE public.projeto_id_proj_seq;
 
 CREATE TABLE public.projeto (
@@ -85,7 +74,7 @@ CREATE TABLE public.usuario (
                 login VARCHAR(30) NOT NULL,
                 senha VARCHAR(16) NOT NULL,
                 nome VARCHAR(50) NOT NULL,
-                id_campus INTEGER NOT NULL,
+                campus VARCHAR(30) NOT NULL,
                 CONSTRAINT login_pk PRIMARY KEY (login)
 );
 
@@ -121,13 +110,6 @@ NOT DEFERRABLE;
 ALTER TABLE public.projeto ADD CONSTRAINT area_conhecimento_projeto_fk
 FOREIGN KEY (id_area)
 REFERENCES public.area_conhecimento (id_area)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
-ALTER TABLE public.usuario ADD CONSTRAINT campus_usuario_fk
-FOREIGN KEY (id_campus)
-REFERENCES public.campus (id_campus)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
