@@ -16,7 +16,17 @@ public class AreaConhecimento {
      * @param id the id to set
      */
     public void setId(int id) {
+
         this.id = id;
+    }
+
+    public void setId(String id) {
+        try {
+            int temp = Integer.parseInt(id);
+            this.id = temp;
+        } catch (Exception e) {
+            System.out.println("NÃO FOI POSSÍVEL FAZER A CONVERSÃO DO ID DA ÁREA DE CONHECIMENTO");
+        }
     }
 
     /**
@@ -32,6 +42,5 @@ public class AreaConhecimento {
     public void setArea(String area) {
         this.area = area;
     }
-    
-    
+
 }

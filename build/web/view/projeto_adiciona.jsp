@@ -149,7 +149,7 @@
                                 <option value="7">Sistemas de Informação</option>
                             </select>
                             -->
-                            <select id="area_conhecimento" name="areaConhecimento">
+                            <select id="area_conhecimento" name="areaConhecimento_x">
                                 <c:forEach items="${area_conhecimento}" var="area">                               
                                     <option value=${area.id}>${area.area}</option>
                                 </c:forEach>

@@ -19,14 +19,16 @@ public class Custo {
 
     public Custo(){}
     
-    public Custo(int id, TipoCusto tipo, String desc, double val){    
+    public Custo(int id, int idProj, TipoCusto tipo, String desc, double val){    
         setId(id);
+        setIdProjeto(idProjeto);
         setTipoCusto(tipoCusto);
         setDescricao(desc);
         setValor(val);
     }
 
-    public Custo(TipoCusto tipo, String desc, double val){    
+    public Custo(int idProj,TipoCusto tipo, String desc, double val){    
+        setIdProjeto(idProjeto);
         setTipoCusto(tipoCusto);
         setDescricao(desc);
         setValor(val);
@@ -54,6 +56,10 @@ public class Custo {
         return tipoCusto;
     }
 
+    public String getTipoCustoString() {
+        return tipoCusto.toString();
+    }
+    
     /**
      * @param tipoCusto the tipoCusto to set
      */

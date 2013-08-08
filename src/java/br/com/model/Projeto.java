@@ -18,10 +18,10 @@ public class Projeto {
     //private String arquivo;
     private MultipartFile arquivo;
 
-    ArrayList<Custo> custeios;
-    ArrayList<Custo> capitais;
+    ArrayList<Custo> custeios = new ArrayList<Custo>();
+    ArrayList<Custo> capitais = new ArrayList<Custo>();;
 
-    private String areaConhecimento;
+    private AreaConhecimento areaConhecimento;
     private Campus campus;
     private boolean sigilo;
 
@@ -144,11 +144,11 @@ public class Projeto {
      * @param custeioVal
      * @param custeioDesc 
      */
-    public void setCusteios(String[] custeioVal, String[] custeioDesc) {
-        this.custeios = new ArrayList<Custo>();
+    public void setCusteios(int idProj, String[] custeioVal, String[] custeioDesc ) {
+        //this.custeios = new ArrayList<Custo>();
         for (int i = 0; i < custeioVal.length; i++) {
             if(valorValido(custeioVal[i]) && descricaoValida(custeioDesc[i])){
-                this.custeios.add(new Custo(TipoCusto.CUSTEIO, custeioDesc[i], Double.parseDouble(custeioVal[i])));
+                this.custeios.add(new Custo(idProj, TipoCusto.CUSTEIO, custeioDesc[i], Double.parseDouble(custeioVal[i])));
             }
         } 
     }
@@ -167,11 +167,11 @@ public class Projeto {
      * @param custeioVal
      * @param custeioDesc 
      */
-    public void setCapitais(String[] capitalVal, String[] capitalDesc) {
-        this.capitais = new ArrayList<Custo>();
+    public void setCapitais(int idProj, String[] capitalVal, String[] capitalDesc) {
+        //this.capitais = new ArrayList<Custo>();
         for (int i = 0; i < capitalVal.length; i++) {
             if(valorValido(capitalVal[i]) && descricaoValida(capitalDesc[i])){
-                this.capitais.add(new Custo(TipoCusto.CAPITAL, capitalDesc[i], Double.parseDouble(capitalVal[i])));
+                this.capitais.add(new Custo(idProj, TipoCusto.CAPITAL, capitalDesc[i], Double.parseDouble(capitalVal[i])));
             }
         } 
     }
@@ -197,14 +197,14 @@ public class Projeto {
     /**
      * @return the areaConhecimento
      */
-    public String getAreaConhecimento() {
+    public AreaConhecimento getAreaConhecimento() {
         return areaConhecimento;
     }
 
     /**
      * @param areaConhecimento the areaConhecimento to set
      */
-    public void setAreaConhecimento(String areaConhecimento) {
+    public void setAreaConhecimento(AreaConhecimento areaConhecimento) {
         this.areaConhecimento = areaConhecimento;
     }
 
