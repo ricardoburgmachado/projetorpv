@@ -10,7 +10,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <script type="text/javascript">
+        
+    </head>
+    <script type="text/javascript">
 function createXMLHttpRequest(){
   // See http://en.wikipedia.org/wiki/XMLHttpRequest
   // Provide the XMLHttpRequest class for IE 5.x-6.x:
@@ -37,43 +39,48 @@ function createXMLHttpRequest(){
             function handler() {
                 if (AJAX.readyState === 4 && AJAX.status === 200) {
                     var json = eval('(' + AJAX.responseText + ')');
+                    //alert("Tá aqui.");
                     var tbhtml = "";
                     for (var i = 0; i < json.length; i++) {
                         tbhtml += "<tr>";
                         
                         tbhtml += "<th>";
-                        tbhtml += json.id;
+                        tbhtml += json[i].id;
                         tbhtml += "</th>";
                         
                         tbhtml += "<th>";
-                        tbhtml += json.titulo;
+                        tbhtml += json[i].titulo;
                         tbhtml += "</th>";
                         
                         tbhtml += "<th>";
-                        tbhtml += json.resumo;
+                        tbhtml += json[i].resumo;
                         tbhtml += "</th>";
                         
                         tbhtml += "<th>";
-                        tbhtml += json.professor;
+                        tbhtml += json[i].professor;
                         tbhtml += "</th>";
                         
                         tbhtml += "</tr>";
                     }
+                    //alert(tbhtml);
+                    document.getElementById("teegoat").innerHTML = tbhtml;
+                    
                     //Editar a tabela
-                } /*else if (AJAX.readyState === 4 && AJAX.status !== 200) {
-                    alert('Something went wrong...');
-                }*/
+                } else if (AJAX.readyState === 4 && AJAX.status !== 200) {
+                    alert('Something went wrong... ' + AJAX.status);
+                }
             }
 
             function show() {
                 AJAX.onreadystatechange = handler;
-                AJAX.open("GET", "clpph.jsp");
+                AJAX.open("GET", "http://localhost:8080/projetorpv/view/clpph.jsp");
                 AJAX.send("");
+                //alert("Here!");
             }
             ;
+            
         </script>
-    </head>
-    <body>
+    <body onload="show()">
         <h1>GIPA</h1>
         <table>
             <caption>Projetos para Homologar</caption>

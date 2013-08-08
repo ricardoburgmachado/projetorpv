@@ -23,6 +23,6 @@
         js_proj.put("professor", item_projeto.getProfessor());
         js_projs.add(js_proj);
     }
-    out.print(prjs);
+    out.print(js_projs);
     out.flush();
 %>

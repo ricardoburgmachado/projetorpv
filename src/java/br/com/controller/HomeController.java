@@ -18,4 +18,10 @@ public class HomeController {
         return new ModelAndView("index");
     }
     
+    @RequestMapping(value ={"listar_homos"})
+    public ModelAndView rrfd(){
+        
+        return new ModelAndView("clpph");
+    }
+    
 }
