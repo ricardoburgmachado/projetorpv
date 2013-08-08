@@ -18,7 +18,7 @@
         <h1>INDEX</h1>     
         
         <% 
-            ConnectionFactory.createConnectionPostgres();
+            ConnectionFactory.getInstance().createConnectionPostgres();
         %>
     </body>
 </html>

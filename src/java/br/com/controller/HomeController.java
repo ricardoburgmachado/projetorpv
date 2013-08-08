@@ -19,7 +19,12 @@ public class HomeController {
     @RequestMapping(value={"", "/"})
     public ModelAndView home(){
         
-        return new ModelAndView("index");
+        return new ModelAndView("login");
     }
     
+    @RequestMapping(value = {"login", "/login"})
+    public ModelAndView login(){
+        
+        return new ModelAndView("login");
+    }
 }

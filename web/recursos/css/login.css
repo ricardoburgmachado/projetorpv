@@ -1,0 +1,28 @@
+/* 
+    Document   : login
+    Created on : 08/08/2013, 20:14:41
+    Author     : rafael
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+#login{
+    
+    margin: auto;
+}
+
+form li{
+    
+   list-style: none;
+   padding-left: 0px;
+}
+
+label{
+    
+    display: block;
+}
+
