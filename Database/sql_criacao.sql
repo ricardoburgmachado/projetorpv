@@ -93,8 +93,8 @@ CREATE TABLE public.usuario_papel (
 
 CREATE TABLE public.participante (
                 id_usuario INTEGER NOT NULL,
-                id_particip INTEGER NOT NULL,
-                CONSTRAINT part_proj_pk PRIMARY KEY (id_usuario, id_particip)
+                id_proj INTEGER NOT NULL,
+                CONSTRAINT part_proj_pk PRIMARY KEY (id_usuario, id_proj)
 );
 
 
@@ -120,7 +120,7 @@ ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
 ALTER TABLE public.participante ADD CONSTRAINT projeto_participante_fk
-FOREIGN KEY (id_particip)
+FOREIGN KEY (id_proj)
 REFERENCES public.projeto (id_proj)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION

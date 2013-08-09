@@ -103,7 +103,7 @@
     <column id="COL26" populated="true" UUID="72388666-3653-4290-80c6-b5b5a7c490f5" autoIncrement="false" autoIncrementSequenceName="usuario_id_usuario_seq_1" defaultValue="" name="ID_USUARIO" nullable="0" physicalName="id_usuario" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
-    <column id="COL27" populated="true" UUID="c7281d0d-f24a-45e9-be44-c2cc43b4c025" autoIncrement="false" autoIncrementSequenceName="projeto_id_particip_seq" defaultValue="" name="ID_PROJ" nullable="0" physicalName="id_particip" precision="0" primaryKeySeq="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+    <column id="COL27" populated="true" UUID="c7281d0d-f24a-45e9-be44-c2cc43b4c025" autoIncrement="false" autoIncrementSequenceName="projeto_id_proj_seq" defaultValue="" name="ID_PROJ" nullable="0" physicalName="id_proj" precision="0" primaryKeySeq="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
     </folder>
@@ -114,7 +114,7 @@
     <folder id="FOLTAB254" populated="true" name="Indices" physicalName="Indices" type="4">
     <index id="IDX28" populated="true" UUID="174e4957-a2e7-4f47-a702-bb88cb25b187" clustered="false" name="part_proj_pk" physicalName="part_proj_pk" primaryKeyIndex="true" unique="false" >
      <index-column id="IDC29" populated="true" UUID="89ef4705-8041-4258-bba0-7f9abff56531" ascendingOrDescending="UNSPECIFIED" column-ref="COL26" name="ID_USUARIO" physicalName="id_usuario" />
-     <index-column id="IDC30" populated="true" UUID="18a5c886-0ef6-449f-96ca-deeeec22115c" ascendingOrDescending="UNSPECIFIED" column-ref="COL27" name="ID_PROJ" physicalName="id_particip" />
+     <index-column id="IDC30" populated="true" UUID="18a5c886-0ef6-449f-96ca-deeeec22115c" ascendingOrDescending="UNSPECIFIED" column-ref="COL27" name="ID_PROJ" physicalName="id_proj" />
     </index>
    </folder>
   </table>
@@ -256,7 +256,7 @@
    </relationship>
   </relationships>
  </target-database>
- <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="false" target-schema="public"> </ddl-generator>
+ <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="true" target-schema="public"> </ddl-generator>
  <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  <create-kettle-job-settings filePath="" jobName="" schemaName="" kettleJoinType="0" savingToFile="true" />
  <play-pen zoom="1.0" viewportX="0" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
