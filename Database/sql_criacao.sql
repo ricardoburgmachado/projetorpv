@@ -32,6 +32,7 @@ CREATE TABLE public.projeto (
                 id_area INTEGER NOT NULL,
                 tipo_proj VARCHAR(50),
                 homologado BOOLEAN DEFAULT false NOT NULL,
+                is_arquivo BOOLEAN DEFAULT false NOT NULL,
                 CONSTRAINT id_pk PRIMARY KEY (id_proj)
 );
 
