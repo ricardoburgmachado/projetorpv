@@ -33,7 +33,7 @@ public class ConnectionFactory {
             System.out.println("Erro ao obter driver de conexão " + ex);
         }
         try {
-            con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/gipa_database", "postgres", "postgres");
+            con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/banco_gipa", "postgres", "postgres");
         } catch (SQLException ex) {
             System.out.println("Erro ao obter conexão " + ex);
         }

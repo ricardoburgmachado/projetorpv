@@ -13,6 +13,7 @@ import java.util.List;
  */
 public abstract class Usuario {
 
+    private int id;
     private String login;
     private String senha;
     private String nome;
@@ -37,6 +38,14 @@ public abstract class Usuario {
 
     public Usuario(String nome, Campus campus) {
         this(null, null, nome, campus);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getLogin() {
