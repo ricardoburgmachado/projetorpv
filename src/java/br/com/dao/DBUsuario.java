@@ -1,14 +1,16 @@
 package br.com.dao;
-    
 
-import br.com.model.Papel;
 import br.com.model.Projeto;
 import java.sql.Statement;
 import java.util.ArrayList;
 import Exceptions.PersistenciaException;
 import br.com.model.Aluno;
+
 import br.com.model.Campus;
 import br.com.model.Coordenador;
+
+import br.com.model.Externo;
+
 import br.com.model.Permissao;
 import br.com.model.ProReitor;
 import br.com.model.Professor;
@@ -31,18 +33,23 @@ public class DBUsuario implements UsuarioDAO {
     private static final String USUARIO = "usuario";
     private ConnectionFactory connectionFactory;
 
+    public DBUsuario(){}
+    
     public DBUsuario(ConnectionFactory connectionFactory) {
 
         this.connectionFactory = connectionFactory;
     }
 
+    
 
     @Override
-    public ArrayList<Usuario> listar(Papel p) throws PersistenciaException {
+    public ArrayList<Usuario> listar(String papel) throws PersistenciaException {
 
-        String query = "SELECT * FROM usuario NATURAL JOIN usuario_papel NATURAL JOIN papel where papel.descricao = '"+p.toString()+"'";
+        String query = "SELECT * FROM usuario NATURAL JOIN usuario_papel NATURAL JOIN papel where papel.descricao = '"+papel.toString()+"'";
         
-        //System.out.println("******************** QUERY -> "+query);
+        System.out.println("******************** QUERY -> "+query);
+        
+        this.connection = connectionFactory.createConnectionPostgres();
         
         PreparedStatement stmt;
         ResultSet resultSet;
@@ -53,20 +60,27 @@ public class DBUsuario implements UsuarioDAO {
             resultSet = stmt.executeQuery();
             while (resultSet.next()) {
                 
-                if (p.toString().equalsIgnoreCase("PROFESSOR")) {                    
-                    Professor a = new Professor("", "");
-                    a.setLogin(resultSet.getString("login").toString());
+
+                if (papel.toString().equalsIgnoreCase("PROFESSOR")) {                    
+                    Professor a = new Professor();
+                    a.setId(resultSet.getInt("id_usuario"));
                     a.setNome(resultSet.getString("nome").toString());                    
                     listaRetorno.add(a);
-                } else if (p.toString().equalsIgnoreCase("ALUNO")) {                    
-                    Aluno a = new Aluno("", Campus.ALEGRETE);
-                    a.setLogin(resultSet.getString("login").toString());
+                } else if (papel.toString().equalsIgnoreCase("ALUNO")) {                    
+                    Aluno a = new Aluno();
+                    a.setId(resultSet.getInt("id_usuario"));
+                    a.setNome(resultSet.getString("nome").toString());                    
+                    listaRetorno.add(a);
+                }else if (papel.toString().equalsIgnoreCase("EXTERNO")) {                    
+                    Externo a = new Externo();
+                    a.setId(resultSet.getInt("id_usuario"));
                     a.setNome(resultSet.getString("nome").toString());                    
                     listaRetorno.add(a);
                 }
             }
 
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
+            System.err.println("ERRO: "+ex.getMessage()+ " -> causa:  "+ex.getCause());
             throw new PersistenciaException("Não foi possível listar os usuários cadastrados no banco", ex);
         }
         return listaRetorno;
@@ -76,6 +90,7 @@ public class DBUsuario implements UsuarioDAO {
     public void obter(Projeto p) throws PersistenciaException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 
     @Override
     public Usuario autentica(String login, String senha) throws PersistenciaException {

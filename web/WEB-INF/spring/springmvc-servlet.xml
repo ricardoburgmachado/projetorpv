@@ -13,6 +13,10 @@
 
                    cache-period="5"/>
     
+    <mvc:resources mapping="/arquivos/**" 
+                   location="/arquivos/"
+                   cache-period="5"/>
+    
     
     <mvc:annotation-driven />
     <context:annotation-config />
@@ -42,5 +46,11 @@
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="50000000"/>
     </bean>
+ 
+    
+    <bean id="repositorioProjeto" class="br.com.repositorio.RepositorioProjeto"></bean>
+    <bean id="repositorioUsuario" class="br.com.repositorio.RepositorioUsuario"></bean>
+    <bean id="custo" class="br.com.model.Custo"></bean>
+ 
  
 </beans>

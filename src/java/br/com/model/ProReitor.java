@@ -8,6 +8,9 @@ import java.util.List;
  */
 public class ProReitor extends Usuario {
 
+
+    public ProReitor(){ }
+
     public ProReitor(String login, String senha, String nome, Campus campus, List<Permissao> permissoes) {
         super(login, senha, nome, campus, permissoes);
     }

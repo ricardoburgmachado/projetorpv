@@ -19,6 +19,7 @@ public class Custo {
 
     public Custo(){}
     
+    /*
     public Custo(int id, int idProj, TipoCusto tipo, String desc, double val){    
         setId(id);
         setIdProjeto(idProjeto);
@@ -26,10 +27,11 @@ public class Custo {
         setDescricao(desc);
         setValor(val);
     }
-
+    */
+    
     public Custo(int idProj,TipoCusto tipo, String desc, double val){    
-        setIdProjeto(idProjeto);
-        setTipoCusto(tipoCusto);
+        this.idProjeto = idProj;
+        this.tipoCusto = tipo;        
         setDescricao(desc);
         setValor(val);
     }
@@ -56,9 +58,9 @@ public class Custo {
         return tipoCusto;
     }
 
-    public String getTipoCustoString() {
-        return tipoCusto.toString();
-    }
+    //public String getTipoCustoString() {
+    //    return tipoCusto.toString();
+    //}
     
     /**
      * @param tipoCusto the tipoCusto to set

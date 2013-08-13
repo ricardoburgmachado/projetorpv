@@ -8,6 +8,9 @@ import java.util.List;
  */
 public class Coordenador extends Usuario {
 
+    public Coordenador() {
+    }
+
     public Coordenador(String login, String senha, String nome, Campus campus, List<Permissao> permissoes) {
         super(login, senha, nome, campus, permissoes);
     }

@@ -8,12 +8,16 @@ import java.util.List;
  * @author rafael
  */
 public abstract class Usuario {
-    
+
+    private int id;
     private String login;
     private String senha;
     private String nome;
     private Campus campus;
     private List<Permissao> permissoes;
+
+    public Usuario() {
+    }
 
     public Usuario(String login, String senha, String nome, Campus campus, List<Permissao> permissoes) {
         this.login = login;
@@ -35,6 +39,17 @@ public abstract class Usuario {
         this(null, null, nome, campus);
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    /**
+     * @return the login
+     */
     public String getLogin() {
         return login;
     }

@@ -10,8 +10,21 @@ package br.com.model;
  * @author Ricardo
  */
 public enum TipoCusto {
-
-    CUSTEIO, CAPITAL;
+   
+    CUSTEIO{
+            @Override
+            public String toString() {
+                return "CUSTEIO";
+            }
+     },CAPITAL{
+            @Override
+            public String toString() {
+                return "CAPITAL";
+            }
+     };
+    
+    
+    
 
     public static TipoCusto fromString(String text) {
         if (text != null) {

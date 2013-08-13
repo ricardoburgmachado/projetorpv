@@ -1,4 +1,3 @@
-
 package br.com.model;
 
 import java.util.List;
@@ -7,7 +6,12 @@ import java.util.List;
  *
  * @author rafael
  */
-public class Professor extends Usuario{
+public class Professor extends Usuario {
+
+    private int siape;
+
+    public Professor() {
+    }
 
     public Professor(String login, String senha, String nome, Campus campus, List<Permissao> permissoes) {
         super(login, senha, nome, campus, permissoes);
@@ -24,4 +28,5 @@ public class Professor extends Usuario{
     public Professor(String nome, Campus campus) {
         super(nome, campus);
     }
+
 }

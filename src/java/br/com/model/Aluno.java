@@ -8,6 +8,11 @@ import java.util.List;
  */
 public class Aluno extends Usuario {
 
+    private int matricula;
+
+    public Aluno() {
+    }
+
     public Aluno(String login, String senha, String nome, Campus campus, List<Permissao> permissoes) {
         super(login, senha, nome, campus, permissoes);
     }
@@ -23,4 +28,19 @@ public class Aluno extends Usuario {
     public Aluno(String nome, Campus campus) {
         super(nome, campus);
     }
+
+    /**
+     * @return the matricula
+     */
+    public int getMatricula() {
+        return matricula;
+    }
+
+    /**
+     * @param matricula the matricula to set
+     */
+    public void setMatricula(int matricula) {
+        this.matricula = matricula;
+    }
+
 }

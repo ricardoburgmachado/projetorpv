@@ -7,21 +7,29 @@ package br.com.repositorio;
 import Exceptions.PersistenciaException;
 import br.com.dao.UsuarioDAO;
 import br.com.model.Usuario;
+import java.util.ArrayList;
 
 /**
  *
  * @author rafael
  */
 public class RepositorioUsuario {
-    
+
     private UsuarioDAO usuarioDAO;
 
+    public RepositorioUsuario(){}
+    
     public RepositorioUsuario(UsuarioDAO usuarioDAO) {
         this.usuarioDAO = usuarioDAO;
     }
-    
-    public Usuario autenticaUsuario(String login, String senha) throws PersistenciaException{
-        
+
+    public Usuario autenticaUsuario(String login, String senha) throws PersistenciaException {
+
         return usuarioDAO.autentica(login, senha);
     }
+
+    public ArrayList<Usuario> listar(String papel) {
+        return usuarioDAO.listar(papel);
+    }
+
 }
