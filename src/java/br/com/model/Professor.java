@@ -1,71 +1,32 @@
 package br.com.model;
 
+import java.util.List;
+
 /**
  *
- * @author Ricardo
+ * @author rafael
  */
 public class Professor extends Usuario {
-    
-    private String login;
-    private String nome;
+
     private int siape;
-    private Permissao tipoAut;
 
-    /**
-     * @return the id
-     */
-    public String getLogin() {
-        return login;
+    public Professor() {
     }
 
-    /**
-     * @param id the id to set
-     */
-    public void setLogin(String l) {
-        
-        this.login = l;
+    public Professor(String login, String senha, String nome, Campus campus, List<Permissao> permissoes) {
+        super(login, senha, nome, campus, permissoes);
     }
 
-    /**
-     * @return the nome
-     */
-    public String getNome() {
-        return nome;
+    public Professor(String login, String senha, String nome, Campus campus) {
+        super(login, senha, nome, campus);
     }
 
-    /**
-     * @param nome the nome to set
-     */
-    public void setNome(String nome) {
-        this.nome = nome;
+    public Professor(String login, String senha) {
+        super(login, senha);
     }
 
-    /**
-     * @return the siape
-     */
-    public int getSiape() {
-        return siape;
+    public Professor(String nome, Campus campus) {
+        super(nome, campus);
     }
 
-    /**
-     * @param siape the siape to set
-     */
-    public void setSiape(int siape) {
-        this.siape = siape;
-    }
-
-    /**
-     * @return the tipoAut
-     */
-    public Permissao getTipoAut() {
-        return tipoAut;
-    }
-
-    /**
-     * @param tipoAut the tipoAut to set
-     */
-    public void setTipoAut(Permissao tipoAut) {
-        this.tipoAut = tipoAut;
-    }
-    
 }

@@ -35,6 +35,12 @@
                     header: "Selecione aluno(s)",
                     noneSelectedText: "Selecione aluno(s)",
                 }).multiselectfilter();
+                $("#partipantes_externo").multiselect({
+                    multiple: true,
+                    header: "Selecione",
+                    noneSelectedText: "Selecione",
+                }).multiselectfilter();
+
                 $("#area_conhecimento").multiselect({
                     multiple: false,
                     header: "Selecione uma área ",
@@ -50,6 +56,22 @@
             });
         </script>
         <!-- fim multiselect -->
+
+        <!-- INICIO JQUERY MONEY -->
+        <script type="text/javascript" src="<c:url value="recursos/js/jquery_price/jquery.price_format.1.8.js"/>" ></script>
+        <script type="text/javascript">
+            jQuery(function() {
+                $('#mascaraCusteio').priceFormat({
+                    prefix: '',
+                    thousandsSeparator: ''
+                });
+                $('#mascaraCapital').priceFormat({
+                    prefix: '',
+                    thousandsSeparator: ''
+                });
+            });
+        </script>
+        <!-- FIM JQUERY MONEY -->
 
 
         <script type="text/javascript" src="<c:url value="recursos/js/funcoes.js"/>" ></script>
@@ -98,57 +120,12 @@
                         <label>Resumo:</label>
                         <textarea style="height: 85px; width: 500px" name=resumo cols=35 rows=5></textarea>
 
-                        <span style="clear: both; display: block"></span>
 
-                        <span class="bloco">
-                            <label>Participantes (alunos):</label><br/><br/>
-                            <!--
-                            <select id="partipantes_aluno" name="participantes_aluno" multiple="multiple">
-                                <option value="1">Joãozinho</option>
-                                <option value="2">Maria</option>
-                                <option value="3">Juliano</option>
-                                <option value="4">Kátia</option>                                
-                            </select>
-                            -->
-                            <select id="partipantes_aluno" name="participantes_aluno" multiple="multiple">
-                                <c:forEach items="${partipantes_aluno}" var="aluno">                               
-                                    <option value=${aluno.login}>${aluno.nome}</option>
-                                </c:forEach>
-                            </select>
-                        </span>
-
-                        <span class="bloco">
-                            <label for="nome">Participantes (professores):</label><br/><br/>                      
-                            <!--
-                            <select id="partipantes_professor" name="participantes_professor" multiple="multiple">
-                                <option value="1">Fávio</option>
-                                <option value="2">Sérgio</option>
-                                <option value="3">Ivone</option>
-                            </select>
-                            -->
-                            <select id="partipantes_professor" name="participantes_professor" multiple="multiple">
-                                <c:forEach items="${partipantes_professor}" var="professor">                               
-                                    <option value=${professor.login}>${professor.nome}</option>
-                                </c:forEach>
-                            </select>
-                        </span>
 
                         <span style="clear: both; display: block;"></span>
 
                         <span class="bloco">
-                            <label for="nome">Área de conhecimento:</label><br/><br/> 
-                            <!--
-                            <select id="area_conhecimento" name="areaConhecimento">
-                                <option selected="selected" value="">Selecione uma área</option>
-                                <option value="1">Engenharia de Software</option>
-                                <option value="2">Engenharia Elétrica</option>
-                                <option value="3">Ciência da Computação</option>
-                                <option value="4">Engeharia Civil</option>
-                                <option value="5">Engenharia Mecânica</option>
-                                <option value="6">Engenharia Florestal</option>
-                                <option value="7">Sistemas de Informação</option>
-                            </select>
-                            -->
+                            <label for="nome">Área de conhecimento:</label><br/><br/>                             
                             <select id="area_conhecimento" name="areaConhecimento_x">
                                 <c:forEach items="${area_conhecimento}" var="area">                               
                                     <option value=${area.id}>${area.area}</option>
@@ -166,44 +143,64 @@
                         </span>
 
 
+
+
+                        <span style="clear: both; display: block"></span>
+
+                        <span class="bloco">
+                            <label>Participantes (alunos):</label><br/><br/>                           
+                            <select id="partipantes_aluno" name="participantes_aluno" multiple="multiple">
+                                <c:forEach items="${participantes_aluno}" var="aluno">                               
+                                    <option value=${aluno.id}>${aluno.nome}</option>
+                                </c:forEach>
+                            </select>
+                        </span>
+
+                        <span class="bloco">
+                            <label for="nome">Participantes (professores):</label><br/><br/>                                                 
+                            <select id="partipantes_professor" name="participantes_professor" multiple="multiple">
+                                <c:forEach items="${participantes_professor}" var="professor">                               
+                                    <option value=${professor.id}>${professor.nome}</option>
+                                </c:forEach>
+                            </select>
+                        </span>
+
+                        <span class="bloco">
+                            <label for="nome">Participantes (Externos):</label><br/><br/>                      
+                            <select id="partipantes_externo" name="participantes_externo" multiple="multiple">
+                                <c:forEach items="${participantes_externo}" var="externo">                               
+                                    <option value=${externo.id}>${externo.nome}</option>
+                                </c:forEach>
+                            </select>
+                        </span>
+
+                        <span class="bloco">
+                            <label for="nome">Anexo (arquivo .PDF):</label>
+                            <input style="font-size: 12px; font-weight: normal; border: none; cursor: pointer" type="file" name="arquivo_xx"/> 
+                        </span>
+
+
                         <span style="clear: both; display: block;"></span>
 
+
+
                         <span class="bloco">
-                            <label for="custeios">Custo (custeio):</label>
-                            <div class="custeios">
-                                <p class="campoCusteio" style="display: block; float: left; border: none; width: 347px; margin-top: 5px">
-                                    <input style="width: 75px; display: block; float: left" type="text" name="custeio_val_x" />
-                                    <textarea style="width: 150px; height: 35px; display: block; float: left; clear: none; margin-left: 10px; margin-top: 0px" name=custeio_desc_x cols=35 rows=3></textarea>
-                                    <a style="width: 100px; text-decoration: none; color: black; display: block; float: left; margin-top: 10px; margin-left: 5px" href="#" class="removerCusteio">Remover</a>
-                                </p>
-                            </div>
-                            <p>
-                                <a style="display: block; clear: both; text-decoration: none; color: black" href="#" class="adicionarCusteio">Adicionar Custeio</a>
-                            </p>
+                            <label for="capitais">Custo (capital):</label>                            
+                            <div id="campo_novo_capital"></div>
+                            <a href="javascript:;" onclick="javascript:AddCapital()" style="display: block; clear: both; text-decoration: none; color: black" href="#" class="adicionarCapital">Adicionar Capital</a>
                         </span>
 
-                        <span class="bloco">
-                            <label for="capitais">Custo (capital):</label>
-                            <div class="capitais">
 
-                                <p class="campoCapital" style="display: block; float: left; border: none; width: 347px; margin-top: 5px">
-                                    <input style="width: 75px; display: block; float: left" type="text" name="capital_val_x" />
-                                    <textarea style="width: 150px; height: 35px; display: block; float: left; clear: none; margin-left: 10px; margin-top: 0px" name=capital_desc_x cols=35 rows=3></textarea>
-                                    <a style="width: 100px; text-decoration: none; color: black; display: block; float: left; margin-top: 10px; margin-left: 5px" href="#" class="removerCapital">Remover</a>
-                                </p>
-                            </div>
-                            <p>
-                                <a style="display: block; clear: both; text-decoration: none; color: black" href="#" class="adicionarCapital">Adicionar Capital</a>
-                            </p>
+                        <span class="bloco">
+                            <label for="capitais">Custo (custeio):</label>                            
+                            <div id="campo_novo_custeio"></div>
+                            <a href="javascript:;" onclick="javascript:AddCusteio()" style="display: block; clear: both; text-decoration: none; color: black" href="#" class="adicionarCapital">Adicionar Custeio</a>
                         </span>
 
 
 
 
 
-
-                        <label for="nome">Anexo (arquivo .PDF):</label>
-                        <input style="font-size: 10px; font-weight: normal; border: none; cursor: pointer" type="file" name="arquivo_xx"/> 
 
                         <span style="clear: both; display: block; "></span>
 

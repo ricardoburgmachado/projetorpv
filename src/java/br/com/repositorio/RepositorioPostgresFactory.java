@@ -4,6 +4,10 @@
  */
 package br.com.repositorio;
 
+import br.com.dao.ConnectionFactory;
+import br.com.dao.DBProjeto;
+import br.com.dao.DBUsuario;
+
 /**
  *
  * @author rafael
@@ -12,7 +16,13 @@ public class RepositorioPostgresFactory implements AbstractRepositorioFactory{
 
     @Override
     public RepositorioUsuario createRepositorioUsuario() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        return new RepositorioUsuario(new DBUsuario(ConnectionFactory.getInstance()));
+    }
+
+    @Override
+    public RepositorioProjeto createRepositorioProjeto() {
+        return new RepositorioProjeto(new DBProjeto(ConnectionFactory.getInstance().createConnectionPostgres()));
     }
     
 }

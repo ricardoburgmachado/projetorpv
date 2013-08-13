@@ -1,66 +1,30 @@
 package br.com.model;
 
-public class ProReitor extends Usuario{
+import java.util.List;
 
-    private String login;
-    private String senha;
-    private String nome;
-    private Permissao tipoAut;
+/**
+ *
+ * @author rafael
+ */
+public class ProReitor extends Usuario {
 
-    /**
-     * @return the login
-     */
-    public String getLogin() {
-        return login;
+
+    public ProReitor(){ }
+
+    public ProReitor(String login, String senha, String nome, Campus campus, List<Permissao> permissoes) {
+        super(login, senha, nome, campus, permissoes);
     }
 
-    /**
-     * @param login the login to set
-     */
-    public void setLogin(String login) {
-        this.login = login;
+    public ProReitor(String login, String senha, String nome, Campus campus) {
+        super(login, senha, nome, campus);
     }
 
-    /**
-     * @return the senha
-     */
-    public String getSenha() {
-        return senha;
+    public ProReitor(String login, String senha) {
+        super(login, senha);
     }
 
-    /**
-     * @param senha the senha to set
-     */
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    /**
-     * @return the nome
-     */
-    public String getNome() {
-        return nome;
-    }
-
-    /**
-     * @param nome the nome to set
-     */
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    /**
-     * @return the tipoAut
-     */
-    public Permissao getTipoAut() {
-        return tipoAut;
-    }
-
-    /**
-     * @param tipoAut the tipoAut to set
-     */
-    public void setTipoAut(Permissao tipoAut) {
-        this.tipoAut = tipoAut;
+    public ProReitor(String nome, Campus campus) {
+        super(nome, campus);
     }
 
 }

@@ -12,4 +12,6 @@ public interface AbstractRepositorioFactory {
     
     public RepositorioUsuario createRepositorioUsuario();
     
+    public abstract RepositorioProjeto createRepositorioProjeto();
+    
 }

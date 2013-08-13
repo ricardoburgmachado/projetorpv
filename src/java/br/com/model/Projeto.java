@@ -1,8 +1,6 @@
 package br.com.model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,14 +11,14 @@ public class Projeto {
     private String palavrasChave;
     private String resumo;
     private TipoProjeto tipoProjeto;
-    private ArrayList<Usuario> participantes;
-    private Professor professor;
-    //private String arquivo;
-    private MultipartFile arquivo;
-
-    ArrayList<Custo> custeios = new ArrayList<Custo>();
-    ArrayList<Custo> capitais = new ArrayList<Custo>();;
-
+    private ArrayList<Usuario> participantes = new ArrayList<Usuario>();    
+    ArrayList<String> participantesString = new  ArrayList<String>();
+    private ArrayList<Aluno> participantesAluno = new ArrayList<Aluno>();
+    private ArrayList<Professor> participantesProfessor = new ArrayList<Professor>();
+    private ArrayList<Externo> participantesExterno = new ArrayList<Externo>();
+    private Professor professor;    
+    private boolean arquivo;    
+    ArrayList<Custo> custos = new ArrayList<Custo>();
     private AreaConhecimento areaConhecimento;
     private Campus campus;
     private boolean sigilo;
@@ -108,8 +106,6 @@ public class Projeto {
     public void setParticipantes(ArrayList<Usuario> participantes) {
         this.participantes = participantes;
     }
-
-   
     
     /**
      * @return the professor
@@ -125,55 +121,19 @@ public class Projeto {
         this.professor = professor;
     }
 
-    /**
-     * @return the arquivo
-     */
-    public MultipartFile getArquivo() {
-        return arquivo;
+    
+
+    public void setCustos(int idProj, TipoCusto tipoC, String[] custoVal, String[] custoDesc) {
+        for (int i = 0; i < custoVal.length; i++) {
+            if (valorValido(custoVal[i]) && descricaoValida(custoDesc[i])) {
+                this.custos.add(new Custo(idProj, tipoC, custoDesc[i], Double.parseDouble(custoVal[i])));
+                //System.out.println("CUSTEIO: idPROJ: "+idProj+" | desc: "+custeioDesc[i]+" valor: "+custeioVal[i]);
+            }
+        }
     }
 
-    /**
-     * @param arquivo the arquivo to set
-     */
-    public void setArquivo(MultipartFile arquivo) {
-        this.arquivo = arquivo;
-    }
-
-    /**
-     * Método utilizado no cadastro de um projeto
-     * @param custeioVal
-     * @param custeioDesc 
-     */
-    public void setCusteios(int idProj, String[] custeioVal, String[] custeioDesc ) {
-        //this.custeios = new ArrayList<Custo>();
-        for (int i = 0; i < custeioVal.length; i++) {
-            if(valorValido(custeioVal[i]) && descricaoValida(custeioDesc[i])){
-                this.custeios.add(new Custo(idProj, TipoCusto.CUSTEIO, custeioDesc[i], Double.parseDouble(custeioVal[i])));
-            }
-        } 
-    }
-    
-    public ArrayList<Custo> getCusteios(){
-        return this.custeios;
-    }
-    
-    public ArrayList<Custo> getCapitais(){
-        return this.capitais;
-    }
-    
-    
-    /**
-     * Método utilizado no cadastro de um projeto
-     * @param custeioVal
-     * @param custeioDesc 
-     */
-    public void setCapitais(int idProj, String[] capitalVal, String[] capitalDesc) {
-        //this.capitais = new ArrayList<Custo>();
-        for (int i = 0; i < capitalVal.length; i++) {
-            if(valorValido(capitalVal[i]) && descricaoValida(capitalDesc[i])){
-                this.capitais.add(new Custo(idProj, TipoCusto.CAPITAL, capitalDesc[i], Double.parseDouble(capitalVal[i])));
-            }
-        } 
+    public ArrayList<Custo> getCustos() {
+        return this.custos;
     }
 
     public boolean valorValido(String valor) {
@@ -185,15 +145,14 @@ public class Projeto {
         }
     }
 
-    public boolean descricaoValida(String desc) {       
-        if(!desc.isEmpty() && desc != ""){
+    public boolean descricaoValida(String desc) {
+        if (!desc.isEmpty() && desc != "") {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    
-    
+
     /**
      * @return the areaConhecimento
      */
@@ -236,4 +195,76 @@ public class Projeto {
         this.sigilo = sigilo;
     }
 
+    /**
+     * @return the participantesAluno
+     */
+    public ArrayList<Aluno> getParticipantesAluno() {
+        return participantesAluno;
+    }
+
+    /**
+     * @param participantesAluno the participantesAluno to set
+     */
+    public void setParticipantesAluno(ArrayList<Aluno> participantesAluno) {
+        this.participantesAluno = participantesAluno;
+    }
+
+    /**
+     * @return the participantesProfessor
+     */
+    public ArrayList<Professor> getParticipantesProfessor() {
+        return participantesProfessor;
+    }
+
+    /**
+     * @param participantesProfessor the participantesProfessor to set
+     */
+    public void setParticipantesProfessor(ArrayList<Professor> participantesProfessor) {
+        this.participantesProfessor = participantesProfessor;
+    }
+
+    /**
+     * @return the participantesExterno
+     */
+    public ArrayList<Externo> getParticipantesExterno() {
+        return participantesExterno;
+    }
+
+    /**
+     * @param participantesExterno the participantesExterno to set
+     */
+    public void setParticipantesExterno(ArrayList<Externo> participantesExterno) {
+        this.participantesExterno = participantesExterno;
+    }
+
+    /**
+     * @return the isArquivo
+     */
+    public boolean getArquivo() {
+        return arquivo;
+    }
+
+    /**
+     * @param isArquivo the isArquivo to set
+     */
+    public void setArquivo(boolean isArquivo) {
+        this.arquivo = isArquivo;
+    }
+
+    /**
+     * @return the participantesString
+     */
+    public ArrayList<String> getParticipantesString() {
+        return participantesString;
+    }
+
+    /**
+     * @param participantesString the participantesString to set
+     */
+    public void setParticipantesString(String[] p) {
+        
+        for(int i = 0; i < p.length;i++){
+            this.participantesString.add(p[i].toString());
+        }
+    }
 }

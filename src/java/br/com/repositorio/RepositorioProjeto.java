@@ -1,0 +1,111 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package br.com.repositorio;
+
+import Exceptions.PersistenciaException;
+import br.com.dao.ProjetoDAO;
+import br.com.dao.ProjetoDAO;
+import br.com.model.Aluno;
+import br.com.model.AreaConhecimento;
+import br.com.model.Custo;
+import br.com.model.Externo;
+import br.com.model.Professor;
+import br.com.model.Projeto;
+import br.com.model.Usuario;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Ricardo
+ */
+public class RepositorioProjeto {
+
+    private ProjetoDAO projDAO;
+
+    
+    public RepositorioProjeto() {}
+    
+    /**
+     * Construtor
+     *
+     * @param projetoDAO
+     */
+    public RepositorioProjeto(ProjetoDAO pDAO) {
+
+        this.projDAO = pDAO;
+    }
+
+    public int inserir(Projeto p) {
+        return projDAO.inserir(p);
+    }
+
+    public ArrayList<AreaConhecimento> listarAreas() {
+        //return usuDao.listar(p);
+        return projDAO.listarAreas();
+    }
+
+    public void inserirCustos(ArrayList<Custo> c) {
+        projDAO.inserirCustos(c);
+    }
+
+    public void inserirParticipantes(int idProj, String[] idPart) {
+        if (valoresValido(idPart)) {
+            projDAO.inserirParticipantes(idProj, idPart);
+        }
+    }
+
+    public boolean valoresValido(String[] idPart) {
+        try {
+            for (int i = 0; i < idPart.length; i++) {
+                double temp = Integer.parseInt(idPart[i]);
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public Projeto obter(int id) {
+
+        return projDAO.obter(id);
+    }
+
+    public Projeto obter(Projeto p) {
+
+        return projDAO.obter(p);
+    }
+
+    public ArrayList<Aluno> getParticAlunos(int id){
+        return projDAO.getParticAlunos(id);
+    }
+
+    public ArrayList<Professor> getParticProfessores(int id){
+        return projDAO.getParticProfessores(id);
+    }
+
+    public ArrayList<Externo> getParticExternos(int id) {
+        return projDAO.getParticExternos(id);
+    }
+    
+    public ArrayList<Custo> getCustos(int idProj){
+        return projDAO.getCustos(idProj);
+    }
+    
+    public void insereArquivo(int idProj) {
+        projDAO.insereArquivo(idProj);
+    }
+
+    public void removeArquivo(int idProj) {
+        projDAO.removeArquivo(idProj);
+    }
+
+    public void editar(Projeto p){
+        projDAO.editar(p);
+        projDAO.atualizaCustos(p.getId(), p.getCustos());     
+        projDAO.atualizaParticipantes(p.getId(), p.getParticipantesString());
+    }
+      
+}

@@ -1,13 +1,17 @@
 package br.com.controller;
 
-import br.com.dao.PersistenciaFactoryPostgres;
-import br.com.dao.RepositorioProjeto;
-import br.com.dao.RepositorioUsuario;
+
+import br.com.repositorio.RepositorioProjeto;
+import br.com.repositorio.RepositorioUsuario;
+import br.com.model.Aluno;
 import br.com.model.AreaConhecimento;
-import br.com.model.Papel;
+import br.com.model.Custo;
 import br.com.model.Permissao;
 import br.com.model.Projeto;
+import br.com.model.TipoCusto;
 import br.com.model.TipoProjeto;
+import br.com.model.Usuario;
+import br.com.repositorio.RepositorioPostgresFactory;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -16,9 +20,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +36,10 @@ public class ProjetoController {
 
     HttpServletRequest request;
 
+    @Autowired(required = true)
+    RepositorioProjeto repositorioProjeto;
+    RepositorioUsuario repositorioUsuario;
+
     /**
      * Método que recebe os dados do formulário para efetivar o cadastro de um
      * projeto no banco de dados
@@ -40,7 +50,171 @@ public class ProjetoController {
     public ModelAndView projetoAdiciona(@ModelAttribute Projeto p_projeto, HttpServletRequest p_request,
             @RequestParam(value = "arquivo_xx", required = false) MultipartFile arquivo) {
 
-        //Projeto projeto = new Projeto();
+        this.request = p_request;
+
+        //AQUI SERÁ FEITA A INCLUSÃO DOS DADOS DO PROJETO NO BD E RETORNARÁ O ID IDENTIFICADOR DO BD PARA PARA DEFINIR O NOME DO ARQUIVO        
+        //int idRetornadoBD = 1;//SIMULADO
+        System.out.println("************************* DADOS PROJETO **********************");
+
+        System.out.println("ID: " + p_projeto.getId());
+        System.out.println("TITULO: " + p_projeto.getTitulo());
+        System.out.println("PALAVRAS CHAVE: " + p_projeto.getPalavrasChave());
+        System.out.println("RESUMO: " + p_projeto.getResumo());
+        //System.out.println("PARTICIPANTES(alunos): " + p_projeto.getParticipantes());
+        //System.out.println("PARTICIPANTES(professores): " + p_projeto.getParticipantes());
+
+        AreaConhecimento area = new AreaConhecimento();
+        area.setId(request.getParameter("areaConhecimento_x"));
+
+        //System.out.println("DEBUG AREA CONHECIMENTO: "+request.getParameter("areaConhecimento_x"));
+        p_projeto.setAreaConhecimento(area);
+        System.out.println("ÁREA CONHECIMENTO: " + p_projeto.getAreaConhecimento());
+        System.out.println("TIPO PROJETO: " + p_projeto.getTipoProjeto());
+
+        String[] custeios_val = request.getParameterValues("custeio_val_x");
+        String[] custeios_desc = request.getParameterValues("custeio_desc_x");
+        String[] capitais_val = request.getParameterValues("capital_val_x");
+        String[] capitais_desc = request.getParameterValues("capital_desc_x");
+
+        
+        System.out.println("*********************** CAPITAIS VALOR: "+capitais_val);
+        
+        
+        String[] participantes_aluno = request.getParameterValues("participantes_aluno");
+        String[] participantes_prof = request.getParameterValues("participantes_professor");
+        String[] participantes_externo = request.getParameterValues("participantes_externo");
+
+        System.out.println("************************* DADOS PROJETO **********************");
+
+        this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
+        this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
+
+        int idRetorno = repositorioProjeto.inserir(p_projeto);
+
+        if (idRetorno != -1) {
+            if(capitais_val != null && capitais_desc != null){
+                p_projeto.setCustos(idRetorno, TipoCusto.CAPITAL, capitais_val, capitais_desc);
+            }
+            if(custeios_val != null && custeios_desc != null){
+                p_projeto.setCustos(idRetorno, TipoCusto.CUSTEIO, custeios_val, custeios_desc);
+            }
+            repositorioProjeto.inserirCustos(p_projeto.getCustos());
+
+            repositorioProjeto.inserirParticipantes(idRetorno, participantes_aluno);
+            repositorioProjeto.inserirParticipantes(idRetorno, participantes_prof);
+            repositorioProjeto.inserirParticipantes(idRetorno, participantes_externo);
+        }
+
+        if (!arquivo.isEmpty() && idRetorno != -1) {
+            processarArquivo(idRetorno, arquivo);
+        }
+
+        //System.out.println("QUANTIDADE CUSTEIOS: "+p_projeto.getCusteios().size());
+        //for(int i = 0; i < p_projeto.getCusteios().size(); i++){
+        //    System.out.println("CUSTEIO TIPO: "+p_projeto.getCusteios().get(i).getTipoCusto());
+        //    System.out.print("CUSTEIO VALOR: "+p_projeto.getCusteios().get(i).getValor());
+        //    System.out.print("CUSTEIO DESCRICAO: "+p_projeto.getCusteios().get(i).getDescricao());
+        //}
+        //RepositorioProjeto rpProjeto = new PersistenciaFactoryPostgres().createPersistenciaProjeto();
+        //System.out.println("CONEXÃO:    "+rpProjeto);
+        //return new ModelAndView("projeto_adiciona");
+        //RepositorioUsuario reposit = new PersistenciaFactoryPostgres().createPersistenciaUsuario();
+        //RepositorioProjeto repositPro = new PersistenciaFactoryPostgres().createPersistenciaProjeto();
+        ModelAndView mv = new ModelAndView("projeto_adiciona");
+        mv.addObject("participantes_aluno", repositorioUsuario.listar("ALUNO"));
+        mv.addObject("participantes_externo", repositorioUsuario.listar("EXTERNO"));
+        mv.addObject("participantes_professor", repositorioUsuario.listar("PROFESSOR"));
+        mv.addObject("area_conhecimento", repositorioProjeto.listarAreas());
+        mv.addObject("tipo_projeto", TipoProjeto.values());
+        return mv;
+
+    }
+
+    private void processarArquivo(int id, MultipartFile arq) {
+
+        String saveDirectory = this.request.getSession().getServletContext().getRealPath("/arquivos/" + id + "");
+        File diretorio = new File(saveDirectory);
+        if (!diretorio.exists()) {
+            diretorio.mkdirs();
+        }
+        try {
+            FileOutputStream arquivo = new FileOutputStream(diretorio.getAbsolutePath() + "/" + id + ".pdf");
+            arquivo.write(arq.getBytes());
+            arquivo.flush();
+            arquivo.close();
+
+            this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
+            repositorioProjeto.insereArquivo(id);
+
+        } catch (IOException ex) {
+        }
+    }
+
+    /**
+     * Método que apenas carrega o formulário para cadastro de projetos
+     *
+     * @return ModelAndView
+     */
+    @RequestMapping(value = "/projeto_adiciona_show")
+    public ModelAndView projetoAdicionaShow() {
+
+        this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
+        this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
+        ModelAndView mv = new ModelAndView("projeto_adiciona");
+        mv.addObject("participantes_aluno", repositorioUsuario.listar("ALUNO"));
+        mv.addObject("participantes_externo", repositorioUsuario.listar("EXTERNO"));
+        mv.addObject("participantes_professor", repositorioUsuario.listar("PROFESSOR"));
+        mv.addObject("area_conhecimento", repositorioProjeto.listarAreas());
+        mv.addObject("tipo_projeto", TipoProjeto.values());
+        return mv;
+    }
+
+    /**
+     * Método que apenas carrega o formulário para edição de projetos, com os
+     * campos preenchidos
+     *
+     * @param id
+     * @return ModelAndView
+     */
+    @RequestMapping(value = "/projeto_edita_show")
+    public ModelAndView projetoEditaShow(@RequestParam int id) {
+
+        System.out.println("************** ID VINDA POR PARAMETRO: " + id);
+
+        this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
+        this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
+
+        Projeto projetoBD = this.repositorioProjeto.obter(id);
+
+        projetoBD.setParticipantesAluno(repositorioProjeto.getParticAlunos(id));
+        projetoBD.setParticipantesProfessor(repositorioProjeto.getParticProfessores(id));
+        projetoBD.setParticipantesExterno(repositorioProjeto.getParticExternos(id));
+
+        ModelAndView mv = new ModelAndView("projeto_edita");
+
+        mv.addObject("projeto", projetoBD);
+        mv.addObject("area_conhecimento", repositorioProjeto.listarAreas());
+        mv.addObject("custos", repositorioProjeto.getCustos(id));
+        mv.addObject("participantes_aluno", repositorioUsuario.listar("ALUNO"));
+        mv.addObject("participantes_externo", repositorioUsuario.listar("EXTERNO"));
+        mv.addObject("participantes_professor", repositorioUsuario.listar("PROFESSOR"));
+
+        return mv;
+    }
+
+    /**
+     * Método que recebe e processa os dados de um projeto editado
+     * atualizando-os no BD
+     *
+     * @param p_projeto
+     * @param p_request
+     * @param arquivo
+     * @return
+     */
+    @RequestMapping(value = "/projeto_edita", method = RequestMethod.POST)
+    public ModelAndView projetoEdita(@ModelAttribute Projeto p_projeto, HttpServletRequest p_request,
+            @RequestParam(value = "arquivo_xx", required = false) MultipartFile arquivo) {
+
         this.request = p_request;
 
         //AQUI SERÁ FEITA A INCLUSÃO DOS DADOS DO PROJETO NO BD E RETORNARÁ O ID IDENTIFICADOR DO BD PARA PARA DEFINIR O NOME DO ARQUIVO        
@@ -69,105 +243,58 @@ public class ProjetoController {
 
         String[] participantes_aluno = request.getParameterValues("participantes_aluno");
         String[] participantes_prof = request.getParameterValues("participantes_professor");
+        String[] participantes_externo = request.getParameterValues("participantes_externo");
 
-        //for(int i = 0; i < custeios_val.length; i++){
-        //    System.out.println("CUSTEIO val: "+custeios_val[i]);
-        //}
-        
-        //for(int i = 0; i < custeios_desc.length; i++){
-        //    System.out.println("CUSTEIO desc: "+custeios_desc[i]);
-        //}
-        
-        //for (int i = 0; i < participantes_aluno.length; i++) {
-        //    System.out.println("PARTICIPANTE(ALUNO)[" + i + "] " + participantes_aluno[i]);
-        //}
-        //for (int i = 0; i < p_projeto.getCusteios().size(); i++) {
-        //    System.out.println("CUSTEIO[" + i + "] " + p_projeto.getCusteios().get(i).getValor() + " | DESC: " + p_projeto.getCusteios().get(i).getDescricao());
-        //}
-        //for (int i = 0; i < p_projeto.getCapitais().size(); i++) {
-        //    System.out.println("CAPITAL[" + i + "] " + p_projeto.getCapitais().get(i).getValor() + " | DESC: " + p_projeto.getCapitais().get(i).getDescricao());
-        //}
-        //System.out.println("SIGILO: " + p_projeto.getSigilo());
         System.out.println("************************* DADOS PROJETO **********************");
 
-        RepositorioProjeto rpProjeto = new PersistenciaFactoryPostgres().createPersistenciaProjeto();
+        this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
+        this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
 
-        //System.out.println("RETORNO CADASTRO: "+rpProjeto.inserir(p_projeto));
-        int idRetorno = rpProjeto.inserir(p_projeto);
-
-        if (idRetorno != -1) {
-            //p_projeto.setCusteios(idRetorno, custeios_val, custeios_desc);
-            //p_projeto.setCapitais(idRetorno, capitais_val, capitais_desc);
+        
+        
+        
+        if(capitais_val != null && capitais_desc != null){
+            p_projeto.setCustos(p_projeto.getId(), TipoCusto.CAPITAL, capitais_val, capitais_desc);
+        }
+        
+        if(custeios_val != null && custeios_desc != null){
+            p_projeto.setCustos(p_projeto.getId(), TipoCusto.CUSTEIO, custeios_val, custeios_desc);
+        }
             
-            //rpProjeto.inserirCusteios(p_projeto.getCusteios());
+        if(participantes_aluno != null){
+            p_projeto.setParticipantesString(participantes_aluno);
+            //repositorioProjeto.inserirParticipantes(p_projeto.getId(), participantes_aluno);            
         }
-
-        //System.out.println("QUANTIDADE CUSTEIOS: "+p_projeto.getCusteios().size());
-        //for(int i = 0; i < p_projeto.getCusteios().size(); i++){
-        //    System.out.println("CUSTEIO TIPO: "+p_projeto.getCusteios().get(i).getTipoCusto());
-        //    System.out.print("CUSTEIO VALOR: "+p_projeto.getCusteios().get(i).getValor());
-        //    System.out.print("CUSTEIO DESCRICAO: "+p_projeto.getCusteios().get(i).getDescricao());
-        //}
-        if (!arquivo.isEmpty() && idRetorno != -1) {
-            processarArquivo(idRetorno, arquivo);
+        if(participantes_prof != null){
+            p_projeto.setParticipantesString(participantes_prof);
+            //repositorioProjeto.inserirParticipantes(p_projeto.getId(), participantes_prof);
+            
         }
-
-        //RepositorioProjeto rpProjeto = new PersistenciaFactoryPostgres().createPersistenciaProjeto();
-        //System.out.println("CONEXÃO:    "+rpProjeto);
-        return new ModelAndView("projeto_adiciona");
-    }
-
-    private void processarArquivo(int id, MultipartFile arq) {
-        //private void processarArquivo(MultipartFile avatar) {
-
-        String saveDirectory = this.request.getSession().getServletContext().getRealPath("/arquivos/" + id + "");
-        File diretorio = new File(saveDirectory);
-        if (!diretorio.exists()) {
-            diretorio.mkdirs();
+        if(participantes_externo != null){
+            p_projeto.setParticipantesString(participantes_externo);
+            //repositorioProjeto.inserirParticipantes(p_projeto.getId(), participantes_externo);        
         }
-        try {
-            FileOutputStream arquivo = new FileOutputStream(diretorio.getAbsolutePath() + "/" + id + ".pdf");
-            arquivo.write(arq.getBytes());
-            arquivo.flush();
-            arquivo.close();
-
-        } catch (IOException ex) {
+        
+        repositorioProjeto.editar(p_projeto);    
+            
+        if (!arquivo.isEmpty()) {
+            processarArquivo(p_projeto.getId(), arquivo);
         }
-    }
-
-    /**
-     * Método que apenas carrega o formulário para cadastro de projetos
-     *
-     * @return ModelAndView
-     */
-    @RequestMapping(value = "/projeto_adiciona_show")
-    public ModelAndView projetoAdicionaShow() {
-
-        RepositorioUsuario reposit = new PersistenciaFactoryPostgres().createPersistenciaUsuario();
-        RepositorioProjeto repositPro = new PersistenciaFactoryPostgres().createPersistenciaProjeto();
+        
         ModelAndView mv = new ModelAndView("projeto_adiciona");
-        mv.addObject("partipantes_aluno", reposit.listar(Papel.ALUNO));
-        mv.addObject("partipantes_professor", reposit.listar(Papel.PROFESSOR));
-        mv.addObject("area_conhecimento", repositPro.listarAreas());
+        mv.addObject("participantes_aluno", repositorioUsuario.listar("ALUNO"));
+        mv.addObject("participantes_externo", repositorioUsuario.listar("EXTERNO"));
+        mv.addObject("participantes_professor", repositorioUsuario.listar("PROFESSOR"));
+        mv.addObject("area_conhecimento", repositorioProjeto.listarAreas());
         mv.addObject("tipo_projeto", TipoProjeto.values());
         return mv;
+
     }
 
-    /**
-     * Método que apenas carrega o formulário para edição de projetos
-     *
-     * @return ModelAndView
-     */
-    @RequestMapping(value = "/projeto_edita_show")
-    public ModelAndView projetoEditaShow() {
+    @RequestMapping(value = "/projeto_lista_show")
+    public ModelAndView projetoListaShow() {
 
-        return new ModelAndView("projeto_edita");
-    }
-
-    @RequestMapping(value = "/projeto_edita")
-    public ModelAndView projetoEdita() {
-
-        return new ModelAndView("projeto_lista");
+        return new ModelAndView("lista_projeto_teste");
     }
 
 }
