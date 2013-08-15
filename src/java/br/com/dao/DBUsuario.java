@@ -102,7 +102,7 @@ public class DBUsuario implements UsuarioDAO {
 
         try {
 
-            stmt = con.prepareStatement("select login, senha, nome, campus, papel.descricao as papel, permissao.descricao as permissao from usuario inner join usuario_papel using (login) inner join papel using(id_papel) inner join papel_permissao using (id_papel) inner join permissao using(id_perm) where login=? and senha=?");
+            stmt = con.prepareStatement("select id_usuario, login, senha, nome, campus, papel.descricao as papel, permissao.descricao as permissao from usuario inner join usuario_papel using (id_usuario) inner join papel using(id_papel) inner join papel_permissao using (id_papel) inner join permissao using(id_perm) where login=? and senha=?");
             stmt.setString(1, login);
             stmt.setString(2, senha);
         } catch (SQLException sqle) {
@@ -131,17 +131,20 @@ public class DBUsuario implements UsuarioDAO {
     private Usuario createUsuario(ResultSet result) throws PersistenciaException {
 
         try {
+            if (!result.next()) {
 
-            result.next();
-        } catch (SQLException sqle) {
-
-            throw new PersistenciaException("Login e senha não conferem", sqle);
+                throw new PersistenciaException("Login e senha não conferem!");
+            }
+        } catch (SQLException ex) {
+            
+            throw new PersistenciaException("Erro ao acessar o resultado da consulta", ex);
         }
 
         try {
 
             String papelUsuario = result.getString("papel");
             Usuario user = instanceUsuario(papelUsuario);
+            user.setId(result.getInt("id_usuario"));
             user.setLogin(result.getString("login"));
             user.setNome(result.getString("nome"));
             user.setSenha(result.getString("senha"));
@@ -156,6 +159,13 @@ public class DBUsuario implements UsuarioDAO {
         } catch (SQLException sqle) {
 
             throw new PersistenciaException("Não foi possível atribuir as propriedades ao usuário", sqle);
+        } finally {
+
+            try {
+                result.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DBUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

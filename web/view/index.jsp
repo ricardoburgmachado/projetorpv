@@ -20,7 +20,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        
         <div id="topo">
             <div id="logo_brasil"></div> 
 
@@ -41,6 +40,5 @@
         </div>
 
         <div id="rodape"></div>
-
     </body>
 </html>

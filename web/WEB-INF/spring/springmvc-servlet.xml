@@ -17,7 +17,6 @@
                    location="/arquivos/"
                    cache-period="5"/>
     
-    
     <mvc:annotation-driven />
     <context:annotation-config />
     
