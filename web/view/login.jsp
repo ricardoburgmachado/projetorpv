@@ -4,6 +4,7 @@
     Author     : rafael
 --%>
 
+<%@page import="Exceptions.PersistenciaException"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,10 +17,10 @@
     <body>
         <h1>GIPA - Login</h1>
         <div class="login">
-            <form action="<c:url value="login"/>" method="post">
+            <form action="<c:url value="/autentica"/>" method="post">
                 <ul>
                     <li>
-                        <label for="login">Usu&aacute;rio</label>
+                        <label for="usuario">Usu&aacute;rio</label>
                         <input type="text" id="usuario" name="login"/>
                     </li>
 
@@ -27,12 +28,17 @@
                         <label for="senha">Senha</label>
                         <input type=password id="senha" name="senha"/>
                     </li>
-
+                    
+                    <%
+                        if(request.getAttribute("exception") != null){
+                            
+                            PersistenciaException pe = (PersistenciaException) request.getAttribute("exception");
+                            out.println("<li><span>" + pe.getMessage() + "</span></li>");
+                        }
+                    %>
                     <button type="submit">Login</button>
                 </ul>
             </form>
-                
-            <c:out value="${usuario.nome}"/>
         </div>
     </body>
 </html>

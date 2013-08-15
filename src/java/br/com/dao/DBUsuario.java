@@ -16,6 +16,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -55,17 +57,19 @@ public class DBUsuario implements UsuarioDAO {
         } catch (SQLException sqle) {
 
             throw new PersistenciaException("Erro ao buscar por usuário no banco de dados", sqle);
-        } 
+        }
     }
 
     private Usuario createUsuario(ResultSet result) throws PersistenciaException {
 
         try {
+            if (!result.next()) {
 
-            result.next();
-        } catch (SQLException sqle) {
-
-            throw new PersistenciaException("Login e senha não conferem", sqle);
+                throw new PersistenciaException("Login e senha não conferem!");
+            }
+        } catch (SQLException ex) {
+            
+            throw new PersistenciaException("Erro ao acessar o resultado da consulta", ex);
         }
 
         try {
@@ -87,6 +91,13 @@ public class DBUsuario implements UsuarioDAO {
         } catch (SQLException sqle) {
 
             throw new PersistenciaException("Não foi possível atribuir as propriedades ao usuário", sqle);
+        } finally {
+
+            try {
+                result.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DBUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
