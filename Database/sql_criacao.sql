@@ -21,38 +21,6 @@ CREATE TABLE public.area_conhecimento (
 
 ALTER SEQUENCE public.area_conhecimento_id_area_seq_1 OWNED BY public.area_conhecimento.id_area;
 
-CREATE SEQUENCE public.projeto_id_proj_seq;
-
-CREATE TABLE public.projeto (
-                id_proj INTEGER NOT NULL DEFAULT nextval('public.projeto_id_proj_seq'),
-                TITULO VARCHAR(100),
-                PALAVRAS_CHAVE VARCHAR(100),
-                RESUMO VARCHAR(2000),
-                sigilo BOOLEAN DEFAULT false NOT NULL,
-                id_area INTEGER NOT NULL,
-                tipo_proj VARCHAR(50),
-                homologado BOOLEAN DEFAULT false NOT NULL,
-                is_arquivo BOOLEAN DEFAULT false NOT NULL,
-                CONSTRAINT id_pk PRIMARY KEY (id_proj)
-);
-
-
-ALTER SEQUENCE public.projeto_id_proj_seq OWNED BY public.projeto.id_proj;
-
-CREATE SEQUENCE public.custo_id_seq;
-
-CREATE TABLE public.Custo (
-                ID INTEGER NOT NULL DEFAULT nextval('public.custo_id_seq'),
-                TIPO VARCHAR NOT NULL,
-                VALOR DOUBLE PRECISION NOT NULL,
-                DESCRICAO VARCHAR(200) NOT NULL,
-                id_proj INTEGER NOT NULL,
-                CONSTRAINT id PRIMARY KEY (ID)
-);
-
-
-ALTER SEQUENCE public.custo_id_seq OWNED BY public.Custo.ID;
-
 CREATE SEQUENCE public.permissao_id_perm_seq;
 
 CREATE TABLE public.permissao (
@@ -84,6 +52,39 @@ CREATE TABLE public.usuario (
 
 
 ALTER SEQUENCE public.usuario_id_usuario_seq OWNED BY public.usuario.id_usuario;
+
+CREATE SEQUENCE public.projeto_id_proj_seq;
+
+CREATE TABLE public.projeto (
+                id_proj INTEGER NOT NULL DEFAULT nextval('public.projeto_id_proj_seq'),
+                TITULO VARCHAR(100),
+                PALAVRAS_CHAVE VARCHAR(100),
+                RESUMO VARCHAR(2000),
+                sigilo BOOLEAN DEFAULT false NOT NULL,
+                id_area INTEGER NOT NULL,
+                tipo_proj VARCHAR(50),
+                homologado BOOLEAN DEFAULT false NOT NULL,
+                is_arquivo BOOLEAN DEFAULT false NOT NULL,
+                id_responsavel INTEGER NOT NULL,
+                CONSTRAINT id_pk PRIMARY KEY (id_proj)
+);
+
+
+ALTER SEQUENCE public.projeto_id_proj_seq OWNED BY public.projeto.id_proj;
+
+CREATE SEQUENCE public.custo_id_seq;
+
+CREATE TABLE public.Custo (
+                ID INTEGER NOT NULL DEFAULT nextval('public.custo_id_seq'),
+                TIPO VARCHAR NOT NULL,
+                VALOR DOUBLE PRECISION NOT NULL,
+                DESCRICAO VARCHAR(200) NOT NULL,
+                id_proj INTEGER NOT NULL,
+                CONSTRAINT id PRIMARY KEY (ID)
+);
+
+
+ALTER SEQUENCE public.custo_id_seq OWNED BY public.Custo.ID;
 
 CREATE TABLE public.usuario_papel (
                 id_usuario INTEGER NOT NULL,
@@ -120,20 +121,6 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE public.participante ADD CONSTRAINT projeto_participante_fk
-FOREIGN KEY (id_proj)
-REFERENCES public.projeto (id_proj)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
-ALTER TABLE public.Custo ADD CONSTRAINT projeto_custo_fk
-FOREIGN KEY (id_proj)
-REFERENCES public.projeto (id_proj)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
 ALTER TABLE public.papel_permissao ADD CONSTRAINT permissao_papel_permissao_fk
 FOREIGN KEY (id_perm)
 REFERENCES public.permissao (id_perm)
@@ -151,6 +138,27 @@ NOT DEFERRABLE;
 ALTER TABLE public.usuario_papel ADD CONSTRAINT usuario_usuario_papel_fk
 FOREIGN KEY (id_usuario)
 REFERENCES public.usuario (id_usuario)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.projeto ADD CONSTRAINT usuario_projeto_fk
+FOREIGN KEY (id_responsavel)
+REFERENCES public.usuario (id_usuario)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.participante ADD CONSTRAINT projeto_participante_fk
+FOREIGN KEY (id_proj)
+REFERENCES public.projeto (id_proj)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.Custo ADD CONSTRAINT projeto_custo_fk
+FOREIGN KEY (id_proj)
+REFERENCES public.projeto (id_proj)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
