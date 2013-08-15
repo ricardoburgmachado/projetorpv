@@ -47,9 +47,6 @@ public abstract class Usuario {
         return this.id;
     }
 
-    /**
-     * @return the login
-     */
     public String getLogin() {
         return login;
     }

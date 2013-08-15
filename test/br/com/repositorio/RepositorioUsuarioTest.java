@@ -43,8 +43,8 @@ public class RepositorioUsuarioTest {
     @Test
     public void testAutenticaUsuario() {
         System.out.println("autenticaUsuario");
-        String login = "professor";
-        String senha = "professor";
+        String login = "rafael";
+        String senha = "rafael";
         RepositorioUsuario instance = new RepositorioPostgresFactory().createRepositorioUsuario();
         Usuario expResult = null;
         Usuario result = instance.autenticaUsuario(login, senha);
