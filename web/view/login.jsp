@@ -21,7 +21,7 @@
                 <ul>
                     <li>
                         <label for="usuario">Usu&aacute;rio</label>
-                        <input type="text" id="usuario" name="login"/>
+                        <input type="text" id="usuario" name="login" autofocus="true"/>
                     </li>
 
                     <li>
@@ -36,6 +36,7 @@
                             out.println("<li><span>" + pe.getMessage() + "</span></li>");
                         }
                     %>
+                    
                     <button type="submit">Login</button>
                 </ul>
             </form>

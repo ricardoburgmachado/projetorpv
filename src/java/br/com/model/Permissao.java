@@ -10,5 +10,5 @@ package br.com.model;
  */
 public enum Permissao {
     
-    CRUD_PROJETO;
+    CRUD_PROJETO, ACESSO;
 }

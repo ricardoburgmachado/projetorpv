@@ -12,7 +12,6 @@
                    location="/recursos/"
                    cache-period="120"/>
     
-    
     <mvc:annotation-driven />
     <context:annotation-config />
     
