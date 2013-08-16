@@ -53,4 +53,8 @@ public interface ProjetoDAO {
      
      public List<Projeto> listarProjetos(int idResponsavel) throws PersistenciaException;
      
+     public void carregaParticipantes(Projeto projeto) throws PersistenciaException;
+     
+     public void carregaCustos(Projeto projeto) throws PersistenciaException;
+     
 }

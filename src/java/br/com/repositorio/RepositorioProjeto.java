@@ -5,8 +5,6 @@
  */
 package br.com.repositorio;
 
-import Exceptions.PersistenciaException;
-import br.com.dao.ProjetoDAO;
 import br.com.dao.ProjetoDAO;
 import br.com.model.Aluno;
 import br.com.model.AreaConhecimento;
@@ -14,8 +12,8 @@ import br.com.model.Custo;
 import br.com.model.Externo;
 import br.com.model.Professor;
 import br.com.model.Projeto;
-import br.com.model.Usuario;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -25,9 +23,9 @@ public class RepositorioProjeto {
 
     private ProjetoDAO projDAO;
 
-    
-    public RepositorioProjeto() {}
-    
+    public RepositorioProjeto() {
+    }
+
     /**
      * Construtor
      *
@@ -78,22 +76,22 @@ public class RepositorioProjeto {
         return projDAO.obter(p);
     }
 
-    public ArrayList<Aluno> getParticAlunos(int id){
+    public ArrayList<Aluno> getParticAlunos(int id) {
         return projDAO.getParticAlunos(id);
     }
 
-    public ArrayList<Professor> getParticProfessores(int id){
+    public ArrayList<Professor> getParticProfessores(int id) {
         return projDAO.getParticProfessores(id);
     }
 
     public ArrayList<Externo> getParticExternos(int id) {
         return projDAO.getParticExternos(id);
     }
-    
-    public ArrayList<Custo> getCustos(int idProj){
+
+    public ArrayList<Custo> getCustos(int idProj) {
         return projDAO.getCustos(idProj);
     }
-    
+
     public void insereArquivo(int idProj) {
         projDAO.insereArquivo(idProj);
     }
@@ -102,10 +100,22 @@ public class RepositorioProjeto {
         projDAO.removeArquivo(idProj);
     }
 
-    public void editar(Projeto p){
+    public void editar(Projeto p) {
         projDAO.editar(p);
-        projDAO.atualizaCustos(p.getId(), p.getCustos());     
+        projDAO.atualizaCustos(p.getId(), p.getCustos());
         projDAO.atualizaParticipantes(p.getId(), p.getParticipantesString());
     }
-      
+
+    public List<Projeto> listarProjetos(int idResponsavel) {
+
+        List<Projeto> projetos = this.projDAO.listarProjetos(idResponsavel);
+
+        for (Projeto proj : projetos) {
+
+            this.projDAO.carregaCustos(proj);
+            this.projDAO.carregaParticipantes(proj);
+        }
+
+        return projetos;
+    }
 }

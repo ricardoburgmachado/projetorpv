@@ -1,8 +1,10 @@
 package br.com.model;
 
 import java.util.ArrayList;
-
-import org.springframework.web.multipart.MultipartFile;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 public class Projeto {
 
@@ -11,14 +13,14 @@ public class Projeto {
     private String palavrasChave;
     private String resumo;
     private TipoProjeto tipoProjeto;
-    private ArrayList<Usuario> participantes = new ArrayList<Usuario>();    
-    ArrayList<String> participantesString = new  ArrayList<String>();
+    private ArrayList<Usuario> participantes = new ArrayList<Usuario>();
+    private ArrayList<String> participantesString = new ArrayList<String>();
     private ArrayList<Aluno> participantesAluno = new ArrayList<Aluno>();
     private ArrayList<Professor> participantesProfessor = new ArrayList<Professor>();
     private ArrayList<Externo> participantesExterno = new ArrayList<Externo>();
-    private Professor professor;    
-    private boolean arquivo;    
-    ArrayList<Custo> custos = new ArrayList<Custo>();
+    private Professor professor;
+    private boolean arquivo;
+    private ArrayList<Custo> custos = new ArrayList<Custo>();
     private AreaConhecimento areaConhecimento;
     private Campus campus;
     private boolean sigilo;
@@ -106,7 +108,7 @@ public class Projeto {
     public void setParticipantes(ArrayList<Usuario> participantes) {
         this.participantes = participantes;
     }
-    
+
     /**
      * @return the professor
      */
@@ -120,8 +122,6 @@ public class Projeto {
     public void setProfessor(Professor professor) {
         this.professor = professor;
     }
-
-    
 
     public void setCustos(int idProj, TipoCusto tipoC, String[] custoVal, String[] custoDesc) {
         for (int i = 0; i < custoVal.length; i++) {
@@ -262,9 +262,20 @@ public class Projeto {
      * @param participantesString the participantesString to set
      */
     public void setParticipantesString(String[] p) {
-        
-        for(int i = 0; i < p.length;i++){
+
+        for (int i = 0; i < p.length; i++) {
             this.participantesString.add(p[i].toString());
         }
     }
+
+    public void setCustos(ArrayList<Custo> custos) {
+        this.custos = custos;
+    }
+
+    @Override
+    public String toString() {
+        return "Projeto{" + "id=" + id + ", titulo=" + titulo + ", palavrasChave=" + palavrasChave + ", resumo=" + resumo + ", tipoProjeto=" + tipoProjeto + ", participantes=" + participantes + ", participantesString=" + participantesString + ", participantesAluno=" + participantesAluno + ", participantesProfessor=" + participantesProfessor + ", participantesExterno=" + participantesExterno + ", professor=" + professor + ", arquivo=" + arquivo + ", custos=" + custos + ", areaConhecimento=" + areaConhecimento + ", campus=" + campus + ", sigilo=" + sigilo + '}';
+    }
+    
+    
 }

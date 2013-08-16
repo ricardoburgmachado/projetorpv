@@ -526,6 +526,12 @@ public class DBProjeto implements ProjetoDAO {
         }
     }
 
+    /**
+     * Lista todos os projetos associados à um responsável (professor).
+     * @param idResponsavel Identificador do responsável.
+     * @return Lista de projetos associados à um responsável (professor).
+     * @throws PersistenciaException Caso algum problema de persistência ocorra
+     */
     @Override
     public List<Projeto> listarProjetos(int idResponsavel) throws PersistenciaException {
 
@@ -552,9 +558,15 @@ public class DBProjeto implements ProjetoDAO {
             throw new PersistenciaException("Falha ao realizar consulta", ex);
         }
 
-        return null;
+        return carregaProjetos(result);
     }
 
+    /**
+     * Cria uma lista de projetos com base no resultado da consulta.
+     * Envolve professor responsável e área de conhecimento.
+     * @param result Resultado da consulta.
+     * @return Lista de projetos.
+     */
     private List<Projeto> carregaProjetos(ResultSet result) {
 
         List<Projeto> projetos = new ArrayList<Projeto>();
@@ -572,6 +584,7 @@ public class DBProjeto implements ProjetoDAO {
                     projeto.setTipoProjeto(TipoProjeto.valueOf(result.getString("tipo_proj")));
                     projeto.setAreaConhecimento(new AreaConhecimento(result.getInt("id_area"), result.getString("area")));
                     projeto.setPalavrasChave(result.getString("palavras_chave"));
+                    projeto.setArquivo(result.getBoolean("is_arquivo"));
                     Professor professor = new Professor(result.getString("nome"), Campus.valueOf(result.getString("campus")));
                     professor.setId(result.getInt("id_responsavel"));
                     projeto.setProfessor(professor);
@@ -585,7 +598,13 @@ public class DBProjeto implements ProjetoDAO {
         return projetos;
     }
 
-    public Projeto carregaParticipantes(Projeto projeto) throws PersistenciaException {
+    /**
+     * Consulta e atribui os participantes relacionados ao projeto.
+     * @param projeto Projeto ao qual seus participantes serão atribuídos
+     * @throws PersistenciaException Caso ocorra algum problema com a persistência
+     */
+    @Override
+    public void carregaParticipantes(Projeto projeto) throws PersistenciaException {
 
         String sql = "select * from projeto natural join participante natural join usuario natural join usuario_papel natural join papel where id_proj=?";
         PreparedStatement stmt = null;
@@ -609,24 +628,69 @@ public class DBProjeto implements ProjetoDAO {
 
         if (verifyResult(result)) {
             try {
-                
+
                 ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
                 do {
-                    
+
                     Usuario usuario = Usuario.instantiateUsuario(result.getString("descricao"));
                     usuario.setCampus(Campus.valueOf(result.getString("campus")));
                     usuario.setNome(result.getString("nome"));
                     usuario.setId(result.getInt("id_usuario"));
+                    usuarios.add(usuario);
                 } while (result.next());
-                
+
                 projeto.setParticipantes(usuarios);
             } catch (SQLException ex) {
-                
+
                 throw new PersistenciaException("Falha ao acessar o resultado da consulta", ex);
             }
         }
+    }
 
-        return projeto;
+    /**
+     * Consulta e atribui os custos relacionados ao projeto.
+     * @param projeto Projeto ao qual seus custos serão atribuídos
+     * @throws PersistenciaException Caso ocorra algum problema com a persistência
+     */
+    @Override
+    public void carregaCustos(Projeto projeto) throws PersistenciaException {
+
+        String sql = "select * from custo where id_proj=?";
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+
+        try {
+            stmt = connection.prepareStatement(sql);
+        } catch (SQLException ex) {
+
+            throw new PersistenciaException("Falha ao preparar consulta", ex);
+        }
+
+        try {
+            result = stmt.executeQuery();
+        } catch (SQLException ex) {
+
+            throw new PersistenciaException("Falha ao executar consulta", ex);
+        }
+
+        if (verifyResult(result)) {
+            try {
+                ArrayList<Custo> custos = new ArrayList<>();
+                do {
+                    
+                    Custo custo = new Custo();
+                    custo.setId(result.getInt("id"));
+                    custo.setDescricao(result.getString("descricao"));
+                    custo.setTipoCusto(TipoCusto.valueOf(result.getString("tipo")));
+                    custo.setValor(result.getDouble("valor"));
+                    custos.add(custo);
+                } while (result.next());
+                projeto.setCustos(custos);
+            } catch (SQLException ex) {
+                
+                throw new PersistenciaException("Falha ao acessar dados da consulta", ex);
+            }
+        }
     }
 
     /**

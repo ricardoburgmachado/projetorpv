@@ -5,14 +5,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import Exceptions.PersistenciaException;
 import br.com.model.Aluno;
-
 import br.com.model.Campus;
-import br.com.model.Coordenador;
-
 import br.com.model.Externo;
-
 import br.com.model.Permissao;
-import br.com.model.ProReitor;
 import br.com.model.Professor;
 import br.com.model.Usuario;
 import java.sql.Connection;
