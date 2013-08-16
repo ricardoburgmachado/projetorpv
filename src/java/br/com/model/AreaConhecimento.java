@@ -5,6 +5,20 @@ public class AreaConhecimento {
     private int id;
     private String area;
 
+    public AreaConhecimento(int id, String area) {
+        this.id = id;
+        this.area = area;
+    }
+
+    public AreaConhecimento(String area) {
+        this.area = area;
+    }
+
+    public AreaConhecimento() {
+    }
+    
+    
+
     /**
      * @return the id
      */

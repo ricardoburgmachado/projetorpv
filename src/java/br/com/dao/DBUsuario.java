@@ -120,7 +120,7 @@ public class DBUsuario implements UsuarioDAO {
         }finally{
             
             try {
-                connection.close();
+                con.close();
             } catch (SQLException sqle) {
                 
                 throw new PersistenciaException("Erro ao fechar conexão com o banco de dados", sqle);
@@ -143,7 +143,7 @@ public class DBUsuario implements UsuarioDAO {
         try {
 
             String papelUsuario = result.getString("papel");
-            Usuario user = instanceUsuario(papelUsuario);
+            Usuario user = Usuario.instantiateUsuario(papelUsuario);
             user.setId(result.getInt("id_usuario"));
             user.setLogin(result.getString("login"));
             user.setNome(result.getString("nome"));
@@ -167,22 +167,5 @@ public class DBUsuario implements UsuarioDAO {
                 Logger.getLogger(DBUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }
-
-    private Usuario instanceUsuario(String papel) {
-
-        papel = papel.toLowerCase();
-
-        if (papel.equals("aluno")) {
-            return new Aluno("", Campus.ALEGRETE);
-        } else if (papel.equals("coordenador")) {
-            return new Coordenador("", Campus.ALEGRETE);
-        } else if (papel.equals("proreitor")) {
-            return new ProReitor("", Campus.ALEGRETE);
-        } else if (papel.equals("professor")) {
-            return new Professor("", Campus.ALEGRETE);
-        }
-
-        return null;
     }
 }

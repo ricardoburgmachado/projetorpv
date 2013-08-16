@@ -8,6 +8,7 @@ package br.com.dao;
 import Exceptions.PersistenciaException;
 import br.com.model.Aluno;
 import br.com.model.AreaConhecimento;
+import br.com.model.Campus;
 import br.com.model.Custo;
 import br.com.model.Externo;
 import br.com.model.Professor;
@@ -21,6 +22,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -266,31 +270,32 @@ public class DBProjeto implements ProjetoDAO {
 
     /**
      * Método utilizado no cadastro de projetos
+     *
      * @param idProj
      * @param idPart
-     * @throws PersistenciaException 
+     * @throws PersistenciaException
      */
     @Override
     public void inserirParticipantes(int idProj, String[] idPart) throws PersistenciaException {
-        for (int i = 0; i < idPart.length; i++) {           
+        for (int i = 0; i < idPart.length; i++) {
             inserirParticipante(idProj, Integer.parseInt(idPart[i].toString()));
         }
     }
 
     /**
      * Método utilizado na ediçao de projetos
+     *
      * @param idProj
      * @param list
-     * @throws PersistenciaException 
+     * @throws PersistenciaException
      */
     @Override
     public void inserirParticipantes(int idProj, ArrayList<String> list) throws PersistenciaException {
-          for (int i = 0; i < list.size(); i++) {            
-            inserirParticipante(idProj, Integer.parseInt( list.get(i).toString()));
+        for (int i = 0; i < list.size(); i++) {
+            inserirParticipante(idProj, Integer.parseInt(list.get(i).toString()));
         }
     }
-    
-    
+
     private void inserirParticipante(int idProjx, int idParticipante) {
 
         System.out.println(" ID PROJETO: " + idProjx + " | idParticipante: " + idParticipante);
@@ -307,12 +312,12 @@ public class DBProjeto implements ProjetoDAO {
             int retorno = stmt.executeUpdate();
 
             if (retorno == 0) {
-                System.out.println("RETORNO FALSE -> BD: o participante com id:"+idParticipante+" não foi cadastrado no banco de dados");
+                System.out.println("RETORNO FALSE -> BD: o participante com id:" + idParticipante + " não foi cadastrado no banco de dados");
             } else {
                 System.out.println("RETORNO TRUE -> BD: o participante foi cadastrado no banco de dados");
             }
         } catch (SQLException sqle) {
-            throw new PersistenciaException("Não foi possível cadastrar o participante com id:"+idParticipante+" no banco de dados!", sqle);
+            throw new PersistenciaException("Não foi possível cadastrar o participante com id:" + idParticipante + " no banco de dados!", sqle);
         }
     }
 
@@ -387,8 +392,8 @@ public class DBProjeto implements ProjetoDAO {
             }
             return listaRetorno;
         } catch (Exception ex) {
-            System.out.println("ERRO: "+ex.getCause()+" ->message: "+ex.getMessage());
-            throw new PersistenciaException("Não foi possível listar os custos do projeto id: " + idProj, ex );
+            System.out.println("ERRO: " + ex.getCause() + " ->message: " + ex.getMessage());
+            throw new PersistenciaException("Não foi possível listar os custos do projeto id: " + idProj, ex);
         }
 
     }
@@ -493,22 +498,22 @@ public class DBProjeto implements ProjetoDAO {
 
     @Override
     public void atualizaParticipantes(int idProj, ArrayList<String> u) throws PersistenciaException {
-        
+
         System.out.println("&&&&&&&&&&&&&&&&&&& CAIU MÉTODO ATUALIZA PARTICIPANTES");
-        
+
         String query = "DELETE FROM " + PARTICIPANTE + " WHERE id_proj = ?";
-        PreparedStatement stmt;        
-        
-        System.out.println("idProj: "+idProj+" tamanho ArrayList<Usuario>.size(): "+u.size());
+        PreparedStatement stmt;
+
+        System.out.println("idProj: " + idProj + " tamanho ArrayList<Usuario>.size(): " + u.size());
         System.out.println("************* QUERY: " + query);
-        
+
         try {
             stmt = connection.prepareStatement(query);
             stmt.setInt(1, idProj);
             int retorno = stmt.executeUpdate();
-            
+
             inserirParticipantes(idProj, u);
-            
+
             if (retorno == 0) {
                 System.out.println("RETORNO FALSE -> BD: os participantes do projeto NÃO foram removidos");
             } else {
@@ -521,6 +526,125 @@ public class DBProjeto implements ProjetoDAO {
         }
     }
 
-    
+    @Override
+    public List<Projeto> listarProjetos(int idResponsavel) throws PersistenciaException {
 
+        //Busca pelos dados do projeto incluindo seus participantes e o papel de cada participante. Também busca pelo nome e id do responsável pelo projeto (Professor)
+        String sql = "select * from projeto inner join usuario on id_responsavel = id_usuario natural join area_conhecimento where id_responsavel=?";
+
+        PreparedStatement stmt = null;
+        ResultSet result;
+
+        try {
+
+            stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, idResponsavel);
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar consulta", sqle);
+        }
+
+        try {
+
+            result = stmt.executeQuery();
+        } catch (SQLException ex) {
+
+            throw new PersistenciaException("Falha ao realizar consulta", ex);
+        }
+
+        return null;
+    }
+
+    private List<Projeto> carregaProjetos(ResultSet result) {
+
+        List<Projeto> projetos = new ArrayList<Projeto>();
+
+        if (verifyResult(result)) {
+
+            try {
+                do {
+
+                    Projeto projeto = new Projeto();
+                    projeto.setTitulo(result.getString("titulo"));
+                    projeto.setId(result.getInt("id_proj"));
+                    projeto.setResumo(result.getString("resumo"));
+                    projeto.setSigilo(result.getBoolean("sigilo"));
+                    projeto.setTipoProjeto(TipoProjeto.valueOf(result.getString("tipo_proj")));
+                    projeto.setAreaConhecimento(new AreaConhecimento(result.getInt("id_area"), result.getString("area")));
+                    projeto.setPalavrasChave(result.getString("palavras_chave"));
+                    Professor professor = new Professor(result.getString("nome"), Campus.valueOf(result.getString("campus")));
+                    professor.setId(result.getInt("id_responsavel"));
+                    projeto.setProfessor(professor);
+                } while (result.next());
+            } catch (SQLException ex) {
+
+                throw new PersistenciaException("Erro ao acessar propriedades do projeto", ex);
+            }
+        }
+
+        return projetos;
+    }
+
+    public Projeto carregaParticipantes(Projeto projeto) throws PersistenciaException {
+
+        String sql = "select * from projeto natural join participante natural join usuario natural join usuario_papel natural join papel where id_proj=?";
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+
+        try {
+
+            stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, projeto.getId());
+        } catch (SQLException ex) {
+
+            throw new PersistenciaException("Falha ao preparar consulta!", ex);
+        }
+
+        try {
+            result = stmt.executeQuery();
+        } catch (SQLException ex) {
+
+            throw new PersistenciaException("Falha ao executar consulta!", ex);
+        }
+
+        if (verifyResult(result)) {
+            try {
+                
+                ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+                do {
+                    
+                    Usuario usuario = Usuario.instantiateUsuario(result.getString("descricao"));
+                    usuario.setCampus(Campus.valueOf(result.getString("campus")));
+                    usuario.setNome(result.getString("nome"));
+                    usuario.setId(result.getInt("id_usuario"));
+                } while (result.next());
+                
+                projeto.setParticipantes(usuarios);
+            } catch (SQLException ex) {
+                
+                throw new PersistenciaException("Falha ao acessar o resultado da consulta", ex);
+            }
+        }
+
+        return projeto;
+    }
+
+    /**
+     * Verifica se a consulta retornou algum resultado. Move o cursor do
+     * resultado para a primeira linha.
+     *
+     * @param result ResultSet
+     * @return true se algum resultado foi encontrado
+     * @throws PersistenciaException Caso o resultado não seja acessível
+     */
+    private boolean verifyResult(ResultSet result) throws PersistenciaException {
+
+        try {
+
+            return result != null && result.first();
+        } catch (SQLException ex) {
+
+            throw new PersistenciaException("Não houve resultados!", ex);
+        }
+    }
 }

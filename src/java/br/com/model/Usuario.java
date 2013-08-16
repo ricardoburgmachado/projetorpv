@@ -101,4 +101,20 @@ public abstract class Usuario {
     public String toString() {
         return "Usuario{" + "login=" + login + ", senha=" + senha + ", nome=" + nome + ", campus=" + campus + ", permissoes=" + permissoes + '}';
     }
+    
+    public static Usuario instantiateUsuario(String papel){
+        
+        papel = papel.toLowerCase();
+        
+        switch(papel){
+            
+            case "aluno": return new Aluno();
+            case "coordenador": return new Coordenador();
+            case "proreitor": return new ProReitor();
+            case "professor": return new Professor();
+            case "externo": return new Externo();
+        }
+
+        return null;
+    }
 }

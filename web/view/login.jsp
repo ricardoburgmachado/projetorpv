@@ -17,7 +17,9 @@
     <body>
         <h1>GIPA - Login</h1>
         <div class="login">
+            
             <form action="<c:url value="/autentica"/>" method="post">
+
                 <ul>
                     <li>
                         <label for="usuario">Usu&aacute;rio</label>
