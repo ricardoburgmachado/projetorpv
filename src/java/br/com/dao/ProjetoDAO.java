@@ -32,7 +32,7 @@ public interface ProjetoDAO {
      public ArrayList<Aluno> getParticAlunos(int id) throws PersistenciaException;
      public ArrayList<Professor> getParticProfessores(int id) throws PersistenciaException;
      public ArrayList<Externo> getParticExternos(int id) throws PersistenciaException;
-     
+
      public ArrayList<Custo> getCustos(int idProj) throws PersistenciaException;
      
      public void atualizaCustos(int idProj, ArrayList<Custo> c) throws PersistenciaException;

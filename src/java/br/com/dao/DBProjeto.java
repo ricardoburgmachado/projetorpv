@@ -13,6 +13,7 @@ import br.com.model.Custo;
 import br.com.model.Externo;
 import br.com.model.Professor;
 import br.com.model.Projeto;
+import br.com.model.StatusProjeto;
 import br.com.model.TipoCusto;
 import br.com.model.TipoProjeto;
 import br.com.model.Usuario;
@@ -153,7 +154,7 @@ public class DBProjeto implements ProjetoDAO {
 
     @Override
     public void editar(Projeto p) throws PersistenciaException {
-        String query = "UPDATE " + PROJETO + " SET titulo=?, palavras_chave=?, resumo=?, sigilo=?, id_area=?, tipo_proj=? WHERE id_proj = ?";
+        String query = "UPDATE " + PROJETO + " SET titulo=?, palavras_chave=?, resumo=?, sigilo=?, id_area=?, tipo_proj=?, status=? WHERE id_proj = ?";
 
         System.out.println("******************** QUERY -> " + query);
 
@@ -167,7 +168,8 @@ public class DBProjeto implements ProjetoDAO {
             stmt.setBoolean(4, p.getSigilo());
             stmt.setInt(5, p.getAreaConhecimento().getId());
             stmt.setString(6, p.getTipoProjeto().toString());
-            stmt.setInt(7, p.getId());
+            stmt.setString(7, p.getStatus().toString());
+            stmt.setInt(8, p.getId());
 
             System.out.println("******************** QUERY -> " + query);
             int retorno = stmt.executeUpdate();
@@ -585,6 +587,7 @@ public class DBProjeto implements ProjetoDAO {
                     projeto.setAreaConhecimento(new AreaConhecimento(result.getInt("id_area"), result.getString("area")));
                     projeto.setPalavrasChave(result.getString("palavras_chave"));
                     projeto.setArquivo(result.getBoolean("is_arquivo"));
+                    projeto.setStatus(StatusProjeto.valueOf(result.getString("status")));
                     Professor professor = new Professor(result.getString("nome"), Campus.valueOf(result.getString("campus")));
                     professor.setId(result.getInt("id_responsavel"));
                     projeto.setProfessor(professor);
