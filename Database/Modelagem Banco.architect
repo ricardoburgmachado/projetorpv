@@ -83,7 +83,7 @@
     <column id="COL21" populated="true" UUID="3039cd70-1c98-46ab-a32a-2ed84fd952b4" autoIncrement="false" autoIncrementSequenceName="projeto_tipo_proj_seq" defaultValue="" name="TIPO_PROJ" nullable="1" physicalName="tipo_proj" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL22" populated="true" UUID="79c1de3c-1a78-4988-904b-febeb6ea2049" autoIncrement="false" autoIncrementSequenceName="projeto_homologado_seq" defaultValue="false" name="HOMOLOGADO" nullable="0" physicalName="homologado" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="16" userDefinedTypeUUID="a26374aa-3026-4bb8-b564-eb2e186dfa5d" >
+    <column id="COL22" populated="true" UUID="0718df64-bf0b-4654-91ba-b45064086764" autoIncrement="false" autoIncrementSequenceName="projeto_status_seq" defaultValue="" name="STATUS" nullable="0" physicalName="status" precision="20" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
     <column id="COL23" populated="true" UUID="14b1fe06-5dcc-47e9-9bd5-8f3338828326" autoIncrement="false" autoIncrementSequenceName="projeto_is_arquivo_seq" defaultValue="false" name="IS_ARQUIVO" nullable="0" physicalName="is_arquivo" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="16" userDefinedTypeUUID="a26374aa-3026-4bb8-b564-eb2e186dfa5d" >
@@ -265,10 +265,10 @@
    </relationship>
   </relationships>
  </target-database>
- <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="false" target-schema="public"> </ddl-generator>
+ <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="true" target-schema="public"> </ddl-generator>
  <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  <create-kettle-job-settings filePath="" jobName="" schemaName="" kettleJoinType="0" savingToFile="true" />
- <play-pen zoom="1.0" viewportX="64" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
+ <play-pen zoom="1.0" viewportX="79" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
   <table-pane table-ref="TAB1" x="528" y="423" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB9" x="40" y="279" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB14" x="726" y="261" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
