@@ -139,7 +139,7 @@ public class RepositorioProjeto {
             verificaStatusParaSubmissaoHomologacao(projeto.getStatus());
         }catch(DadoInconsistenteException diex){
             
-            exception = new DadoInconsistenteException(exception, null);
+            exception = new DadoInconsistenteException(exception, "");
         }
         
         if(exception != null){
@@ -147,7 +147,8 @@ public class RepositorioProjeto {
             throw exception;
         }else{
             
-            this.projDAO.editar(projeto);
+            projeto.setStatus(StatusProjeto.SUBMETIDO_HOMOLOGACAO);
+            this.projDAO.atualizaStatus(projeto);
         }
     }
 
@@ -164,7 +165,7 @@ public class RepositorioProjeto {
         DadoInconsistenteException exception = null;
         final String VAZIO = "";
 
-        if (projeto == null) {
+        if (projeto == null || obter(projeto.getId()) == null) {
 
             throw new DadoInconsistenteException("Projeto Inválido!");
         }

@@ -57,4 +57,6 @@ public interface ProjetoDAO {
      
      public void carregaCustos(Projeto projeto) throws PersistenciaException;
      
+     public void atualizaStatus(Projeto projeto) throws PersistenciaException;
+     
 }
