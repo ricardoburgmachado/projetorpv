@@ -17,7 +17,13 @@
                    location="/arquivos/"
                    cache-period="5"/>
     
-    
+
+    <!--
+    <mvc:interceptors>
+        <bean class="br.com.filtro.FiltroControleAcesso"/>
+    </mvc:interceptors>
+    -->
+        
     <mvc:annotation-driven />
     <context:annotation-config />
     

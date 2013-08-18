@@ -9,14 +9,19 @@
     <head>
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <link rel="stylesheet" href="<c:url value="/recursos/css/style.css"/>" />
 
 
         <!-- inicio multiselect -->
-        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" />
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>        
+        <!--<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" /> -->
+        <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>-->
+        <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>-->        
+
+        <!-- inicio opção de carregamento das bibliotecas acima setadas que são remotas -->
+        <link rel="stylesheet" href="<c:url value="/recursos/js/jquery/jquery-ui.css"/>" />
+        <script type="text/javascript" src="<c:url value="recursos/js/jquery/jquery2.js"/>" ></script>
+        <script type="text/javascript" src="<c:url value="recursos/js/jquery/jquery-ui.min.js"/>" ></script>
+        <!-- fim opção de carregamento das bibliotecas acima setadas que são remotas -->
 
         <script type="text/javascript" src="<c:url value="recursos/js/multiselect/src/jquery.multiselect.js"/>" ></script>
         <script type="text/javascript" src="<c:url value="recursos/js/multiselect/src/jquery.multiselect.filter.js"/>" ></script>
@@ -72,6 +77,13 @@
             });
         </script>
         <!-- FIM JQUERY MONEY -->
+
+        <!-- INICIO JQUERY TOAST MESSAGE-->
+        <script type="text/javascript" src="<c:url value="recursos/js/jqueryToastMessage/jquery.toastmessage-min.js"/>" ></script>
+        <script type="text/javascript" src="<c:url value="recursos/js/jqueryToastMessage/funcoes.js"/>" ></script> 
+        <link rel="stylesheet" href="<c:url value="recursos/js/jqueryToastMessage/css/jquery.toastmessage-min.css"/>" />        
+        <!-- FIM JQUERY TOAST MESSAGE-->
+
 
 
         <script type="text/javascript" src="<c:url value="recursos/js/funcoes.js"/>" ></script>
@@ -182,8 +194,7 @@
 
                         <span style="clear: both; display: block;"></span>
 
-
-
+                        
                         <span class="bloco">
                             <label for="capitais">Custo (capital):</label>                            
                             <div id="campo_novo_capital"></div>
@@ -197,13 +208,7 @@
                             <a href="javascript:;" onclick="javascript:AddCusteio()" style="display: block; clear: both; text-decoration: none; color: black" href="#" class="adicionarCapital">Adicionar Custeio</a>
                         </span>
 
-
-
-
-
-
                         <span style="clear: both; display: block; "></span>
-
 
                         <label for="nome">Quero que este projeto permaneça em sigilo:</label>
                         <input style=" margin-top: 10px; height: 10px; width: 20px; cursor: pointer" type="radio" name="sigilo" value="true"><span style="display: block; float: left; margin-top: 10px; ">Sim</span>
@@ -219,7 +224,12 @@
                     </fieldset>
                 </form:form>    
 
-
+                <!--
+                <p>
+                    <a href="javascript:showSuccessToast();">notsticky</a>|
+                    <a href="javascript:showStickySuccessToast();">sticky</a>
+                </p>
+                -->
 
 
             </div>

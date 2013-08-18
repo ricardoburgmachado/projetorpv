@@ -97,6 +97,7 @@ public class DBProjeto implements ProjetoDAO {
             p.setId(resultSet.getInt("id_proj"));
             p.setTitulo(resultSet.getString("titulo"));
             p.setResumo(resultSet.getString("resumo"));
+            p.setPalavrasChave(resultSet.getString("palavras_chave"));
             p.setAreaConhecimento(getArea(id));
             p.setTipoProjeto(TipoProjeto.fromString(resultSet.getString("tipo_proj")));
             p.setSigilo(resultSet.getBoolean("sigilo"));

@@ -58,6 +58,13 @@
         <!-- fim multiselect -->
 
 
+        <!-- INICIO JQUERY TOAST MESSAGE-->
+        <script type="text/javascript" src="<c:url value="recursos/js/jqueryToastMessage/jquery.toastmessage-min.js"/>" ></script>
+        <script type="text/javascript" src="<c:url value="recursos/js/jqueryToastMessage/funcoes.js"/>" ></script> 
+        <link rel="stylesheet" href="<c:url value="recursos/js/jqueryToastMessage/css/jquery.toastmessage-min.css"/>" />        
+        <!-- FIM JQUERY TOAST MESSAGE-->
+        
+        
         <script type="text/javascript" src="<c:url value="recursos/js/funcoes.js"/>" ></script>
 
 
@@ -67,11 +74,19 @@
 
         <title>JSP Page</title>
     </head>
-    <body>
-
+    
+    
+        
+           <!-- <body <c:if test="${mensagem != null}"> onload="showSuccessToast("<c:out  value="${mensagem}"/>)""</c:if>>-->
+                
+    <body>   
+        
+        
+            
+       
+        
         <div id="topo">
             <div id="logo_brasil"></div> 
-
         </div>
 
         <div id="all">
