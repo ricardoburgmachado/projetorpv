@@ -28,7 +28,7 @@ INSERT INTO custo(id, tipo, valor, descricao, id_proj)VALUES(2, 'CAPITAL', 10.23
 
 /***************************** INICIO cadastro PAPEL **********************/
 INSERT INTO papel(id_papel, descricao)VALUES(1, 'PRO_REITOR');
-INSERT INTO papel(id_papel, descricao)VALUES(2, 'CORDENADOR');
+INSERT INTO papel(id_papel, descricao)VALUES(2, 'COORDENADOR');
 INSERT INTO papel(id_papel, descricao)VALUES(3, 'PROFESSOR');
 INSERT INTO papel(id_papel, descricao)VALUES(4, 'ALUNO');
 INSERT INTO papel(id_papel, descricao)VALUES(5, 'EXTERNO');
