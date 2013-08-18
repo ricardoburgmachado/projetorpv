@@ -637,6 +637,8 @@ public class DBProjeto implements ProjetoDAO {
                 do {
 
                     Usuario usuario = Usuario.instantiateUsuario(result.getString("descricao"));
+                    System.out.println(result.getString("descricao"));
+                    System.out.println(usuario);
                     usuario.setCampus(Campus.valueOf(result.getString("campus")));
                     usuario.setNome(result.getString("nome"));
                     usuario.setId(result.getInt("id_usuario"));
