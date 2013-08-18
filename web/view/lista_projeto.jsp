@@ -52,8 +52,8 @@
                                 <td class="titulo">${projeto.titulo}</td>
                                 <td class="tipo" >${projeto.tipoProjeto}</td>
                                 <td class="status">NÃO HOMOLOGADO</td>
-                                <td class="edita"><a href="projeto_edita_show?id=${projeto.id}"></a></td>
-                                <td class="exibe"><a href="projeto_exibe?id=${projeto.id}"></a></td>
+                                <td class="edita"><a title="Clique aqui para editar Projeto" href="projeto_edita_show?id=${projeto.id}"></a></td>
+                                <td class="exibe"><a title="Clique aqui para exibir detalhes do projeto" href="projeto_exibe?id=${projeto.id}"></a></td>
                             </a>
                         </tr>
                     </c:forEach>
