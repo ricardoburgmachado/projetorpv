@@ -1,5 +1,6 @@
 package br.com.model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,6 +18,8 @@ public abstract class Usuario {
     private List<Permissao> permissoes;
 
     public Usuario() {
+        
+        this.permissoes = new ArrayList<Permissao>();
     }
 
     public Usuario(String login, String senha, String nome, Campus campus, List<Permissao> permissoes) {
