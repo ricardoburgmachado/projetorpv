@@ -13,6 +13,7 @@ import br.com.model.Custo;
 import br.com.model.Externo;
 import br.com.model.Professor;
 import br.com.model.Projeto;
+import br.com.model.StatusProjeto;
 import br.com.model.TipoCusto;
 import br.com.model.TipoProjeto;
 import br.com.model.Usuario;
@@ -23,8 +24,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -103,6 +102,8 @@ public class DBProjeto implements ProjetoDAO {
             p.setResumo(resultSet.getString("resumo"));
             p.setAreaConhecimento(getArea(id));
             p.setTipoProjeto(TipoProjeto.fromString(resultSet.getString("tipo_proj")));
+            p.setStatus(StatusProjeto.valueOf(resultSet.getString("status")));
+            p.setPalavrasChave(resultSet.getString("palavras_chave"));
             p.setSigilo(resultSet.getBoolean("sigilo"));
             p.setArquivo(resultSet.getBoolean("is_arquivo"));
             return p;
@@ -585,6 +586,7 @@ public class DBProjeto implements ProjetoDAO {
                     projeto.setAreaConhecimento(new AreaConhecimento(result.getInt("id_area"), result.getString("area")));
                     projeto.setPalavrasChave(result.getString("palavras_chave"));
                     projeto.setArquivo(result.getBoolean("is_arquivo"));
+                    projeto.setStatus(StatusProjeto.valueOf(result.getString("status")));
                     Professor professor = new Professor(result.getString("nome"), Campus.valueOf(result.getString("campus")));
                     professor.setId(result.getInt("id_responsavel"));
                     projeto.setProfessor(professor);
@@ -718,6 +720,32 @@ public class DBProjeto implements ProjetoDAO {
         } catch (SQLException ex) {
 
             throw new PersistenciaException("Não houve resultados!", ex);
+        }
+    }
+
+    @Override
+    public void atualizaStatus(Projeto projeto) throws PersistenciaException {
+        
+        String sql = "update " + PROJETO + " set status=? where id_proj=?";
+        PreparedStatement stmt = null;
+        
+        try{
+            
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, projeto.getStatus().toString());
+            stmt.setInt(2, projeto.getId());
+        }catch(SQLException sqle){
+            
+            throw new PersistenciaException("Falha ao preparar atualização");
+        }
+        
+        try{
+            
+            stmt.executeUpdate();
+        }catch(SQLException sqle){
+            
+            System.out.println(sqle);
+            throw new PersistenciaException("Falha ao atualizar registro");
         }
     }
 }

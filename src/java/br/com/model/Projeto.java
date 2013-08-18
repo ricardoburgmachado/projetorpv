@@ -24,6 +24,12 @@ public class Projeto {
     private AreaConhecimento areaConhecimento;
     private Campus campus;
     private boolean sigilo;
+    private StatusProjeto status;
+    
+    public Projeto(){
+        
+        this.status = StatusProjeto.CRIADO;
+    }
 
     /**
      * @return the id
@@ -270,6 +276,14 @@ public class Projeto {
 
     public void setCustos(ArrayList<Custo> custos) {
         this.custos = custos;
+    }
+
+    public StatusProjeto getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusProjeto status) {
+        this.status = status;
     }
 
     @Override
