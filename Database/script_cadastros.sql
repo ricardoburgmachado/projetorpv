@@ -35,32 +35,30 @@ INSERT INTO papel(id_papel, descricao)VALUES(5, 'EXTERNO');
 /***************************** FIM cadastro PAPEL **********************/
 
 /***************************** INICIO cadastro PERMISSÃO**********************/
-INSERT INTO permissao(id_perm, descricao)VALUES(1, 'x');
-INSERT INTO permissao(id_perm, descricao)VALUES(2, 'y');
+INSERT INTO permissao(id_perm, descricao)VALUES(1, 'CRUD_PROJETO');
+INSERT INTO permissao(id_perm, descricao)VALUES(2, 'ACESSO');
 /***************************** FIM cadastro PERMISSÃO **********************/
 
 
 /***************************** INICIO cadastro PAPEL PERMISSÃO**********************/
-/**INSERT INTO papel_permissao(id_perm, id_papel)VALUES(1, ); **/
+INSERT INTO papel_permissao VALUES (1, 3);
+INSERT INTO papel_permissao VALUES (2, 3);
 /***************************** FIM cadastro PAPEL PERMISSÃO **********************/
 
 /***************************** INICIO cadastro usuarios **********************/
-/** o atributo id é auto increment **/
-
-INSERT INTO usuario(login, senha, nome, campus)VALUES('joao', 'joao', 'joão da silva','ALEGRETE');
-INSERT INTO usuario(login, senha, nome, campus)VALUES('maria', 'maria', 'maria da silva','ALEGRETE');
-INSERT INTO usuario(login, senha, nome, campus)VALUES('alfredo', 'alfredo', 'alfredo picareta','ALEGRETE');
-INSERT INTO usuario(login, senha, nome, campus)VALUES('joaquim', 'joaquim', 'joaquim santos','ALEGRETE');
-INSERT INTO usuario(login, senha, nome, campus)VALUES('rafael', 'rafael', 'rafael santos','ALEGRETE');
-INSERT INTO usuario(login, senha, nome, campus)VALUES('rogerio', 'rogerio', 'rogerio','ALEGRETE');
-INSERT INTO usuario(login, senha, nome, campus)VALUES('ivone', 'ivone', 'ivone','ALEGRETE');
-INSERT INTO usuario(login, senha, nome, campus)VALUES('ricardo', 'ricardo', 'ricardo machado','ALEGRETE');
-INSERT INTO usuario(login, senha, nome, campus)VALUES('fabio', 'fabio', 'fábio','ALEGRETE');
-INSERT INTO usuario(login, senha, nome, campus)VALUES('wolmir', 'wolmir', 'wolmir','ALEGRETE');
-INSERT INTO usuario(login, senha, nome, campus)VALUES('jose', 'jose', 'José','ALEGRETE');
-INSERT INTO usuario(login, senha, nome, campus)VALUES('paulo', 'paulo', 'Paulo','ALEGRETE');
-INSERT INTO usuario(login, senha, nome, campus)VALUES('carlos', 'carlos', 'Carlos','ALEGRETE');
-
+INSERT INTO usuario VALUES (1, 'joao', 'joao', 'joão da silva','ALEGRETE');
+INSERT INTO usuario VALUES (2, 'maria', 'maria', 'maria da silva','ALEGRETE');
+INSERT INTO usuario VALUES (3, 'alfredo', 'alfredo', 'alfredo picareta','ALEGRETE');
+INSERT INTO usuario VALUES (4, 'joaquim', 'joaquim', 'joaquim santos','ALEGRETE');
+INSERT INTO usuario VALUES (5, 'rafael', 'rafael', 'rafael santos','ALEGRETE');
+INSERT INTO usuario VALUES (6, 'rogerio', 'rogerio', 'rogerio','ALEGRETE');
+INSERT INTO usuario VALUES (7, 'ivone', 'ivone', 'ivone','ALEGRETE');
+INSERT INTO usuario VALUES (8, 'ricardo', 'ricardo', 'ricardo machado','ALEGRETE');
+INSERT INTO usuario VALUES (9, 'fabio', 'fabio', 'fábio','ALEGRETE');
+INSERT INTO usuario VALUES (10, 'wolmir', 'wolmir', 'wolmir','ALEGRETE');
+INSERT INTO usuario VALUES (11, 'jose', 'jose', 'José','ALEGRETE');
+INSERT INTO usuario VALUES (12, 'paulo', 'paulo', 'Paulo','ALEGRETE');
+INSERT INTO usuario VALUES (13, 'carlos', 'carlos', 'Carlos','ALEGRETE');
 /***************************** FIM cadastro usuarios **********************/
 
 /***************************** INICIO cadastro participantes **********************/
