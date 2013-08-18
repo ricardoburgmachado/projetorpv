@@ -588,6 +588,8 @@ public class DBProjeto implements ProjetoDAO {
                     Professor professor = new Professor(result.getString("nome"), Campus.valueOf(result.getString("campus")));
                     professor.setId(result.getInt("id_responsavel"));
                     projeto.setProfessor(professor);
+                    
+                    projetos.add(projeto);
                 } while (result.next());
             } catch (SQLException ex) {
 
@@ -620,6 +622,7 @@ public class DBProjeto implements ProjetoDAO {
         }
 
         try {
+            
             result = stmt.executeQuery();
         } catch (SQLException ex) {
 
@@ -627,6 +630,7 @@ public class DBProjeto implements ProjetoDAO {
         }
 
         if (verifyResult(result)) {
+            
             try {
 
                 ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
@@ -660,13 +664,16 @@ public class DBProjeto implements ProjetoDAO {
         ResultSet result = null;
 
         try {
+            
             stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, projeto.getId());
         } catch (SQLException ex) {
 
             throw new PersistenciaException("Falha ao preparar consulta", ex);
         }
 
         try {
+            
             result = stmt.executeQuery();
         } catch (SQLException ex) {
 
@@ -685,6 +692,7 @@ public class DBProjeto implements ProjetoDAO {
                     custo.setValor(result.getDouble("valor"));
                     custos.add(custo);
                 } while (result.next());
+                
                 projeto.setCustos(custos);
             } catch (SQLException ex) {
                 
@@ -704,8 +712,7 @@ public class DBProjeto implements ProjetoDAO {
     private boolean verifyResult(ResultSet result) throws PersistenciaException {
 
         try {
-
-            return result != null && result.first();
+            return result != null && result.next();
         } catch (SQLException ex) {
 
             throw new PersistenciaException("Não houve resultados!", ex);

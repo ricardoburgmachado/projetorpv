@@ -110,6 +110,7 @@ public abstract class Usuario {
             
             case "aluno": return new Aluno();
             case "coordenador": return new Coordenador();
+            case "pro_reitor": return new ProReitor();
             case "proreitor": return new ProReitor();
             case "professor": return new Professor();
             case "externo": return new Externo();
