@@ -300,7 +300,7 @@ public class ProjetoController {
         } catch (DadoInconsistenteException diex) {
 
             do {
-                System.out.println(diex.getMessage());
+                
                 inconsistencias.add(diex.getMessage());
                 diex = diex.getException();
             } while (diex != null);
