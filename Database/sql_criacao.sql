@@ -10,16 +10,11 @@ CREATE TABLE public.papel (
 
 ALTER SEQUENCE public.papel_id_papel_seq OWNED BY public.papel.id_papel;
 
-CREATE SEQUENCE public.area_conhecimento_id_area_seq_1;
-
 CREATE TABLE public.area_conhecimento (
-                id_area INTEGER NOT NULL DEFAULT nextval('public.area_conhecimento_id_area_seq_1'),
+                id_area serial NOT NULL,
                 area VARCHAR(50),
                 CONSTRAINT area_conhecimento_pk PRIMARY KEY (id_area)
 );
-
-
-ALTER SEQUENCE public.area_conhecimento_id_area_seq_1 OWNED BY public.area_conhecimento.id_area;
 
 CREATE SEQUENCE public.permissao_id_perm_seq;
 
@@ -61,7 +56,7 @@ CREATE TABLE public.projeto (
                 PALAVRAS_CHAVE VARCHAR(100),
                 RESUMO VARCHAR(2000),
                 sigilo BOOLEAN DEFAULT false NOT NULL,
-                id_area INTEGER NOT NULL,
+                id_area INTEGER,
                 tipo_proj VARCHAR(50),
                 status VARCHAR(20) NOT NULL,
                 is_arquivo BOOLEAN DEFAULT false NOT NULL,

@@ -77,7 +77,6 @@ INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(3, 5);
 INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(3, 4);
 INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(3, 13);
 INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(3, 12);
-INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(4, 12);
 INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(4, 11);
 INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(4, 10);
 INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(5, 9);
