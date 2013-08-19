@@ -122,6 +122,13 @@ public class RepositorioProjeto {
         return projetos;
     }
 
+    public void submeterHomologacao(int idProjeto) throws PersistenciaException, DadoInconsistenteException {
+        
+        Projeto projeto = obter(idProjeto);
+        
+        submeterHomologacao(projeto);
+    }
+
     public void submeterHomologacao(Projeto projeto) throws PersistenciaException, DadoInconsistenteException {
 
         DadoInconsistenteException exception = null;
@@ -135,18 +142,24 @@ public class RepositorioProjeto {
         }
 
         try {
-            
+
             verificaStatusParaSubmissaoHomologacao(projeto.getStatus());
-        }catch(DadoInconsistenteException diex){
-            
-            exception = new DadoInconsistenteException(exception, "");
+        } catch (DadoInconsistenteException diex) {
+
+            if(exception == null){
+                
+                exception = diex;
+            }else{
+                
+                exception.setException(diex);
+            }
         }
-        
-        if(exception != null){
-            
+
+        if (exception != null) {
+
             throw exception;
-        }else{
-            
+        } else {
+
             projeto.setStatus(StatusProjeto.SUBMETIDO_HOMOLOGACAO);
             this.projDAO.atualizaStatus(projeto);
         }
@@ -165,7 +178,7 @@ public class RepositorioProjeto {
         DadoInconsistenteException exception = null;
         final String VAZIO = "";
 
-        if (projeto == null || obter(projeto.getId()) == null) {
+        if (projeto == null) {
 
             throw new DadoInconsistenteException("Projeto Inválido!");
         }
@@ -199,9 +212,9 @@ public class RepositorioProjeto {
 
             exception = new DadoInconsistenteException(exception, "Status do projeto é nulo!");
         }
-        
-        if(verificaNulo(projeto.getProfessor())){
-            
+
+        if (verificaNulo(projeto.getProfessor())) {
+
             exception = new DadoInconsistenteException(exception, "Deve haver professor associado ao projeto!");
         }
 

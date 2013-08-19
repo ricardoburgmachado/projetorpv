@@ -29,4 +29,14 @@ public class DadoInconsistenteException extends RuntimeException{
     public DadoInconsistenteException getException() {
         return exception;
     }
+    
+    @Override
+    public String getMessage(){
+        
+        return this.message;
+    }
+
+    public void setException(DadoInconsistenteException exception) {
+        this.exception = exception;
+    }
 }

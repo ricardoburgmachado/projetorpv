@@ -290,18 +290,17 @@ public class ProjetoController {
     }
 
     @RequestMapping(value = "/submete_homologacao")
-    public ModelAndView submeteProjeto(HttpServletRequest p_request,
-            @RequestParam(value = "arquivo_xx", required = false) MultipartFile arquivo) {
+    public ModelAndView submeteProjeto(@RequestParam int id) {
 
-        Projeto projeto = criaProjeto(request);
         List<String> inconsistencias = new LinkedList<>();
 
         try {
 
-            new RepositorioPostgresFactory().createRepositorioProjeto().submeterHomologacao(projeto);
+            new RepositorioPostgresFactory().createRepositorioProjeto().submeterHomologacao(id);
         } catch (DadoInconsistenteException diex) {
 
             do {
+                System.out.println(diex.getMessage());
                 inconsistencias.add(diex.getMessage());
                 diex = diex.getException();
             } while (diex != null);
@@ -310,7 +309,16 @@ public class ProjetoController {
             inconsistencias.add(pex.getMessage());
         }
         
-        return null;
+        ModelAndView mv = this.projetoEditaShow(id);
+        if(inconsistencias.isEmpty()){
+            
+            mv.addObject("sucesso", "Projeto submetido com sucesso!");
+        }else{
+            
+            mv.addObject("inconsistencias", inconsistencias);
+        }
+        
+        return mv;
     }
 
     private Projeto criaProjeto(HttpServletRequest request) {
