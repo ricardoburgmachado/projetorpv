@@ -38,26 +38,39 @@
 
                 <h1>Listar Projetos</h1>
 
-                <table id="lista_projetos">
-                    <tr class="sub_titulo">
-                        <td class="titulo">TITULO</td>
-                        <td class="tipo">TIPO</td>
-                        <td class="status">STATUS</td>
-                        <td class="funcoes">AÇÕES</td>
-                    </tr>
-                    <c:forEach items="${projetos}" var="projeto">
 
-                        <tr class="linealt">
-                            <a>
-                                <td class="titulo">${projeto.titulo}</td>
-                                <td class="tipo" >${projeto.tipoProjeto}</td>
-                                <td class="status">NÃO HOMOLOGADO</td>
-                                <td class="edita"><a title="Clique aqui para editar Projeto" href="projeto_edita_show?id=${projeto.id}"></a></td>
-                                <td class="exibe"><a title="Clique aqui para exibir detalhes do projeto" href="projeto_exibe?id=${projeto.id}"></a></td>
-                            </a>
-                        </tr>
-                    </c:forEach>
+                <table id="lista_projetos">
+                    <c:choose>
+                        <c:when test="${projetos != null}">
+
+                            <tr class="sub_titulo">
+                                <td class="titulo">TITULO</td>
+                                <td class="tipo">TIPO</td>
+                                <td class="status">STATUS</td>
+                                <td class="funcoes">AÇÕES</td>
+                            </tr>
+                            <c:forEach items="${projetos}" var="projeto">
+
+                                <tr class="linealt">
+                                <a>
+                                    <td class="titulo">${projeto.titulo}</td>
+                                    <td class="tipo" >${projeto.tipoProjeto}</td>
+                                    <td class="status">NÃO HOMOLOGADO</td>
+                                    <td class="edita"><a title="Clique aqui para editar Projeto" href="projeto_edita_show?id=${projeto.id}"></a></td>
+                                    <td class="exibe"><a title="Clique aqui para exibir detalhes do projeto" href="projeto_exibe?id=${projeto.id}"></a></td>
+                                </a>
+                                </tr>
+                            </c:forEach>
+
+
+                        </c:when>
+                        <c:otherwise>
+                            Não existe nenhum projeto cadastrado!
+                        </c:otherwise>
+                    </c:choose>
+
                 </table>
+
 
 
 

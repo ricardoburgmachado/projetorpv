@@ -476,7 +476,7 @@ background: #CCCCCC;
 #exibe_projeto tr {
     display: block;
     float: left;
-    border: 1px solid blue;
+
     clear: both;
     margin-top: 5px;
     width: 765px;
@@ -485,7 +485,7 @@ background: #CCCCCC;
 #exibe_projeto tr .titulo {
     display: block;
     float: left;
-    border: 1px dashed red;
+
     width: 380px;
 }
 
@@ -493,21 +493,21 @@ background: #CCCCCC;
     display: block;
     float: left;
     margin-left: 5px;
-    border: 1px dashed red;
+
     width: 370px;
 }
 
 #exibe_projeto tr .resumo {
     display: block;
     float: left;
-    border: 1px dashed red;
+
     width: 765px;
 }
 
 #exibe_projeto tr .area_conhecimento {
     display: block;
     float: left;
-    border: 1px dashed red;
+
     width: 370px;
 }
 
@@ -515,28 +515,28 @@ background: #CCCCCC;
     display: block;
     float: left;
     margin-left: 5px;
-    border: 1px dashed red;
+
     width: 380px;
 }
 
 #exibe_projeto tr .part_alunos {
     display: block;
     float: left;
-    border: 1px dashed red;
+
     width: 245px;
 }
 #exibe_projeto tr .part_professores {
     display: block;
     float: left;
     margin-left: 5px;
-    border: 1px dashed red;
+
     width: 245px;
 }
 #exibe_projeto tr .part_externo {
     display: block;
     float: left;
     margin-left: 5px;
-    border: 1px dashed red;
+
     width: 245px;
 }
 
@@ -553,29 +553,70 @@ background: #CCCCCC;
 #exibe_projeto tr .custo_cap_valor {
     display: block;
     float: left;
-    border: 1px dashed red;
+
     width: 250px;
 }
 #exibe_projeto tr .custo_cap_desc {
     display: block;
     float: left;
     margin-left: 5px;
-    border: 1px dashed red;
+
     width: 495px;
 }
 #exibe_projeto tr .custo_cust_valor {
     display: block;
     float: left;
-    border: 1px dashed red;
+
     width: 250px;
 }
 #exibe_projeto tr .custo_cust_desc {
     display: block;
     float: left;
     margin-left: 5px;
-    border: 1px dashed red;
+
     width: 495px;
 }
+
+#exibe_projeto tr .arquivo {
+    display: block;
+    float: left;
+
+    width: 500px;
+}
+
+#exibe_projeto tr .sigilo {
+    display: block;
+    float: left;
+    margin-left: 5px;
+
+    width: 200px;
+}
+
+#excluir_projeto {
+    display:block;
+    float:left;
+    width:124px;
+    text-align: center;
+    margin-left: 10px;
+    margin-top:8px;
+    height:27px;
+    font-size:14px;
+    font-weight:bold;
+    color: white;
+    background: #303030;
+    cursor:pointer;
+    border:none;
+    clear: both;
+    text-decoration: none;
+}
+
+#excluir_projeto:hover {
+    color: #303030;
+    background: white;
+    border: 1px solid #303030;
+}
+
+
 
 /* *************** FIM EXIBE PROJETO *************** */
 

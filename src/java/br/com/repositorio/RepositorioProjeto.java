@@ -15,6 +15,7 @@ import br.com.model.Externo;
 import br.com.model.Professor;
 import br.com.model.Projeto;
 import br.com.model.StatusProjeto;
+import br.com.model.TipoProjeto;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,8 +40,16 @@ public class RepositorioProjeto {
         this.projDAO = pDAO;
     }
 
-    public int inserir(Projeto p) {
-        return projDAO.inserir(p);
+    public String inserir(Projeto p) {
+        String erros = "";
+        if (verificaAreaConhecimento(p.getAreaConhecimento().getId())
+                && verificaTipoProjeto(p.getTipoProjeto().name())
+                    && verificaTitulo(p.getTitulo())) {
+            
+            return projDAO.inserir(p);
+        } else {
+            return -1;
+        }
     }
 
     public ArrayList<AreaConhecimento> listarAreas() {
@@ -135,18 +144,18 @@ public class RepositorioProjeto {
         }
 
         try {
-            
+
             verificaStatusParaSubmissaoHomologacao(projeto.getStatus());
-        }catch(DadoInconsistenteException diex){
-            
+        } catch (DadoInconsistenteException diex) {
+
             exception = new DadoInconsistenteException(exception, "");
         }
-        
-        if(exception != null){
-            
+
+        if (exception != null) {
+
             throw exception;
-        }else{
-            
+        } else {
+
             projeto.setStatus(StatusProjeto.SUBMETIDO_HOMOLOGACAO);
             this.projDAO.atualizaStatus(projeto);
         }
@@ -199,9 +208,9 @@ public class RepositorioProjeto {
 
             exception = new DadoInconsistenteException(exception, "Status do projeto é nulo!");
         }
-        
-        if(verificaNulo(projeto.getProfessor())){
-            
+
+        if (verificaNulo(projeto.getProfessor())) {
+
             exception = new DadoInconsistenteException(exception, "Deve haver professor associado ao projeto!");
         }
 
@@ -220,4 +229,41 @@ public class RepositorioProjeto {
 
         return obj == null;
     }
+
+    public void excluir(int idProj) {
+        this.projDAO.excluir(idProj);
+    }
+
+    private boolean verificaAreaConhecimento(int idArea) {
+        if (idArea != 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean verificaTipoProjeto(String tipo) {
+        if (tipo != "" && tipo != null && TipoProjeto.fromString(tipo) != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean verificaTitulo(String t) {
+        if (t != "" && t != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean verificaStatus(String t) {
+        if (t != "" && t != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

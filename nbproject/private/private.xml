@@ -3,11 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Ricardo/Desktop/Dropbox/DiretorioNetBeans/ProjetoRPV/web/view/lista_projeto_teste.jsp</file>
-            <file>file:/C:/Users/Ricardo/Desktop/Dropbox/DiretorioNetBeans/ProjetoRPV/web/view/projeto_edita.jsp</file>
             <file>file:/C:/Users/Ricardo/Desktop/Dropbox/DiretorioNetBeans/ProjetoRPV/src/java/br/com/controller/ProjetoController.java</file>
+            <file>file:/C:/Users/Ricardo/Desktop/Dropbox/DiretorioNetBeans/ProjetoRPV/web/view/projeto_edita.jsp</file>
+            <file>file:/C:/Users/Ricardo/Desktop/Dropbox/DiretorioNetBeans/ProjetoRPV/src/java/br/com/dao/DBProjeto.java</file>
+            <file>file:/C:/Users/Ricardo/Desktop/Dropbox/DiretorioNetBeans/ProjetoRPV/web/view/projeto_exibe.jsp</file>
+            <file>file:/C:/Users/Ricardo/Desktop/Dropbox/DiretorioNetBeans/ProjetoRPV/src/java/br/com/model/Projeto.java</file>
+            <file>file:/C:/Users/Ricardo/Desktop/Dropbox/DiretorioNetBeans/ProjetoRPV/src/java/br/com/repositorio/RepositorioProjeto.java</file>
             <file>file:/C:/Users/Ricardo/Desktop/Dropbox/DiretorioNetBeans/ProjetoRPV/web/view/projeto_adiciona.jsp</file>
-            <file>file:/C:/Users/Ricardo/Desktop/Dropbox/DiretorioNetBeans/ProjetoRPV/web/recursos/js/jqueryToastMessage/funcoes.js</file>
+            <file>file:/C:/Users/Ricardo/Desktop/Dropbox/DiretorioNetBeans/ProjetoRPV/web/view/menu.jsp</file>
+            <file>file:/C:/Users/Ricardo/Desktop/Dropbox/DiretorioNetBeans/ProjetoRPV/web/view/lista_projeto.jsp</file>
         </group>
     </open-files>
 </project-private>

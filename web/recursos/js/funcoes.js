@@ -63,6 +63,9 @@ function AddCapital() {
     var qtd_campo_novo_capital = document.getElementsByClassName("campo_capital").length;
 
     elemento.innerHTML += '<p class="campo_capital" id="campo_capital_' + qtd_campo_novo_capital + '"> \n\
+    <span style="display:block;float:left; clear:both">\n\
+    <span style="display:block;float:left">Valor:</span><span style="display:block;float:left;margin-left:60px">Descrição:</span> \n\
+    </span>\n\
     <input onkeydown="Mascara(this,Valor);" style="width: 75px; display: block; float: left" type="text" name="capital_val_x" /> \n\
     <textarea style="width: 150px; height: 35px; display: block; float: left; clear: none; margin-left: 10px; margin-top: 0px" name=capital_desc_x cols=35 rows=3></textarea> \n\
     <a style="width:100px;text-decoration:none;color:black;display:block;float:left;margin-top:10px;margin-left:5px" href="#" onclick="deletarCapital(\'campo_capital_' + qtd_campo_novo_capital + '\');return false;">Remover Capital</a></p>';
@@ -79,6 +82,9 @@ function AddCusteio() {
     var qtd_campo_novo_custeio = document.getElementsByClassName("campo_custeio").length;
 
     elemento.innerHTML += '<p class="campo_custeio" id="campo_custeio_' + qtd_campo_novo_custeio + '"> \n\
+    <span style="display:block;float:left; clear:both">\n\
+    <span style="display:block;float:left">Valor:</span><span style="display:block;float:left;margin-left:60px">Descrição:</span> \n\
+    </span>\n\
     <input onkeydown="Mascara(this,Valor);" style="width: 75px; display: block; float: left" type="text" name="custeio_val_x" /> \n\
     <textarea style="width: 150px; height: 35px; display: block; float: left; clear: none; margin-left: 10px; margin-top: 0px" name=custeio_desc_x cols=35 rows=3></textarea> \n\
     <a style="width:100px;text-decoration:none;color:black;display:block;float:left;margin-top:10px;margin-left:5px" href="#" onclick="deletarCusteio(\'campo_custeio_' + qtd_campo_novo_custeio + '\');return false;">Remover Custeio</a></p>';

@@ -110,43 +110,133 @@
                         </td>
                     </tr>
                     <tr>
-                        
-                        <td class="part_alunos"><b>Participantes(aluno):</b> </td>
-                        <c:forEach items="${projeto.participantesAluno}" var="aluno">
-                            ${aluno.nome}
-                        </c:forEach>
-                        <td class="part_professores"><b>Participantes(professor):</b> Juca da Silva, Roberto da Silva, Alfredo da Silva</td>
-                        
-                        <td class="part_externo"><b>Participantes(externo):</b> Juca da Silva, Roberto da Silva, Alfredo da Silva</td>                        
-                    
+
+                        <td class="part_alunos"><b>Participantes(aluno):</b>
+                            <c:choose>
+                                <c:when test="${projeto.participantesAluno != null}">
+                                    <br/>
+                                    <c:forEach items="${projeto.participantesAluno}" var="aluno">
+                                        ${aluno.nome}<br/>
+                                    </c:forEach>
+                                </c:when>
+                                <c:otherwise>
+                                    Nenhum participante (aluno) esta relacionado a este projeto
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
+
+                        <td class="part_professores"><b>Participantes(professor):</b> 
+                            <c:choose>
+                                <c:when test="${projeto.participantesProfessor != null}">
+                                    <br/>
+                                    <c:forEach items="${projeto.participantesProfessor}" var="professor">
+                                        ${professor.nome}<br/>
+                                    </c:forEach>
+                                </c:when>
+                                <c:otherwise>
+                                    Nenhum participante (professor) esta relacionado a este projeto
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
+
+                        <td class="part_externo"><b>Participantes(externo):</b> 
+                            <c:choose>
+                                <c:when test="${projeto.participantesExterno != null}">
+                                    <br/>
+                                    <c:forEach items="${projeto.participantesExterno}" var="externo">
+                                        ${externo.nome}<br/>
+                                    </c:forEach>
+                                </c:when>
+                                <c:otherwise>
+                                    Nenhum participante (externo) esta relacionado a este projeto
+                                </c:otherwise>
+                            </c:choose>
+                        </td>                        
+
                     </tr>
                     <tr>
                         <td class="subtitulo">
                             CUSTOS (CAPITAL)
                         </td>
                     </tr>
+
                     <tr>
-                        <td class="custo_cap_valor"><b>Valor:</b>R$ 12,00</td>
-                        <td class="custo_cap_desc"><b>Descrição:</b>computadores de última geração</td>
+                        <c:forEach items="${custos}" var="custoDB_X">
+                            <c:if test="${custoDB_X.tipoCusto eq 'CAPITAL'}">
+                                <c:set var="countCapitais" value="1"></c:set>
+                            </c:if>
+                        </c:forEach>                      
+
+
+
+                        <c:choose>
+                            <c:when test="${countCapitais > 0}">
+                            <br/>
+
+                            <c:forEach items="${custos}" var="custoDB">
+                                <c:if test="${custoDB.tipoCusto eq 'CAPITAL'}">
+                                    <td class="custo_cap_valor"><b>Valor:</b> R$ ${custoDB.valor}</td>    
+                                    <td class="custo_cap_desc"><b>Descrição:</b>${custoDB.descricao}</td>
+                                </c:if>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <td class="custo_cap_valor" style="color: red">Nenhum custo (capital) cadastrado</td>                                
+                        </c:otherwise>
+                    </c:choose>                   
                     </tr>
+
                     <tr>
                         <td class="subtitulo">
                             CUSTOS (CUSTEIO)
                         </td>
                     </tr>
-
                     <tr>
-                        <td class="custo_cust_valor"><b>dalor:</b>R$ 12,00</td>
-                        <td class="custo_cust_desc"><b>descrição:</b>computadores de última geração</td>
+                        <c:forEach items="${custos}" var="custoDB">
+                            <c:if test="${custoDB.tipoCusto eq 'CUSTEIO'}">
+                                <c:set var="countCusteios" value="1"></c:set>
+                            </c:if>
+                        </c:forEach>                        
+                        <c:choose>
+                            <c:when test="${countCusteios > 0}">
+                            <br/>
+                            <c:forEach items="${custos}" var="custoDB">
+                                <c:if test="${custoDB.tipoCusto eq 'CUSTEIO'}">
+                                    <td class="custo_cust_valor"><b>Valor:</b> R$ ${custoDB.valor}</td>    
+                                    <td class="custo_cust_desc"><b>Descrição:</b>${custoDB.descricao}</td>
+                                </c:if>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <td class="custo_cust_valor" style="color: red">Nenhum custo (custeio) cadastrado</td>                                
+                        </c:otherwise>
+                    </c:choose>                                   
                     </tr>
-
                     <tr>
-                        <td class="arquivo"><b>Arquivo (.pdf):</b>link para o arquivo</td>
+                        <c:choose>
+                            <c:when test="${projeto.arquivo}">                                
+                                <td class="arquivo"><b>Arquivo (.pdf):</b><a title="Clique aqui para visualizar o arquivo" style="color: darkgreen; text-decoration: none; font-size: 14px; font-weight: bold" href="<c:url value="/arquivos/${projeto.id }/${projeto.id}.pdf"/>"> Clique aqui para visualizar o arquivo</a></td>        
+                            </c:when>
+                            <c:otherwise>
+                                <td class="arquivo"><b>Arquivo (.pdf):</b> Nenhum arquivo armazenado</td>
+                            </c:otherwise>
+                        </c:choose>
+                                
+                        <c:choose>
+                            <c:when test="${projeto.sigilo}">
+                                  <td class="sigilo"><b>Projeto em sigilo:</b> Sim</td>
+                            </c:when>
+                            <c:otherwise>
+                               <td class="sigilo"><b>Projeto em sigilo:</b> Não</td>
+                            </c:otherwise>
+                        </c:choose>
+                                
                     </tr>
+                    
 
                 </table>
 
-
+                <a id="excluir_projeto" href="projeto_exclui?id=${projeto.id}" >Deletar projeto</a>
 
 
             </div>
