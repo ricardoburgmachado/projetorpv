@@ -207,6 +207,9 @@
                                 <c:forEach items="${custos}" var="custoBD">
                                     <c:if test="${custoBD.tipoCusto eq 'CAPITAL'}">
                                         <p class="campo_capital" id="campo_capital_<%=countCapitais_x%>">
+                                           <span style="display:block;float:left; clear:both">
+                                                <span style="display:block;float:left">Valor:</span><span style="display:block;float:left;margin-left:60px">Descrição:</span>
+                                           </span>
                                             <input onkeydown="Mascara(this, Valor);" style="width: 75px; display: block; float: left" type="text" name="capital_val_x" value="${custoBD.valor}"/> 
                                             <textarea style="width: 150px; height: 35px; display: block; float: left; clear: none; margin-left: 10px; margin-top: 0px" name=capital_desc_x cols=35 rows=3>${custoBD.descricao}</textarea> 
                                             <a style="width:100px;text-decoration:none;color:black;display:block;float:left;margin-top:10px;margin-left:5px" href="#" onclick="deletarCapital('campo_capital_<%=countCapitais_x%>');
@@ -227,6 +230,9 @@
                                 <c:forEach items="${custos}" var="custoBD">
                                     <c:if test="${custoBD.tipoCusto eq 'CUSTEIO'}">
                                         <p class="campo_custeio" id="campo_custeio_<%=countCusteios_x%>">
+                                           <span style="display:block;float:left; clear:both">
+                                                <span style="display:block;float:left">Valor:</span><span style="display:block;float:left;margin-left:60px">Descrição:</span>
+                                           </span>
                                             <input onkeydown="Mascara(this, Valor);" style="width: 75px; display: block; float: left" type="text" name="custeio_val_x" value="${custoBD.valor}"/> 
                                             <textarea style="width: 150px; height: 35px; display: block; float: left; clear: none; margin-left: 10px; margin-top: 0px" name=custeio_desc_x cols=35 rows=3>${custoBD.descricao}</textarea> 
                                             <a style="width:100px;text-decoration:none;color:black;display:block;float:left;margin-top:10px;margin-left:5px" href="#" onclick="deletarCusteio('campo_custeio_<%=countCusteios_x%>');
@@ -237,12 +243,6 @@
                                 </c:forEach>
                             </div>         
                         </span>
-
-
-
-
-
-
 
 
 

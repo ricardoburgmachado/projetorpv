@@ -15,6 +15,7 @@ import br.com.model.Externo;
 import br.com.model.Professor;
 import br.com.model.Projeto;
 import br.com.model.StatusProjeto;
+import br.com.model.TipoProjeto;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,8 +40,33 @@ public class RepositorioProjeto {
         this.projDAO = pDAO;
     }
 
-    public int inserir(Projeto p) {
-        return projDAO.inserir(p);
+    public int inserir(Projeto p) throws PersistenciaException, DadoInconsistenteException {
+
+        DadoInconsistenteException exception = null;
+        
+        if(verificaAreaConhecimentoInvalida(p.getAreaConhecimento())){
+            
+            exception = new DadoInconsistenteException(exception, "Área de conhecimento não informada!");
+        }
+        
+        if(verificaNulo(p.getTipoProjeto())){
+            
+            exception = new DadoInconsistenteException(exception, "Tipo de projeto não informado!");
+        }
+        
+        if(verificaVazio(p.getTitulo())){
+            
+            exception = new DadoInconsistenteException(exception, "Título não informado!");
+        }
+        
+        if(exception == null){
+            
+            return projDAO.inserir(p);
+        }else{
+            
+            throw exception;
+        }
+
     }
 
     public ArrayList<AreaConhecimento> listarAreas() {
@@ -123,9 +149,9 @@ public class RepositorioProjeto {
     }
 
     public void submeterHomologacao(int idProjeto) throws PersistenciaException, DadoInconsistenteException {
-        
+
         Projeto projeto = obter(idProjeto);
-        
+
         submeterHomologacao(projeto);
     }
 
@@ -146,13 +172,14 @@ public class RepositorioProjeto {
             verificaStatusParaSubmissaoHomologacao(projeto.getStatus());
         } catch (DadoInconsistenteException diex) {
 
-            if(exception == null){
-                
+            if (exception == null) {
+
                 exception = diex;
-            }else{
-                
+            } else {
+
                 exception.setException(diex);
             }
+
         }
 
         if (exception != null) {
@@ -179,6 +206,7 @@ public class RepositorioProjeto {
         final String VAZIO = "";
 
         if (projeto == null) {
+
 
             throw new DadoInconsistenteException("Projeto Inválido!");
         }
@@ -232,5 +260,46 @@ public class RepositorioProjeto {
     private boolean verificaNulo(Object obj) {
 
         return obj == null;
+    }
+    
+    private boolean verificaAreaConhecimentoInvalida(AreaConhecimento area){
+        
+        return verificaNulo(area) || area.getId() <= 0;
+    }
+
+    public void excluir(int idProj) {
+        this.projDAO.excluir(idProj);
+    }
+
+    private boolean verificaAreaConhecimento(int idArea) {
+        if (idArea != 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean verificaTipoProjeto(String tipo) {
+        if (tipo != "" && tipo != null && TipoProjeto.fromString(tipo) != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean verificaTitulo(String t) {
+        if (t != "" && t != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean verificaStatus(String t) {
+        if (t != "" && t != null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

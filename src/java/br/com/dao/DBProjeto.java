@@ -111,9 +111,9 @@ public class DBProjeto implements ProjetoDAO {
             p.setPalavrasChave(resultSet.getString("palavras_chave"));
             p.setSigilo(resultSet.getBoolean("sigilo"));
             p.setArquivo(resultSet.getBoolean("is_arquivo"));
-            Professor professor = new Professor();
-            professor.setId(resultSet.getInt("id_responsavel"));
-            p.setProfessor(professor);
+            Professor prof = new Professor();
+            prof.setId(resultSet.getInt("id_responsavel"));
+            p.setProfessor(prof);
             return p;
 
         } catch (SQLException ex) {
@@ -137,7 +137,7 @@ public class DBProjeto implements ProjetoDAO {
          INNER JOIN papel ON papel.id_papel = usuario_papel.id_papel AND papel.descricao = 'ALUNO'
          INNER JOIN participante ON participante.id_usuario = usuario.id_usuario  AND participante.id_proj = 26        
          */
-        String query = "SELECT usuario.id_usuario FROM usuario "
+        String query = "SELECT usuario.id_usuario, usuario.nome FROM usuario "
                 + " INNER JOIN usuario_papel ON usuario.id_usuario = usuario_papel.id_usuario "
                 + " INNER JOIN papel ON papel.id_papel = usuario_papel.id_papel AND papel.descricao = 'ALUNO' "
                 + " INNER JOIN participante ON participante.id_usuario = usuario.id_usuario  AND participante.id_proj = " + id;
@@ -152,6 +152,7 @@ public class DBProjeto implements ProjetoDAO {
             while (resultSet.next()) {
                 Aluno a = new Aluno();
                 a.setId(resultSet.getInt("id_usuario"));
+                a.setNome(resultSet.getString("nome"));
                 listaRetorno.add(a);
             }
             return listaRetorno;
@@ -176,10 +177,10 @@ public class DBProjeto implements ProjetoDAO {
             stmt.setBoolean(4, p.getSigilo());
             stmt.setInt(5, p.getAreaConhecimento().getId());
             stmt.setString(6, p.getTipoProjeto().toString());
-            
-            //stmt.setString(7,"CRIADO");
-            //stmt.setString(8, p.getTipoProjeto().toString());
-            
+            stmt.setString(7, "CRIADO");
+            stmt.setInt(8, p.getProfessor().getId());
+            System.out.println("********************** ID PROFESSOR: " + p.getProfessor().getId());
+
             stmt.setInt(9, p.getId());
 
             System.out.println("******************** QUERY -> " + query);
@@ -196,6 +197,7 @@ public class DBProjeto implements ProjetoDAO {
 
         } catch (SQLException sqle) {
 
+            System.out.println("**************** ERRO: " + sqle.getCause());
             throw new PersistenciaException("Não foi possível atualizar o projeto no banco de dados!, erro: ", sqle);
         }
 
@@ -203,7 +205,36 @@ public class DBProjeto implements ProjetoDAO {
 
     @Override
     public void excluir(Projeto p) throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void excluir(int idProj) throws PersistenciaException {
+        String query = "DELETE FROM " + PROJETO + " WHERE id_proj = ?";
+
+        System.out.println("******************** QUERY -> " + query);
+
+        PreparedStatement stmt;
+
+        try {
+            stmt = connection.prepareStatement(query);
+            stmt.setInt(1, idProj);
+
+            System.out.println("******************** QUERY -> " + query);
+            int retorno = stmt.executeUpdate();
+
+            if (retorno == 0) {
+                System.out.println("RETORNO FALSE -> BD: o projeto não foi excluído no banco de dados");
+
+            } else {
+                System.out.println("RETORNO TRUE -> BD: o projeto foi excluído no banco de dados");
+            }
+
+        } catch (SQLException sqle) {
+
+            System.out.println("**************** ERRO: " + sqle.getCause());
+            throw new PersistenciaException("Não foi possível excluir o projeto no banco de dados!, erro: ", sqle);
+        }
+
     }
 
     @Override
@@ -336,7 +367,7 @@ public class DBProjeto implements ProjetoDAO {
 
     @Override
     public ArrayList<Professor> getParticProfessores(int id) throws PersistenciaException {
-        String query = "SELECT usuario.id_usuario FROM usuario "
+        String query = "SELECT usuario.id_usuario, usuario.nome FROM usuario "
                 + " INNER JOIN usuario_papel ON usuario.id_usuario = usuario_papel.id_usuario "
                 + " INNER JOIN papel ON papel.id_papel = usuario_papel.id_papel AND papel.descricao = 'PROFESSOR' "
                 + " INNER JOIN participante ON participante.id_usuario = usuario.id_usuario  AND participante.id_proj = " + id;
@@ -351,6 +382,7 @@ public class DBProjeto implements ProjetoDAO {
             while (resultSet.next()) {
                 Professor a = new Professor();
                 a.setId(resultSet.getInt("id_usuario"));
+                a.setNome(resultSet.getString("nome"));
                 listaRetorno.add(a);
             }
             return listaRetorno;
@@ -361,7 +393,7 @@ public class DBProjeto implements ProjetoDAO {
 
     @Override
     public ArrayList<Externo> getParticExternos(int id) throws PersistenciaException {
-        String query = "SELECT usuario.id_usuario FROM usuario "
+        String query = "SELECT usuario.id_usuario, usuario.nome FROM usuario "
                 + " INNER JOIN usuario_papel ON usuario.id_usuario = usuario_papel.id_usuario "
                 + " INNER JOIN papel ON papel.id_papel = usuario_papel.id_papel AND papel.descricao = 'EXTERNO' "
                 + " INNER JOIN participante ON participante.id_usuario = usuario.id_usuario  AND participante.id_proj = " + id;
@@ -376,6 +408,7 @@ public class DBProjeto implements ProjetoDAO {
             while (resultSet.next()) {
                 Externo a = new Externo();
                 a.setId(resultSet.getInt("id_usuario"));
+                a.setNome(resultSet.getString("nome"));
                 listaRetorno.add(a);
             }
             return listaRetorno;
@@ -539,9 +572,9 @@ public class DBProjeto implements ProjetoDAO {
         }
     }
 
-
     /**
      * Lista todos os projetos associados à um responsável (professor).
+     *
      * @param idResponsavel Identificador do responsável.
      * @return Lista de projetos associados à um responsável (professor).
      * @throws PersistenciaException Caso algum problema de persistência ocorra
@@ -576,8 +609,9 @@ public class DBProjeto implements ProjetoDAO {
     }
 
     /**
-     * Cria uma lista de projetos com base no resultado da consulta.
-     * Envolve professor responsável e área de conhecimento.
+     * Cria uma lista de projetos com base no resultado da consulta. Envolve
+     * professor responsável e área de conhecimento.
+     *
      * @param result Resultado da consulta.
      * @return Lista de projetos.
      */
@@ -603,7 +637,7 @@ public class DBProjeto implements ProjetoDAO {
                     Professor professor = new Professor(result.getString("nome"), Campus.valueOf(result.getString("campus")));
                     professor.setId(result.getInt("id_responsavel"));
                     projeto.setProfessor(professor);
-                    
+
                     projetos.add(projeto);
                 } while (result.next());
             } catch (SQLException ex) {
@@ -617,8 +651,10 @@ public class DBProjeto implements ProjetoDAO {
 
     /**
      * Consulta e atribui os participantes relacionados ao projeto.
+     *
      * @param projeto Projeto ao qual seus participantes serão atribuídos
-     * @throws PersistenciaException Caso ocorra algum problema com a persistência
+     * @throws PersistenciaException Caso ocorra algum problema com a
+     * persistência
      */
     @Override
     public void carregaParticipantes(Projeto projeto) throws PersistenciaException {
@@ -637,7 +673,7 @@ public class DBProjeto implements ProjetoDAO {
         }
 
         try {
-            
+
             result = stmt.executeQuery();
         } catch (SQLException ex) {
 
@@ -645,7 +681,7 @@ public class DBProjeto implements ProjetoDAO {
         }
 
         if (verifyResult(result)) {
-            
+
             try {
 
                 ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
@@ -670,8 +706,10 @@ public class DBProjeto implements ProjetoDAO {
 
     /**
      * Consulta e atribui os custos relacionados ao projeto.
+     *
      * @param projeto Projeto ao qual seus custos serão atribuídos
-     * @throws PersistenciaException Caso ocorra algum problema com a persistência
+     * @throws PersistenciaException Caso ocorra algum problema com a
+     * persistência
      */
     @Override
     public void carregaCustos(Projeto projeto) throws PersistenciaException {
@@ -681,7 +719,7 @@ public class DBProjeto implements ProjetoDAO {
         ResultSet result = null;
 
         try {
-            
+
             stmt = connection.prepareStatement(sql);
             stmt.setInt(1, projeto.getId());
         } catch (SQLException ex) {
@@ -690,7 +728,7 @@ public class DBProjeto implements ProjetoDAO {
         }
 
         try {
-            
+
             result = stmt.executeQuery();
         } catch (SQLException ex) {
 
@@ -701,7 +739,7 @@ public class DBProjeto implements ProjetoDAO {
             try {
                 ArrayList<Custo> custos = new ArrayList<>();
                 do {
-                    
+
                     Custo custo = new Custo();
                     custo.setId(result.getInt("id"));
                     custo.setDescricao(result.getString("descricao"));
@@ -709,10 +747,10 @@ public class DBProjeto implements ProjetoDAO {
                     custo.setValor(result.getDouble("valor"));
                     custos.add(custo);
                 } while (result.next());
-                
+
                 projeto.setCustos(custos);
             } catch (SQLException ex) {
-                
+
                 throw new PersistenciaException("Falha ao acessar dados da consulta", ex);
             }
         }
@@ -738,27 +776,32 @@ public class DBProjeto implements ProjetoDAO {
 
     @Override
     public void atualizaStatus(Projeto projeto) throws PersistenciaException {
-        
+
         String sql = "update " + PROJETO + " set status=? where id_proj=?";
         PreparedStatement stmt = null;
-        
-        try{
-            
+
+        try {
+
             stmt = connection.prepareStatement(sql);
             stmt.setString(1, projeto.getStatus().toString());
             stmt.setInt(2, projeto.getId());
-        }catch(SQLException sqle){
-            
+        } catch (SQLException sqle) {
+
             throw new PersistenciaException("Falha ao preparar atualização");
         }
-        
-        try{
-            
+
+        try {
+
             stmt.executeUpdate();
-        }catch(SQLException sqle){
-            
+        } catch (SQLException sqle) {
+
             System.out.println(sqle);
             throw new PersistenciaException("Falha ao atualizar registro");
         }
+    }
+
+    public boolean verificaStatus() {
+
+        return true;
     }
 }

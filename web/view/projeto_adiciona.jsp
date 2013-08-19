@@ -117,13 +117,12 @@
 
                     <fieldset> 
 
-
                         <!-- PRESTAR ATENÇÃO AQUI, DEVE SER RECUPERADO O ID DO PROFESSOR QUE ESTARÁ NA SESSÃO -->
                         <input type="hidden" name="id" value=1 />       
 
 
                         <label>Título:</label>
-                        <span class="obrigatorio">*Campo obrigatório</span>
+                        <!--<span class="obrigatorio">*</span>-->
                         <input type="text" name="titulo" required="required" />       
 
                         <label>Palavras chave:</label>
@@ -139,6 +138,7 @@
                         <span class="bloco">
                             <label for="nome">Área de conhecimento:</label><br/><br/>                             
                             <select id="area_conhecimento" name="areaConhecimento_x">
+                                <option selected="selected" value="">Selecione</option>
                                 <c:forEach items="${area_conhecimento}" var="area">                               
                                     <option value=${area.id}>${area.area}</option>
                                 </c:forEach>
@@ -146,8 +146,9 @@
                         </span>
 
                         <span class="bloco">
-                            <label  for="nome">Tipo projeto:</label><br/><br/> 
+                            <label  for="nome">Tipo projeto:</label><br/><br/>                             
                             <select id="tipo_projeto" name="tipoProjeto">
+                                <option selected="selected" value="">Selecione</option>
                                 <option value="<%=TipoProjeto.PESQUISA%>">Pesquisa</option>
                                 <option value="<%=TipoProjeto.ENSINO%>">Ensino</option>
                                 <option value="<%=TipoProjeto.EXTENSAO%>">Extensão</option>                                
