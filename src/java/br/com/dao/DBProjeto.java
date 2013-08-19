@@ -44,7 +44,8 @@ public class DBProjeto implements ProjetoDAO {
     @Override
     public int inserir(Projeto p) throws PersistenciaException {
 
-        String query = "INSERT INTO " + PROJETO + " (titulo, palavras_chave, resumo, sigilo, id_area, tipo_proj) VALUES (?,?,?,?,?,?) ";
+        String query = "INSERT INTO " + PROJETO + " (titulo, palavras_chave, resumo, sigilo, id_area, tipo_proj, status, id_responsavel) "
+                + "VALUES (?,?,?,?,?,?,?,?) ";
 
         PreparedStatement stmt;
 
@@ -56,6 +57,9 @@ public class DBProjeto implements ProjetoDAO {
             stmt.setBoolean(4, p.getSigilo());
             stmt.setInt(5, p.getAreaConhecimento().getId());
             stmt.setString(6, p.getTipoProjeto().toString());
+            stmt.setString(7, "CRIADO");
+            stmt.setInt(8, p.getProfessor().getId());
+
             int retorno = stmt.executeUpdate();
 
             if (retorno == 0) {
@@ -69,7 +73,7 @@ public class DBProjeto implements ProjetoDAO {
             }
 
         } catch (SQLException sqle) {
-
+            System.out.println("********************* ERRO: " + sqle);
             throw new PersistenciaException("Não foi possível inserir o projeto no banco de dados!", sqle);
         }
 
@@ -150,7 +154,7 @@ public class DBProjeto implements ProjetoDAO {
 
     @Override
     public void editar(Projeto p) throws PersistenciaException {
-        String query = "UPDATE " + PROJETO + " SET titulo=?, palavras_chave=?, resumo=?, sigilo=?, id_area=?, tipo_proj=? WHERE id_proj = ?";
+        String query = "UPDATE " + PROJETO + " SET titulo=?, palavras_chave=?, resumo=?, sigilo=?, id_area=?, tipo_proj=?, status=?, id_responsavel=? WHERE id_proj = ?";
 
         System.out.println("******************** QUERY -> " + query);
 
@@ -164,7 +168,11 @@ public class DBProjeto implements ProjetoDAO {
             stmt.setBoolean(4, p.getSigilo());
             stmt.setInt(5, p.getAreaConhecimento().getId());
             stmt.setString(6, p.getTipoProjeto().toString());
-            stmt.setInt(7, p.getId());
+            
+            //stmt.setString(7,"CRIADO");
+            //stmt.setString(8, p.getTipoProjeto().toString());
+            
+            stmt.setInt(9, p.getId());
 
             System.out.println("******************** QUERY -> " + query);
             int retorno = stmt.executeUpdate();
@@ -267,31 +275,32 @@ public class DBProjeto implements ProjetoDAO {
 
     /**
      * Método utilizado no cadastro de projetos
+     *
      * @param idProj
      * @param idPart
-     * @throws PersistenciaException 
+     * @throws PersistenciaException
      */
     @Override
     public void inserirParticipantes(int idProj, String[] idPart) throws PersistenciaException {
-        for (int i = 0; i < idPart.length; i++) {           
+        for (int i = 0; i < idPart.length; i++) {
             inserirParticipante(idProj, Integer.parseInt(idPart[i].toString()));
         }
     }
 
     /**
      * Método utilizado na ediçao de projetos
+     *
      * @param idProj
      * @param list
-     * @throws PersistenciaException 
+     * @throws PersistenciaException
      */
     @Override
     public void inserirParticipantes(int idProj, ArrayList<String> list) throws PersistenciaException {
-          for (int i = 0; i < list.size(); i++) {            
-            inserirParticipante(idProj, Integer.parseInt( list.get(i).toString()));
+        for (int i = 0; i < list.size(); i++) {
+            inserirParticipante(idProj, Integer.parseInt(list.get(i).toString()));
         }
     }
-    
-    
+
     private void inserirParticipante(int idProjx, int idParticipante) {
 
         System.out.println(" ID PROJETO: " + idProjx + " | idParticipante: " + idParticipante);
@@ -308,12 +317,12 @@ public class DBProjeto implements ProjetoDAO {
             int retorno = stmt.executeUpdate();
 
             if (retorno == 0) {
-                System.out.println("RETORNO FALSE -> BD: o participante com id:"+idParticipante+" não foi cadastrado no banco de dados");
+                System.out.println("RETORNO FALSE -> BD: o participante com id:" + idParticipante + " não foi cadastrado no banco de dados");
             } else {
                 System.out.println("RETORNO TRUE -> BD: o participante foi cadastrado no banco de dados");
             }
         } catch (SQLException sqle) {
-            throw new PersistenciaException("Não foi possível cadastrar o participante com id:"+idParticipante+" no banco de dados!", sqle);
+            throw new PersistenciaException("Não foi possível cadastrar o participante com id:" + idParticipante + " no banco de dados!", sqle);
         }
     }
 
@@ -388,8 +397,8 @@ public class DBProjeto implements ProjetoDAO {
             }
             return listaRetorno;
         } catch (Exception ex) {
-            System.out.println("ERRO: "+ex.getCause()+" ->message: "+ex.getMessage());
-            throw new PersistenciaException("Não foi possível listar os custos do projeto id: " + idProj, ex );
+            System.out.println("ERRO: " + ex.getCause() + " ->message: " + ex.getMessage());
+            throw new PersistenciaException("Não foi possível listar os custos do projeto id: " + idProj, ex);
         }
 
     }
@@ -494,22 +503,22 @@ public class DBProjeto implements ProjetoDAO {
 
     @Override
     public void atualizaParticipantes(int idProj, ArrayList<String> u) throws PersistenciaException {
-        
+
         System.out.println("&&&&&&&&&&&&&&&&&&& CAIU MÉTODO ATUALIZA PARTICIPANTES");
-        
+
         String query = "DELETE FROM " + PARTICIPANTE + " WHERE id_proj = ?";
-        PreparedStatement stmt;        
-        
-        System.out.println("idProj: "+idProj+" tamanho ArrayList<Usuario>.size(): "+u.size());
+        PreparedStatement stmt;
+
+        System.out.println("idProj: " + idProj + " tamanho ArrayList<Usuario>.size(): " + u.size());
         System.out.println("************* QUERY: " + query);
-        
+
         try {
             stmt = connection.prepareStatement(query);
             stmt.setInt(1, idProj);
             int retorno = stmt.executeUpdate();
-            
+
             inserirParticipantes(idProj, u);
-            
+
             if (retorno == 0) {
                 System.out.println("RETORNO FALSE -> BD: os participantes do projeto NÃO foram removidos");
             } else {
@@ -521,7 +530,5 @@ public class DBProjeto implements ProjetoDAO {
             throw new PersistenciaException("os participantes do projeto foram removidos , ERRO:", sqle);
         }
     }
-
-    
 
 }

@@ -6,6 +6,7 @@ import br.com.model.Aluno;
 import br.com.model.AreaConhecimento;
 import br.com.model.Custo;
 import br.com.model.Permissao;
+import br.com.model.Professor;
 import br.com.model.Projeto;
 import br.com.model.TipoCusto;
 import br.com.model.TipoProjeto;
@@ -83,6 +84,12 @@ public class ProjetoController {
 
         System.out.println("************************* DADOS PROJETO **********************");
 
+        
+        //Professor prof = (Professor) request.getSession().getAttribute("usuario");
+        Professor prof = new Professor();
+        prof.setId(5);
+        p_projeto.setProfessor(prof);
+        
         this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
         this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
 
@@ -279,6 +286,31 @@ public class ProjetoController {
     public ModelAndView projetoListaShow() {
 
         return new ModelAndView("lista_projeto_teste");
-    }    
+    }
+
+    @RequestMapping(value = "/projeto_exibe")
+    public ModelAndView projetoExibe(@RequestParam int id) {
+        System.out.println("************** ID VINDA POR PARAMETRO: " + id);
+
+        this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
+        this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
+
+        Projeto projetoBD = this.repositorioProjeto.obter(id);
+
+        projetoBD.setParticipantesAluno(repositorioProjeto.getParticAlunos(id));
+        projetoBD.setParticipantesProfessor(repositorioProjeto.getParticProfessores(id));
+        projetoBD.setParticipantesExterno(repositorioProjeto.getParticExternos(id));
+
+        ModelAndView mv = new ModelAndView("projeto_exibe");
+
+        mv.addObject("projeto", projetoBD);
+        mv.addObject("area_conhecimento", repositorioProjeto.listarAreas());
+        mv.addObject("custos", repositorioProjeto.getCustos(id));
+        mv.addObject("participantes_aluno", repositorioUsuario.listar("ALUNO"));
+        mv.addObject("participantes_externo", repositorioUsuario.listar("EXTERNO"));
+        mv.addObject("participantes_professor", repositorioUsuario.listar("PROFESSOR"));
+
+        return mv;
+    }
 
 }

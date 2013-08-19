@@ -325,3 +325,120 @@ ol#menurel li a {
 
 /* *************** FIM CADASTRO DE PROJETO *************** */
 
+/* *************** INICIO EXIBE PROJETO *************** */
+#exibe_projeto {
+    display: block;
+    float: left;
+    font-size: 14px;
+    padding: 0px 0px 10px 10px;
+    margin:  10px 0px 10px 10px;
+    width: 780px;
+    background-color: #E4E4E4;
+    border: 1px solid #444444;
+}
+
+#exibe_projeto tr {
+    display: block;
+    float: left;
+    border: 1px solid blue;
+    clear: both;
+    margin-top: 5px;
+    width: 765px;
+}
+
+#exibe_projeto tr .titulo {
+    display: block;
+    float: left;
+    border: 1px dashed red;
+    width: 380px;
+}
+
+#exibe_projeto tr .palavras_chave {
+    display: block;
+    float: left;
+    margin-left: 5px;
+    border: 1px dashed red;
+    width: 370px;
+}
+
+#exibe_projeto tr .resumo {
+    display: block;
+    float: left;
+    border: 1px dashed red;
+    width: 765px;
+}
+
+#exibe_projeto tr .area_conhecimento {
+    display: block;
+    float: left;
+    border: 1px dashed red;
+    width: 370px;
+}
+
+#exibe_projeto tr .tipo_projeto {
+    display: block;
+    float: left;
+    margin-left: 5px;
+    border: 1px dashed red;
+    width: 380px;
+}
+
+#exibe_projeto tr .part_alunos {
+    display: block;
+    float: left;
+    border: 1px dashed red;
+    width: 245px;
+}
+#exibe_projeto tr .part_professores {
+    display: block;
+    float: left;
+    margin-left: 5px;
+    border: 1px dashed red;
+    width: 245px;
+}
+#exibe_projeto tr .part_externo {
+    display: block;
+    float: left;
+    margin-left: 5px;
+    border: 1px dashed red;
+    width: 245px;
+}
+
+#exibe_projeto tr .subtitulo {
+    display: block;
+    float: left;
+    clear: both;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    background: #CCCCCC;
+}
+#exibe_projeto tr .custo_cap_valor {
+    display: block;
+    float: left;
+    border: 1px dashed red;
+    width: 250px;
+}
+#exibe_projeto tr .custo_cap_desc {
+    display: block;
+    float: left;
+    margin-left: 5px;
+    border: 1px dashed red;
+    width: 495px;
+}
+#exibe_projeto tr .custo_cust_valor {
+    display: block;
+    float: left;
+    border: 1px dashed red;
+    width: 250px;
+}
+#exibe_projeto tr .custo_cust_desc {
+    display: block;
+    float: left;
+    margin-left: 5px;
+    border: 1px dashed red;
+    width: 495px;
+}
+
+/* *************** FIM EXIBE PROJETO *************** */
