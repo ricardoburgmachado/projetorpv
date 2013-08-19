@@ -47,7 +47,8 @@ public class DBProjeto implements ProjetoDAO {
     @Override
     public int inserir(Projeto p) throws PersistenciaException {
 
-        String query = "INSERT INTO " + PROJETO + " (titulo, palavras_chave, resumo, sigilo, id_area, tipo_proj) VALUES (?,?,?,?,?,?) ";
+        String query = "INSERT INTO " + PROJETO + " (titulo, palavras_chave, resumo, sigilo, id_area, tipo_proj, status, id_responsavel) "
+                + "VALUES (?,?,?,?,?,?,?,?) ";
 
         PreparedStatement stmt;
 
@@ -59,6 +60,9 @@ public class DBProjeto implements ProjetoDAO {
             stmt.setBoolean(4, p.getSigilo());
             stmt.setInt(5, p.getAreaConhecimento().getId());
             stmt.setString(6, p.getTipoProjeto().toString());
+            stmt.setString(7, "CRIADO");
+            stmt.setInt(8, p.getProfessor().getId());
+
             int retorno = stmt.executeUpdate();
 
             if (retorno == 0) {
@@ -72,7 +76,7 @@ public class DBProjeto implements ProjetoDAO {
             }
 
         } catch (SQLException sqle) {
-
+            System.out.println("********************* ERRO: " + sqle);
             throw new PersistenciaException("Não foi possível inserir o projeto no banco de dados!", sqle);
         }
 
@@ -100,6 +104,7 @@ public class DBProjeto implements ProjetoDAO {
             p.setId(resultSet.getInt("id_proj"));
             p.setTitulo(resultSet.getString("titulo"));
             p.setResumo(resultSet.getString("resumo"));
+            p.setPalavrasChave(resultSet.getString("palavras_chave"));
             p.setAreaConhecimento(getArea(id));
             p.setTipoProjeto(TipoProjeto.fromString(resultSet.getString("tipo_proj")));
             p.setStatus(StatusProjeto.valueOf(resultSet.getString("status")));
@@ -154,7 +159,7 @@ public class DBProjeto implements ProjetoDAO {
 
     @Override
     public void editar(Projeto p) throws PersistenciaException {
-        String query = "UPDATE " + PROJETO + " SET titulo=?, palavras_chave=?, resumo=?, sigilo=?, id_area=?, tipo_proj=? WHERE id_proj = ?";
+        String query = "UPDATE " + PROJETO + " SET titulo=?, palavras_chave=?, resumo=?, sigilo=?, id_area=?, tipo_proj=?, status=?, id_responsavel=? WHERE id_proj = ?";
 
         System.out.println("******************** QUERY -> " + query);
 
@@ -168,7 +173,11 @@ public class DBProjeto implements ProjetoDAO {
             stmt.setBoolean(4, p.getSigilo());
             stmt.setInt(5, p.getAreaConhecimento().getId());
             stmt.setString(6, p.getTipoProjeto().toString());
-            stmt.setInt(7, p.getId());
+            
+            //stmt.setString(7,"CRIADO");
+            //stmt.setString(8, p.getTipoProjeto().toString());
+            
+            stmt.setInt(9, p.getId());
 
             System.out.println("******************** QUERY -> " + query);
             int retorno = stmt.executeUpdate();
@@ -526,6 +535,7 @@ public class DBProjeto implements ProjetoDAO {
             throw new PersistenciaException("os participantes do projeto foram removidos , ERRO:", sqle);
         }
     }
+
 
     /**
      * Lista todos os projetos associados à um responsável (professor).

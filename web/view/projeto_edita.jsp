@@ -15,9 +15,15 @@
 
 
         <!-- inicio multiselect -->
-        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" />
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>        
+       <!--<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" /> -->
+        <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>-->
+        <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>-->        
+
+        <!-- inicio opção de carregamento das bibliotecas acima setadas que são remotas -->
+        <link rel="stylesheet" href="<c:url value="/recursos/js/jquery/jquery-ui.css"/>" />
+        <script type="text/javascript" src="<c:url value="recursos/js/jquery/jquery2.js"/>" ></script>
+        <script type="text/javascript" src="<c:url value="recursos/js/jquery/jquery-ui.min.js"/>" ></script>
+        <!-- fim opção de carregamento das bibliotecas acima setadas que são remotas -->
 
         <script type="text/javascript" src="<c:url value="recursos/js/multiselect/src/jquery.multiselect.js"/>" ></script>
         <script type="text/javascript" src="<c:url value="recursos/js/multiselect/src/jquery.multiselect.filter.js"/>" ></script>
@@ -100,7 +106,7 @@
                         <input type="text" name="titulo" value="${projeto.titulo}" required="required" />       
 
                         <label>Palavras chave:</label>
-                        <textarea name=palavrasChave cols=35 rows=3></textarea>
+                        <textarea name=palavrasChave cols=35 rows=3>${projeto.palavrasChave}</textarea>
 
                         <label>Resumo:</label>
                         <textarea style="height: 85px; width: 500px" name=resumo cols=35 rows=5>${projeto.resumo}</textarea>

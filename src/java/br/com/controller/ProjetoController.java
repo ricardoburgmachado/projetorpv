@@ -1,14 +1,12 @@
 package br.com.controller;
 
-
-import Exceptions.PersistenciaException;
-import br.com.dao.ConnectionFactory;
 import br.com.repositorio.RepositorioProjeto;
 import br.com.repositorio.RepositorioUsuario;
 import br.com.model.Aluno;
 import br.com.model.AreaConhecimento;
 import br.com.model.Custo;
 import br.com.model.Permissao;
+import br.com.model.Professor;
 import br.com.model.Projeto;
 import br.com.model.TipoCusto;
 import br.com.model.TipoProjeto;
@@ -80,26 +78,30 @@ public class ProjetoController {
         String[] capitais_val = request.getParameterValues("capital_val_x");
         String[] capitais_desc = request.getParameterValues("capital_desc_x");
 
-        
-        System.out.println("*********************** CAPITAIS VALOR: "+capitais_val);
-        
-        
+        System.out.println("*********************** CAPITAIS VALOR: " + capitais_val);
+
         String[] participantes_aluno = request.getParameterValues("participantes_aluno");
         String[] participantes_prof = request.getParameterValues("participantes_professor");
         String[] participantes_externo = request.getParameterValues("participantes_externo");
 
         System.out.println("************************* DADOS PROJETO **********************");
 
+        
+        //Professor prof = (Professor) request.getSession().getAttribute("usuario");
+        Professor prof = new Professor();
+        prof.setId(5);
+        p_projeto.setProfessor(prof);
+        
         this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
         this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
 
         int idRetorno = repositorioProjeto.inserir(p_projeto);
 
         if (idRetorno != -1) {
-            if(capitais_val != null && capitais_desc != null){
+            if (capitais_val != null && capitais_desc != null) {
                 p_projeto.setCustos(idRetorno, TipoCusto.CAPITAL, capitais_val, capitais_desc);
             }
-            if(custeios_val != null && custeios_desc != null){
+            if (custeios_val != null && custeios_desc != null) {
                 p_projeto.setCustos(idRetorno, TipoCusto.CUSTEIO, custeios_val, custeios_desc);
             }
             repositorioProjeto.inserirCustos(p_projeto.getCustos());
@@ -113,22 +115,12 @@ public class ProjetoController {
             processarArquivo(idRetorno, arquivo);
         }
 
-        //System.out.println("QUANTIDADE CUSTEIOS: "+p_projeto.getCusteios().size());
-        //for(int i = 0; i < p_projeto.getCusteios().size(); i++){
-        //    System.out.println("CUSTEIO TIPO: "+p_projeto.getCusteios().get(i).getTipoCusto());
-        //    System.out.print("CUSTEIO VALOR: "+p_projeto.getCusteios().get(i).getValor());
-        //    System.out.print("CUSTEIO DESCRICAO: "+p_projeto.getCusteios().get(i).getDescricao());
-        //}
-        //RepositorioProjeto rpProjeto = new PersistenciaFactoryPostgres().createPersistenciaProjeto();
-        //System.out.println("CONEXÃO:    "+rpProjeto);
-        //return new ModelAndView("projeto_adiciona");
-        //RepositorioUsuario reposit = new PersistenciaFactoryPostgres().createPersistenciaUsuario();
-        //RepositorioProjeto repositPro = new PersistenciaFactoryPostgres().createPersistenciaProjeto();
-        ModelAndView mv = new ModelAndView("projeto_adiciona");
+        ModelAndView mv = new ModelAndView("lista_projeto_teste");
         mv.addObject("participantes_aluno", repositorioUsuario.listar("ALUNO"));
         mv.addObject("participantes_externo", repositorioUsuario.listar("EXTERNO"));
         mv.addObject("participantes_professor", repositorioUsuario.listar("PROFESSOR"));
         mv.addObject("area_conhecimento", repositorioProjeto.listarAreas());
+        mv.addObject("mensagem", "Projeto cadastrado com sucesso!");
         mv.addObject("tipo_projeto", TipoProjeto.values());
         return mv;
 
@@ -254,37 +246,34 @@ public class ProjetoController {
         this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
         this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
 
-        
-        
-        
-        if(capitais_val != null && capitais_desc != null){
+        if (capitais_val != null && capitais_desc != null) {
             p_projeto.setCustos(p_projeto.getId(), TipoCusto.CAPITAL, capitais_val, capitais_desc);
         }
-        
-        if(custeios_val != null && custeios_desc != null){
+
+        if (custeios_val != null && custeios_desc != null) {
             p_projeto.setCustos(p_projeto.getId(), TipoCusto.CUSTEIO, custeios_val, custeios_desc);
         }
-            
-        if(participantes_aluno != null){
+
+        if (participantes_aluno != null) {
             p_projeto.setParticipantesString(participantes_aluno);
             //repositorioProjeto.inserirParticipantes(p_projeto.getId(), participantes_aluno);            
         }
-        if(participantes_prof != null){
+        if (participantes_prof != null) {
             p_projeto.setParticipantesString(participantes_prof);
             //repositorioProjeto.inserirParticipantes(p_projeto.getId(), participantes_prof);
-            
+
         }
-        if(participantes_externo != null){
+        if (participantes_externo != null) {
             p_projeto.setParticipantesString(participantes_externo);
             //repositorioProjeto.inserirParticipantes(p_projeto.getId(), participantes_externo);        
         }
-        
-        repositorioProjeto.editar(p_projeto);    
-            
+
+        repositorioProjeto.editar(p_projeto);
+
         if (!arquivo.isEmpty()) {
             processarArquivo(p_projeto.getId(), arquivo);
         }
-        
+
         ModelAndView mv = new ModelAndView("projeto_adiciona");
         mv.addObject("participantes_aluno", repositorioUsuario.listar("ALUNO"));
         mv.addObject("participantes_externo", repositorioUsuario.listar("EXTERNO"));
@@ -306,6 +295,31 @@ public class ProjetoController {
         //}
         ModelAndView mv = new ModelAndView("lista_projeto");
         mv.addObject("projetos", projetos);
+        return mv;
+    }
+
+    @RequestMapping(value = "/projeto_exibe")
+    public ModelAndView projetoExibe(@RequestParam int id) {
+        System.out.println("************** ID VINDA POR PARAMETRO: " + id);
+
+        this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
+        this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
+
+        Projeto projetoBD = this.repositorioProjeto.obter(id);
+
+        projetoBD.setParticipantesAluno(repositorioProjeto.getParticAlunos(id));
+        projetoBD.setParticipantesProfessor(repositorioProjeto.getParticProfessores(id));
+        projetoBD.setParticipantesExterno(repositorioProjeto.getParticExternos(id));
+
+        ModelAndView mv = new ModelAndView("projeto_exibe");
+
+        mv.addObject("projeto", projetoBD);
+        mv.addObject("area_conhecimento", repositorioProjeto.listarAreas());
+        mv.addObject("custos", repositorioProjeto.getCustos(id));
+        mv.addObject("participantes_aluno", repositorioUsuario.listar("ALUNO"));
+        mv.addObject("participantes_externo", repositorioUsuario.listar("EXTERNO"));
+        mv.addObject("participantes_professor", repositorioUsuario.listar("PROFESSOR"));
+
         return mv;
     }
 

@@ -1,8 +1,3 @@
-<%-- 
-    Document   : Login
-    Created on : 08/08/2013, 19:13:43
-    Author     : rafael
---%>
 
 <%@page import="Exceptions.PersistenciaException"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -45,3 +40,19 @@
         </div>
     </body>
 </html>
+=======
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <h1>Hello World!</h1>
+
+        <%
+
+
+
+        %>
+
+
+    </body>
+</html>
+>>>>>>> crud_projeto
