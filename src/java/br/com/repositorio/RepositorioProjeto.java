@@ -182,7 +182,7 @@ public class RepositorioProjeto {
 
         if (verificaVazio(projeto.getResumo())) {
 
-            exception = new DadoInconsistenteException(exception, "Resumo não informado");
+            exception = new DadoInconsistenteException(exception, "Resumo não informado!");
         }
 
         if (verificaNulo(projeto.getAreaConhecimento())) {
