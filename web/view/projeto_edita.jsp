@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="br.com.controller.ProjetoController"%>
 <%@page import="br.com.model.TipoProjeto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -95,7 +96,23 @@
                     <h1>Editar Projeto</h1>                                                                                                  
 
                     <fieldset> 
-
+                        
+                        <% 
+                            
+                            if(request.getAttribute("sucesso") != null){
+                                
+                               out.println("<span class=\"sucesso\">" + request.getAttribute("sucesso") + "</span>");
+                            }else if(request.getAttribute("inconsistencias") != null){
+                                
+                                List<String> inconsistencias = (List<String>) request.getAttribute("inconsistencias");
+                                out.println("<ul>");
+                                for(String inconsistencia: inconsistencias){
+                                    out.println("<li>" + inconsistencia + "</li>");
+                                }
+                                out.println("</ul>");
+                            }
+                            
+                        %>
 
                         <!-- PRESTAR ATENÇÃO AQUI, DEVE SER RECUPERADO O ID DO PROFESSOR QUE ESTARÁ NA SESSÃO -->
                         <input type="hidden" name="id" value=${projeto.id} />       
@@ -242,7 +259,7 @@
                             <span style="clear: both; display: block"></span>
 
                             <input class="enviar_form" type="submit" value="Editar"/>
-                            <button type="reset" class="limpar_form">Limpar</button> 
+                            <a href="submete_homologacao?id=${projeto.id}"><button type="button" class="submeter_form">Submeter</button></a>
 
 
                         </fieldset>

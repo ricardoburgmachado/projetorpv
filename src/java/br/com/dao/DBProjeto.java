@@ -111,6 +111,9 @@ public class DBProjeto implements ProjetoDAO {
             p.setPalavrasChave(resultSet.getString("palavras_chave"));
             p.setSigilo(resultSet.getBoolean("sigilo"));
             p.setArquivo(resultSet.getBoolean("is_arquivo"));
+            Professor professor = new Professor();
+            professor.setId(resultSet.getInt("id_responsavel"));
+            p.setProfessor(professor);
             return p;
 
         } catch (SQLException ex) {

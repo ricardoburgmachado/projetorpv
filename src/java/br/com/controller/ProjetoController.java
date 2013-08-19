@@ -1,32 +1,25 @@
 package br.com.controller;
 
+
+import Exceptions.DadoInconsistenteException;
+import Exceptions.PersistenciaException;
 import br.com.repositorio.RepositorioProjeto;
 import br.com.repositorio.RepositorioUsuario;
-import br.com.model.Aluno;
 import br.com.model.AreaConhecimento;
-import br.com.model.Custo;
-import br.com.model.Permissao;
 import br.com.model.Professor;
 import br.com.model.Projeto;
 import br.com.model.TipoCusto;
 import br.com.model.TipoProjeto;
-import br.com.model.Usuario;
 import br.com.repositorio.RepositorioPostgresFactory;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.ConnectException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,7 +30,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class ProjetoController {
 
     HttpServletRequest request;
-
     @Autowired(required = true)
     RepositorioProjeto repositorioProjeto;
     RepositorioUsuario repositorioUsuario;
@@ -77,6 +69,7 @@ public class ProjetoController {
         String[] custeios_desc = request.getParameterValues("custeio_desc_x");
         String[] capitais_val = request.getParameterValues("capital_val_x");
         String[] capitais_desc = request.getParameterValues("capital_desc_x");
+
 
         System.out.println("*********************** CAPITAIS VALOR: " + capitais_val);
 
@@ -281,7 +274,6 @@ public class ProjetoController {
         mv.addObject("area_conhecimento", repositorioProjeto.listarAreas());
         mv.addObject("tipo_projeto", TipoProjeto.values());
         return mv;
-
     }
 
     @RequestMapping(value = "/projeto_lista_show")
@@ -323,4 +315,79 @@ public class ProjetoController {
         return mv;
     }
 
+    @RequestMapping(value = "/submete_homologacao")
+    public ModelAndView submeteProjeto(@RequestParam int id) {
+
+        List<String> inconsistencias = new LinkedList<>();
+
+        try {
+
+            new RepositorioPostgresFactory().createRepositorioProjeto().submeterHomologacao(id);
+        } catch (DadoInconsistenteException diex) {
+
+            do {
+                
+                inconsistencias.add(diex.getMessage());
+                diex = diex.getException();
+            } while (diex != null);
+        } catch(PersistenciaException pex){
+            
+            inconsistencias.add(pex.getMessage());
+        }
+        
+        ModelAndView mv = this.projetoEditaShow(id);
+        if(inconsistencias.isEmpty()){
+            
+            mv.addObject("sucesso", "Projeto submetido com sucesso!");
+        }else{
+            
+            mv.addObject("inconsistencias", inconsistencias);
+        }
+        
+        return mv;
+    }
+
+    private Projeto criaProjeto(HttpServletRequest request) {
+
+        Projeto projeto = new Projeto();
+
+        projeto.setId(Integer.parseInt(request.getParameter("id")));
+        projeto.setTitulo(request.getParameter("titulo"));
+        projeto.setResumo(request.getParameter("resumo"));
+        projeto.setPalavrasChave(request.getParameter("palavrasChave"));
+        projeto.setTipoProjeto(TipoProjeto.fromString("tipoProjeto"));
+        projeto.setAreaConhecimento(new AreaConhecimento(Integer.valueOf(request.getParameter("areaConhecimento_x")), null));
+        projeto.setProfessor((Professor) request.getSession().getAttribute("usuario"));
+        projeto.setSigilo(Boolean.valueOf(request.getParameter("sigilo")));
+
+        atribuiParticipantes(projeto, request.getParameterValues("participantes_aluno"));
+        atribuiParticipantes(projeto, request.getParameterValues("participantes_professor"));
+        atribuiParticipantes(projeto, request.getParameterValues("participantes_externo"));
+
+        atribuiCustos(projeto, TipoCusto.CUSTEIO, request.getParameterValues("custeio_desc_x"), request.getParameterValues("custeio_val_x"));
+        atribuiCustos(projeto, TipoCusto.CUSTEIO, request.getParameterValues("capital_desc_x"), request.getParameterValues("capital_val_x"));
+
+        return projeto;
+    }
+
+    private void atribuiCustos(Projeto projeto, TipoCusto tipoCusto, String[] descricoes, String[] valores) {
+
+        if (!verificaNulo(projeto) && !verificaNulo(tipoCusto) && !verificaNulo(descricoes) && !verificaNulo(valores)) {
+
+            projeto.setCustos(projeto.getId(), tipoCusto, valores, descricoes);
+        }
+    }
+
+    private void atribuiParticipantes(Projeto projeto, String[] participantes) {
+
+        if (!verificaNulo(projeto) && !verificaNulo(participantes)) {
+
+            projeto.setParticipantesString(participantes);
+        }
+    }
+
+    private boolean verificaNulo(Object obj) {
+
+        return obj == null;
+    }
 }

@@ -288,7 +288,7 @@ ol#menurel li a {
 }
 
 
-#conteudo_interno #form_addprojeto .limpar_form {
+#conteudo_interno #form_addprojeto .submeter_form {
     display:block;
     float:left;
     width:105px;
@@ -302,7 +302,7 @@ ol#menurel li a {
     cursor:pointer;
     border:none;
 }
-#conteudo_interno #form_addprojeto .limpar_form:hover {
+#conteudo_interno #form_addprojeto .submeter_form:hover {
     color: #303030;
     background: white;
     border: 1px solid #303030;
