@@ -63,7 +63,7 @@ CREATE TABLE public.projeto (
                 sigilo BOOLEAN DEFAULT false NOT NULL,
                 id_area INTEGER NOT NULL,
                 tipo_proj VARCHAR(50),
-                status VARCHAR(40) NOT NULL,
+                status VARCHAR(20) NOT NULL,
                 is_arquivo BOOLEAN DEFAULT false NOT NULL,
                 id_responsavel INTEGER NOT NULL,
                 CONSTRAINT id_pk PRIMARY KEY (id_proj)
@@ -131,8 +131,8 @@ NOT DEFERRABLE;
 ALTER TABLE public.participante ADD CONSTRAINT usuario_participante_fk
 FOREIGN KEY (id_usuario)
 REFERENCES public.usuario (id_usuario)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
+ON DELETE CASCADE
+ON UPDATE CASCADE
 NOT DEFERRABLE;
 
 ALTER TABLE public.usuario_papel ADD CONSTRAINT usuario_usuario_papel_fk
@@ -152,13 +152,13 @@ NOT DEFERRABLE;
 ALTER TABLE public.participante ADD CONSTRAINT projeto_participante_fk
 FOREIGN KEY (id_proj)
 REFERENCES public.projeto (id_proj)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
+ON DELETE CASCADE
+ON UPDATE CASCADE
 NOT DEFERRABLE;
 
 ALTER TABLE public.Custo ADD CONSTRAINT projeto_custo_fk
 FOREIGN KEY (id_proj)
 REFERENCES public.projeto (id_proj)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
+ON DELETE CASCADE
+ON UPDATE CASCADE
 NOT DEFERRABLE;
