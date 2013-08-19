@@ -5,8 +5,8 @@
  */
 package br.com.repositorio;
 
+import Exceptions.DadoInconsistenteException;
 import Exceptions.PersistenciaException;
-import br.com.dao.ProjetoDAO;
 import br.com.dao.ProjetoDAO;
 import br.com.model.Aluno;
 import br.com.model.AreaConhecimento;
@@ -14,8 +14,9 @@ import br.com.model.Custo;
 import br.com.model.Externo;
 import br.com.model.Professor;
 import br.com.model.Projeto;
-import br.com.model.Usuario;
+import br.com.model.StatusProjeto;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -25,9 +26,9 @@ public class RepositorioProjeto {
 
     private ProjetoDAO projDAO;
 
-    
-    public RepositorioProjeto() {}
-    
+    public RepositorioProjeto() {
+    }
+
     /**
      * Construtor
      *
@@ -78,22 +79,22 @@ public class RepositorioProjeto {
         return projDAO.obter(p);
     }
 
-    public ArrayList<Aluno> getParticAlunos(int id){
+    public ArrayList<Aluno> getParticAlunos(int id) {
         return projDAO.getParticAlunos(id);
     }
 
-    public ArrayList<Professor> getParticProfessores(int id){
+    public ArrayList<Professor> getParticProfessores(int id) {
         return projDAO.getParticProfessores(id);
     }
 
     public ArrayList<Externo> getParticExternos(int id) {
         return projDAO.getParticExternos(id);
     }
-    
-    public ArrayList<Custo> getCustos(int idProj){
+
+    public ArrayList<Custo> getCustos(int idProj) {
         return projDAO.getCustos(idProj);
     }
-    
+
     public void insereArquivo(int idProj) {
         projDAO.insereArquivo(idProj);
     }
@@ -102,10 +103,121 @@ public class RepositorioProjeto {
         projDAO.removeArquivo(idProj);
     }
 
-    public void editar(Projeto p){
+    public void editar(Projeto p) {
         projDAO.editar(p);
-        projDAO.atualizaCustos(p.getId(), p.getCustos());     
+        projDAO.atualizaCustos(p.getId(), p.getCustos());
         projDAO.atualizaParticipantes(p.getId(), p.getParticipantesString());
     }
-      
+
+    public List<Projeto> listarProjetos(int idResponsavel) {
+
+        List<Projeto> projetos = this.projDAO.listarProjetos(idResponsavel);
+
+        for (Projeto proj : projetos) {
+
+            this.projDAO.carregaCustos(proj);
+            this.projDAO.carregaParticipantes(proj);
+        }
+
+        return projetos;
+    }
+
+    public void submeterHomologacao(Projeto projeto) throws PersistenciaException, DadoInconsistenteException {
+
+        DadoInconsistenteException exception = null;
+
+        try {
+
+            verificaCamposNaoInformados(projeto);
+        } catch (DadoInconsistenteException diex) {
+
+            exception = diex;
+        }
+
+        try {
+            
+            verificaStatusParaSubmissaoHomologacao(projeto.getStatus());
+        }catch(DadoInconsistenteException diex){
+            
+            exception = new DadoInconsistenteException(exception, "");
+        }
+        
+        if(exception != null){
+            
+            throw exception;
+        }else{
+            
+            projeto.setStatus(StatusProjeto.SUBMETIDO_HOMOLOGACAO);
+            this.projDAO.atualizaStatus(projeto);
+        }
+    }
+
+    private void verificaStatusParaSubmissaoHomologacao(StatusProjeto status) throws DadoInconsistenteException {
+
+        if (status == null || status != StatusProjeto.CRIADO) {
+
+            throw new DadoInconsistenteException("O status do projeto deve ser CRIADO!");
+        }
+    }
+
+    private void verificaCamposNaoInformados(Projeto projeto) throws DadoInconsistenteException {
+
+        DadoInconsistenteException exception = null;
+        final String VAZIO = "";
+
+        if (projeto == null || obter(projeto.getId()) == null) {
+
+            throw new DadoInconsistenteException("Projeto Inválido!");
+        }
+
+        if (verificaVazio(projeto.getTitulo())) {
+
+            exception = new DadoInconsistenteException(exception, "Título não informado!");
+        }
+
+        if (verificaVazio(projeto.getPalavrasChave())) {
+
+            exception = new DadoInconsistenteException(exception, "Palavras-chave não informadas!");
+        }
+
+        if (verificaVazio(projeto.getResumo())) {
+
+            exception = new DadoInconsistenteException(exception, "Resumo não informado");
+        }
+
+        if (verificaNulo(projeto.getAreaConhecimento())) {
+
+            exception = new DadoInconsistenteException(exception, "Área de conhecimento não informada!");
+        }
+
+        if (verificaNulo(projeto.getTipoProjeto())) {
+
+            exception = new DadoInconsistenteException(exception, "Tipo do projeto não informado!");
+        }
+
+        if (verificaNulo(projeto.getStatus())) {
+
+            exception = new DadoInconsistenteException(exception, "Status do projeto é nulo!");
+        }
+        
+        if(verificaNulo(projeto.getProfessor())){
+            
+            exception = new DadoInconsistenteException(exception, "Deve haver professor associado ao projeto!");
+        }
+
+        if (exception != null) {
+
+            throw exception;
+        }
+    }
+
+    private boolean verificaVazio(String campo) {
+
+        return verificaNulo(campo) || campo.equals("");
+    }
+
+    private boolean verificaNulo(Object obj) {
+
+        return obj == null;
+    }
 }

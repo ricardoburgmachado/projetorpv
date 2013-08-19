@@ -110,5 +110,12 @@ public class Custo {
     public void setIdProjeto(int idProjeto) {
         this.idProjeto = idProjeto;
     }
+
+    @Override
+    public String toString() {
+        return "Custo{" + "id=" + id + ", idProjeto=" + idProjeto + ", tipoCusto=" + tipoCusto + ", descricao=" + descricao + ", valor=" + valor + '}';
+    }
+    
+    
     
 }

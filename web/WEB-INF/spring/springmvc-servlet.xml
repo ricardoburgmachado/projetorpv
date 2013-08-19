@@ -17,13 +17,6 @@
                    location="/arquivos/"
                    cache-period="5"/>
     
-
-    <!--
-    <mvc:interceptors>
-        <bean class="br.com.filtro.FiltroControleAcesso"/>
-    </mvc:interceptors>
-    -->
-        
     <mvc:annotation-driven />
     <context:annotation-config />
     
@@ -36,6 +29,8 @@
     <context:component-scan
         base-package="br.com.model"/>
     
+    <context:component-scan
+        base-package="br.com.repositorio"/>
     
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver" >

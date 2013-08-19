@@ -3,7 +3,8 @@ package br.com.model;
 public enum Permissao {
 
     //ADMIN, COMUM, BASICO;
-    x, y, CRUD_PROJETO;;
+    x, y, CRUD_PROJETO, ACESSO;
+    
     public static Permissao fromString(String text) {
         if (text != null) {
             for (Permissao c : Permissao.values()) {

@@ -15,9 +15,11 @@ import br.com.repositorio.RepositorioPostgresFactory;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -285,8 +287,17 @@ public class ProjetoController {
     @RequestMapping(value = "/projeto_lista_show")
     public ModelAndView projetoListaShow() {
 
-        return new ModelAndView("lista_projeto_teste");
+        RepositorioProjeto rp = new RepositorioPostgresFactory().createRepositorioProjeto();
+        //try{
+        List projetos =  rp.listarProjetos(5);
+        //}catch(PersistenciaException e){
+        //    System.err.println("********** ERRO: "+e.getException());
+        //}
+        ModelAndView mv = new ModelAndView("lista_projeto");
+        mv.addObject("projetos", projetos);
+        return mv;
     }
+
 
     @RequestMapping(value = "/projeto_exibe")
     public ModelAndView projetoExibe(@RequestParam int id) {

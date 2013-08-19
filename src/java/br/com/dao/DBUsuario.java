@@ -5,14 +5,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import Exceptions.PersistenciaException;
 import br.com.model.Aluno;
-
 import br.com.model.Campus;
-import br.com.model.Coordenador;
-
 import br.com.model.Externo;
-
 import br.com.model.Permissao;
-import br.com.model.ProReitor;
 import br.com.model.Professor;
 import br.com.model.Usuario;
 import java.sql.Connection;
@@ -102,7 +97,7 @@ public class DBUsuario implements UsuarioDAO {
 
         try {
 
-            stmt = con.prepareStatement("select login, senha, nome, campus, papel.descricao as papel, permissao.descricao as permissao from usuario inner join usuario_papel using (login) inner join papel using(id_papel) inner join papel_permissao using (id_papel) inner join permissao using(id_perm) where login=? and senha=?");
+            stmt = con.prepareStatement("select id_usuario, login, senha, nome, campus, papel.descricao as papel, permissao.descricao as permissao from usuario inner join usuario_papel using (id_usuario) inner join papel using(id_papel) inner join papel_permissao using (id_papel) inner join permissao using(id_perm) where login=? and senha=?");
             stmt.setString(1, login);
             stmt.setString(2, senha);
         } catch (SQLException sqle) {
@@ -120,7 +115,7 @@ public class DBUsuario implements UsuarioDAO {
         }finally{
             
             try {
-                connection.close();
+                con.close();
             } catch (SQLException sqle) {
                 
                 throw new PersistenciaException("Erro ao fechar conexão com o banco de dados", sqle);
@@ -131,17 +126,20 @@ public class DBUsuario implements UsuarioDAO {
     private Usuario createUsuario(ResultSet result) throws PersistenciaException {
 
         try {
+            if (!result.next()) {
 
-            result.next();
-        } catch (SQLException sqle) {
-
-            throw new PersistenciaException("Login e senha não conferem", sqle);
+                throw new PersistenciaException("Login e senha não conferem!");
+            }
+        } catch (SQLException ex) {
+            
+            throw new PersistenciaException("Erro ao acessar o resultado da consulta", ex);
         }
 
         try {
 
             String papelUsuario = result.getString("papel");
-            Usuario user = instanceUsuario(papelUsuario);
+            Usuario user = Usuario.instantiateUsuario(papelUsuario);
+            user.setId(result.getInt("id_usuario"));
             user.setLogin(result.getString("login"));
             user.setNome(result.getString("nome"));
             user.setSenha(result.getString("senha"));
@@ -156,23 +154,13 @@ public class DBUsuario implements UsuarioDAO {
         } catch (SQLException sqle) {
 
             throw new PersistenciaException("Não foi possível atribuir as propriedades ao usuário", sqle);
+        } finally {
+
+            try {
+                result.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DBUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-    }
-
-    private Usuario instanceUsuario(String papel) {
-
-        papel = papel.toLowerCase();
-
-        if (papel.equals("aluno")) {
-            return new Aluno("", Campus.ALEGRETE);
-        } else if (papel.equals("coordenador")) {
-            return new Coordenador("", Campus.ALEGRETE);
-        } else if (papel.equals("proreitor")) {
-            return new ProReitor("", Campus.ALEGRETE);
-        } else if (papel.equals("professor")) {
-            return new Professor("", Campus.ALEGRETE);
-        }
-
-        return null;
     }
 }

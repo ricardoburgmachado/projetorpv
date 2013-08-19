@@ -1,5 +1,6 @@
 package br.com.model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,6 +18,9 @@ public abstract class Usuario {
     private List<Permissao> permissoes;
 
     public Usuario() {
+        
+        this.permissoes = new ArrayList<>();
+
     }
 
     public Usuario(String login, String senha, String nome, Campus campus, List<Permissao> permissoes) {
@@ -47,9 +51,6 @@ public abstract class Usuario {
         return this.id;
     }
 
-    /**
-     * @return the login
-     */
     public String getLogin() {
         return login;
     }
@@ -103,5 +104,22 @@ public abstract class Usuario {
     @Override
     public String toString() {
         return "Usuario{" + "login=" + login + ", senha=" + senha + ", nome=" + nome + ", campus=" + campus + ", permissoes=" + permissoes + '}';
+    }
+    
+    public static Usuario instantiateUsuario(String papel){
+        
+        papel = papel.toLowerCase();
+        
+        switch(papel){
+            
+            case "aluno": return new Aluno();
+            case "coordenador": return new Coordenador();
+            case "pro_reitor": return new ProReitor();
+            case "proreitor": return new ProReitor();
+            case "professor": return new Professor();
+            case "externo": return new Externo();
+        }
+
+        return null;
     }
 }
