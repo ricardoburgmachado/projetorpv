@@ -88,12 +88,12 @@ INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(5, 3);
 /***************************** FIM cadastro usuario papel **********************/
 
 /***************************** INICIO cadastro projeto **********************/
-insert into projeto (id_proj, titulo, palavras_chave, resumo, sigilo, id_area, tipo_proj, status, is_arquivo, id_responsavel) 
-values (1, 'Analisador Morfossintático', 'tagger, palavras, viterbi', 'Desenvolver um analidor morfossintático', true, 1, 'PESQUISA', 'CRIADO', false, 5);
-insert into projeto (id_proj, titulo, palavras_chave, resumo, sigilo, id_area, tipo_proj, status, is_arquivo, id_responsavel) 
-values (2, 'Novo Analisador Morfossintático para o idioma português', 'tagger, palavras, viterbi', 'Desenvolver um analidor morfossintático', true, 1, 'PESQUISA', 'CRIADO', false, 5);
-insert into projeto (id_proj, titulo, palavras_chave, resumo, sigilo, id_area, tipo_proj, status, is_arquivo, id_responsavel) 
-values (3, 'Análise de Solos para Construção Civíl', 'solos, mapas', 'Desenvolvimento de um sistema que registre a análise de solos', false, 3, 'EXTENSAO', 'CRIADO', false, 4);
+insert into projeto (titulo, palavras_chave, resumo, sigilo, id_area, tipo_proj, status, is_arquivo, id_responsavel) 
+values ('Analisador Morfossintático', 'tagger, palavras, viterbi', 'Desenvolver um analidor morfossintático', true, 1, 'PESQUISA', 'CRIADO', false, 5);
+insert into projeto (titulo, palavras_chave, resumo, sigilo, id_area, tipo_proj, status, is_arquivo, id_responsavel) 
+values ('Novo Analisador Morfossintático para o idioma português', 'tagger, palavras, viterbi', 'Desenvolver um analidor morfossintático', true, 1, 'PESQUISA', 'CRIADO', false, 5);
+insert into projeto (titulo, palavras_chave, resumo, sigilo, id_area, tipo_proj, status, is_arquivo, id_responsavel) 
+values ('Análise de Solos para Construção Civíl', 'solos, mapas', 'Desenvolvimento de um sistema que registre a análise de solos', false, 3, 'EXTENSAO', 'CRIADO', false, 4);
 /***************************** FIM cadastro projeto **********************/
 
 /***** INICIO cadastro participantes ******/
