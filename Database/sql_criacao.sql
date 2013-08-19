@@ -1,4 +1,3 @@
-
 CREATE SEQUENCE public.papel_id_papel_seq;
 
 CREATE TABLE public.papel (
@@ -61,7 +60,7 @@ CREATE TABLE public.projeto (
                 status VARCHAR(20) NOT NULL,
                 is_arquivo BOOLEAN DEFAULT false NOT NULL,
                 id_responsavel INTEGER NOT NULL,
-                CONSTRAINT id_pk PRIMARY KEY (id_proj)
+                PRIMARY KEY (id_proj)
 );
 
 
