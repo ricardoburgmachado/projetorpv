@@ -25,9 +25,9 @@ public interface ProjetoDAO {
      public Projeto obter(Projeto p) throws PersistenciaException;
      public Projeto obter(int id) throws PersistenciaException;
      public void editar(Projeto p) throws PersistenciaException;
-     public void excluir(Projeto p) throws PersistenciaException;  
+     public void excluir(Projeto p) throws PersistenciaException; 
+     public void excluir(int idProj) throws PersistenciaException; 
      public ArrayList<AreaConhecimento> listarAreas() throws PersistenciaException;  
-     //public ArrayList<TipoProjeto> listarTiposProjeto() throws PersistenciaException;  
      
      public ArrayList<Aluno> getParticAlunos(int id) throws PersistenciaException;
      public ArrayList<Professor> getParticProfessores(int id) throws PersistenciaException;
@@ -58,5 +58,7 @@ public interface ProjetoDAO {
      public void carregaCustos(Projeto projeto) throws PersistenciaException;
      
      public void atualizaStatus(Projeto projeto) throws PersistenciaException;
+     
+     public String consultaStatus(int idProj) throws PersistenciaException;
      
 }

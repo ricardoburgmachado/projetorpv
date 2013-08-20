@@ -4,6 +4,7 @@ public enum Permissao {
 
     //ADMIN, COMUM, BASICO;
     x, y, CRUD_PROJETO, ACESSO;
+    
     public static Permissao fromString(String text) {
         if (text != null) {
             for (Permissao c : Permissao.values()) {

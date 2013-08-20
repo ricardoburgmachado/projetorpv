@@ -1,8 +1,3 @@
-<%-- 
-    Document   : Login
-    Created on : 08/08/2013, 19:13:43
-    Author     : rafael
---%>
 
 <%@page import="Exceptions.PersistenciaException"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -45,3 +40,4 @@
         </div>
     </body>
 </html>
+

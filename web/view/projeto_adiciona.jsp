@@ -9,14 +9,19 @@
     <head>
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <link rel="stylesheet" href="<c:url value="/recursos/css/style.css"/>" />
 
 
         <!-- inicio multiselect -->
-        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" />
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>        
+        <!--<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" /> -->
+        <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>-->
+        <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>-->        
+
+        <!-- inicio opção de carregamento das bibliotecas acima setadas que são remotas -->
+        <link rel="stylesheet" href="<c:url value="/recursos/js/jquery/jquery-ui.css"/>" />
+        <script type="text/javascript" src="<c:url value="recursos/js/jquery/jquery2.js"/>" ></script>
+        <script type="text/javascript" src="<c:url value="recursos/js/jquery/jquery-ui.min.js"/>" ></script>
+        <!-- fim opção de carregamento das bibliotecas acima setadas que são remotas -->
 
         <script type="text/javascript" src="<c:url value="recursos/js/multiselect/src/jquery.multiselect.js"/>" ></script>
         <script type="text/javascript" src="<c:url value="recursos/js/multiselect/src/jquery.multiselect.filter.js"/>" ></script>
@@ -73,6 +78,13 @@
         </script>
         <!-- FIM JQUERY MONEY -->
 
+        <!-- INICIO JQUERY TOAST MESSAGE-->
+        <script type="text/javascript" src="<c:url value="recursos/js/jqueryToastMessage/jquery.toastmessage-min.js"/>" ></script>
+        <script type="text/javascript" src="<c:url value="recursos/js/jqueryToastMessage/funcoes.js"/>" ></script> 
+        <link rel="stylesheet" href="<c:url value="recursos/js/jqueryToastMessage/css/jquery.toastmessage-min.css"/>" />        
+        <!-- FIM JQUERY TOAST MESSAGE-->
+
+
 
         <script type="text/javascript" src="<c:url value="recursos/js/funcoes.js"/>" ></script>
 
@@ -83,7 +95,15 @@
 
         <title>JSP Page</title>
     </head>
-    <body>
+   
+     <c:choose>
+         <c:when test="${not empty mensagem}">
+                <body onload="javascript:showErrorToast('${mensagem}');">
+            </c:when>
+            <c:otherwise>
+                <body>
+            </c:otherwise>
+     </c:choose> 
 
         <div id="topo">
             <div id="logo_brasil"></div> 
@@ -99,135 +119,134 @@
 
             <div id="conteudo_interno">
 
+                
+                        <form:form action="projeto_adiciona" modelAttribute="projeto" id="form_addprojeto" enctype="multipart/form-data">
+                            <h1>Adicionar Projeto</h1>                                                                                                  
 
-                <form:form action="projeto_adiciona" modelAttribute="projeto" id="form_addprojeto" enctype="multipart/form-data">
-                    <h1>Adicionar Projeto</h1>                                                                                                  
+                            <fieldset> 
 
-                    <fieldset> 
-
-
-                        <!-- PRESTAR ATENÇÃO AQUI, DEVE SER RECUPERADO O ID DO PROFESSOR QUE ESTARÁ NA SESSÃO -->
-                        <input type="hidden" name="id" value=1 />       
-
-
-                        <label>Título:</label>
-                        <span class="obrigatorio">*Campo obrigatório</span>
-                        <input type="text" name="titulo" required="required" />       
-
-                        <label>Palavras chave:</label>
-                        <textarea name=palavrasChave cols=35 rows=3></textarea>
-
-                        <label>Resumo:</label>
-                        <textarea style="height: 85px; width: 500px" name=resumo cols=35 rows=5></textarea>
+                                <!-- PRESTAR ATENÇÃO AQUI, DEVE SER RECUPERADO O ID DO PROFESSOR QUE ESTARÁ NA SESSÃO -->
+                                <input type="hidden" name="id" value=1 />       
 
 
+                                <label>Título:</label>
+                                <!--<span class="obrigatorio">*</span>-->
+                                <input type="text" name="titulo" />       
 
-                        <span style="clear: both; display: block;"></span>
+                                <label>Palavras chave:</label>
+                                <textarea name=palavrasChave cols=35 rows=3></textarea>
 
-                        <span class="bloco">
-                            <label for="nome">Área de conhecimento:</label><br/><br/>                             
-                            <select id="area_conhecimento" name="areaConhecimento_x">
-                                <c:forEach items="${area_conhecimento}" var="area">                               
-                                    <option value=${area.id}>${area.area}</option>
-                                </c:forEach>
-                            </select>
-                        </span>
-
-                        <span class="bloco">
-                            <label  for="nome">Tipo projeto:</label><br/><br/> 
-                            <select id="tipo_projeto" name="tipoProjeto">
-                                <option value="<%=TipoProjeto.PESQUISA%>">Pesquisa</option>
-                                <option value="<%=TipoProjeto.ENSINO%>">Ensino</option>
-                                <option value="<%=TipoProjeto.EXTENSAO%>">Extensão</option>                                
-                            </select>
-                        </span>
+                                <label>Resumo:</label>
+                                <textarea style="height: 85px; width: 500px" name=resumo cols=35 rows=5></textarea>
 
 
 
+                                <span style="clear: both; display: block;"></span>
 
-                        <span style="clear: both; display: block"></span>
+                                <span class="bloco">
+                                    <label for="nome">Área de conhecimento:</label><br/><br/>                             
+                                    <select id="area_conhecimento" name="areaConhecimento_x">
+                                        <option selected="selected" value="">Selecione</option>
+                                        <c:forEach items="${area_conhecimento}" var="area">                               
+                                            <option value=${area.id}>${area.area}</option>
+                                        </c:forEach>
+                                    </select>
+                                </span>
 
-                        <span class="bloco">
-                            <label>Participantes (alunos):</label><br/><br/>                           
-                            <select id="partipantes_aluno" name="participantes_aluno" multiple="multiple">
-                                <c:forEach items="${participantes_aluno}" var="aluno">                               
-                                    <option value=${aluno.id}>${aluno.nome}</option>
-                                </c:forEach>
-                            </select>
-                        </span>
-
-                        <span class="bloco">
-                            <label for="nome">Participantes (professores):</label><br/><br/>                                                 
-                            <select id="partipantes_professor" name="participantes_professor" multiple="multiple">
-                                <c:forEach items="${participantes_professor}" var="professor">                               
-                                    <option value=${professor.id}>${professor.nome}</option>
-                                </c:forEach>
-                            </select>
-                        </span>
-
-                        <span class="bloco">
-                            <label for="nome">Participantes (Externos):</label><br/><br/>                      
-                            <select id="partipantes_externo" name="participantes_externo" multiple="multiple">
-                                <c:forEach items="${participantes_externo}" var="externo">                               
-                                    <option value=${externo.id}>${externo.nome}</option>
-                                </c:forEach>
-                            </select>
-                        </span>
-
-                        <span class="bloco">
-                            <label for="nome">Anexo (arquivo .PDF):</label>
-                            <input style="font-size: 12px; font-weight: normal; border: none; cursor: pointer" type="file" name="arquivo_xx"/> 
-                        </span>
-
-
-                        <span style="clear: both; display: block;"></span>
-
-
-
-                        <span class="bloco">
-                            <label for="capitais">Custo (capital):</label>                            
-                            <div id="campo_novo_capital"></div>
-                            <a href="javascript:;" onclick="javascript:AddCapital()" style="display: block; clear: both; text-decoration: none; color: black" href="#" class="adicionarCapital">Adicionar Capital</a>
-                        </span>
-
-
-                        <span class="bloco">
-                            <label for="capitais">Custo (custeio):</label>                            
-                            <div id="campo_novo_custeio"></div>
-                            <a href="javascript:;" onclick="javascript:AddCusteio()" style="display: block; clear: both; text-decoration: none; color: black" href="#" class="adicionarCapital">Adicionar Custeio</a>
-                        </span>
+                                <span class="bloco">
+                                    <label  for="nome">Tipo projeto:</label><br/><br/>                             
+                                    <select id="tipo_projeto" name="tipoProjeto">
+                                        <option selected="selected" value="">Selecione</option>
+                                        <option value="<%=TipoProjeto.PESQUISA%>">Pesquisa</option>
+                                        <option value="<%=TipoProjeto.ENSINO%>">Ensino</option>
+                                        <option value="<%=TipoProjeto.EXTENSAO%>">Extensão</option>                                
+                                    </select>
+                                </span>
 
 
 
 
+                                <span style="clear: both; display: block"></span>
+
+                                <span class="bloco">
+                                    <label>Participantes (alunos):</label><br/><br/>                           
+                                    <select id="partipantes_aluno" name="participantes_aluno" multiple="multiple">
+                                        <c:forEach items="${participantes_aluno}" var="aluno">                               
+                                            <option value=${aluno.id}>${aluno.nome}</option>
+                                        </c:forEach>
+                                    </select>
+                                </span>
+
+                                <span class="bloco">
+                                    <label for="nome">Participantes (professores):</label><br/><br/>                                                 
+                                    <select id="partipantes_professor" name="participantes_professor" multiple="multiple">
+                                        <c:forEach items="${participantes_professor}" var="professor">                               
+                                            <option value=${professor.id}>${professor.nome}</option>
+                                        </c:forEach>
+                                    </select>
+                                </span>
+
+                                <span class="bloco">
+                                    <label for="nome">Participantes (Externos):</label><br/><br/>                      
+                                    <select id="partipantes_externo" name="participantes_externo" multiple="multiple">
+                                        <c:forEach items="${participantes_externo}" var="externo">                               
+                                            <option value=${externo.id}>${externo.nome}</option>
+                                        </c:forEach>
+                                    </select>
+                                </span>
+
+                                <span class="bloco">
+                                    <label for="nome">Anexo (arquivo .PDF):</label>
+                                    <input style="font-size: 12px; font-weight: normal; border: none; cursor: pointer" type="file" name="arquivo_xx"/> 
+                                </span>
 
 
-                        <span style="clear: both; display: block; "></span>
+                                <span style="clear: both; display: block;"></span>
 
 
-                        <label for="nome">Quero que este projeto permaneça em sigilo:</label>
-                        <input style=" margin-top: 10px; height: 10px; width: 20px; cursor: pointer" type="radio" name="sigilo" value="true"><span style="display: block; float: left; margin-top: 10px; ">Sim</span>
-                        <input style=" margin-top: 10px; margin-left: 25px; clear: none; height: 10px; width: 20px; cursor: pointer" type="radio" name="sigilo" value="false" checked="checked"><span style="display: block; float: left; margin-top: 10px; ">Não</span>
+                                <span class="bloco">
+                                    <label for="capitais">Custo (capital):</label>                            
+                                    <div id="campo_novo_capital"></div>
+                                    <a href="javascript:;" onclick="javascript:AddCapital()" style="display: block; clear: both; text-decoration: none; color: black" href="#" class="adicionarCapital">Adicionar Capital</a>
+                                </span>
 
 
-                        <span style="clear: both; display: block"></span>
+                                <span class="bloco">
+                                    <label for="capitais">Custo (custeio):</label>                            
+                                    <div id="campo_novo_custeio"></div>
+                                    <a href="javascript:;" onclick="javascript:AddCusteio()" style="display: block; clear: both; text-decoration: none; color: black" href="#" class="adicionarCapital">Adicionar Custeio</a>
+                                </span>
 
-                        <input class="enviar_form" type="submit" value="Adicionar"/>
-                        <button type="reset" class="limpar_form">Limpar</button> 
+                                <span style="clear: both; display: block; "></span>
+
+                                <label for="nome">Quero que este projeto permaneça em sigilo:</label>
+                                <input style=" margin-top: 10px; height: 10px; width: 20px; cursor: pointer" type="radio" name="sigilo" value="true"><span style="display: block; float: left; margin-top: 10px; ">Sim</span>
+                                <input style=" margin-top: 10px; margin-left: 25px; clear: none; height: 10px; width: 20px; cursor: pointer" type="radio" name="sigilo" value="false" checked="checked"><span style="display: block; float: left; margin-top: 10px; ">Não</span>
 
 
-                    </fieldset>
-                </form:form>    
+                                <span style="clear: both; display: block"></span>
+
+                                <input class="enviar_form" type="submit" value="Adicionar"/>
 
 
 
+                            </fieldset>
+                        </form:form>    
 
-            </div>
+                        <!--
+                        <p>
+                            <a href="javascript:showSuccessToast();">notsticky</a>|
+                            <a href="javascript:showStickySuccessToast();">sticky</a>
+                        </p>
+                        -->
 
-        </div>
 
-        <div id="rodape"></div>
+                        </div>
 
-    </body>
-</html>
+                        </div>
+
+                        <div id="rodape"></div>
+
+                        </body>
+                        </html>
 

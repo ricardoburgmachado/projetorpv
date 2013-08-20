@@ -20,6 +20,7 @@ public abstract class Usuario {
     public Usuario() {
         
         this.permissoes = new ArrayList<>();
+
     }
 
     public Usuario(String login, String senha, String nome, Campus campus, List<Permissao> permissoes) {

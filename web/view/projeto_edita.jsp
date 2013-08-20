@@ -16,9 +16,15 @@
 
 
         <!-- inicio multiselect -->
-        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" />
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>        
+       <!--<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" /> -->
+        <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>-->
+        <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>-->        
+
+        <!-- inicio opção de carregamento das bibliotecas acima setadas que são remotas -->
+        <link rel="stylesheet" href="<c:url value="/recursos/js/jquery/jquery-ui.css"/>" />
+        <script type="text/javascript" src="<c:url value="recursos/js/jquery/jquery2.js"/>" ></script>
+        <script type="text/javascript" src="<c:url value="recursos/js/jquery/jquery-ui.min.js"/>" ></script>
+        <!-- fim opção de carregamento das bibliotecas acima setadas que são remotas -->
 
         <script type="text/javascript" src="<c:url value="recursos/js/multiselect/src/jquery.multiselect.js"/>" ></script>
         <script type="text/javascript" src="<c:url value="recursos/js/multiselect/src/jquery.multiselect.filter.js"/>" ></script>
@@ -59,6 +65,13 @@
         </script>
         <!-- fim multiselect -->
 
+        <!-- INICIO JQUERY TOAST MESSAGE-->
+        <script type="text/javascript" src="<c:url value="recursos/js/jqueryToastMessage/jquery.toastmessage-min.js"/>" ></script>
+        <script type="text/javascript" src="<c:url value="recursos/js/jqueryToastMessage/funcoes.js"/>" ></script> 
+        <link rel="stylesheet" href="<c:url value="recursos/js/jqueryToastMessage/css/jquery.toastmessage-min.css"/>" />        
+        <!-- FIM JQUERY TOAST MESSAGE-->
+        
+        
 
         <script type="text/javascript" src="<c:url value="recursos/js/funcoes.js"/>" ></script>
 
@@ -69,7 +82,14 @@
 
         <title>JSP Page</title>
     </head>
-    <body>
+    <c:choose>
+         <c:when test="${not empty mensagem}">
+                <body onload="javascript:showErrorToast('${mensagem}');">
+            </c:when>
+            <c:otherwise>
+                <body>
+            </c:otherwise>
+     </c:choose> 
 
         <div id="topo">
             <div id="logo_brasil"></div> 
@@ -113,11 +133,11 @@
 
 
                         <label>Título:</label>
-                        <span class="obrigatorio">*Campo obrigatório</span>
-                        <input type="text" name="titulo" value="${projeto.titulo}" required="required" />       
+
+                        <input type="text" name="titulo" value="${projeto.titulo}" />       
 
                         <label>Palavras chave:</label>
-                        <textarea name=palavrasChave cols=35 rows=3></textarea>
+                        <textarea name=palavrasChave cols=35 rows=3>${projeto.palavrasChave}</textarea>
 
                         <label>Resumo:</label>
                         <textarea style="height: 85px; width: 500px" name=resumo cols=35 rows=5>${projeto.resumo}</textarea>
@@ -201,6 +221,9 @@
                                 <c:forEach items="${custos}" var="custoBD">
                                     <c:if test="${custoBD.tipoCusto eq 'CAPITAL'}">
                                         <p class="campo_capital" id="campo_capital_<%=countCapitais_x%>">
+                                           <span style="display:block;float:left; clear:both">
+                                                <span style="display:block;float:left">Valor:</span><span style="display:block;float:left;margin-left:60px">Descrição:</span>
+                                           </span>
                                             <input onkeydown="Mascara(this, Valor);" style="width: 75px; display: block; float: left" type="text" name="capital_val_x" value="${custoBD.valor}"/> 
                                             <textarea style="width: 150px; height: 35px; display: block; float: left; clear: none; margin-left: 10px; margin-top: 0px" name=capital_desc_x cols=35 rows=3>${custoBD.descricao}</textarea> 
                                             <a style="width:100px;text-decoration:none;color:black;display:block;float:left;margin-top:10px;margin-left:5px" href="#" onclick="deletarCapital('campo_capital_<%=countCapitais_x%>');
@@ -221,6 +244,9 @@
                                 <c:forEach items="${custos}" var="custoBD">
                                     <c:if test="${custoBD.tipoCusto eq 'CUSTEIO'}">
                                         <p class="campo_custeio" id="campo_custeio_<%=countCusteios_x%>">
+                                           <span style="display:block;float:left; clear:both">
+                                                <span style="display:block;float:left">Valor:</span><span style="display:block;float:left;margin-left:60px">Descrição:</span>
+                                           </span>
                                             <input onkeydown="Mascara(this, Valor);" style="width: 75px; display: block; float: left" type="text" name="custeio_val_x" value="${custoBD.valor}"/> 
                                             <textarea style="width: 150px; height: 35px; display: block; float: left; clear: none; margin-left: 10px; margin-top: 0px" name=custeio_desc_x cols=35 rows=3>${custoBD.descricao}</textarea> 
                                             <a style="width:100px;text-decoration:none;color:black;display:block;float:left;margin-top:10px;margin-left:5px" href="#" onclick="deletarCusteio('campo_custeio_<%=countCusteios_x%>');
@@ -231,12 +257,6 @@
                                 </c:forEach>
                             </div>         
                         </span>
-
-
-
-
-
-
 
 
 

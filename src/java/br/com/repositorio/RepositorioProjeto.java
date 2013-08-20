@@ -15,6 +15,7 @@ import br.com.model.Externo;
 import br.com.model.Professor;
 import br.com.model.Projeto;
 import br.com.model.StatusProjeto;
+import br.com.model.TipoProjeto;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,8 +40,33 @@ public class RepositorioProjeto {
         this.projDAO = pDAO;
     }
 
-    public int inserir(Projeto p) {
-        return projDAO.inserir(p);
+    public int inserir(Projeto p) throws PersistenciaException, DadoInconsistenteException {
+
+        DadoInconsistenteException exception = null;
+
+        if (verificaAreaConhecimentoInvalida(p.getAreaConhecimento())) {
+
+            exception = new DadoInconsistenteException(exception, "Área de conhecimento não informada <br/>");
+        }
+
+        if (verificaNulo(p.getTipoProjeto())) {
+
+            exception = new DadoInconsistenteException(exception, "Tipo de projeto não informado <br/>");
+        }
+
+        if (verificaVazio(p.getTitulo())) {
+
+            exception = new DadoInconsistenteException(exception, "Título não informado <br/>");
+        }
+
+        if (exception == null) {
+
+            return projDAO.inserir(p);
+        } else {
+
+            throw exception;
+        }
+
     }
 
     public ArrayList<AreaConhecimento> listarAreas() {
@@ -104,9 +130,22 @@ public class RepositorioProjeto {
     }
 
     public void editar(Projeto p) {
-        projDAO.editar(p);
-        projDAO.atualizaCustos(p.getId(), p.getCustos());
-        projDAO.atualizaParticipantes(p.getId(), p.getParticipantesString());
+
+        DadoInconsistenteException exception = null;
+
+        if (verificaVazio(p.getTitulo())) {
+
+            exception = new DadoInconsistenteException(exception, "Título não informado <br/>");
+        }
+
+        if (exception == null) {
+            projDAO.editar(p);
+            projDAO.atualizaCustos(p.getId(), p.getCustos());
+            projDAO.atualizaParticipantes(p.getId(), p.getParticipantesString());
+        } else {
+            throw exception;
+        }
+
     }
 
     public List<Projeto> listarProjetos(int idResponsavel) {
@@ -123,9 +162,9 @@ public class RepositorioProjeto {
     }
 
     public void submeterHomologacao(int idProjeto) throws PersistenciaException, DadoInconsistenteException {
-        
+
         Projeto projeto = obter(idProjeto);
-        
+
         submeterHomologacao(projeto);
     }
 
@@ -146,13 +185,14 @@ public class RepositorioProjeto {
             verificaStatusParaSubmissaoHomologacao(projeto.getStatus());
         } catch (DadoInconsistenteException diex) {
 
-            if(exception == null){
-                
+            if (exception == null) {
+
                 exception = diex;
-            }else{
-                
+            } else {
+
                 exception.setException(diex);
             }
+
         }
 
         if (exception != null) {
@@ -232,5 +272,75 @@ public class RepositorioProjeto {
     private boolean verificaNulo(Object obj) {
 
         return obj == null;
+    }
+
+    private boolean verificaAreaConhecimentoInvalida(AreaConhecimento area) {
+
+        return verificaNulo(area) || area.getId() <= 0;
+    }
+
+    public void excluir(int idProj) {
+        
+        
+        DadoInconsistenteException exception = null;
+
+        if (checaStatus(idProj)) {
+            exception = new DadoInconsistenteException(exception, "Este projeto já foi submetido, sendo impossível de ser excluído <br/>");
+        }
+
+        if (exception == null) {
+            this.projDAO.excluir(idProj);
+        } else {
+            throw exception;
+        }       
+      
+    }
+
+    private boolean verificaAreaConhecimento(int idArea) {
+        if (idArea != 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean verificaTipoProjeto(String tipo) {
+        if (tipo != "" && tipo != null && TipoProjeto.fromString(tipo) != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean verificaTitulo(String t) {
+        if (t != "" && t != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean verificaStatus(String t) {
+        if (t != "" && t != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    /**
+     * Método utilizado para auxiliar na exclusão de um projeto, verificando se o mesmo está com o status == "CRIADO" para então poder excluir o projeto
+     * @param id do projeto
+     * @return FALSE caso NÃO possa ser excluído (status == 'CRIADO')
+     * @return TRUE caso possa ser excluído (status != 'CRIADO')
+     */
+    private boolean checaStatus(int idProj){
+    
+       String status = this.projDAO.consultaStatus(idProj);       
+       if(status.equalsIgnoreCase("CRIADO")){      
+           return false;
+       }else{
+           return true;
+       }
     }
 }
