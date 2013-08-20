@@ -9,6 +9,18 @@
 
         <link rel="stylesheet" href="<c:url value="/recursos/css/style.css"/>" />
         <script type="text/javascript" src="<c:url value="recursos/js/funcoes.js"/>" ></script>
+        
+        <!-- inicio opção de carregamento das bibliotecas acima setadas que são remotas -->
+        <link rel="stylesheet" href="<c:url value="/recursos/js/jquery/jquery-ui.css"/>" />
+        <script type="text/javascript" src="<c:url value="recursos/js/jquery/jquery2.js"/>" ></script>
+        <script type="text/javascript" src="<c:url value="recursos/js/jquery/jquery-ui.min.js"/>" ></script>
+        <!-- fim opção de carregamento das bibliotecas acima setadas que são remotas -->
+        
+        <!-- INICIO JQUERY TOAST MESSAGE-->
+        <script type="text/javascript" src="<c:url value="recursos/js/jqueryToastMessage/jquery.toastmessage-min.js"/>" ></script>
+        <script type="text/javascript" src="<c:url value="recursos/js/jqueryToastMessage/funcoes.js"/>" ></script> 
+        <link rel="stylesheet" href="<c:url value="recursos/js/jqueryToastMessage/css/jquery.toastmessage-min.css"/>" />        
+        <!-- FIM JQUERY TOAST MESSAGE-->
 
         <!--[if IE]>
             <link rel="stylesheet" type="text/css" href="<c:url value="/recursos/css/iehacks.css"/>" />
@@ -17,8 +29,16 @@
 
         <title>JSP Page</title>
     </head>
+    
+     <c:choose>
+         <c:when test="${not empty mensagem}">
+                <body onload="javascript:showSuccessToast('${mensagem}');">
+            </c:when>
+            <c:otherwise>
+                <body>
+            </c:otherwise>
+     </c:choose> 
 
-    <body>
 
         <div id="topo">
             <div id="logo_brasil"></div> 
@@ -38,9 +58,9 @@
 
                 <h1>Listar Projetos</h1>
 
-                <table id="lista_projetos">
+                <table id="lista_projetos">                    
                     <c:choose>
-                        <c:when test="${projetos != null}">
+                        <c:when test="${projetos != null && projetos.size() > 0}">
 
                             <tr class="sub_titulo">
                                 <td class="titulo">TITULO</td>
@@ -64,7 +84,11 @@
 
                         </c:when>
                         <c:otherwise>
-                            Não existe nenhum projeto cadastrado!
+                            <tr>
+                                <td class="titulo">
+                                    Não existe nenhum projeto cadastrado!
+                                </td>
+                            </tr>
                         </c:otherwise>
                     </c:choose>
 

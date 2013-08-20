@@ -5,17 +5,36 @@
  */
 
 /*
-function showSuccessToast() {
-    $().toastmessage('showSuccessToast', "Success Dialog which is fading away ...");
-}
-*/
+ function showSuccessToast() {
+ $().toastmessage('showSuccessToast', "Success Dialog which is fading away ...");
+ }
+ */
+
 function showSuccessToast(texto) {
-    $().toastmessage('showSuccessToast', ""+texto);
+    
+    var textoGlobal = texto;
+    
+    var specialChars = "!@#$^&%*()+=-[]\{}|:?,.";
+    for (var i = 0; i < specialChars.length; i++) {
+        textoGlobal = textoGlobal.replace(new RegExp("\\" + specialChars[i], 'gi'), '');
+    }
+
+    $().toastmessage('showToast', {
+        text: textoGlobal,
+        sticky: true,
+        position: 'top-center',
+        type: 'sucess',
+        closeText: '',
+        close: function() {
+            console.log("toast is closed ...");
+        }
+    });
 }
+
 
 function showStickySuccessToast() {
     $().toastmessage('showToast', {
-        text: 'Projeto cadastrado com sucesso!',
+        text: 'cadastrado com sucesso!',
         sticky: true,
         //position: 'top-right',
         position: 'top-center',
@@ -28,6 +47,11 @@ function showStickySuccessToast() {
     });
 
 }
+/**
+ function showNoticeToast() {
+ $().toastmessage('showNoticeToast', "Notice  Dialog which is fading away ...");
+ }
+ */
 function showNoticeToast() {
     $().toastmessage('showNoticeToast', "Notice  Dialog which is fading away ...");
 }
@@ -58,8 +82,26 @@ function showStickyWarningToast() {
         }
     });
 }
-function showErrorToast() {
-    $().toastmessage('showErrorToast', "Error Dialog which is fading away ...");
+function showErrorToast(texto) {
+    
+    var textoGlobal = texto;
+    
+    var specialChars = "!@#$^&%*()+=-[]\{}|:?,.";
+    for (var i = 0; i < specialChars.length; i++) {
+        textoGlobal = textoGlobal.replace(new RegExp("\\" + specialChars[i], 'gi'), '');
+    }
+
+    $().toastmessage('showToast', {
+        text: textoGlobal,
+        sticky: true,
+        position: 'top-center',
+        type: 'error',
+        closeText: '',
+        close: function() {
+            console.log("toast is closed ...");
+        }
+    });
+
 }
 
 function showStickyErrorToast() {

@@ -59,4 +59,6 @@ public interface ProjetoDAO {
      
      public void atualizaStatus(Projeto projeto) throws PersistenciaException;
      
+     public String consultaStatus(int idProj) throws PersistenciaException;
+     
 }

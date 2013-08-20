@@ -65,6 +65,13 @@
         </script>
         <!-- fim multiselect -->
 
+        <!-- INICIO JQUERY TOAST MESSAGE-->
+        <script type="text/javascript" src="<c:url value="recursos/js/jqueryToastMessage/jquery.toastmessage-min.js"/>" ></script>
+        <script type="text/javascript" src="<c:url value="recursos/js/jqueryToastMessage/funcoes.js"/>" ></script> 
+        <link rel="stylesheet" href="<c:url value="recursos/js/jqueryToastMessage/css/jquery.toastmessage-min.css"/>" />        
+        <!-- FIM JQUERY TOAST MESSAGE-->
+        
+        
 
         <script type="text/javascript" src="<c:url value="recursos/js/funcoes.js"/>" ></script>
 
@@ -75,7 +82,14 @@
 
         <title>JSP Page</title>
     </head>
-    <body>
+    <c:choose>
+         <c:when test="${not empty mensagem}">
+                <body onload="javascript:showErrorToast('${mensagem}');">
+            </c:when>
+            <c:otherwise>
+                <body>
+            </c:otherwise>
+     </c:choose> 
 
         <div id="topo">
             <div id="logo_brasil"></div> 
@@ -119,8 +133,8 @@
 
 
                         <label>Título:</label>
-                        <span class="obrigatorio">*Campo obrigatório</span>
-                        <input type="text" name="titulo" value="${projeto.titulo}" required="required" />       
+
+                        <input type="text" name="titulo" value="${projeto.titulo}" />       
 
                         <label>Palavras chave:</label>
                         <textarea name=palavrasChave cols=35 rows=3>${projeto.palavrasChave}</textarea>
