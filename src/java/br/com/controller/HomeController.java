@@ -14,14 +14,14 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Ricardo
  */
 @Controller
-public class HomeController {
+public class HomeController extends GenericController{
 
     @RequestMapping(value = {"", "/"})
     public ModelAndView home(HttpServletRequest request, HttpServletResponse response) throws IOException {
         
         Usuario user = (Usuario) request.getSession().getAttribute("usuario");
         
-        if(user == null || !user.getPermissoes().contains(Permissao.ACESSO)){
+        if(!verificaAutorizacao(user, Permissao.ACESSO)){
             
             return new ModelAndView("login");
         }
