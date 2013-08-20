@@ -65,6 +65,14 @@
         <!-- fim multiselect -->
 
 
+        <!-- INICIO JQUERY TOAST MESSAGE-->
+        <script type="text/javascript" src="<c:url value="recursos/js/jqueryToastMessage/jquery.toastmessage-min.js"/>" ></script>
+        <script type="text/javascript" src="<c:url value="recursos/js/jqueryToastMessage/funcoes.js"/>" ></script> 
+        <link rel="stylesheet" href="<c:url value="recursos/js/jqueryToastMessage/css/jquery.toastmessage-min.css"/>" />        
+        <!-- FIM JQUERY TOAST MESSAGE-->
+
+
+
         <script type="text/javascript" src="<c:url value="recursos/js/funcoes.js"/>" ></script>
 
 
@@ -74,7 +82,14 @@
 
         <title>JSP Page</title>
     </head>
-    <body>
+        <c:choose>
+            <c:when test="${not empty mensagem}">
+            <body onload="javascript:showErrorToast('${mensagem}');">
+            </c:when>
+            <c:otherwise>
+            <body>
+            </c:otherwise>
+        </c:choose> 
 
         <div id="topo">
             <div id="logo_brasil"></div> 
@@ -95,10 +110,20 @@
                 <table id="exibe_projeto">
                     <tr>
                         <td class="titulo"><b>Titulo:</b> ${projeto.titulo}</td>
-                        <td class="palavras_chave"><b>Palavras chave:</b> ${projeto.palavrasChave}</td>
+                        <td class="palavras_chave"><b>Palavras chave:</b>
+                            <c:choose>
+                                <c:when test="${ not empty projeto.palavrasChave && projeto.palavrasChave != null }">${projeto.palavrasChave}</c:when>
+                                <c:otherwise>Não cadastrado</c:otherwise>
+                            </c:choose>  
+                        </td>
                     </tr>
                     <tr>
-                        <td class="resumo"><b>Resumo:</b> ${projeto.resumo}</td>
+                        <td class="resumo"><b>Resumo:</b> 
+                            <c:choose>
+                                <c:when test="${ not empty projeto.resumo && projeto.resumo != null }">${projeto.resumo}</c:when>
+                                <c:otherwise>Não cadastrado</c:otherwise>
+                            </c:choose>  
+                        </td>
                     </tr>
                     <tr>
                         <td class="area_conhecimento"><b>Área de conhecimento:</b> ${projeto.areaConhecimento.area}</td>
@@ -111,44 +136,45 @@
                     </tr>
                     <tr>
 
-                        <td class="part_alunos"><b>Participantes(aluno):</b>
+                        <td class="part_alunos"><b>Participantes(aluno):</b></br>
+                            
                             <c:choose>
-                                <c:when test="${projeto.participantesAluno != null}">
+                                <c:when test="${projeto.participantesAluno != null && projeto.participantesAluno.size() > 0}">
                                     <br/>
                                     <c:forEach items="${projeto.participantesAluno}" var="aluno">
                                         ${aluno.nome}<br/>
                                     </c:forEach>
                                 </c:when>
                                 <c:otherwise>
-                                    Nenhum participante (aluno) esta relacionado a este projeto
+                                    Nenhum participante (aluno) está relacionado a este projeto
                                 </c:otherwise>
                             </c:choose>
                         </td>
 
-                        <td class="part_professores"><b>Participantes(professor):</b> 
+                        <td class="part_professores"><b>Participantes(professor):</b> </br> 
                             <c:choose>
-                                <c:when test="${projeto.participantesProfessor != null}">
+                                <c:when test="${projeto.participantesProfessor != null && projeto.participantesProfessor.size() > 0}">
                                     <br/>
                                     <c:forEach items="${projeto.participantesProfessor}" var="professor">
                                         ${professor.nome}<br/>
                                     </c:forEach>
                                 </c:when>
                                 <c:otherwise>
-                                    Nenhum participante (professor) esta relacionado a este projeto
+                                    Nenhum participante (professor) está relacionado a este projeto
                                 </c:otherwise>
                             </c:choose>
                         </td>
 
-                        <td class="part_externo"><b>Participantes(externo):</b> 
+                        <td class="part_externo"><b>Participantes(externo):</b> </br> 
                             <c:choose>
-                                <c:when test="${projeto.participantesExterno != null}">
+                                <c:when test="${projeto.participantesExterno != null && projeto.participantesExterno.size() > 0}">
                                     <br/>
                                     <c:forEach items="${projeto.participantesExterno}" var="externo">
                                         ${externo.nome}<br/>
                                     </c:forEach>
                                 </c:when>
                                 <c:otherwise>
-                                    Nenhum participante (externo) esta relacionado a este projeto
+                                    Nenhum participante (externo) está relacionado a este projeto
                                 </c:otherwise>
                             </c:choose>
                         </td>                        
@@ -181,7 +207,7 @@
                             </c:forEach>
                         </c:when>
                         <c:otherwise>
-                            <td class="custo_cap_valor" style="color: red">Nenhum custo (capital) cadastrado</td>                                
+                            <td class="custo_cap_valor">Nenhum custo (capital) cadastrado</td>                                
                         </c:otherwise>
                     </c:choose>                   
                     </tr>
@@ -209,7 +235,7 @@
                             </c:forEach>
                         </c:when>
                         <c:otherwise>
-                            <td class="custo_cust_valor" style="color: red">Nenhum custo (custeio) cadastrado</td>                                
+                            <td class="custo_cust_valor" >Nenhum custo (custeio) cadastrado</td>                                
                         </c:otherwise>
                     </c:choose>                                   
                     </tr>

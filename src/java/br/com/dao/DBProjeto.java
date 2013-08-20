@@ -163,7 +163,7 @@ public class DBProjeto implements ProjetoDAO {
 
     @Override
     public void editar(Projeto p) throws PersistenciaException {
-        String query = "UPDATE " + PROJETO + " SET titulo=?, palavras_chave=?, resumo=?, sigilo=?, id_area=?, tipo_proj=?, status=?, id_responsavel=? WHERE id_proj = ?";
+        String query = "UPDATE " + PROJETO + " SET titulo=?, palavras_chave=?, resumo=?, sigilo=?, id_area=?, tipo_proj=?, id_responsavel=? WHERE id_proj = ?";
 
         System.out.println("******************** QUERY -> " + query);
 
@@ -176,13 +176,10 @@ public class DBProjeto implements ProjetoDAO {
             stmt.setString(3, p.getResumo());
             stmt.setBoolean(4, p.getSigilo());
             stmt.setInt(5, p.getAreaConhecimento().getId());
-            stmt.setString(6, p.getTipoProjeto().toString());
-            stmt.setString(7, "CRIADO");
-            stmt.setInt(8, p.getProfessor().getId());
+            stmt.setString(6, p.getTipoProjeto().toString());            
+            stmt.setInt(7, p.getProfessor().getId());
             System.out.println("********************** ID PROFESSOR: " + p.getProfessor().getId());
-
-            stmt.setInt(9, p.getId());
-
+            stmt.setInt(8, p.getId());
             System.out.println("******************** QUERY -> " + query);
             int retorno = stmt.executeUpdate();
 
@@ -803,5 +800,24 @@ public class DBProjeto implements ProjetoDAO {
     public boolean verificaStatus() {
 
         return true;
+    }
+
+    public String consultaStatus(int idProj) {
+
+        String sql = "SELECT status FROM " + PROJETO + " where id_proj=?";
+        PreparedStatement stmt = null;
+        ResultSet resultSet;
+        try {
+
+            stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, idProj);            
+            resultSet = stmt.executeQuery();
+            resultSet.next();
+            return resultSet.getString(1);
+
+        } catch (SQLException sqle) {
+            System.out.println("************** ERRO: "+sql);
+            throw new PersistenciaException("Falha ao consultar status do projeto");             
+        }
     }
 }

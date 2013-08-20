@@ -451,6 +451,7 @@ background: #CCCCCC;
     text-align: center;
     background:url(../imagens/more.png) no-repeat;
     border: none;
+    margin-left: 10px;
 } 
 #lista_projetos .linealt .exibe a:hover{
     background:url(../imagens/more_hover.png) no-repeat;

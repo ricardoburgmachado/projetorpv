@@ -43,27 +43,27 @@ public class RepositorioProjeto {
     public int inserir(Projeto p) throws PersistenciaException, DadoInconsistenteException {
 
         DadoInconsistenteException exception = null;
-        
-        if(verificaAreaConhecimentoInvalida(p.getAreaConhecimento())){
-            
-            exception = new DadoInconsistenteException(exception, "Área de conhecimento não informada!");
+
+        if (verificaAreaConhecimentoInvalida(p.getAreaConhecimento())) {
+
+            exception = new DadoInconsistenteException(exception, "Área de conhecimento não informada <br/>");
         }
-        
-        if(verificaNulo(p.getTipoProjeto())){
-            
-            exception = new DadoInconsistenteException(exception, "Tipo de projeto não informado!");
+
+        if (verificaNulo(p.getTipoProjeto())) {
+
+            exception = new DadoInconsistenteException(exception, "Tipo de projeto não informado <br/>");
         }
-        
-        if(verificaVazio(p.getTitulo())){
-            
-            exception = new DadoInconsistenteException(exception, "Título não informado!");
+
+        if (verificaVazio(p.getTitulo())) {
+
+            exception = new DadoInconsistenteException(exception, "Título não informado <br/>");
         }
-        
-        if(exception == null){
-            
+
+        if (exception == null) {
+
             return projDAO.inserir(p);
-        }else{
-            
+        } else {
+
             throw exception;
         }
 
@@ -130,9 +130,22 @@ public class RepositorioProjeto {
     }
 
     public void editar(Projeto p) {
-        projDAO.editar(p);
-        projDAO.atualizaCustos(p.getId(), p.getCustos());
-        projDAO.atualizaParticipantes(p.getId(), p.getParticipantesString());
+
+        DadoInconsistenteException exception = null;
+
+        if (verificaVazio(p.getTitulo())) {
+
+            exception = new DadoInconsistenteException(exception, "Título não informado <br/>");
+        }
+
+        if (exception == null) {
+            projDAO.editar(p);
+            projDAO.atualizaCustos(p.getId(), p.getCustos());
+            projDAO.atualizaParticipantes(p.getId(), p.getParticipantesString());
+        } else {
+            throw exception;
+        }
+
     }
 
     public List<Projeto> listarProjetos(int idResponsavel) {
@@ -207,7 +220,6 @@ public class RepositorioProjeto {
 
         if (projeto == null) {
 
-
             throw new DadoInconsistenteException("Projeto Inválido!");
         }
 
@@ -261,14 +273,27 @@ public class RepositorioProjeto {
 
         return obj == null;
     }
-    
-    private boolean verificaAreaConhecimentoInvalida(AreaConhecimento area){
-        
+
+    private boolean verificaAreaConhecimentoInvalida(AreaConhecimento area) {
+
         return verificaNulo(area) || area.getId() <= 0;
     }
 
     public void excluir(int idProj) {
-        this.projDAO.excluir(idProj);
+        
+        
+        DadoInconsistenteException exception = null;
+
+        if (checaStatus(idProj)) {
+            exception = new DadoInconsistenteException(exception, "Este projeto já foi submetido, sendo impossível de ser excluído <br/>");
+        }
+
+        if (exception == null) {
+            this.projDAO.excluir(idProj);
+        } else {
+            throw exception;
+        }       
+      
     }
 
     private boolean verificaAreaConhecimento(int idArea) {
@@ -301,5 +326,21 @@ public class RepositorioProjeto {
         } else {
             return false;
         }
+    }
+    
+    /**
+     * Método utilizado para auxiliar na exclusão de um projeto, verificando se o mesmo está com o status == "CRIADO" para então poder excluir o projeto
+     * @param id do projeto
+     * @return FALSE caso NÃO possa ser excluído (status == 'CRIADO')
+     * @return TRUE caso possa ser excluído (status != 'CRIADO')
+     */
+    private boolean checaStatus(int idProj){
+    
+       String status = this.projDAO.consultaStatus(idProj);       
+       if(status.equalsIgnoreCase("CRIADO")){      
+           return false;
+       }else{
+           return true;
+       }
     }
 }

@@ -46,50 +46,50 @@ public class ProjetoController {
         this.request = p_request;
 
         //AQUI SERÁ FEITA A INCLUSÃO DOS DADOS DO PROJETO NO BD E RETORNARÁ O ID IDENTIFICADOR DO BD PARA PARA DEFINIR O NOME DO ARQUIVO        
-        //int idRetornadoBD = 1;//SIMULADO
-        System.out.println("************************* DADOS PROJETO **********************");
-
-        System.out.println("ID: " + p_projeto.getId());
-        System.out.println("TITULO: " + p_projeto.getTitulo());
-        System.out.println("PALAVRAS CHAVE: " + p_projeto.getPalavrasChave());
-        System.out.println("RESUMO: " + p_projeto.getResumo());
-        //System.out.println("PARTICIPANTES(alunos): " + p_projeto.getParticipantes());
-        //System.out.println("PARTICIPANTES(professores): " + p_projeto.getParticipantes());
-
-        
-        if(request.getParameter("areaConhecimento_x") != null || request.getParameter("areaConhecimento_x") != ""){
+        if (request.getParameter("areaConhecimento_x") != null || request.getParameter("areaConhecimento_x") != "") {
             AreaConhecimento area = new AreaConhecimento();
             area.setId(request.getParameter("areaConhecimento_x"));
-            //System.out.println("DEBUG AREA CONHECIMENTO: "+request.getParameter("areaConhecimento_x"));
             p_projeto.setAreaConhecimento(area);
-            //System.out.println("ÁREA CONHECIMENTO: " + p_projeto.getAreaConhecimento());
-            //System.out.println("TIPO PROJETO: " + p_projeto.getTipoProjeto());
         }
-        
-        
+
         String[] custeios_val = request.getParameterValues("custeio_val_x");
         String[] custeios_desc = request.getParameterValues("custeio_desc_x");
         String[] capitais_val = request.getParameterValues("capital_val_x");
         String[] capitais_desc = request.getParameterValues("capital_desc_x");
 
-        System.out.println("*********************** CAPITAIS VALOR: " + capitais_val);
-
         String[] participantes_aluno = request.getParameterValues("participantes_aluno");
         String[] participantes_prof = request.getParameterValues("participantes_professor");
         String[] participantes_externo = request.getParameterValues("participantes_externo");
 
-        System.out.println("************************* DADOS PROJETO **********************");
-
         Professor prof = (Professor) request.getSession().getAttribute("usuario");
-        //Professor prof = new Professor();
-        //prof.setId(5);
         p_projeto.setProfessor(prof);
 
+        //this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
+        //this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
+        //int idRetorno = repositorioProjeto.inserir(p_projeto);
+        int idRetorno = -1;
 
-        this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
-        this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
+        /**
+         * **************************************** *
+         */
+        List<String> inconsistencias = new LinkedList<>();
 
-        int idRetorno = repositorioProjeto.inserir(p_projeto);
+        try {
+            this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
+            this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
+            idRetorno = repositorioProjeto.inserir(p_projeto);
+        } catch (DadoInconsistenteException diex) {
+            do {
+                inconsistencias.add(diex.getMessage());
+                diex = diex.getException();
+            } while (diex != null);
+        } catch (PersistenciaException pex) {
+
+            inconsistencias.add(pex.getMessage());
+        }
+        /**
+         * **************************************** *
+         */
 
         if (idRetorno != -1) {
             if (capitais_val != null && capitais_desc != null) {
@@ -108,11 +108,24 @@ public class ProjetoController {
         if (!arquivo.isEmpty() && idRetorno != -1) {
             processarArquivo(idRetorno, arquivo);
         }
-        
-        List projetos = this.repositorioProjeto.listarProjetos(5);
-        ModelAndView mv = new ModelAndView("lista_projeto");
-        mv.addObject("projetos", projetos);        
 
+        ModelAndView mv;
+        if (inconsistencias.size() > 0) {
+            this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
+            this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
+            mv = new ModelAndView("projeto_adiciona");
+            mv.addObject("participantes_aluno", repositorioUsuario.listar("ALUNO"));
+            mv.addObject("participantes_externo", repositorioUsuario.listar("EXTERNO"));
+            mv.addObject("participantes_professor", repositorioUsuario.listar("PROFESSOR"));
+            mv.addObject("area_conhecimento", repositorioProjeto.listarAreas());
+            mv.addObject("tipo_projeto", TipoProjeto.values());
+            mv.addObject("mensagem", inconsistencias);
+        } else {
+            List projetos = this.repositorioProjeto.listarProjetos(p_projeto.getProfessor().getId());
+            mv = new ModelAndView("lista_projeto");
+            mv.addObject("mensagem", "Projeto cadastrado com sucesso");
+            mv.addObject("projetos", projetos);
+        }
         return mv;
     }
 
@@ -203,24 +216,10 @@ public class ProjetoController {
 
         this.request = p_request;
 
-        //AQUI SERÁ FEITA A INCLUSÃO DOS DADOS DO PROJETO NO BD E RETORNARÁ O ID IDENTIFICADOR DO BD PARA PARA DEFINIR O NOME DO ARQUIVO        
-        //int idRetornadoBD = 1;//SIMULADO
-        System.out.println("************************* DADOS PROJETO **********************");
-
-        System.out.println("ID: " + p_projeto.getId());
-        System.out.println("TITULO: " + p_projeto.getTitulo());
-        System.out.println("PALAVRAS CHAVE: " + p_projeto.getPalavrasChave());
-        System.out.println("RESUMO: " + p_projeto.getResumo());
-        //System.out.println("PARTICIPANTES(alunos): " + p_projeto.getParticipantes());
-        //System.out.println("PARTICIPANTES(professores): " + p_projeto.getParticipantes());
-
+        //AQUI SERÁ FEITA A INCLUSÃO DOS DADOS DO PROJETO NO BD E RETORNARÁ O ID IDENTIFICADOR DO BD PARA PARA DEFINIR O NOME DO ARQUIVO                
         AreaConhecimento area = new AreaConhecimento();
         area.setId(request.getParameter("areaConhecimento_x"));
-
-        //System.out.println("DEBUG AREA CONHECIMENTO: "+request.getParameter("areaConhecimento_x"));
         p_projeto.setAreaConhecimento(area);
-        System.out.println("ÁREA CONHECIMENTO: " + p_projeto.getAreaConhecimento());
-        System.out.println("TIPO PROJETO: " + p_projeto.getTipoProjeto());
 
         String[] custeios_val = request.getParameterValues("custeio_val_x");
         String[] custeios_desc = request.getParameterValues("custeio_desc_x");
@@ -231,11 +230,7 @@ public class ProjetoController {
         String[] participantes_prof = request.getParameterValues("participantes_professor");
         String[] participantes_externo = request.getParameterValues("participantes_externo");
 
-        System.out.println("************************* DADOS PROJETO **********************");
-
-        Professor prof = (Professor) request.getSession().getAttribute("usuario");
-        //Professor prof = new Professor();
-        //prof.setId(5);
+        Professor prof = (Professor) this.request.getSession().getAttribute("usuario");
         p_projeto.setProfessor(prof);
 
         this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
@@ -251,27 +246,61 @@ public class ProjetoController {
 
         if (participantes_aluno != null) {
             p_projeto.setParticipantesString(participantes_aluno);
-            //repositorioProjeto.inserirParticipantes(p_projeto.getId(), participantes_aluno);            
         }
         if (participantes_prof != null) {
             p_projeto.setParticipantesString(participantes_prof);
-            //repositorioProjeto.inserirParticipantes(p_projeto.getId(), participantes_prof);
-
         }
         if (participantes_externo != null) {
             p_projeto.setParticipantesString(participantes_externo);
-            //repositorioProjeto.inserirParticipantes(p_projeto.getId(), participantes_externo);        
         }
 
-        repositorioProjeto.editar(p_projeto);
+        /**
+         * **************************************** *
+         */
+        List<String> inconsistencias = new LinkedList<>();
+
+        try {
+            repositorioProjeto.editar(p_projeto);
+        } catch (DadoInconsistenteException diex) {
+            do {
+                inconsistencias.add(diex.getMessage());
+                diex = diex.getException();
+            } while (diex != null);
+        } catch (PersistenciaException pex) {
+
+            inconsistencias.add(pex.getMessage());
+        }
+        /**
+         * **************************************** *
+         */
 
         if (!arquivo.isEmpty()) {
             processarArquivo(p_projeto.getId(), arquivo);
-        }     
-        
-        List projetos = this.repositorioProjeto.listarProjetos(5);
-        ModelAndView mv = new ModelAndView("lista_projeto");
-        mv.addObject("projetos", projetos);        
+        }
+
+        ModelAndView mv;
+        if (inconsistencias.size() > 0) {
+
+            Projeto projetoBD = this.repositorioProjeto.obter(p_projeto.getId());
+
+            projetoBD.setParticipantesAluno(repositorioProjeto.getParticAlunos(p_projeto.getId()));
+            projetoBD.setParticipantesProfessor(repositorioProjeto.getParticProfessores(p_projeto.getId()));
+            projetoBD.setParticipantesExterno(repositorioProjeto.getParticExternos(p_projeto.getId()));
+            mv = new ModelAndView("projeto_edita");
+            mv.addObject("projeto", projetoBD);
+            mv.addObject("area_conhecimento", repositorioProjeto.listarAreas());
+            mv.addObject("custos", repositorioProjeto.getCustos(p_projeto.getId()));
+            mv.addObject("participantes_aluno", repositorioUsuario.listar("ALUNO"));
+            mv.addObject("participantes_externo", repositorioUsuario.listar("EXTERNO"));
+            mv.addObject("participantes_professor", repositorioUsuario.listar("PROFESSOR"));
+            mv.addObject("mensagem", inconsistencias);
+        } else {
+
+            List projetos = this.repositorioProjeto.listarProjetos(p_projeto.getProfessor().getId());
+            mv = new ModelAndView("lista_projeto");
+            mv.addObject("projetos", projetos);
+            mv.addObject("mensagem", "Projeto editado com sucesso!");
+        }
         return mv;
     }
 
@@ -280,13 +309,13 @@ public class ProjetoController {
 
         RepositorioProjeto rp = new RepositorioPostgresFactory().createRepositorioProjeto();
         //try{
-        Professor prof = (Professor)p_request.getSession().getAttribute("usuario");
+        Professor prof = (Professor) p_request.getSession().getAttribute("usuario");
         List projetos = rp.listarProjetos(prof.getId());
         //}catch(PersistenciaException e){
         //    System.err.println("********** ERRO: "+e.getException());
         //}
         ModelAndView mv = new ModelAndView("lista_projeto");
-        if(projetos != null){
+        if (projetos != null) {
             mv.addObject("projetos", projetos);
         }
         return mv;
@@ -307,20 +336,56 @@ public class ProjetoController {
         mv.addObject("custos", repositorioProjeto.getCustos(id));
         return mv;
     }
-    
+
     @RequestMapping(value = "/projeto_exclui")
     public ModelAndView projetoExclui(@RequestParam int id, HttpServletRequest p_request) {
+        this.request = p_request;
         System.out.println("************** ID VINDA POR PARAMETRO: " + id);
 
+        Professor prof = (Professor) request.getSession().getAttribute("usuario");
+
         this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
-        
-        this.repositorioProjeto.excluir(id);
-        
-        List projetos = this.repositorioProjeto.listarProjetos(5);
-        
-        ModelAndView mv = new ModelAndView("lista_projeto");
-        mv.addObject("projetos", projetos);        
-        return mv;  
+
+        /**
+         * **************************************** *
+         */
+        List<String> inconsistencias = new LinkedList<>();
+
+        try {
+            this.repositorioProjeto.excluir(id);
+        } catch (DadoInconsistenteException diex) {
+            do {
+                inconsistencias.add(diex.getMessage());
+                diex = diex.getException();
+            } while (diex != null);
+        } catch (PersistenciaException pex) {
+            inconsistencias.add(pex.getMessage());
+        }
+        /**
+         * **************************************** *
+         */
+
+        ModelAndView mv;
+        if (inconsistencias.size() > 0) {
+
+            Projeto projetoBD = this.repositorioProjeto.obter(id);
+            projetoBD.setParticipantesAluno(repositorioProjeto.getParticAlunos(id));
+            projetoBD.setParticipantesProfessor(repositorioProjeto.getParticProfessores(id));
+            projetoBD.setParticipantesExterno(repositorioProjeto.getParticExternos(id));
+
+            mv = new ModelAndView("projeto_exibe");
+            mv.addObject("projeto", projetoBD);
+            mv.addObject("custos", repositorioProjeto.getCustos(id));
+            mv.addObject("mensagem", inconsistencias);
+        } else {
+
+            List projetos = this.repositorioProjeto.listarProjetos(prof.getId());
+            mv = new ModelAndView("lista_projeto");
+            mv.addObject("projetos", projetos);
+            mv.addObject("mensagem", "Projeto excluído com sucesso!");
+        }
+
+        return mv;
     }
 
     @RequestMapping(value = "/submete_homologacao")
@@ -334,24 +399,24 @@ public class ProjetoController {
         } catch (DadoInconsistenteException diex) {
 
             do {
-                
+
                 inconsistencias.add(diex.getMessage());
                 diex = diex.getException();
             } while (diex != null);
-        } catch(PersistenciaException pex){
-            
+        } catch (PersistenciaException pex) {
+
             inconsistencias.add(pex.getMessage());
         }
-        
+
         ModelAndView mv = this.projetoEditaShow(id);
-        if(inconsistencias.isEmpty()){
-            
+        if (inconsistencias.isEmpty()) {
+
             mv.addObject("sucesso", "Projeto submetido com sucesso!");
-        }else{
-            
+        } else {
+
             mv.addObject("inconsistencias", inconsistencias);
         }
-        
+
         return mv;
     }
 
