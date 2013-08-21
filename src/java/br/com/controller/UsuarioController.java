@@ -43,4 +43,12 @@ public class UsuarioController {
 
         return new ModelAndView("login");
     }
+
+    @RequestMapping(value = {"/logoff", "logoff"})
+    public ModelAndView logoff(HttpServletRequest request, HttpServletResponse response, @RequestParam int id) throws IOException {
+
+        request.getSession().removeAttribute("usuario");
+        return new ModelAndView("login");
+    }
+    
 }

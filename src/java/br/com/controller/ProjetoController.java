@@ -5,10 +5,12 @@ import Exceptions.PersistenciaException;
 import br.com.repositorio.RepositorioProjeto;
 import br.com.repositorio.RepositorioUsuario;
 import br.com.model.AreaConhecimento;
+import br.com.model.Permissao;
 import br.com.model.Professor;
 import br.com.model.Projeto;
 import br.com.model.TipoCusto;
 import br.com.model.TipoProjeto;
+import br.com.model.Usuario;
 import br.com.repositorio.RepositorioPostgresFactory;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -26,7 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class ProjetoController {
+public class ProjetoController extends GenericController {
 
     HttpServletRequest request;
     @Autowired(required = true)
@@ -44,6 +46,12 @@ public class ProjetoController {
             @RequestParam(value = "arquivo_xx", required = false) MultipartFile arquivo) {
 
         this.request = p_request;
+
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        if (!verificaAutorizacao(user, Permissao.CRUD_PROJETO)) {
+
+            return new ModelAndView("login");
+        }
 
         //AQUI SERÁ FEITA A INCLUSÃO DOS DADOS DO PROJETO NO BD E RETORNARÁ O ID IDENTIFICADOR DO BD PARA PARA DEFINIR O NOME DO ARQUIVO        
         if (request.getParameter("areaConhecimento_x") != null || request.getParameter("areaConhecimento_x") != "") {
@@ -155,7 +163,14 @@ public class ProjetoController {
      * @return ModelAndView
      */
     @RequestMapping(value = "/projeto_adiciona_show")
-    public ModelAndView projetoAdicionaShow() {
+    public ModelAndView projetoAdicionaShow(HttpServletRequest p_request) {
+
+        this.request = p_request;
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        if (!verificaAutorizacao(user, Permissao.CRUD_PROJETO)) {
+
+            return new ModelAndView("login");
+        }
 
         this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
         this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
@@ -176,9 +191,16 @@ public class ProjetoController {
      * @return ModelAndView
      */
     @RequestMapping(value = "/projeto_edita_show")
-    public ModelAndView projetoEditaShow(@RequestParam int id) {
-
+    public ModelAndView projetoEditaShow(HttpServletRequest p_request, @RequestParam int id) {
+        
+        this.request = p_request;
         System.out.println("************** ID VINDA POR PARAMETRO: " + id);
+
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        if (!verificaAutorizacao(user, Permissao.CRUD_PROJETO)) {
+
+            return new ModelAndView("login");
+        }
 
         this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
         this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
@@ -215,6 +237,12 @@ public class ProjetoController {
             @RequestParam(value = "arquivo_xx", required = false) MultipartFile arquivo) {
 
         this.request = p_request;
+
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        if (!verificaAutorizacao(user, Permissao.CRUD_PROJETO)) {
+
+            return new ModelAndView("login");
+        }
 
         //AQUI SERÁ FEITA A INCLUSÃO DOS DADOS DO PROJETO NO BD E RETORNARÁ O ID IDENTIFICADOR DO BD PARA PARA DEFINIR O NOME DO ARQUIVO                
         AreaConhecimento area = new AreaConhecimento();
@@ -307,6 +335,13 @@ public class ProjetoController {
     @RequestMapping(value = "/projeto_lista_show")
     public ModelAndView projetoListaShow(HttpServletRequest p_request) {
 
+        this.request = p_request;
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        if (!verificaAutorizacao(user, Permissao.CRUD_PROJETO)) {
+
+            return new ModelAndView("login");
+        }
+
         RepositorioProjeto rp = new RepositorioPostgresFactory().createRepositorioProjeto();
         //try{
         Professor prof = (Professor) p_request.getSession().getAttribute("usuario");
@@ -322,8 +357,15 @@ public class ProjetoController {
     }
 
     @RequestMapping(value = "/projeto_exibe")
-    public ModelAndView projetoExibe(@RequestParam int id) {
+    public ModelAndView projetoExibe(HttpServletRequest p_request, @RequestParam int id) {
         System.out.println("************** ID VINDA POR PARAMETRO: " + id);
+
+        this.request = p_request;
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        if (!verificaAutorizacao(user, Permissao.CRUD_PROJETO)) {
+
+            return new ModelAndView("login");
+        }
 
         this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
         Projeto projetoBD = this.repositorioProjeto.obter(id);
@@ -339,7 +381,14 @@ public class ProjetoController {
 
     @RequestMapping(value = "/projeto_exclui")
     public ModelAndView projetoExclui(@RequestParam int id, HttpServletRequest p_request) {
+
         this.request = p_request;
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        if (!verificaAutorizacao(user, Permissao.CRUD_PROJETO)) {
+
+            return new ModelAndView("login");
+        }
+
         System.out.println("************** ID VINDA POR PARAMETRO: " + id);
 
         Professor prof = (Professor) request.getSession().getAttribute("usuario");
@@ -389,8 +438,8 @@ public class ProjetoController {
     }
 
     @RequestMapping(value = "/submete_homologacao")
-    public ModelAndView submeteProjeto(@RequestParam int id) {
-
+    public ModelAndView submeteProjeto(HttpServletRequest p_request, @RequestParam int id) {
+        this.request = p_request;
         List<String> inconsistencias = new LinkedList<>();
 
         try {
@@ -408,7 +457,7 @@ public class ProjetoController {
             inconsistencias.add(pex.getMessage());
         }
 
-        ModelAndView mv = this.projetoEditaShow(id);
+        ModelAndView mv = this.projetoEditaShow(this.request,id);
         if (inconsistencias.isEmpty()) {
 
             mv.addObject("sucesso", "Projeto submetido com sucesso!");

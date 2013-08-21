@@ -16,6 +16,6 @@ public abstract class GenericController {
     
     public boolean verificaAutorizacao(Usuario user, Permissao permissao){
         
-        return user != null && user.getPermissoes().contains(Permissao.ACESSO);
+        return user != null && user.getPermissoes().contains(permissao);
     }
 }

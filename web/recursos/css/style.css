@@ -64,6 +64,54 @@ h1 {
     background: url(../imagens/logo_topo_brasil.png) no-repeat;
 }
 
+.sub_topo{
+    display:block;
+    margin:0 auto;
+    width:1000px; 
+    height:80px;
+}
+
+
+.sub_topo .sub_sub{
+    
+    display: block;
+    float: right; 
+    width: 400px; 
+    height: 50px; 
+}
+
+.sub_topo .dados_usuario{
+    display: block; 
+    float: left; 
+    font-size: 15px; 
+    width: 300px; 
+    margin-top: 10px;
+         
+}
+
+.sub_topo .btn_sair{
+    display:block;
+    float:right;
+    margin-top: 10px;
+    width:65px;
+    text-decoration: none;
+    text-align: center;
+    text-align-last: center;
+    height:27px;
+    font-size:14px;
+    font-weight:bold;
+    color: white;
+    //background: #303030;
+    cursor:pointer;
+    border:none;
+    background:url(../imagens/logoff.png) no-repeat;
+}
+
+.sub_topo .btn_sair:hover{
+    color: #303030;
+    //background: white;
+    background:url(../imagens/logoff_hover.png) no-repeat;
+}
 /** *********** FIM TOPO *********** */
 #conteudo_interno {
     display: block;
@@ -394,7 +442,7 @@ ol#menurel li a {
 
 
 #lista_projetos .linealt:hover{
-background: #CCCCCC;
+    background: #CCCCCC;
 }
 
 #lista_projetos .linealt a{
@@ -583,9 +631,8 @@ background: #CCCCCC;
     float:left;
     width:124px;
     text-align: center;
-    margin-left: 10px;
-    margin-top:8px;
-    height:27px;
+    margin-top:15px;
+    height:24px;
     font-size:14px;
     font-weight:bold;
     color: white;
@@ -594,6 +641,8 @@ background: #CCCCCC;
     border:none;
     clear: both;
     text-decoration: none;
+    border: 1px solid #303030;
+    padding-top: 4px;
 }
 
 #excluir_projeto:hover {

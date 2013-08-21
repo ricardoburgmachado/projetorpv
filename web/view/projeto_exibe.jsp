@@ -82,8 +82,8 @@
 
         <title>JSP Page</title>
     </head>
-        <c:choose>
-            <c:when test="${not empty mensagem}">
+    <c:choose>
+        <c:when test="${not empty mensagem}">
             <body onload="javascript:showErrorToast('${mensagem}');">
             </c:when>
             <c:otherwise>
@@ -93,7 +93,7 @@
 
         <div id="topo">
             <div id="logo_brasil"></div> 
-
+            <c:import url="sub_topo.jsp"/>
         </div>
 
         <div id="all">
@@ -137,7 +137,7 @@
                     <tr>
 
                         <td class="part_alunos"><b>Participantes(aluno):</b></br>
-                            
+
                             <c:choose>
                                 <c:when test="${projeto.participantesAluno != null && projeto.participantesAluno.size() > 0}">
                                     <br/>
@@ -259,11 +259,20 @@
                         </c:choose>
 
                     </tr>
+                    <tr>
+                        <td class="subtitulo">
+                                FUNCIONALIDADES
+                        </td>
+                    </tr>
 
-
+                    <tr>
+                        <td style="display: block; float: left; ">
+                            <a id="excluir_projeto" href="projeto_exclui?id=${projeto.id}" >Deletar projeto</a>
+                        </td>
+                    </tr>
                 </table>
 
-                <a id="excluir_projeto" href="projeto_exclui?id=${projeto.id}" >Deletar projeto</a>
+
 
 
             </div>

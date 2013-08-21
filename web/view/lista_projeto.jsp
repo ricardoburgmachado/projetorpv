@@ -42,7 +42,7 @@
 
         <div id="topo">
             <div id="logo_brasil"></div> 
-
+            <c:import url="sub_topo.jsp"/>
         </div>
 
         <div id="all">

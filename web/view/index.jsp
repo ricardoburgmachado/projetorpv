@@ -22,7 +22,7 @@
     <body>
         <div id="topo">
             <div id="logo_brasil"></div> 
-
+            <c:import url="sub_topo.jsp"/>
         </div>
 
         <div id="all">
@@ -34,7 +34,7 @@
 
             <div id="conteudo_interno">
 
-                Página principal
+                <h3>Página principal</h3>
             </div>
 
         </div>
