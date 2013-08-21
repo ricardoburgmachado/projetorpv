@@ -21,5 +21,4 @@ public enum StatusProjeto {
     public String getDescricao(){
         return this.descricao;
     }
-    
 }

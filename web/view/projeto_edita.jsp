@@ -273,9 +273,7 @@
                             <span style="clear: both; display: block"></span>
 
                             <input class="enviar_form" type="submit" value="Editar"/>
-                            <a href="submete_homologacao?id=${projeto.id}"><button type="button" class="submeter_form">Submeter</button></a>
-
-
+                            <a href="submete_homologacao?idProjeto=${projeto.id}"><button type="button" class="submeter_form">Submeter</button></a>
                         </fieldset>
                 </form:form>    
 
