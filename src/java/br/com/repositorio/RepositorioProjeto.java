@@ -162,17 +162,17 @@ public class RepositorioProjeto {
         return projetos;
     }
 
-    public void submeterHomologacao(int idProjeto, int idResponsavel) throws PersistenciaException, DadoInconsistenteException, PrivacidadeException {
+    public void submeterHomologacao(int idProjeto, int idResponsavel) throws PersistenciaException, DadoInconsistenteException{
 
         Projeto projeto = obter(idProjeto);
 
         submeterHomologacao(projeto, idResponsavel);
     }
 
-    public void submeterHomologacao(Projeto projeto, int idResponsavel) throws PersistenciaException, DadoInconsistenteException, PrivacidadeException {        
+    public void submeterHomologacao(Projeto projeto, int idResponsavel) throws PersistenciaException, DadoInconsistenteException{
 
         DadoInconsistenteException exception = verificaConsistenciaParaSubmissao(projeto, idResponsavel);
-        
+
         if (exception != null) {
 
             throw exception;
@@ -182,9 +182,9 @@ public class RepositorioProjeto {
             this.projDAO.atualizaStatus(projeto);
         }
     }
-    
-    private DadoInconsistenteException verificaConsistenciaParaSubmissao(Projeto projeto, int idUsuario) throws PersistenciaException{
-        
+
+    private DadoInconsistenteException verificaConsistenciaParaSubmissao(Projeto projeto, int idUsuario) throws PersistenciaException {
+
         DadoInconsistenteException exception = null;
 
         try {
@@ -194,10 +194,10 @@ public class RepositorioProjeto {
 
             exception = diex;
         }
-        
-        if(!verificaProjetoResponsavel(projeto, idUsuario)){
-            
-            throw new PrivacidadeException(exception, "Projeto não pertencente ao professor");
+
+        if (!verificaProjetoResponsavel(projeto, idUsuario)) {
+
+            exception = new PrivacidadeException(exception, "Projeto não pertencente ao professor");
         }
 
         try {
@@ -213,14 +213,14 @@ public class RepositorioProjeto {
                 exception.setException(diex);
             }
         }
-        
+
         return exception;
     }
-    
-    private boolean verificaProjetoResponsavel(Projeto projeto, int idResponsavel){
-        
+
+    private boolean verificaProjetoResponsavel(Projeto projeto, int idResponsavel) {
+
         return !verificaNulo(projeto) && !verificaNulo(projeto.getProfessor()) && projeto.getProfessor().getId() == idResponsavel;
-        
+
     }
 
     private void verificaStatusParaSubmissaoHomologacao(StatusProjeto status) throws DadoInconsistenteException {
@@ -297,7 +297,7 @@ public class RepositorioProjeto {
     }
 
     public void excluir(int idProj) {
-        
+
         DadoInconsistenteException exception = null;
 
         if (checaStatus(idProj)) {
@@ -308,23 +308,25 @@ public class RepositorioProjeto {
             this.projDAO.excluir(idProj);
         } else {
             throw exception;
-        }       
-      
+        }
+
     }
-    
+
     /**
-     * Método utilizado para auxiliar na exclusão de um projeto, verificando se o mesmo está com o status == "CRIADO" para então poder excluir o projeto
+     * Método utilizado para auxiliar na exclusão de um projeto, verificando se
+     * o mesmo está com o status == "CRIADO" para então poder excluir o projeto
+     *
      * @param id do projeto
      * @return FALSE caso NÃO possa ser excluído (status == 'CRIADO')
      * @return TRUE caso possa ser excluído (status != 'CRIADO')
      */
-    private boolean checaStatus(int idProj){
-    
-       String status = this.projDAO.consultaStatus(idProj);       
-       if(status.equalsIgnoreCase("CRIADO")){      
-           return false;
-       }else{
-           return true;
-       }
+    private boolean checaStatus(int idProj) {
+
+        String status = this.projDAO.consultaStatus(idProj);
+        if (status.equalsIgnoreCase("CRIADO")) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

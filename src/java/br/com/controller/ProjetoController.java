@@ -298,10 +298,12 @@ public class ProjetoController extends GenericController {
         } else {
 
             List projetos = this.repositorioProjeto.listarProjetos(p_projeto.getProfessor().getId());
-            mv = new ModelAndView("lista_projeto");
+            //mv = new ModelAndView("lista_projeto");
+            mv = this.projetoEditaShow(p_projeto.getId());
             mv.addObject("projetos", projetos);
             mv.addObject("mensagem", "Projeto editado com sucesso!");
         }
+        
         return mv;
     }
 
