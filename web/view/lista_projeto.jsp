@@ -1,3 +1,4 @@
+<%@page import="br.com.model.Projeto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -74,7 +75,7 @@
                                 <a>
                                     <td class="titulo">${projeto.titulo}</td>
                                     <td class="tipo" >${projeto.tipoProjeto}</td>
-                                    <td class="status">NÃO HOMOLOGADO</td>
+                                    <td class="status">${projeto.status.string}</td>
                                     <td class="edita"><a title="Clique aqui para editar Projeto" href="projeto_edita_show?id=${projeto.id}"></a></td>
                                     <td class="exibe"><a title="Clique aqui para exibir detalhes do projeto" href="projeto_exibe?id=${projeto.id}"></a></td>
                                 </a>

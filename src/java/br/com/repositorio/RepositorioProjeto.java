@@ -216,7 +216,6 @@ public class RepositorioProjeto {
     private void verificaCamposNaoInformados(Projeto projeto) throws DadoInconsistenteException {
 
         DadoInconsistenteException exception = null;
-        final String VAZIO = "";
 
         if (projeto == null) {
 
@@ -281,7 +280,6 @@ public class RepositorioProjeto {
 
     public void excluir(int idProj) {
         
-        
         DadoInconsistenteException exception = null;
 
         if (checaStatus(idProj)) {
@@ -294,38 +292,6 @@ public class RepositorioProjeto {
             throw exception;
         }       
       
-    }
-
-    private boolean verificaAreaConhecimento(int idArea) {
-        if (idArea != 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private boolean verificaTipoProjeto(String tipo) {
-        if (tipo != "" && tipo != null && TipoProjeto.fromString(tipo) != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private boolean verificaTitulo(String t) {
-        if (t != "" && t != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private boolean verificaStatus(String t) {
-        if (t != "" && t != null) {
-            return true;
-        } else {
-            return false;
-        }
     }
     
     /**

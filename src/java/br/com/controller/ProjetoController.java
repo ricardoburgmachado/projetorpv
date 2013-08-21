@@ -5,10 +5,12 @@ import Exceptions.PersistenciaException;
 import br.com.repositorio.RepositorioProjeto;
 import br.com.repositorio.RepositorioUsuario;
 import br.com.model.AreaConhecimento;
+import br.com.model.Permissao;
 import br.com.model.Professor;
 import br.com.model.Projeto;
 import br.com.model.TipoCusto;
 import br.com.model.TipoProjeto;
+import br.com.model.Usuario;
 import br.com.repositorio.RepositorioPostgresFactory;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -26,7 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class ProjetoController {
+public class ProjetoController extends GenericController{
 
     HttpServletRequest request;
     @Autowired(required = true)
@@ -307,13 +309,16 @@ public class ProjetoController {
     @RequestMapping(value = "/projeto_lista_show")
     public ModelAndView projetoListaShow(HttpServletRequest p_request) {
 
+        Usuario user = (Usuario) p_request.getSession().getAttribute("usuario");
+        
+        if(!verificaAutorizacao(user, Permissao.CRUD_PROJETO)){
+            
+            return new ModelAndView("login");
+        }
+        
         RepositorioProjeto rp = new RepositorioPostgresFactory().createRepositorioProjeto();
-        //try{
         Professor prof = (Professor) p_request.getSession().getAttribute("usuario");
         List projetos = rp.listarProjetos(prof.getId());
-        //}catch(PersistenciaException e){
-        //    System.err.println("********** ERRO: "+e.getException());
-        //}
         ModelAndView mv = new ModelAndView("lista_projeto");
         if (projetos != null) {
             mv.addObject("projetos", projetos);
@@ -389,8 +394,40 @@ public class ProjetoController {
     }
 
     @RequestMapping(value = "/submete_homologacao")
-    public ModelAndView submeteProjeto(@RequestParam int id) {
+    public ModelAndView submeteProjeto(@RequestParam int id, HttpServletRequest request) {
+        
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        
+        if(!verificaAutorizacao(user, Permissao.SUBMISSAO_HOMOLOGACAO)){
+            
+            return new ModelAndView("login");
+        }
 
+        List<String> inconsistencias = submete(id);
+
+        ModelAndView mv;
+        
+        try{
+            
+            mv = this.projetoEditaShow(id);
+        }catch(PersistenciaException ex){
+            
+            mv = new ModelAndView("projeto_adiciona");
+        }
+        
+        if (inconsistencias.isEmpty()) {
+
+            mv.addObject("sucesso", "Projeto submetido com sucesso!");
+        } else {
+
+            mv.addObject("inconsistencias", inconsistencias);
+        }
+
+        return mv;
+    }
+    
+    private List<String> submete(int id){
+        
         List<String> inconsistencias = new LinkedList<>();
 
         try {
@@ -407,17 +444,8 @@ public class ProjetoController {
 
             inconsistencias.add(pex.getMessage());
         }
-
-        ModelAndView mv = this.projetoEditaShow(id);
-        if (inconsistencias.isEmpty()) {
-
-            mv.addObject("sucesso", "Projeto submetido com sucesso!");
-        } else {
-
-            mv.addObject("inconsistencias", inconsistencias);
-        }
-
-        return mv;
+        
+        return inconsistencias;
     }
 
     private Projeto criaProjeto(HttpServletRequest request) {
