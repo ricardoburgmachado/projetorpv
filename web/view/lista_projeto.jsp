@@ -9,13 +9,13 @@
 
         <link rel="stylesheet" href="<c:url value="/recursos/css/style.css"/>" />
         <script type="text/javascript" src="<c:url value="recursos/js/funcoes.js"/>" ></script>
-        
+
         <!-- inicio opção de carregamento das bibliotecas acima setadas que são remotas -->
         <link rel="stylesheet" href="<c:url value="/recursos/js/jquery/jquery-ui.css"/>" />
         <script type="text/javascript" src="<c:url value="recursos/js/jquery/jquery2.js"/>" ></script>
         <script type="text/javascript" src="<c:url value="recursos/js/jquery/jquery-ui.min.js"/>" ></script>
         <!-- fim opção de carregamento das bibliotecas acima setadas que são remotas -->
-        
+
         <!-- INICIO JQUERY TOAST MESSAGE-->
         <script type="text/javascript" src="<c:url value="recursos/js/jqueryToastMessage/jquery.toastmessage-min.js"/>" ></script>
         <script type="text/javascript" src="<c:url value="recursos/js/jqueryToastMessage/funcoes.js"/>" ></script> 
@@ -29,15 +29,15 @@
 
         <title>JSP Page</title>
     </head>
-    
-     <c:choose>
-         <c:when test="${not empty mensagem}">
-                <body onload="javascript:showSuccessToast('${mensagem}');">
+
+    <c:choose>
+        <c:when test="${not empty mensagem}">
+            <body onload="javascript:showSuccessToast('${mensagem}');">
             </c:when>
             <c:otherwise>
-                <body>
+            <body>
             </c:otherwise>
-     </c:choose> 
+        </c:choose> 
 
 
         <div id="topo">
@@ -74,7 +74,7 @@
                                 <a>
                                     <td class="titulo">${projeto.titulo}</td>
                                     <td class="tipo" >${projeto.tipoProjeto}</td>
-                                    <td class="status">NÃO HOMOLOGADO</td>
+                                    <td class="status">${projeto.status.descricao }</td>
                                     <td class="edita"><a title="Clique aqui para editar Projeto" href="projeto_edita_show?id=${projeto.id}"></a></td>
                                     <td class="exibe"><a title="Clique aqui para exibir detalhes do projeto" href="projeto_exibe?id=${projeto.id}"></a></td>
                                 </a>
