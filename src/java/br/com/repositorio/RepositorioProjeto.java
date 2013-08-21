@@ -7,6 +7,7 @@ package br.com.repositorio;
 
 import Exceptions.DadoInconsistenteException;
 import Exceptions.PersistenciaException;
+import Exceptions.PrivacidadeException;
 import br.com.dao.ProjetoDAO;
 import br.com.model.Aluno;
 import br.com.model.AreaConhecimento;
@@ -161,15 +162,29 @@ public class RepositorioProjeto {
         return projetos;
     }
 
-    public void submeterHomologacao(int idProjeto) throws PersistenciaException, DadoInconsistenteException {
+    public void submeterHomologacao(int idProjeto, int idResponsavel) throws PersistenciaException, DadoInconsistenteException, PrivacidadeException {
 
         Projeto projeto = obter(idProjeto);
 
-        submeterHomologacao(projeto);
+        submeterHomologacao(projeto, idResponsavel);
     }
 
-    public void submeterHomologacao(Projeto projeto) throws PersistenciaException, DadoInconsistenteException {
+    public void submeterHomologacao(Projeto projeto, int idResponsavel) throws PersistenciaException, DadoInconsistenteException, PrivacidadeException {        
 
+        DadoInconsistenteException exception = verificaConsistenciaParaSubmissao(projeto, idResponsavel);
+        
+        if (exception != null) {
+
+            throw exception;
+        } else {
+
+            projeto.setStatus(StatusProjeto.SUBMETIDO_HOMOLOGACAO);
+            this.projDAO.atualizaStatus(projeto);
+        }
+    }
+    
+    private DadoInconsistenteException verificaConsistenciaParaSubmissao(Projeto projeto, int idUsuario) throws PersistenciaException{
+        
         DadoInconsistenteException exception = null;
 
         try {
@@ -178,6 +193,11 @@ public class RepositorioProjeto {
         } catch (DadoInconsistenteException diex) {
 
             exception = diex;
+        }
+        
+        if(!verificaProjetoResponsavel(projeto, idUsuario)){
+            
+            throw new PrivacidadeException(exception, "Projeto não pertencente ao professor");
         }
 
         try {
@@ -192,24 +212,22 @@ public class RepositorioProjeto {
 
                 exception.setException(diex);
             }
-
         }
-
-        if (exception != null) {
-
-            throw exception;
-        } else {
-
-            projeto.setStatus(StatusProjeto.SUBMETIDO_HOMOLOGACAO);
-            this.projDAO.atualizaStatus(projeto);
-        }
+        
+        return exception;
+    }
+    
+    private boolean verificaProjetoResponsavel(Projeto projeto, int idResponsavel){
+        
+        return !verificaNulo(projeto) && !verificaNulo(projeto.getProfessor()) && projeto.getProfessor().getId() == idResponsavel;
+        
     }
 
     private void verificaStatusParaSubmissaoHomologacao(StatusProjeto status) throws DadoInconsistenteException {
 
         if (status == null || status != StatusProjeto.CRIADO) {
 
-            throw new DadoInconsistenteException("O status do projeto deve ser CRIADO!");
+            throw new DadoInconsistenteException("O status do projeto deve ser " + StatusProjeto.CRIADO);
         }
     }
 

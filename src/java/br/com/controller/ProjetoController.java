@@ -2,6 +2,7 @@ package br.com.controller;
 
 import Exceptions.DadoInconsistenteException;
 import Exceptions.PersistenciaException;
+import Exceptions.PrivacidadeException;
 import br.com.repositorio.RepositorioProjeto;
 import br.com.repositorio.RepositorioUsuario;
 import br.com.model.AreaConhecimento;
@@ -28,7 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class ProjetoController extends GenericController{
+public class ProjetoController extends GenericController {
 
     HttpServletRequest request;
     @Autowired(required = true)
@@ -92,7 +93,6 @@ public class ProjetoController extends GenericController{
         /**
          * **************************************** *
          */
-
         if (idRetorno != -1) {
             if (capitais_val != null && capitais_desc != null) {
                 p_projeto.setCustos(idRetorno, TipoCusto.CAPITAL, capitais_val, capitais_desc);
@@ -275,7 +275,6 @@ public class ProjetoController extends GenericController{
         /**
          * **************************************** *
          */
-
         if (!arquivo.isEmpty()) {
             processarArquivo(p_projeto.getId(), arquivo);
         }
@@ -310,12 +309,12 @@ public class ProjetoController extends GenericController{
     public ModelAndView projetoListaShow(HttpServletRequest p_request) {
 
         Usuario user = (Usuario) p_request.getSession().getAttribute("usuario");
-        
-        if(!verificaAutorizacao(user, Permissao.CRUD_PROJETO)){
-            
+
+        if (!verificaAutorizacao(user, Permissao.CRUD_PROJETO)) {
+
             return new ModelAndView("login");
         }
-        
+
         RepositorioProjeto rp = new RepositorioPostgresFactory().createRepositorioProjeto();
         Professor prof = (Professor) p_request.getSession().getAttribute("usuario");
         List projetos = rp.listarProjetos(prof.getId());
@@ -369,7 +368,6 @@ public class ProjetoController extends GenericController{
         /**
          * **************************************** *
          */
-
         ModelAndView mv;
         if (inconsistencias.size() > 0) {
 
@@ -394,27 +392,35 @@ public class ProjetoController extends GenericController{
     }
 
     @RequestMapping(value = "/submete_homologacao")
-    public ModelAndView submeteProjeto(@RequestParam int id, HttpServletRequest request) {
-        
+    public ModelAndView submeteProjeto(@RequestParam int idProjeto, HttpServletRequest request) {
+
         Usuario user = (Usuario) request.getSession().getAttribute("usuario");
-        
-        if(!verificaAutorizacao(user, Permissao.SUBMISSAO_HOMOLOGACAO)){
-            
+
+        if (!verificaAutorizacao(user, Permissao.SUBMISSAO_HOMOLOGACAO)) {
+
             return new ModelAndView("login");
         }
 
-        List<String> inconsistencias = submete(id);
-
+        List<String> inconsistencias = new LinkedList();
         ModelAndView mv;
-        
-        try{
+
+        try {
+
+            inconsistencias = submete(idProjeto, user.getId());
+        } catch (PrivacidadeException pex) {
             
-            mv = this.projetoEditaShow(id);
-        }catch(PersistenciaException ex){
-            
+            System.out.println("######## PRIVACIDADE EXCEPTION #########");
+            return this.projetoListaShow(request);
+        }
+
+        try {
+
+            mv = this.projetoEditaShow(idProjeto);
+        } catch (PersistenciaException ex) {
+
             mv = new ModelAndView("projeto_adiciona");
         }
-        
+
         if (inconsistencias.isEmpty()) {
 
             mv.addObject("sucesso", "Projeto submetido com sucesso!");
@@ -425,15 +431,18 @@ public class ProjetoController extends GenericController{
 
         return mv;
     }
-    
-    private List<String> submete(int id){
-        
+
+    private List<String> submete(int idProjeto, int idResponsavel) throws PrivacidadeException {
+
         List<String> inconsistencias = new LinkedList<>();
 
         try {
 
-            new RepositorioPostgresFactory().createRepositorioProjeto().submeterHomologacao(id);
-        } catch (DadoInconsistenteException diex) {
+            new RepositorioPostgresFactory().createRepositorioProjeto().submeterHomologacao(idProjeto, idResponsavel);
+        } catch (PrivacidadeException pex){
+            
+            throw pex;
+        }catch (DadoInconsistenteException diex) {
 
             do {
 
@@ -444,7 +453,7 @@ public class ProjetoController extends GenericController{
 
             inconsistencias.add(pex.getMessage());
         }
-        
+
         return inconsistencias;
     }
 
