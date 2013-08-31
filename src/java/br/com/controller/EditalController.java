@@ -5,9 +5,97 @@
  */
 package br.com.controller;
 
+import br.com.model.Edital;
+import br.com.model.Permissao;
+import br.com.model.Professor;
+import br.com.model.Projeto;
+import br.com.model.TipoProjeto;
+import br.com.model.Usuario;
+import br.com.repositorio.RepositorioPostgresFactory;
+import br.com.repositorio.RepositorioProjeto;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class EditalController extends GenericController{
+public class EditalController extends GenericController {
+
+    HttpServletRequest request;
+
+    /**
+     * Método que apenas carrega o formulário para cadastro de editais
+     *
+     * @return ModelAndView
+     */
+    @RequestMapping(value = "/edital_adiciona_show")
+    public ModelAndView editalAdicionaShow(HttpServletRequest p_request) {
+
+        this.request = p_request;
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+
+        //%%%%%%%%%%%%%%%%%%% ATENÇÃO AQUI DEVE SER REVISTO ESSA LÓGICA DE AUTORIZAÇÃO  %%%%%%%%%%%%%%%%%%%
+        if (!verificaAutorizacao(user, Permissao.CRUD_PROJETO)) {
+
+            return new ModelAndView("login");
+        }
+
+        ModelAndView mv = new ModelAndView("edital_adiciona");
+        return mv;
+    }
+
+   /**
+     * Método que apenas carrega o formulário para edição de projetos, com os
+     * campos preenchidos
+     *
+     * @param id
+     * @return ModelAndView
+     */
+    @RequestMapping(value = "/edital_edita_show")
+    public ModelAndView editalEditaShow(HttpServletRequest p_request, @RequestParam int id) {
+        
+        this.request = p_request;
+        System.out.println("************** ID VINDA POR PARAMETRO: " + id);
+
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        if (!verificaAutorizacao(user, Permissao.CRUD_PROJETO)) {
+
+            return new ModelAndView("login");
+        }
+
+
+        ModelAndView mv = new ModelAndView("edital_edita");
+
+        return mv;
+    }
     
+    
+    @RequestMapping(value = "/edital_lista_show")
+    public ModelAndView editalListaShow(HttpServletRequest p_request) {
+
+        this.request = p_request;
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        if (!verificaAutorizacao(user, Permissao.CRUD_PROJETO)) {
+
+            return new ModelAndView("login");
+        }
+
+        ModelAndView mv = new ModelAndView("lista_edital");
+        //if (projetos != null) {
+        //    mv.addObject("projetos", projetos);
+        //}
+        return mv;
+    }
+    
+    
+    
+
 }
