@@ -12,7 +12,7 @@ import java.util.Date;
  * @author Ricardo
  */
 public class Edital {
-    
+
     private int id;
     private String titulo;
     private TipoEdital tipoEdital;
@@ -20,6 +20,29 @@ public class Edital {
     private Date prazoFinal;
     private boolean documento;//TRUE caso exista um arquivo 
     private ProReitor proReitor;
+
+    public Edital() {
+    }
+
+    public Edital(int id, String titulo, TipoEdital tipo, Date prazoIni, Date prazoFim, boolean docum, ProReitor proReitor) {
+
+        this.id = id;
+        this.titulo = titulo;
+        this.tipoEdital = tipo;
+        this.prazoInicial = prazoIni;
+        this.prazoFinal = prazoFim;
+        this.documento = docum;
+        this.proReitor = proReitor;
+    }
+
+    public Edital(String titulo, TipoEdital tipo, Date prazoIni, Date prazoFim, boolean docum, ProReitor proReitor) {
+        this.titulo = titulo;
+        this.tipoEdital = tipo;
+        this.prazoInicial = prazoIni;
+        this.prazoFinal = prazoFim;
+        this.documento = docum;
+        this.proReitor = proReitor;
+    }
 
     /**
      * @return the id
@@ -118,8 +141,5 @@ public class Edital {
     public void setProReitor(ProReitor proReitor) {
         this.proReitor = proReitor;
     }
-    
-    
-    
-    
+
 }
