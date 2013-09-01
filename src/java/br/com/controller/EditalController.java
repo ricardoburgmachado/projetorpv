@@ -88,7 +88,7 @@ public class EditalController extends GenericController {
             return new ModelAndView("login");
         }
 
-        ModelAndView mv = new ModelAndView("lista_edital");
+        ModelAndView mv = new ModelAndView("edital_lista");
         //if (projetos != null) {
         //    mv.addObject("projetos", projetos);
         //}
