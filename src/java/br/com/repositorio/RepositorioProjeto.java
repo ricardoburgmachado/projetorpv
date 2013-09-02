@@ -153,7 +153,7 @@ public class RepositorioProjeto {
 
         List<Projeto> projetos = this.projDAO.listarProjetos(idResponsavel);
 
-        for (Projeto proj : projetos) {edita
+        for (Projeto proj : projetos) {
 
             this.projDAO.carregaCustos(proj);
             this.projDAO.carregaParticipantes(proj);
@@ -273,6 +273,11 @@ public class RepositorioProjeto {
         if (verificaNulo(projeto.getProfessor())) {
 
             exception = new DadoInconsistenteException(exception, "Deve haver professor associado ao projeto!");
+        }
+        
+        if(!projeto.getArquivo()){
+            
+            exception = new DadoInconsistenteException(exception, "Dave haver arquivo associado ao projeto!");
         }
 
         if (exception != null) {
