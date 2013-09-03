@@ -30,8 +30,7 @@
         <link rel="stylesheet" href="<c:url value="recursos/js/multiselect/jquery.multiselect.css"/>" />        
         <script type="text/javascript">
             
-            var $a = jQuery.noConflict();
-            
+            var $a = jQuery.noConflict();            
             $a(function() {
                 $a("#tipo_edital").multiselect({
                     multiple: false,

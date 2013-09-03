@@ -1,10 +1,7 @@
 package br.com.model;
 
 import java.util.ArrayList;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
+
 
 public class Projeto {
 

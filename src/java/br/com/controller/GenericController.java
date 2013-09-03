@@ -6,7 +6,6 @@ package br.com.controller;
 
 import br.com.model.Permissao;
 import br.com.model.Usuario;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
