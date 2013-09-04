@@ -1,3 +1,4 @@
+
 CREATE SEQUENCE public.papel_id_papel_seq;
 
 CREATE TABLE public.papel (
@@ -9,11 +10,16 @@ CREATE TABLE public.papel (
 
 ALTER SEQUENCE public.papel_id_papel_seq OWNED BY public.papel.id_papel;
 
+CREATE SEQUENCE public.area_conhecimento_id_area_seq_1;
+
 CREATE TABLE public.area_conhecimento (
-                id_area serial NOT NULL,
+                id_area INTEGER NOT NULL DEFAULT nextval('public.area_conhecimento_id_area_seq_1'),
                 area VARCHAR(50),
                 CONSTRAINT area_conhecimento_pk PRIMARY KEY (id_area)
 );
+
+
+ALTER SEQUENCE public.area_conhecimento_id_area_seq_1 OWNED BY public.area_conhecimento.id_area;
 
 CREATE SEQUENCE public.permissao_id_perm_seq;
 
@@ -47,6 +53,18 @@ CREATE TABLE public.usuario (
 
 ALTER SEQUENCE public.usuario_id_usuario_seq OWNED BY public.usuario.id_usuario;
 
+CREATE TABLE public.edital (
+                id_edital INTEGER NOT NULL,
+                prazo_final DATE,
+                prazo_inicial DATE,
+                titulo VARCHAR(2000),
+                is_arquivo BOOLEAN,
+                id_usuario INTEGER NOT NULL,
+                tipo_edital VARCHAR(50),
+                CONSTRAINT edital_pk PRIMARY KEY (id_edital)
+);
+
+
 CREATE SEQUENCE public.projeto_id_proj_seq;
 
 CREATE TABLE public.projeto (
@@ -60,7 +78,7 @@ CREATE TABLE public.projeto (
                 status VARCHAR(20) NOT NULL,
                 is_arquivo BOOLEAN DEFAULT false NOT NULL,
                 id_responsavel INTEGER NOT NULL,
-                PRIMARY KEY (id_proj)
+                CONSTRAINT id_pk PRIMARY KEY (id_proj)
 );
 
 
@@ -138,6 +156,13 @@ NOT DEFERRABLE;
 
 ALTER TABLE public.projeto ADD CONSTRAINT usuario_projeto_fk
 FOREIGN KEY (id_responsavel)
+REFERENCES public.usuario (id_usuario)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.edital ADD CONSTRAINT usuario_edital_fk
+FOREIGN KEY (id_usuario)
 REFERENCES public.usuario (id_usuario)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
