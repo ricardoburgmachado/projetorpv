@@ -1,4 +1,13 @@
 
+CREATE TABLE public.arquivo (
+                id_arquivo INTEGER NOT NULL,
+                nome_arquivo VARCHAR(100) NOT NULL,
+                extensao VARCHAR(3) NOT NULL,
+                dados BYTEA NOT NULL,
+                CONSTRAINT arquivo_pk PRIMARY KEY (id_arquivo)
+);
+
+
 CREATE SEQUENCE public.papel_id_papel_seq;
 
 CREATE TABLE public.papel (
@@ -61,6 +70,7 @@ CREATE TABLE public.edital (
                 is_arquivo BOOLEAN,
                 id_usuario INTEGER NOT NULL,
                 tipo_edital VARCHAR(50),
+                id_arquivo INTEGER NOT NULL,
                 CONSTRAINT edital_pk PRIMARY KEY (id_edital)
 );
 
@@ -111,6 +121,13 @@ CREATE TABLE public.participante (
                 CONSTRAINT part_proj_pk PRIMARY KEY (id_usuario, id_proj)
 );
 
+
+ALTER TABLE public.edital ADD CONSTRAINT arquivo_edital_fk
+FOREIGN KEY (id_arquivo)
+REFERENCES public.arquivo (id_arquivo)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
 
 ALTER TABLE public.papel_permissao ADD CONSTRAINT papel_papel_permissao_fk
 FOREIGN KEY (id_papel)
