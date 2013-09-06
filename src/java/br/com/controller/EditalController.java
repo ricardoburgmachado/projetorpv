@@ -5,6 +5,7 @@
  */
 package br.com.controller;
 
+import br.com.model.Arquivo;
 import br.com.model.Edital;
 import br.com.model.Permissao;
 import br.com.model.Professor;
@@ -50,6 +51,18 @@ public class EditalController extends GenericController {
 
         ModelAndView mv = new ModelAndView("edital_adiciona");
         return mv;
+    }
+    
+    @RequestMapping(value = "/edital_adiciona", method = RequestMethod.POST)
+    public ModelAndView editalAdiciona(@ModelAttribute Edital edital, HttpServletRequest p_request,
+            @RequestParam(value = "arquivo_xx", required = false) MultipartFile arquivo) throws IOException {
+        
+        String[] split = arquivo.getName().split("\\.");
+        Arquivo arq = new Arquivo(arquivo.getName(), split[split.length-1], arquivo.getBytes());
+        
+        edital.setArquivo(arq);
+        
+        return null;
     }
 
    /**
