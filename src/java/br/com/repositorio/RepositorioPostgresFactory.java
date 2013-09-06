@@ -5,6 +5,7 @@
 package br.com.repositorio;
 
 import br.com.dao.ConnectionFactory;
+import br.com.dao.DBEdital;
 import br.com.dao.DBProjeto;
 import br.com.dao.DBUsuario;
 
@@ -24,5 +25,13 @@ public class RepositorioPostgresFactory implements AbstractRepositorioFactory{
     public RepositorioProjeto createRepositorioProjeto() {
         return new RepositorioProjeto(new DBProjeto(ConnectionFactory.getInstance().createConnectionPostgres()));
     }
+
+    @Override
+    public RepositorioEdital createRepositorioEdital() {
+        
+        return new RepositorioEdital(new DBEdital(ConnectionFactory.getInstance()));
+    }
+    
+    
     
 }
