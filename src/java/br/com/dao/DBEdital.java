@@ -29,19 +29,20 @@ public class DBEdital implements EditalDAO {
     @Override
     public void adiciona(Edital edital) throws PersistenciaException {
         
-        String sql = "insert into edital (prazo_final, prazo_inicial, titulo, id_usuario, tipo_edital, id_arquivo) values (?,?,?,?,?,?)";
+        //String sql = "insert into edital (prazo_final, prazo_inicial, titulo, id_usuario, tipo_edital, id_arquivo) values (?,?,?,?,?,?)";
+        String sql = "insert into edital (id_edital, titulo, id_usuario, tipo_edital, id_arquivo) values (1, ?,?,?,?)";
         Connection con = factory.createConnectionPostgres();
         PreparedStatement stmt;
         
         try {
 
             stmt = con.prepareStatement(sql);
-            stmt.setDate(1, new Date(edital.getPrazoFinal().getTime()));
-            stmt.setDate(2, new Date(edital.getPrazoInicial().getTime()));
-            stmt.setString(3, edital.getTitulo());
-            stmt.setInt(4, edital.getProReitor().getId());
-            stmt.setString(5, edital.getTipo().toString());
-            stmt.setInt(6, adicionaArquivo(edital.getArquivo()));
+            //stmt.setDate(1, new Date(edital.getPrazoFinal().getTime()));
+            //stmt.setDate(2, new Date(edital.getPrazoInicial().getTime()));
+            stmt.setString(1, edital.getTitulo());
+            stmt.setInt(2, edital.getProReitor().getId());
+            stmt.setString(3, edital.getTipo().toString());
+            stmt.setInt(4, adicionaArquivo(edital.getArquivo()));
         } catch (SQLException sqle) {
 
             throw new PersistenciaException("Falha ao configurar inserção do edital!", sqle);
@@ -62,7 +63,7 @@ public class DBEdital implements EditalDAO {
 
     private int adicionaArquivo(Arquivo arquivo) throws PersistenciaException {
 
-        String sql = "insert into arquivo (nome_arquivo, extensao, dados) values (?, ?, ?)";
+        String sql = "insert into arquivo (id_arquivo, nome_arquivo, extensao, dados) values (1, ?, ?, ?)";
         Connection con = factory.createConnectionPostgres();
         PreparedStatement stmt;
 
@@ -93,7 +94,7 @@ public class DBEdital implements EditalDAO {
 
     private int getMaxIDArquivo() throws PersistenciaException {
 
-        String sql = "select max(id) as id from arquivo";
+        String sql = "select max(id_arquivo) as id from arquivo";
         Connection con = factory.createConnectionPostgres();
         PreparedStatement stmt;
 

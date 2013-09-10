@@ -8,16 +8,10 @@ package br.com.controller;
 import br.com.model.Arquivo;
 import br.com.model.Edital;
 import br.com.model.Permissao;
-import br.com.model.Professor;
-import br.com.model.Projeto;
-import br.com.model.TipoProjeto;
+import br.com.model.ProReitor;
 import br.com.model.Usuario;
 import br.com.repositorio.RepositorioPostgresFactory;
-import br.com.repositorio.RepositorioProjeto;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -57,11 +51,14 @@ public class EditalController extends GenericController {
     public ModelAndView editalAdiciona(@ModelAttribute Edital edital, HttpServletRequest p_request,
             @RequestParam(value = "arquivo_xx", required = false) MultipartFile arquivo) throws IOException {
         
-        String[] split = arquivo.getName().split("\\.");
+        String[] split = arquivo.getOriginalFilename().split("\\.");
         Arquivo arq = new Arquivo(arquivo.getName(), split[split.length-1], arquivo.getBytes());
-        
+        ProReitor pro = new ProReitor();
+        pro.setId(1);
+        edital.setProReitor(pro);
         edital.setArquivo(arq);
         
+        new RepositorioPostgresFactory().createRepositorioEdital().adiciona(edital);
         return null;
     }
 
