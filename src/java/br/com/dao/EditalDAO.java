@@ -14,4 +14,6 @@ import br.com.model.Edital;
 public interface EditalDAO {
     
     void adiciona(Edital edital) throws PersistenciaException;
+    
+    Edital obtem(int idEdital) throws PersistenciaException;
 }

@@ -26,4 +26,9 @@ public class RepositorioEdital{
         this.editalDao.adiciona(edital);
     }
     
+    public Edital obtem(int idEdital) throws PersistenciaException{
+        
+        return this.editalDao.obtem(idEdital);
+    }
+    
 }

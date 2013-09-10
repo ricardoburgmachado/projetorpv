@@ -7,6 +7,9 @@ package br.com.dao;
 import Exceptions.PersistenciaException;
 import br.com.model.Arquivo;
 import br.com.model.Edital;
+import br.com.model.ProReitor;
+import br.com.model.TipoProjeto;
+import br.com.model.Usuario;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -113,4 +116,59 @@ public class DBEdital implements EditalDAO {
 
         return 0;
     }
+
+    @Override
+    public Edital obtem(int idEdital) throws PersistenciaException {
+        
+        String sql = "select * from edital  where id_edital=?"; //FALTA OBTER PRO-REITOR RESPONSAVEL
+        Connection con = this.factory.createConnectionPostgres();
+        PreparedStatement stmt;
+        ResultSet result;
+        
+        try{
+            
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, idEdital);
+        }catch(SQLException sqle){
+            
+            throw new PersistenciaException("Falha ao preparar consulta para obtenção do edital!", sqle);
+        }
+        
+        try{
+            
+            result = stmt.executeQuery();
+        }catch(SQLException sqle){
+            
+            throw new PersistenciaException("Falha ao consultar pela edital!", sqle);
+        }finally{
+            
+            this.factory.close(con);
+        }
+        
+        return createEdital(result);
+    }
+    
+    private Edital createEdital(ResultSet result){
+        
+        try{
+            
+            if(result.next()){
+                
+                Edital edital = new Edital();
+                edital.setId(result.getInt("id_edital"));
+                edital.setPrazoFinal(result.getDate("prazo_final"));
+                edital.setPrazoInicial(result.getDate("prazo_inicial"));
+                edital.setTipo(TipoProjeto.valueOf("tipo_edital"));
+                edital.setTitulo(result.getString("titulo"));
+                
+                return edital;
+            }
+        }catch(SQLException sqle){
+            
+            throw new PersistenciaException("Falha ao obter dados do edital!", sqle);
+        }
+        
+        return null;
+    }
+    
 }
