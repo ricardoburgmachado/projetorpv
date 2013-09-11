@@ -7,6 +7,7 @@ package br.com.dao;
 import Exceptions.PersistenciaException;
 import br.com.model.Arquivo;
 import br.com.model.Edital;
+import br.com.model.Inscricao;
 import br.com.model.TipoProjeto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -60,7 +61,8 @@ public class DBEdital implements EditalDAO {
 
     }
 
-    private int adicionaArquivo(Arquivo arquivo) throws PersistenciaException {
+    @Override
+    public int adicionaArquivo(Arquivo arquivo) throws PersistenciaException {
 
         String sql = "insert into arquivo (id_arquivo, nome_arquivo, extensao, dados) values (1, ?, ?, ?)";
         Connection conn = factory.createConnection();
@@ -283,4 +285,38 @@ public class DBEdital implements EditalDAO {
             throw new PersistenciaException("Falha ao excluir edital!", sqle);
         }
     }
+
+    @Override
+    public void inscreveProjetoEdital(int idProjeto, int idEdital) throws PersistenciaException {
+        
+        String sql = "insert into inscricao values (?, ?)";
+        Connection conn = this.factory.createConnection();
+        PreparedStatement stmt;
+        
+        try{
+            
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idProjeto);
+            stmt.setInt(2, idEdital);
+        }catch(SQLException sqle){
+            
+            throw new PersistenciaException("Falha ao configurar inscrição do projeto no edital!", sqle);
+        }
+        
+        try{
+        
+            stmt.execute();
+        }catch(SQLException sqle){
+            
+            throw new PersistenciaException("Falha ao registrar inscrição do projeto no edital!", sqle);
+        }
+    }
+
+    @Override
+    public void inscreveProjetoEdital(Inscricao inscricao) throws PersistenciaException {
+        
+        
+    }
+    
+    
 }

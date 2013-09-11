@@ -7,6 +7,7 @@ package br.com.dao;
 import Exceptions.PersistenciaException;
 import br.com.model.Arquivo;
 import br.com.model.Edital;
+import br.com.model.Inscricao;
 
 /**
  *
@@ -23,4 +24,10 @@ public interface EditalDAO {
     boolean exists(int idEdital) throws PersistenciaException;
     
     boolean exclui(int idEdital, int idResponsavel) throws PersistenciaException;
+    
+    int adicionaArquivo(Arquivo arquivo) throws PersistenciaException;
+    
+    void inscreveProjetoEdital(int idProjeto, int idEdital) throws PersistenciaException;
+    
+    void inscreveProjetoEdital(Inscricao inscricao) throws PersistenciaException;
 }
