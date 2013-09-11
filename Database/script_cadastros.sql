@@ -103,4 +103,12 @@ insert into participante (id_usuario, id_proj) values (10, 2);
 insert into participante (id_usuario, id_proj) values (11, 2);
 /***** FIM cadastro participantes *******/
 
+/*** INICIO cadastro arquivos *****/
+insert into arquivo(nome_arquivo, extensao, dados) values ('arquivo', 'txt', '[B@451cf2d');
+/*** FIM cadastro arquivos *****/
+
+/**** INICIO cadastro editais *****/
+insert into edital (prazo_inicial, prazo_final, titulo, id_usuario, tipo_edital, id_arquivo) values ('10/10/2013', '10/08/2013', 'PBDA', 1, 'PESQUISA', 1);
+/**** FIM cadastro editais *****/
+
 
