@@ -5,9 +5,7 @@
 package br.com.repositorio;
 
 import Exceptions.DadoInconsistenteException;
-import Exceptions.PersistenciaException;
 import Exceptions.PrivacidadeException;
-import br.com.model.Edital;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -55,20 +53,38 @@ public class RepositorioEditalTest {
      * Test of obtem method, of class RepositorioEdital.
      */
     @Test(expected = DadoInconsistenteException.class)
-    public void testObtemEditalNaoExistente() {
+    public void testObtemEditalInexistente() {
 
-        repEdital.obtem(2, 1);
+        repEdital.obtemEdital(2, 1);
     }
     
     @Test(expected = PrivacidadeException.class)
     public void testObtemEditalNaoPertencenteUsuario(){
         
-        repEdital.obtem(1, 2);
+        repEdital.obtemEdital(1, 2);
     }
     
     @Test
     public void testObtemSucesso(){
         
-        repEdital.obtem(1, 1);
+        repEdital.obtemEdital(1, 1);
+    }
+    
+    @Test(expected = DadoInconsistenteException.class)
+    public void testExcluiEditalInexistente(){
+        
+        repEdital.excluiEdital(2, 1);
+    }
+    
+    @Test(expected = PrivacidadeException.class)
+    public void tesExcluibtemEditalNaoPertencenteUsuario(){
+        
+        repEdital.excluiEdital(1, 2);
+    }
+    
+    @Test
+    public void testExcluirSucesso(){
+        
+        assertEquals(true, repEdital.excluiEdital(1, 1));
     }
 }

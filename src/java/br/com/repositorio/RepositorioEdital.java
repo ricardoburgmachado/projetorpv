@@ -27,7 +27,7 @@ public class RepositorioEdital {
         this.editalDao.adiciona(edital);
     }
 
-    public Edital obtem(int idEdital, int idResponsavel) throws PersistenciaException, DadoInconsistenteException, PrivacidadeException {
+    public Edital obtemEdital(int idEdital, int idResponsavel) throws PersistenciaException, DadoInconsistenteException, PrivacidadeException {
 
         if (verificaConsistenciaObterEdital(idEdital, idResponsavel)) {
 
@@ -44,14 +44,37 @@ public class RepositorioEdital {
         
         return null;
     }
+    
+    public boolean excluiEdital(int idEdital, int idResponsavel) throws PersistenciaException, DadoInconsistenteException, PrivacidadeException{
+        
+        if(verificaConsistenciaExcluirEdital(idEdital, idResponsavel)){
+            
+            if(!this.editalDao.exclui(idEdital, idResponsavel)){
+                
+                throw new PrivacidadeException("Edital não pertencente ao usuário!");
+            }
+        }
+        
+        return true;
+    }
 
-    private boolean verificaConsistenciaObterEdital(int idEdital, int idResponsavel) throws DadoInconsistenteException {
+    private boolean verificaConsistenciaObterEdital(int idEdital, int idResponsavel) throws PersistenciaException, DadoInconsistenteException {
 
         if (!exists(idEdital)) {
 
             throw new DadoInconsistenteException("Edital não existente!");
         }
 
+        return true;
+    }
+    
+    private boolean verificaConsistenciaExcluirEdital(int idEdital, int idResponsavel) throws PersistenciaException, DadoInconsistenteException{
+        
+        if(!exists(idEdital)){
+            
+            throw new DadoInconsistenteException("Edital não existente!");
+        }
+        
         return true;
     }
 

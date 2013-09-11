@@ -30,12 +30,12 @@ public class DBEdital implements EditalDAO {
 
         //String sql = "insert into edital (prazo_final, prazo_inicial, titulo, id_usuario, tipo_edital, id_arquivo) values (?,?,?,?,?,?)";
         String sql = "insert into edital (id_edital, titulo, id_usuario, tipo_edital, id_arquivo) values (1, ?,?,?,?)";
-        Connection con = factory.createConnection();
+        Connection conn = factory.createConnection();
         PreparedStatement stmt;
 
         try {
 
-            stmt = con.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
             //stmt.setDate(1, new Date(edital.getPrazoFinal().getTime()));
             //stmt.setDate(2, new Date(edital.getPrazoInicial().getTime()));
             stmt.setString(1, edital.getTitulo());
@@ -55,7 +55,7 @@ public class DBEdital implements EditalDAO {
             throw new PersistenciaException("Falha ao inserir edital!", sqle);
         } finally {
 
-            factory.close(con);
+            factory.close(conn);
         }
 
     }
@@ -63,12 +63,12 @@ public class DBEdital implements EditalDAO {
     private int adicionaArquivo(Arquivo arquivo) throws PersistenciaException {
 
         String sql = "insert into arquivo (id_arquivo, nome_arquivo, extensao, dados) values (1, ?, ?, ?)";
-        Connection con = factory.createConnection();
+        Connection conn = factory.createConnection();
         PreparedStatement stmt;
 
         try {
 
-            stmt = con.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
             stmt.setString(1, arquivo.getNomeArquivo());
             stmt.setString(2, arquivo.getExtensao());
             stmt.setBytes(3, arquivo.getDados());
@@ -85,7 +85,7 @@ public class DBEdital implements EditalDAO {
             throw new PersistenciaException("Falha ao inserir arquivo!", sqle);
         } finally {
 
-            factory.close(con);
+            factory.close(conn);
         }
 
         return getMaxIDArquivo();
@@ -94,12 +94,12 @@ public class DBEdital implements EditalDAO {
     private int getMaxIDArquivo() throws PersistenciaException {
 
         String sql = "select max(id_arquivo) as id from arquivo";
-        Connection con = factory.createConnection();
+        Connection conn = factory.createConnection();
         PreparedStatement stmt;
 
         try {
 
-            stmt = con.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
@@ -117,13 +117,13 @@ public class DBEdital implements EditalDAO {
     public Edital obtem(int idEdital, int idResponsavel) throws PersistenciaException {
 
         String sql = "select * from edital where id_edital=? and id_usuario=?"; //FALTA OBTER PRO-REITOR RESPONSAVEL
-        Connection con = this.factory.createConnection();
+        Connection conn = this.factory.createConnection();
         PreparedStatement stmt;
         ResultSet result;
 
         try {
 
-            stmt = con.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
             stmt.setInt(1, idEdital);
             stmt.setInt(2, idResponsavel);
         } catch (SQLException sqle) {
@@ -139,7 +139,7 @@ public class DBEdital implements EditalDAO {
             throw new PersistenciaException("Falha ao consultar pela edital!", sqle);
         } finally {
 
-            this.factory.close(con);
+            this.factory.close(conn);
         }
 
         return nextEdital(result);
@@ -172,13 +172,13 @@ public class DBEdital implements EditalDAO {
     public Arquivo obtemArquivo(int idEdital) throws PersistenciaException {
 
         String sql = "select * from arquivo where id_arquivo in (select id_arquivo from edital where id_edital=?)";
-        Connection con = this.factory.createConnection();
+        Connection conn = this.factory.createConnection();
         PreparedStatement stmt;
         ResultSet result;
 
         try {
 
-            stmt = con.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
             stmt.setInt(1, idEdital);
         } catch (SQLException sqle) {
 
@@ -193,7 +193,7 @@ public class DBEdital implements EditalDAO {
             throw new PersistenciaException("Falha ao consultar pelo arquivo!", sqle);
         } finally {
 
-            this.factory.close(con);
+            this.factory.close(conn);
         }
 
         return nextArquivo(result);
@@ -220,13 +220,13 @@ public class DBEdital implements EditalDAO {
     public boolean exists(int idEdital) throws PersistenciaException {
         
         String sql = "select id_edital from edital where id_edital=?";
-        Connection con = this.factory.createConnection();
+        Connection conn = this.factory.createConnection();
         PreparedStatement stmt;
         ResultSet result;
         
         try{
         
-            stmt = con.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
             stmt.setInt(1, idEdital);
         }catch(SQLException sqle){
             
@@ -241,7 +241,7 @@ public class DBEdital implements EditalDAO {
             throw new PersistenciaException("Falha ao buscar por edital!", sqle);
         }finally{
             
-            this.factory.close(con);
+            this.factory.close(conn);
         }
         
         return !isEmpty(result);
@@ -255,6 +255,32 @@ public class DBEdital implements EditalDAO {
         }catch(SQLException sqle){
             
             throw new PersistenciaException("Falha ao acessar resultados da consulta!", sqle);
+        }
+    }
+
+    @Override
+    public boolean exclui(int idEdital, int idResponsavel) throws PersistenciaException {
+        
+        String sql = "delete from edital where id_edital=? and id_usuario=?";
+        Connection conn = this.factory.createConnection();
+        PreparedStatement stmt;
+        
+        try{ 
+            
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idEdital);
+            stmt.setInt(2, idResponsavel);
+        }catch(SQLException sqle){
+            
+            throw new PersistenciaException("Falha ao preparar exclusão do edital!", sqle);
+        }
+        
+        try{ 
+            
+            return stmt.executeUpdate() > 0;
+        }catch(SQLException sqle){
+            
+            throw new PersistenciaException("Falha ao excluir edital!", sqle);
         }
     }
 }
