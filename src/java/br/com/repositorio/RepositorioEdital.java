@@ -6,6 +6,7 @@ package br.com.repositorio;
 
 import Exceptions.DadoInconsistenteException;
 import Exceptions.PersistenciaException;
+import Exceptions.PrivacidadeException;
 import br.com.dao.EditalDAO;
 import br.com.model.Edital;
 
@@ -26,11 +27,17 @@ public class RepositorioEdital {
         this.editalDao.adiciona(edital);
     }
 
-    public Edital obtem(int idEdital, int idResponsavel) throws PersistenciaException, DadoInconsistenteException {
+    public Edital obtem(int idEdital, int idResponsavel) throws PersistenciaException, DadoInconsistenteException, PrivacidadeException {
 
         if (verificaConsistenciaObterEdital(idEdital, idResponsavel)) {
 
-            Edital edital = this.editalDao.obtem(idEdital);
+            Edital edital = this.editalDao.obtem(idEdital, idResponsavel);
+            
+            if(verificaNulo(edital)){
+                
+                throw new PrivacidadeException("Edital não pertencente ao usuário!");
+            }
+            
             edital.setArquivo(this.editalDao.obtemArquivo(idEdital));
             return edital;
         }
@@ -51,5 +58,10 @@ public class RepositorioEdital {
     private boolean exists(int idEdital) throws PersistenciaException {
 
         return this.editalDao.exists(idEdital);
+    }
+    
+    private boolean verificaNulo(Object obj){
+        
+        return obj == null;
     }
 }

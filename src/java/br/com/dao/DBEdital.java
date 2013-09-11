@@ -114,9 +114,9 @@ public class DBEdital implements EditalDAO {
     }
 
     @Override
-    public Edital obtem(int idEdital) throws PersistenciaException {
+    public Edital obtem(int idEdital, int idResponsavel) throws PersistenciaException {
 
-        String sql = "select * from edital  where id_edital=?"; //FALTA OBTER PRO-REITOR RESPONSAVEL
+        String sql = "select * from edital where id_edital=? and id_usuario=?"; //FALTA OBTER PRO-REITOR RESPONSAVEL
         Connection con = this.factory.createConnection();
         PreparedStatement stmt;
         ResultSet result;
@@ -125,6 +125,7 @@ public class DBEdital implements EditalDAO {
 
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, idEdital);
+            stmt.setInt(2, idResponsavel);
         } catch (SQLException sqle) {
 
             throw new PersistenciaException("Falha ao preparar consulta para obtenção do edital!", sqle);

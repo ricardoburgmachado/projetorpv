@@ -4,7 +4,9 @@
  */
 package br.com.repositorio;
 
+import Exceptions.DadoInconsistenteException;
 import Exceptions.PersistenciaException;
+import Exceptions.PrivacidadeException;
 import br.com.model.Edital;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -52,15 +54,21 @@ public class RepositorioEditalTest {
     /**
      * Test of obtem method, of class RepositorioEdital.
      */
+    @Test(expected = DadoInconsistenteException.class)
+    public void testObtemEditalNaoExistente() {
+
+        repEdital.obtem(2, 1);
+    }
+    
+    @Test(expected = PrivacidadeException.class)
+    public void testObtemEditalNaoPertencenteUsuario(){
+        
+        repEdital.obtem(1, 2);
+    }
+    
     @Test
-    public void testObtem() {
-
-        try {
-
-            Edital edital = repEdital.obtem(2,1);
-            System.out.println(edital.getTitulo());
-            System.out.println(edital.getArquivo().getNomeArquivo());
-        } catch (PersistenciaException pex) {
-        }
+    public void testObtemSucesso(){
+        
+        repEdital.obtem(1, 1);
     }
 }
