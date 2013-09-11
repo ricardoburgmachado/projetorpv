@@ -1,12 +1,16 @@
 
+CREATE SEQUENCE public.arquivo_id_arquivo_seq_1_1;
+
 CREATE TABLE public.arquivo (
-                id_arquivo INTEGER NOT NULL,
+                id_arquivo INTEGER NOT NULL DEFAULT nextval('public.arquivo_id_arquivo_seq_1_1'),
                 nome_arquivo VARCHAR(100) NOT NULL,
                 extensao VARCHAR(3) NOT NULL,
                 dados BYTEA NOT NULL,
                 CONSTRAINT arquivo_pk PRIMARY KEY (id_arquivo)
 );
 
+
+ALTER SEQUENCE public.arquivo_id_arquivo_seq_1_1 OWNED BY public.arquivo.id_arquivo;
 
 CREATE SEQUENCE public.papel_id_papel_seq;
 
@@ -62,8 +66,10 @@ CREATE TABLE public.usuario (
 
 ALTER SEQUENCE public.usuario_id_usuario_seq OWNED BY public.usuario.id_usuario;
 
+CREATE SEQUENCE public.edital_id_edital_seq;
+
 CREATE TABLE public.edital (
-                id_edital INTEGER NOT NULL,
+                id_edital INTEGER NOT NULL DEFAULT nextval('public.edital_id_edital_seq'),
                 prazo_final DATE,
                 prazo_inicial DATE,
                 titulo VARCHAR(2000),
@@ -74,6 +80,8 @@ CREATE TABLE public.edital (
                 CONSTRAINT edital_pk PRIMARY KEY (id_edital)
 );
 
+
+ALTER SEQUENCE public.edital_id_edital_seq OWNED BY public.edital.id_edital;
 
 CREATE SEQUENCE public.projeto_id_proj_seq;
 
@@ -93,6 +101,14 @@ CREATE TABLE public.projeto (
 
 
 ALTER SEQUENCE public.projeto_id_proj_seq OWNED BY public.projeto.id_proj;
+
+CREATE TABLE public.inscricao (
+                id_proj INTEGER NOT NULL,
+                id_edital INTEGER NOT NULL,
+                id_arquivo INTEGER NOT NULL,
+                CONSTRAINT inscricao_pk PRIMARY KEY (id_proj, id_edital)
+);
+
 
 CREATE SEQUENCE public.custo_id_seq;
 
@@ -123,6 +139,13 @@ CREATE TABLE public.participante (
 
 
 ALTER TABLE public.edital ADD CONSTRAINT arquivo_edital_fk
+FOREIGN KEY (id_arquivo)
+REFERENCES public.arquivo (id_arquivo)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.inscricao ADD CONSTRAINT arquivo_inscricao_fk
 FOREIGN KEY (id_arquivo)
 REFERENCES public.arquivo (id_arquivo)
 ON DELETE NO ACTION
@@ -185,6 +208,13 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
+ALTER TABLE public.inscricao ADD CONSTRAINT edital_inscricao_fk
+FOREIGN KEY (id_edital)
+REFERENCES public.edital (id_edital)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
 ALTER TABLE public.participante ADD CONSTRAINT projeto_participante_fk
 FOREIGN KEY (id_proj)
 REFERENCES public.projeto (id_proj)
@@ -197,4 +227,11 @@ FOREIGN KEY (id_proj)
 REFERENCES public.projeto (id_proj)
 ON DELETE CASCADE
 ON UPDATE CASCADE
+NOT DEFERRABLE;
+
+ALTER TABLE public.inscricao ADD CONSTRAINT projeto_inscricao_fk
+FOREIGN KEY (id_proj)
+REFERENCES public.projeto (id_proj)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
 NOT DEFERRABLE;
