@@ -289,7 +289,7 @@ public class DBEdital implements EditalDAO {
     @Override
     public void inscreveProjetoEdital(int idProjeto, int idEdital) throws PersistenciaException {
         
-        String sql = "insert into inscricao values (?, ?)";
+        String sql = "insert into inscricao (id_projeto, id_edital) values (?, ?)";
         Connection conn = this.factory.createConnection();
         PreparedStatement stmt;
         
@@ -309,13 +309,40 @@ public class DBEdital implements EditalDAO {
         }catch(SQLException sqle){
             
             throw new PersistenciaException("Falha ao registrar inscrição do projeto no edital!", sqle);
+        }finally{
+            
+            this.factory.close(conn);
         }
     }
 
     @Override
     public void inscreveProjetoEdital(Inscricao inscricao) throws PersistenciaException {
         
+        int idArquivo = adicionaArquivo(inscricao.getArquivo());
+        inscreveProjetoEdital(inscricao.getProjeto().getId(), inscricao.getEdital().getId());
         
+        String sql = "update inscricao id_arquivo=? where id_projeto=? and id_edital=?";
+        Connection conn = this.factory.createConnection();
+        PreparedStatement stmt;
+        
+        try{
+            
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idArquivo);
+            stmt.setInt(2, inscricao.getProjeto().getId());
+            stmt.setInt(3, inscricao.getEdital().getId());
+        }catch(SQLException sqle){
+            
+            throw new PersistenciaException("Falha ao configurar inserção do arquivo na inscrição", sqle);
+        }
+        
+        try{
+            
+            stmt.executeUpdate();
+        }catch(SQLException sqle){
+            
+            throw new PersistenciaException("Falha ao inserir arquivo na inscrição!", sqle);
+        }
     }
     
     
