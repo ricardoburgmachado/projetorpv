@@ -302,13 +302,13 @@
   <table id="TAB81" populated="true" UUID="7b39a23d-b271-436f-ad8b-3820cb894052" name="Inscricao" objectType="TABLE" physicalName="inscricao" >
    <remarks></remarks>
    <folder id="FOLTAB811" populated="true" name="Columns" physicalName="Columns" type="1">
-    <column id="COL82" populated="true" UUID="6bc9eebf-5298-46be-a600-16384c794b8d" autoIncrement="false" autoIncrementSequenceName="projeto_id_proj_seq_1" defaultValue="" name="ID_PROJ" nullable="0" physicalName="id_proj" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+    <column id="COL82" populated="true" UUID="6bc9eebf-5298-46be-a600-16384c794b8d" autoIncrement="false" autoIncrementSequenceName="projeto_id_proj_seq_1_1" defaultValue="" name="ID_PROJ" nullable="0" physicalName="id_proj" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
     <column id="COL83" populated="true" UUID="47a035c3-4036-47cd-8b94-13a47c7256ff" autoIncrement="false" autoIncrementSequenceName="edital_id_edital_seq_1" defaultValue="" name="ID_EDITAL" nullable="0" physicalName="id_edital" precision="0" primaryKeySeq="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
-    <column id="COL84" populated="true" UUID="5550f34a-50e0-4491-904b-757b42ed4563" autoIncrement="false" autoIncrementSequenceName="arquivo_id_arquivo_seq_1_2" defaultValue="" name="ID_ARQUIVO" nullable="0" physicalName="id_arquivo" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+    <column id="COL84" populated="true" UUID="5550f34a-50e0-4491-904b-757b42ed4563" autoIncrement="false" autoIncrementSequenceName="arquivo_id_arquivo_seq_1_2" defaultValue="" name="ID_ARQUIVO" nullable="1" physicalName="id_arquivo" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
     </folder>
@@ -371,7 +371,7 @@
  <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="false" target-schema="public"> </ddl-generator>
  <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  <create-kettle-job-settings filePath="" jobName="" schemaName="" kettleJoinType="0" savingToFile="true" />
- <play-pen zoom="1.0" viewportX="0" viewportY="12" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
+ <play-pen zoom="1.0" viewportX="0" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
   <table-pane table-ref="TAB1" x="528" y="437" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB9" x="25" y="289" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB14" x="726" y="275" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>

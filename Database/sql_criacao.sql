@@ -105,7 +105,7 @@ ALTER SEQUENCE public.projeto_id_proj_seq OWNED BY public.projeto.id_proj;
 CREATE TABLE public.inscricao (
                 id_proj INTEGER NOT NULL,
                 id_edital INTEGER NOT NULL,
-                id_arquivo INTEGER NOT NULL,
+                id_arquivo INTEGER,
                 CONSTRAINT inscricao_pk PRIMARY KEY (id_proj, id_edital)
 );
 
