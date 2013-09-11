@@ -5,6 +5,7 @@
 package br.com.dao;
 
 import Exceptions.PersistenciaException;
+import br.com.model.Arquivo;
 import br.com.model.Edital;
 
 /**
@@ -16,4 +17,6 @@ public interface EditalDAO {
     void adiciona(Edital edital) throws PersistenciaException;
     
     Edital obtem(int idEdital) throws PersistenciaException;
+    
+    Arquivo obtemArquivo(int idEdital) throws PersistenciaException;
 }

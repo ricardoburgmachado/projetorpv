@@ -16,7 +16,6 @@ import br.com.model.Externo;
 import br.com.model.Professor;
 import br.com.model.Projeto;
 import br.com.model.StatusProjeto;
-import br.com.model.TipoProjeto;
 import java.util.ArrayList;
 import java.util.List;
 

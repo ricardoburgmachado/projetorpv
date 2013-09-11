@@ -7,15 +7,11 @@ package br.com.dao;
 import Exceptions.PersistenciaException;
 import br.com.model.Arquivo;
 import br.com.model.Edital;
-import br.com.model.ProReitor;
 import br.com.model.TipoProjeto;
-import br.com.model.Usuario;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 
 /**
  *
@@ -31,12 +27,12 @@ public class DBEdital implements EditalDAO {
 
     @Override
     public void adiciona(Edital edital) throws PersistenciaException {
-        
+
         //String sql = "insert into edital (prazo_final, prazo_inicial, titulo, id_usuario, tipo_edital, id_arquivo) values (?,?,?,?,?,?)";
         String sql = "insert into edital (id_edital, titulo, id_usuario, tipo_edital, id_arquivo) values (1, ?,?,?,?)";
         Connection con = factory.createConnectionPostgres();
         PreparedStatement stmt;
-        
+
         try {
 
             stmt = con.prepareStatement(sql);
@@ -50,7 +46,7 @@ public class DBEdital implements EditalDAO {
 
             throw new PersistenciaException("Falha ao configurar inserção do edital!", sqle);
         }
-        
+
         try {
 
             stmt.execute();
@@ -61,7 +57,7 @@ public class DBEdital implements EditalDAO {
 
             factory.close(con);
         }
-        
+
     }
 
     private int adicionaArquivo(Arquivo arquivo) throws PersistenciaException {
@@ -119,56 +115,103 @@ public class DBEdital implements EditalDAO {
 
     @Override
     public Edital obtem(int idEdital) throws PersistenciaException {
-        
+
         String sql = "select * from edital  where id_edital=?"; //FALTA OBTER PRO-REITOR RESPONSAVEL
         Connection con = this.factory.createConnectionPostgres();
         PreparedStatement stmt;
         ResultSet result;
-        
-        try{
-            
+
+        try {
+
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, idEdital);
-        }catch(SQLException sqle){
-            
+        } catch (SQLException sqle) {
+
             throw new PersistenciaException("Falha ao preparar consulta para obtenção do edital!", sqle);
         }
-        
-        try{
-            
+
+        try {
+
             result = stmt.executeQuery();
-        }catch(SQLException sqle){
-            
+        } catch (SQLException sqle) {
+
             throw new PersistenciaException("Falha ao consultar pela edital!", sqle);
-        }finally{
-            
+        } finally {
+
             this.factory.close(con);
         }
-        
-        return createEdital(result);
+
+        return nextEdital(result);
     }
-    
-    private Edital createEdital(ResultSet result){
-        
-        try{
-            
-            if(result.next()){
-                
+
+    private Edital nextEdital(ResultSet result) {
+
+        try {
+
+            if (result.next()) {
+
                 Edital edital = new Edital();
                 edital.setId(result.getInt("id_edital"));
                 edital.setPrazoFinal(result.getDate("prazo_final"));
                 edital.setPrazoInicial(result.getDate("prazo_inicial"));
-                edital.setTipo(TipoProjeto.valueOf("tipo_edital"));
+                edital.setTipo(TipoProjeto.valueOf(result.getString("tipo_edital")));
                 edital.setTitulo(result.getString("titulo"));
-                
+
                 return edital;
             }
-        }catch(SQLException sqle){
-            
+        } catch (SQLException sqle) {
+
             throw new PersistenciaException("Falha ao obter dados do edital!", sqle);
         }
-        
+
         return null;
     }
-    
+
+    @Override
+    public Arquivo obtemArquivo(int idEdital) throws PersistenciaException {
+
+        String sql = "select * from arquivo where id_arquivo in (select id_arquivo from edital where id_edital=?)";
+        Connection con = this.factory.createConnectionPostgres();
+        PreparedStatement stmt;
+        ResultSet result;
+
+        try {
+
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, idEdital);
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao configurar consulta por arquivo!", sqle);
+        }
+
+        try {
+
+            result = stmt.executeQuery();
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao consultar pela arquivo!", sqle);
+        } finally {
+
+            this.factory.close(con);
+        }
+
+        return nextArquivo(result);
+    }
+
+    private Arquivo nextArquivo(ResultSet result) throws PersistenciaException {
+
+        try {
+
+            if (result.next()) {
+
+                Arquivo arquivo = new Arquivo(result.getString("nome_arquivo"), result.getString("extensao"), result.getBytes("dados"));
+                return arquivo;
+            }
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao acessar os dados do arquivo!", sqle);
+        }
+
+        return null;
+    }
 }
