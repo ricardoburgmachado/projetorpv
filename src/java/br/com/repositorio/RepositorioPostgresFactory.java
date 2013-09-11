@@ -4,7 +4,7 @@
  */
 package br.com.repositorio;
 
-import br.com.dao.ConnectionFactory;
+import br.com.dao.PostgresConnectionFactory;
 import br.com.dao.DBEdital;
 import br.com.dao.DBProjeto;
 import br.com.dao.DBUsuario;
@@ -18,18 +18,18 @@ public class RepositorioPostgresFactory implements AbstractRepositorioFactory{
     @Override
     public RepositorioUsuario createRepositorioUsuario() {
         
-        return new RepositorioUsuario(new DBUsuario(ConnectionFactory.getInstance()));
+        return new RepositorioUsuario(new DBUsuario(PostgresConnectionFactory.getInstance()));
     }
 
     @Override
     public RepositorioProjeto createRepositorioProjeto() {
-        return new RepositorioProjeto(new DBProjeto(ConnectionFactory.getInstance().createConnectionPostgres()));
+        return new RepositorioProjeto(new DBProjeto(PostgresConnectionFactory.getInstance().createConnection()));
     }
 
     @Override
     public RepositorioEdital createRepositorioEdital() {
         
-        return new RepositorioEdital(new DBEdital(ConnectionFactory.getInstance()));
+        return new RepositorioEdital(new DBEdital(PostgresConnectionFactory.getInstance()));
     }
     
     

@@ -9,19 +9,19 @@ import java.sql.SQLException;
  *
  * @author rafael
  */
-public class ConnectionFactory {
+public class PostgresConnectionFactory {
 
-    private static ConnectionFactory connectionFactory = new ConnectionFactory();
+    private static PostgresConnectionFactory connectionFactory = new PostgresConnectionFactory();
 
-    private ConnectionFactory() {
+    private PostgresConnectionFactory() {
     }
 
-    public static ConnectionFactory getInstance() {
+    public static PostgresConnectionFactory getInstance() {
 
         return connectionFactory;
     }
 
-    public Connection createConnectionPostgres() {
+    public Connection createConnection() {
 
         Connection con = null;
 

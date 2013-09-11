@@ -19,9 +19,9 @@ import java.sql.SQLException;
  */
 public class DBEdital implements EditalDAO {
 
-    private ConnectionFactory factory;
+    private PostgresConnectionFactory factory;
 
-    public DBEdital(ConnectionFactory factory) {
+    public DBEdital(PostgresConnectionFactory factory) {
         this.factory = factory;
     }
 
@@ -30,7 +30,7 @@ public class DBEdital implements EditalDAO {
 
         //String sql = "insert into edital (prazo_final, prazo_inicial, titulo, id_usuario, tipo_edital, id_arquivo) values (?,?,?,?,?,?)";
         String sql = "insert into edital (id_edital, titulo, id_usuario, tipo_edital, id_arquivo) values (1, ?,?,?,?)";
-        Connection con = factory.createConnectionPostgres();
+        Connection con = factory.createConnection();
         PreparedStatement stmt;
 
         try {
@@ -63,7 +63,7 @@ public class DBEdital implements EditalDAO {
     private int adicionaArquivo(Arquivo arquivo) throws PersistenciaException {
 
         String sql = "insert into arquivo (id_arquivo, nome_arquivo, extensao, dados) values (1, ?, ?, ?)";
-        Connection con = factory.createConnectionPostgres();
+        Connection con = factory.createConnection();
         PreparedStatement stmt;
 
         try {
@@ -94,7 +94,7 @@ public class DBEdital implements EditalDAO {
     private int getMaxIDArquivo() throws PersistenciaException {
 
         String sql = "select max(id_arquivo) as id from arquivo";
-        Connection con = factory.createConnectionPostgres();
+        Connection con = factory.createConnection();
         PreparedStatement stmt;
 
         try {
@@ -117,7 +117,7 @@ public class DBEdital implements EditalDAO {
     public Edital obtem(int idEdital) throws PersistenciaException {
 
         String sql = "select * from edital  where id_edital=?"; //FALTA OBTER PRO-REITOR RESPONSAVEL
-        Connection con = this.factory.createConnectionPostgres();
+        Connection con = this.factory.createConnection();
         PreparedStatement stmt;
         ResultSet result;
 
@@ -171,7 +171,7 @@ public class DBEdital implements EditalDAO {
     public Arquivo obtemArquivo(int idEdital) throws PersistenciaException {
 
         String sql = "select * from arquivo where id_arquivo in (select id_arquivo from edital where id_edital=?)";
-        Connection con = this.factory.createConnectionPostgres();
+        Connection con = this.factory.createConnection();
         PreparedStatement stmt;
         ResultSet result;
 
@@ -189,7 +189,7 @@ public class DBEdital implements EditalDAO {
             result = stmt.executeQuery();
         } catch (SQLException sqle) {
 
-            throw new PersistenciaException("Falha ao consultar pela arquivo!", sqle);
+            throw new PersistenciaException("Falha ao consultar pelo arquivo!", sqle);
         } finally {
 
             this.factory.close(con);
@@ -203,7 +203,7 @@ public class DBEdital implements EditalDAO {
         try {
 
             if (result.next()) {
-
+ 
                 Arquivo arquivo = new Arquivo(result.getString("nome_arquivo"), result.getString("extensao"), result.getBytes("dados"));
                 return arquivo;
             }
@@ -213,5 +213,47 @@ public class DBEdital implements EditalDAO {
         }
 
         return null;
+    }
+
+    @Override
+    public boolean exists(int idEdital) throws PersistenciaException {
+        
+        String sql = "select id_edital from edital where id_edital=?";
+        Connection con = this.factory.createConnection();
+        PreparedStatement stmt;
+        ResultSet result;
+        
+        try{
+        
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, idEdital);
+        }catch(SQLException sqle){
+            
+            throw new PersistenciaException("Falha ao configurar consulta por edital!", sqle);
+        }
+        
+        try{
+            
+            result = stmt.executeQuery();
+        }catch(SQLException sqle){
+            
+            throw new PersistenciaException("Falha ao buscar por edital!", sqle);
+        }finally{
+            
+            this.factory.close(con);
+        }
+        
+        return !isEmpty(result);
+    }
+    
+    private boolean isEmpty(ResultSet result) throws PersistenciaException{
+        
+        try{ 
+            
+            return result.getRow() <= 0 && !result.isBeforeFirst();
+        }catch(SQLException sqle){
+            
+            throw new PersistenciaException("Falha ao acessar resultados da consulta!", sqle);
+        }
     }
 }

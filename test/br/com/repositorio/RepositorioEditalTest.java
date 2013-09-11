@@ -57,12 +57,10 @@ public class RepositorioEditalTest {
 
         try {
 
-            Edital edital = repEdital.obtem(1);
+            Edital edital = repEdital.obtem(2,1);
             System.out.println(edital.getTitulo());
             System.out.println(edital.getArquivo().getNomeArquivo());
         } catch (PersistenciaException pex) {
-            
-            pex.getException().printStackTrace();
         }
     }
 }
