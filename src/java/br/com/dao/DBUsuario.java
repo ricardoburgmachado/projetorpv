@@ -26,11 +26,11 @@ public class DBUsuario implements UsuarioDAO {
     private Connection connection;
     private Statement statement = null;
     private static final String USUARIO = "usuario";
-    private ConnectionFactory connectionFactory;
+    private PostgresConnectionFactory connectionFactory;
 
     public DBUsuario(){}
     
-    public DBUsuario(ConnectionFactory connectionFactory) {
+    public DBUsuario(PostgresConnectionFactory connectionFactory) {
 
         this.connectionFactory = connectionFactory;
     }
@@ -44,7 +44,7 @@ public class DBUsuario implements UsuarioDAO {
         
         System.out.println("******************** QUERY -> "+query);
         
-        this.connection = connectionFactory.createConnectionPostgres();
+        this.connection = connectionFactory.createConnection();
         
         PreparedStatement stmt;
         ResultSet resultSet;
@@ -90,7 +90,7 @@ public class DBUsuario implements UsuarioDAO {
     @Override
     public Usuario autentica(String login, String senha) throws PersistenciaException {
 
-        Connection con = connectionFactory.createConnectionPostgres();
+        Connection con = connectionFactory.createConnection();
         Usuario user = null;
         PreparedStatement stmt = null;
         ResultSet result;

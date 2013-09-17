@@ -10,8 +10,10 @@ package br.com.repositorio;
  */
 public interface AbstractRepositorioFactory {
     
-    public RepositorioUsuario createRepositorioUsuario();
+    RepositorioUsuario createRepositorioUsuario();
     
-    public abstract RepositorioProjeto createRepositorioProjeto();
+    RepositorioProjeto createRepositorioProjeto();
+    
+    RepositorioEdital createRepositorioEdital();
     
 }
