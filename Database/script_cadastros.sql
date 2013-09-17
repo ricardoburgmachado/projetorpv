@@ -51,9 +51,9 @@ INSERT INTO usuario VALUES (2, 'maria', 'maria', 'maria da silva','ALEGRETE');
 INSERT INTO usuario VALUES (3, 'alfredo', 'alfredo', 'alfredo picareta','ALEGRETE');
 INSERT INTO usuario VALUES (4, 'joaquim', 'joaquim', 'joaquim santos','ALEGRETE');
 INSERT INTO usuario VALUES (5, 'rafael', 'rafael', 'rafael santos','ALEGRETE');
-INSERT INTO usuario VALUES (6, 'rogerio', 'rogerio', 'rogerio','ALEGRETE');
-INSERT INTO usuario VALUES (7, 'ivone', 'ivone', 'ivone','ALEGRETE');
-INSERT INTO usuario VALUES (8, 'ricardo', 'ricardo', 'ricardo machado','ALEGRETE');
+INSERT INTO usuario VALUES (6, 'rogerio', 'rogerio', 'rogerio','ALEGRETE', 'ENSINO');
+INSERT INTO usuario VALUES (7, 'ivone', 'ivone', 'ivone','ALEGRETE', 'EXTENSAO');
+INSERT INTO usuario VALUES (8, 'ricardo', 'ricardo', 'ricardo machado','ALEGRETE', 'PESQUISA');
 INSERT INTO usuario VALUES (9, 'fabio', 'fabio', 'fábio','ALEGRETE');
 INSERT INTO usuario VALUES (10, 'wolmir', 'wolmir', 'wolmir','ALEGRETE');
 INSERT INTO usuario VALUES (11, 'jose', 'jose', 'José','ALEGRETE');
@@ -80,9 +80,9 @@ INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(3, 12);
 INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(4, 11);
 INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(4, 10);
 INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(5, 9);
-INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(5, 8);
-INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(5, 7);
-INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(5, 6);
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(1, 8);
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(1, 7);
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(1, 6);
 INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(5, 3);
 
 /***************************** FIM cadastro usuario papel **********************/
