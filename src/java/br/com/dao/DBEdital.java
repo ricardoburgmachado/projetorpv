@@ -64,7 +64,7 @@ public class DBEdital implements EditalDAO {
     @Override
     public int adicionaArquivo(Arquivo arquivo) throws PersistenciaException {
 
-        String sql = "insert into arquivo (id_arquivo, nome_arquivo, extensao, dados) values (1, ?, ?, ?)";
+        String sql = "insert into arquivo (nome_arquivo, extensao, dados) values (?, ?, ?)";
         Connection conn = factory.createConnection();
         PreparedStatement stmt;
 

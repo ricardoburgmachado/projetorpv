@@ -1249,7 +1249,7 @@ exists or setup the property manually. For example like this:
         </nbjpdaconnect>
     </target>
     <target if="do.display.browser.debug" name="debug-display-browser">
-        <nbbrowse url="${client.url}"/>
+        <nbbrowse context="${browser.context}" url="${client.url}" urlPath="${client.urlPart}"/>
     </target>
     <target if="do.debug.client" name="connect-client-debugger">
         <webproject1:nbjsdebugstart webUrl="${client.url}"/>

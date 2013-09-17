@@ -46,23 +46,31 @@ public class EditalController extends GenericController {
         ModelAndView mv = new ModelAndView("edital_adiciona");
         return mv;
     }
-    
+
     @RequestMapping(value = "/edital_adiciona", method = RequestMethod.POST)
     public ModelAndView editalAdiciona(@ModelAttribute Edital edital, HttpServletRequest p_request,
             @RequestParam(value = "arquivo_xx", required = false) MultipartFile arquivo) throws IOException {
-        
+
+        this.request = p_request;
+
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        if (!verificaAutorizacao(user, Permissao.CRUD_EDITAL)) {
+
+            return new ModelAndView("login");
+        }
+
         String[] split = arquivo.getOriginalFilename().split("\\.");
-        Arquivo arq = new Arquivo(arquivo.getName(), split[split.length-1], arquivo.getBytes());
+        Arquivo arq = new Arquivo(arquivo.getName(), split[split.length - 1], arquivo.getBytes());
         ProReitor pro = new ProReitor();
-        pro.setId(1);
+        pro.setId(user.getId());
         edital.setProReitor(pro);
         edital.setArquivo(arq);
-        
+
         new RepositorioPostgresFactory().createRepositorioEdital().adiciona(edital);
         return null;
     }
 
-   /**
+    /**
      * Método que apenas carrega o formulário para edição de projetos, com os
      * campos preenchidos
      *
@@ -71,7 +79,7 @@ public class EditalController extends GenericController {
      */
     @RequestMapping(value = "/edital_edita_show")
     public ModelAndView editalEditaShow(HttpServletRequest p_request, @RequestParam int id) {
-        
+
         this.request = p_request;
         System.out.println("************** ID VINDA POR PARAMETRO: " + id);
 
@@ -81,13 +89,11 @@ public class EditalController extends GenericController {
             return new ModelAndView("login");
         }
 
-
         ModelAndView mv = new ModelAndView("edital_edita");
 
         return mv;
     }
-    
-    
+
     @RequestMapping(value = "/edital_lista_show")
     public ModelAndView editalListaShow(HttpServletRequest p_request) {
 
@@ -104,8 +110,5 @@ public class EditalController extends GenericController {
         //}
         return mv;
     }
-    
-    
-    
 
 }
