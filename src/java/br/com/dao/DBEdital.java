@@ -30,7 +30,7 @@ public class DBEdital implements EditalDAO {
     public void adiciona(Edital edital) throws PersistenciaException {
 
         //String sql = "insert into edital (prazo_final, prazo_inicial, titulo, id_usuario, tipo_edital, id_arquivo) values (?,?,?,?,?,?)";
-        String sql = "insert into edital (id_edital, titulo, id_usuario, tipo_edital, id_arquivo) values (1, ?,?,?,?)";
+        String sql = "insert into edital (titulo, id_usuario, tipo_edital, id_arquivo) values (?,?,?,?)";
         Connection conn = factory.createConnection();
         PreparedStatement stmt;
 
