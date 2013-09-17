@@ -15,29 +15,25 @@ public class Edital {
 
     private int id;
     private String titulo;
-    private TipoEdital tipoEdital;
+    private TipoProjeto tipo;
     private Date prazoInicial;
     private Date prazoFinal;
     private boolean documento;//TRUE caso exista um arquivo 
     private ProReitor proReitor;
+    private Arquivo arquivo;
 
     public Edital() {
     }
 
-    public Edital(int id, String titulo, TipoEdital tipo, Date prazoIni, Date prazoFim, boolean docum, ProReitor proReitor) {
-
+    public Edital(int id, String titulo, TipoProjeto tipo, Date prazoIni, Date prazoFim, boolean docum, ProReitor proReitor) {
+        
+        this(titulo, tipo, prazoIni, prazoFim, docum, proReitor);
         this.id = id;
-        this.titulo = titulo;
-        this.tipoEdital = tipo;
-        this.prazoInicial = prazoIni;
-        this.prazoFinal = prazoFim;
-        this.documento = docum;
-        this.proReitor = proReitor;
     }
 
-    public Edital(String titulo, TipoEdital tipo, Date prazoIni, Date prazoFim, boolean docum, ProReitor proReitor) {
+    public Edital(String titulo, TipoProjeto tipo, Date prazoIni, Date prazoFim, boolean docum, ProReitor proReitor) {
         this.titulo = titulo;
-        this.tipoEdital = tipo;
+        this.tipo = tipo;
         this.prazoInicial = prazoIni;
         this.prazoFinal = prazoFim;
         this.documento = docum;
@@ -70,20 +66,6 @@ public class Edital {
      */
     public void setTitulo(String titulo) {
         this.titulo = titulo;
-    }
-
-    /**
-     * @return the tipoEdital
-     */
-    public TipoEdital getTipoEdital() {
-        return tipoEdital;
-    }
-
-    /**
-     * @param tipoEdital the tipoEdital to set
-     */
-    public void setTipoEdital(TipoEdital tipoEdital) {
-        this.tipoEdital = tipoEdital;
     }
 
     /**
@@ -140,6 +122,22 @@ public class Edital {
      */
     public void setProReitor(ProReitor proReitor) {
         this.proReitor = proReitor;
+    }
+
+    public Arquivo getArquivo() {
+        return arquivo;
+    }
+
+    public void setArquivo(Arquivo arquivo) {
+        this.arquivo = arquivo;
+    }
+
+    public TipoProjeto getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoProjeto tipo) {
+        this.tipo = tipo;
     }
 
 }
