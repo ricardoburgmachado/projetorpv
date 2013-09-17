@@ -60,6 +60,7 @@ CREATE TABLE public.usuario (
                 senha VARCHAR(16),
                 nome VARCHAR(50) NOT NULL,
                 campus VARCHAR(50),
+                area VARCHAR(50),
                 CONSTRAINT login_pk PRIMARY KEY (id_usuario)
 );
 
