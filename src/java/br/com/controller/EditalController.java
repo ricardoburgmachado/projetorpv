@@ -38,7 +38,7 @@ public class EditalController extends GenericController {
         Usuario user = (Usuario) request.getSession().getAttribute("usuario");
 
         //%%%%%%%%%%%%%%%%%%% ATENÇÃO AQUI DEVE SER REVISTO ESSA LÓGICA DE AUTORIZAÇÃO  %%%%%%%%%%%%%%%%%%%
-        if (!verificaAutorizacao(user, Permissao.CRUD_PROJETO)) {
+        if (!verificaAutorizacao(user, Permissao.CRUD_EDITAL)) {
 
             return new ModelAndView("login");
         }
