@@ -45,6 +45,7 @@ INSERT INTO permissao(id_perm, descricao)VALUES(3, 'CRUD_EDITAL');
 INSERT INTO papel_permissao VALUES (1, 3);
 INSERT INTO papel_permissao VALUES (2, 3);
 INSERT INTO papel_permissao VALUES (3, 1);
+INSERT INTO papel_permissao VALUES (2, 1);
 /***************************** FIM cadastro PAPEL PERMISSÃO **********************/
 
 /***************************** INICIO cadastro usuarios **********************/
