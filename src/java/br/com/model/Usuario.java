@@ -16,6 +16,7 @@ public abstract class Usuario {
     private String nome;
     private Campus campus;
     private List<Permissao> permissoes;
+    private String area;
 
     public Usuario() {
         
@@ -143,5 +144,19 @@ public abstract class Usuario {
         }
 
         return null;
+    }
+
+    /**
+     * @return the area
+     */
+    public String getArea() {
+        return area;
+    }
+
+    /**
+     * @param area the area to set
+     */
+    public void setArea(String area) {
+        this.area = area;
     }
 }
