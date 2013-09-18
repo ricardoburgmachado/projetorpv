@@ -10,8 +10,10 @@ import br.com.model.Arquivo;
 import br.com.model.Campus;
 import br.com.model.Edital;
 import br.com.model.Inscricao;
+import br.com.model.ProReitor;
 import br.com.model.StatusProjeto;
 import br.com.model.TipoProjeto;
+import br.com.model.Usuario;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -135,7 +137,7 @@ public class DBEdital implements EditalDAO {
     @Override
     public Edital obtem(int idEdital, int idResponsavel) throws PersistenciaException {
 
-        String sql = "select * from edital where id_edital=? and id_usuario=?"; //FALTA OBTER PRO-REITOR RESPONSAVEL
+        String sql = "select * from edital natural join usuario where id_edital=? and id_usuario=?";
         Connection conn = this.factory.createConnection();
         PreparedStatement stmt;
         ResultSet result;
@@ -176,6 +178,13 @@ public class DBEdital implements EditalDAO {
                 edital.setPrazoInicial(result.getDate("prazo_inicial"));
                 edital.setTipo(TipoProjeto.valueOf(result.getString("tipo_edital")));
                 edital.setTitulo(result.getString("titulo"));
+                
+                ProReitor proReitor = new ProReitor();
+                proReitor.setId(result.getInt("id_usuario"));
+                proReitor.setNome(result.getString("nome"));
+                proReitor.setCampus(Campus.valueOf(result.getString("campus")));
+                proReitor.setArea(result.getString("area"));
+                edital.setProReitor(proReitor);
 
                 return edital;
             }

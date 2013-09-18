@@ -4,6 +4,10 @@
  */
 package br.com.repositorio;
 
+import Exceptions.AutorizacaoException;
+import Exceptions.DadoInconsistenteException;
+import Exceptions.PersistenciaException;
+import Exceptions.PrivacidadeException;
 import br.com.model.Arquivo;
 import br.com.model.Edital;
 import br.com.model.Inscricao;
@@ -36,6 +40,16 @@ public class RepositorioFacade {
         Inscricao inscricao = edital.inscreveProjeto(projeto, arquivo, dataInscricao);
         
         this.repEdital.inscreveProjetoEdital(inscricao, usuario);
+    }
+    
+     public Usuario autenticaUsuario(String login, String senha) throws PersistenciaException{
+        
+        return this.repUsuario.autenticaUsuario(login, senha);
+    }
+
+    public void excluiEdital(int idEdital, Usuario usuario) throws PersistenciaException, PrivacidadeException, AutorizacaoException, DadoInconsistenteException{
+        
+        this.repEdital.excluiEdital(this.repEdital.obtemEdital(idEdital), usuario);
     }
     
 }
