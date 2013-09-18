@@ -8,6 +8,7 @@ import Exceptions.PersistenciaException;
 import br.com.model.Arquivo;
 import br.com.model.Edital;
 import br.com.model.Inscricao;
+import br.com.model.StatusProjeto;
 import br.com.model.TipoProjeto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -64,7 +65,7 @@ public class DBEdital implements EditalDAO {
     @Override
     public int adicionaArquivo(Arquivo arquivo) throws PersistenciaException {
 
-        String sql = "insert into arquivo (id_arquivo, nome_arquivo, extensao, dados) values (1, ?, ?, ?)";
+        String sql = "insert into arquivo (nome_arquivo, extensao, dados) values (?, ?, ?)";
         Connection conn = factory.createConnection();
         PreparedStatement stmt;
 
@@ -206,7 +207,7 @@ public class DBEdital implements EditalDAO {
         try {
 
             if (result.next()) {
- 
+
                 Arquivo arquivo = new Arquivo(result.getString("nome_arquivo"), result.getString("extensao"), result.getBytes("dados"));
                 return arquivo;
             }
@@ -220,130 +221,191 @@ public class DBEdital implements EditalDAO {
 
     @Override
     public boolean exists(int idEdital) throws PersistenciaException {
-        
+
         String sql = "select id_edital from edital where id_edital=?";
         Connection conn = this.factory.createConnection();
         PreparedStatement stmt;
         ResultSet result;
-        
-        try{
-        
+
+        try {
+
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, idEdital);
-        }catch(SQLException sqle){
-            
+        } catch (SQLException sqle) {
+
             throw new PersistenciaException("Falha ao configurar consulta por edital!", sqle);
         }
-        
-        try{
-            
+
+        try {
+
             result = stmt.executeQuery();
-        }catch(SQLException sqle){
-            
+        } catch (SQLException sqle) {
+
             throw new PersistenciaException("Falha ao buscar por edital!", sqle);
-        }finally{
-            
+        } finally {
+
             this.factory.close(conn);
         }
-        
+
         return !isEmpty(result);
     }
-    
-    private boolean isEmpty(ResultSet result) throws PersistenciaException{
-        
-        try{ 
-            
+
+    private boolean isEmpty(ResultSet result) throws PersistenciaException {
+
+        try {
+
             return result.getRow() <= 0 && !result.isBeforeFirst();
-        }catch(SQLException sqle){
-            
+        } catch (SQLException sqle) {
+
             throw new PersistenciaException("Falha ao acessar resultados da consulta!", sqle);
         }
     }
 
     @Override
     public boolean exclui(int idEdital, int idResponsavel) throws PersistenciaException {
-        
+
         String sql = "delete from edital where id_edital=? and id_usuario=?";
         Connection conn = this.factory.createConnection();
         PreparedStatement stmt;
-        
-        try{ 
-            
+
+        try {
+
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, idEdital);
             stmt.setInt(2, idResponsavel);
-        }catch(SQLException sqle){
-            
+        } catch (SQLException sqle) {
+
             throw new PersistenciaException("Falha ao preparar exclusão do edital!", sqle);
         }
-        
-        try{ 
-            
+
+        try {
+
             return stmt.executeUpdate() > 0;
-        }catch(SQLException sqle){
-            
+        } catch (SQLException sqle) {
+
             throw new PersistenciaException("Falha ao excluir edital!", sqle);
+        } finally {
+
+            this.factory.close(conn);
         }
     }
 
-    @Override
-    public void inscreveProjetoEdital(int idProjeto, int idEdital) throws PersistenciaException {
-        
-        String sql = "insert into inscricao (id_projeto, id_edital) values (?, ?)";
+    private boolean inscreveProjetoEdital(int idProjeto, int idEdital) throws PersistenciaException {
+
+        String sql = "insert into inscricao (id_proj, id_edital) values (?, ?)";
         Connection conn = this.factory.createConnection();
         PreparedStatement stmt;
-        
-        try{
-            
+
+        try {
+
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, idProjeto);
             stmt.setInt(2, idEdital);
-        }catch(SQLException sqle){
-            
+        } catch (SQLException sqle) {
+
             throw new PersistenciaException("Falha ao configurar inscrição do projeto no edital!", sqle);
         }
-        
-        try{
-        
-            stmt.execute();
-        }catch(SQLException sqle){
-            
+
+        try {
+
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException sqle) {
+
             throw new PersistenciaException("Falha ao registrar inscrição do projeto no edital!", sqle);
-        }finally{
-            
+        } finally {
+
             this.factory.close(conn);
         }
     }
 
     @Override
     public void inscreveProjetoEdital(Inscricao inscricao) throws PersistenciaException {
-        
+
         int idArquivo = adicionaArquivo(inscricao.getArquivo());
         inscreveProjetoEdital(inscricao.getProjeto().getId(), inscricao.getEdital().getId());
-        
-        String sql = "update inscricao id_arquivo=? where id_projeto=? and id_edital=?";
+        atualizaStatusProjeto(inscricao.getProjeto().getId(), StatusProjeto.INSCRITO);
+
+        String sql = "update inscricao set id_arquivo=? where id_proj=? and id_edital=?";
         Connection conn = this.factory.createConnection();
         PreparedStatement stmt;
-        
-        try{
-            
+
+        try {
+
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, idArquivo);
             stmt.setInt(2, inscricao.getProjeto().getId());
             stmt.setInt(3, inscricao.getEdital().getId());
-        }catch(SQLException sqle){
-            
+        } catch (SQLException sqle) {
+
             throw new PersistenciaException("Falha ao configurar inserção do arquivo na inscrição", sqle);
         }
-        
-        try{
-            
+
+        try {
+
             stmt.executeUpdate();
-        }catch(SQLException sqle){
-            
+        } catch (SQLException sqle) {
+
             throw new PersistenciaException("Falha ao inserir arquivo na inscrição!", sqle);
+        } finally {
+
+            this.factory.close(conn);
         }
     }
     
-    
+    private boolean atualizaStatusProjeto(int idProjeto, StatusProjeto status){
+        
+        String sql = "update projeto set status=? where id_proj = ?";
+        Connection conn = this.factory.createConnection();
+        PreparedStatement stmt;
+
+        try {
+
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, status.toString());
+            stmt.setInt(2, idProjeto);
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar atualização de status para o projeto!", sqle);
+        }
+
+        try {
+
+            return stmt.executeQuery().next();
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao atualizar status do projeto!", sqle);
+        } finally {
+
+            this.factory.close(conn);
+        }
+    }
+
+    @Override
+    public boolean verificaInscricao(int idEdital, int idProjeto) throws PersistenciaException {
+
+        String sql = "select idEdital from inscricao where id_edital=? and id_projeto=?";
+        Connection conn = this.factory.createConnection();
+        PreparedStatement stmt;
+
+        try {
+
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idEdital);
+            stmt.setInt(2, idProjeto);
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar consulta por inscrição!", sqle);
+        }
+
+        try {
+
+            return stmt.executeQuery().next();
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao consultar inscrição!", sqle);
+        } finally {
+
+            this.factory.close(conn);
+        }
+    }
 }

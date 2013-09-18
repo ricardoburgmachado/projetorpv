@@ -27,7 +27,7 @@ public interface EditalDAO {
     
     int adicionaArquivo(Arquivo arquivo) throws PersistenciaException;
     
-    void inscreveProjetoEdital(int idProjeto, int idEdital) throws PersistenciaException;
-    
     void inscreveProjetoEdital(Inscricao inscricao) throws PersistenciaException;
+    
+    boolean verificaInscricao(int idEdital, int idProjeto) throws PersistenciaException;
 }

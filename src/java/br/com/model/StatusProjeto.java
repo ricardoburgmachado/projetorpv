@@ -10,7 +10,7 @@ package br.com.model;
  */
 public enum StatusProjeto {
     
-    CRIADO("Não homologado"), SUBMETIDO_HOMOLOGACAO("Submetido para homologação"), HOMOLOGADO("Homologado");
+    CRIADO("Não homologado"), SUBMETIDO_HOMOLOGACAO("Submetido para homologação"), HOMOLOGADO("Homologado"), INSCRITO("Inscrito");
     
     private String descricao;
     

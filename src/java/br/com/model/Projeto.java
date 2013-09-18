@@ -17,11 +17,12 @@ public class Projeto {
     private ArrayList<Externo> participantesExterno = new ArrayList<Externo>();
     private Professor professor;
     private boolean arquivo;
-    private ArrayList<Custo> custos = new ArrayList<Custo>();
+    private ArrayList<Custo> custos = new ArrayList<>();
     private AreaConhecimento areaConhecimento;
     private Campus campus;
     private boolean sigilo;
     private StatusProjeto status;
+    
     
     public Projeto(){
         
@@ -282,6 +283,8 @@ public class Projeto {
     public void setStatus(StatusProjeto status) {
         this.status = status;
     }
+    
+    
 
     @Override
     public String toString() {

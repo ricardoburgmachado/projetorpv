@@ -2,7 +2,7 @@ package br.com.model;
 
 public enum Permissao {
 
-    CRUD_PROJETO, ACESSO, SUBMISSAO_HOMOLOGACAO;
+    CRUD_PROJETO, ACESSO, SUBMISSAO_HOMOLOGACAO, INSCRICAO_EDITAL;
     
     public static Permissao fromString(String text) {
         if (text != null) {

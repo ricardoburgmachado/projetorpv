@@ -4,6 +4,8 @@
  */
 package br.com.model;
 
+import java.util.Date;
+
 /**
  *
  * @author rafael
@@ -13,15 +15,21 @@ public class Inscricao {
     private Projeto projeto;
     private Edital edital;
     private Arquivo arquivo;
+    private Date dataInscricao;
+
+    public Inscricao(Projeto projeto, Edital edital, Arquivo arquivo, Date dataInscricao) {
+        this.projeto = projeto;
+        this.edital = edital;
+        this.arquivo = arquivo;
+        this.dataInscricao = dataInscricao == null ? new Date(): dataInscricao;
+    }
 
     public Inscricao(Projeto projeto, Edital edital, Arquivo arquivo) {
-        this(projeto, edital);
-        this.arquivo = arquivo;
+       this(projeto, edital, arquivo, null);
     }
 
     public Inscricao(Projeto projeto, Edital edital) {
-        this.projeto = projeto;
-        this.edital = edital;
+       this(projeto, edital, null);
     }
 
     public Projeto getProjeto() {
@@ -47,7 +55,13 @@ public class Inscricao {
     public void setArquivo(Arquivo arquivo) {
         this.arquivo = arquivo;
     }
-    
-    
+
+    public Date getDataInscricao() {
+        return dataInscricao;
+    }
+
+    public void setDataInscricao(Date dataInscricao) {
+        this.dataInscricao = dataInscricao;
+    }
     
 }

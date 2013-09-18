@@ -6,6 +6,7 @@
 package br.com.model;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -19,6 +20,7 @@ public class Edital {
     private Date prazoInicial;
     private Date prazoFinal;
     private boolean documento;//TRUE caso exista um arquivo 
+    private List<Inscricao> inscricoes;
     private ProReitor proReitor;
     private Arquivo arquivo;
 
@@ -138,6 +140,14 @@ public class Edital {
 
     public void setTipo(TipoProjeto tipo) {
         this.tipo = tipo;
+    }
+    
+    public Inscricao inscreveProjeto(Projeto projeto, Arquivo arquivo, Date dataInscricao){
+        
+        Inscricao inscricao = new Inscricao(projeto, this, arquivo, dataInscricao);
+        this.inscricoes.add(inscricao);
+        
+        return inscricao;
     }
 
 }
