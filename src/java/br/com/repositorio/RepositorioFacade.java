@@ -41,4 +41,14 @@ public class RepositorioFacade {
 
         this.repEdital.inscreveProjetoEdital(inscricao, usuario);
     }
+    
+     public Usuario autenticaUsuario(String login, String senha) throws PersistenciaException{
+        
+        return this.repUsuario.autenticaUsuario(login, senha);
+    }
+
+    public void excluiEdital(int idEdital, Usuario usuario) throws PersistenciaException, PrivacidadeException, AutorizacaoException, DadoInconsistenteException{
+        
+        this.repEdital.excluiEdital(this.repEdital.obtemEdital(idEdital), usuario);
+    }
 }
