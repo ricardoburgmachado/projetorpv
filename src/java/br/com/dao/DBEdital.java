@@ -163,6 +163,38 @@ public class DBEdital implements EditalDAO {
 
         return nextEdital(result);
     }
+    
+    @Override
+    public Edital obtem(int idEdital) throws PersistenciaException {
+        
+        String sql = "select * from edital where id_edital=?"; //FALTA OBTER PRO-REITOR RESPONSAVEL
+        Connection conn = this.factory.createConnection();
+        PreparedStatement stmt;
+        ResultSet result;
+
+        try {
+
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idEdital);
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar consulta para obtenção do edital!", sqle);
+        }
+
+        try {
+
+            result = stmt.executeQuery();
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao consultar pela edital!", sqle);
+        } finally {
+
+            this.factory.close(conn);
+        }
+
+        return nextEdital(result);
+    }
+    
 
     private Edital nextEdital(ResultSet result) {
 
@@ -389,7 +421,7 @@ public class DBEdital implements EditalDAO {
 
         try {
 
-            return stmt.executeQuery().next();
+            return stmt.executeUpdate() > 0;
         } catch (SQLException sqle) {
 
             throw new PersistenciaException("Falha ao atualizar status do projeto!", sqle);
@@ -402,7 +434,7 @@ public class DBEdital implements EditalDAO {
     @Override
     public boolean verificaInscricao(int idEdital, int idProjeto) throws PersistenciaException {
 
-        String sql = "select idEdital from inscricao where id_edital=? and id_projeto=?";
+        String sql = "select id_edital from inscricao where id_edital=? and id_proj=?";
         Connection conn = this.factory.createConnection();
         PreparedStatement stmt;
 

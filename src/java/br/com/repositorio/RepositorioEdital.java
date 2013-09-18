@@ -87,6 +87,11 @@ public class RepositorioEdital {
 
         return null;
     }
+    
+    public Edital obtemEdital(int idEdital) throws PersistenciaException{
+        
+        return this.editalDao.obtem(idEdital);
+    }
 
     public boolean excluiEdital(int idEdital, int idResponsavel) throws PersistenciaException, DadoInconsistenteException, PrivacidadeException {
 
@@ -164,7 +169,11 @@ public class RepositorioEdital {
             exception = new PrivacidadeException(exception, "Projeto não pertencente ao usuário!");
         }
 
+<<<<<<< HEAD
         if (!(inscricao.getDataInscricao().after(inscricao.getEdital().getPrazoInicial()) && inscricao.getDataInscricao().before(inscricao.getEdital().getPrazoInicial()))) {
+=======
+        if (!(inscricao.getDataInscricao().after(inscricao.getEdital().getPrazoInicial()) && inscricao.getDataInscricao().before(inscricao.getEdital().getPrazoFinal()))) {
+>>>>>>> inscricao-edital
 
             exception = new DadoInconsistenteException(exception, "Prazo para inscrição expirado!");
         }
@@ -177,7 +186,12 @@ public class RepositorioEdital {
         if (this.editalDao.verificaInscricao(inscricao.getEdital().getId(), inscricao.getProjeto().getId())) {
 
             exception = new DadoInconsistenteException(exception, "Projeto já inscrito no edital!");
+<<<<<<< HEAD
         } else if (!inscricao.getProjeto().getStatus().equals(StatusProjeto.HOMOLOGADO) || !inscricao.getProjeto().getStatus().equals(StatusProjeto.INSCRITO)) {
+=======
+
+        } else if (!inscricao.getProjeto().getStatus().equals(StatusProjeto.HOMOLOGADO) && !inscricao.getProjeto().getStatus().equals(StatusProjeto.INSCRITO)) {
+>>>>>>> inscricao-edital
 
             exception = new DadoInconsistenteException(exception, "Projeto não homologado!");
         }

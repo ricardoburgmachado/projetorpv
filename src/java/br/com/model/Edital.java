@@ -5,6 +5,7 @@
  */
 package br.com.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,12 +26,15 @@ public class Edital {
     private Arquivo arquivo;
 
     public Edital() {
+        
+        this.inscricoes = new ArrayList<>();
     }
 
     public Edital(int id, String titulo, TipoProjeto tipo, Date prazoIni, Date prazoFim, boolean docum, ProReitor proReitor) {
         
         this(titulo, tipo, prazoIni, prazoFim, docum, proReitor);
         this.id = id;
+        this.inscricoes = new ArrayList<>();
     }
 
     public Edital(String titulo, TipoProjeto tipo, Date prazoIni, Date prazoFim, boolean docum, ProReitor proReitor) {
@@ -40,6 +44,7 @@ public class Edital {
         this.prazoFinal = prazoFim;
         this.documento = docum;
         this.proReitor = proReitor;
+        this.inscricoes = new ArrayList<>();
     }
 
     /**
