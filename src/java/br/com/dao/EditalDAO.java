@@ -19,6 +19,8 @@ public interface EditalDAO {
     
     Edital obtem(int idEdital, int idResponsavel) throws PersistenciaException;
     
+    Edital obtem(int idEdital) throws PersistenciaException;
+    
     Arquivo obtemArquivo(int idEdital) throws PersistenciaException;
     
     boolean exists(int idEdital) throws PersistenciaException;
