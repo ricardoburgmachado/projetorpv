@@ -65,6 +65,11 @@ public class DBEdital implements EditalDAO {
     @Override
     public int adicionaArquivo(Arquivo arquivo) throws PersistenciaException {
 
+        if (arquivo == null) {
+
+            return 0;
+        }
+
         String sql = "insert into arquivo (nome_arquivo, extensao, dados) values (?, ?, ?)";
         Connection conn = factory.createConnection();
         PreparedStatement stmt;
@@ -325,35 +330,38 @@ public class DBEdital implements EditalDAO {
         inscreveProjetoEdital(inscricao.getProjeto().getId(), inscricao.getEdital().getId());
         atualizaStatusProjeto(inscricao.getProjeto().getId(), StatusProjeto.INSCRITO);
 
-        String sql = "update inscricao set id_arquivo=? where id_proj=? and id_edital=?";
-        Connection conn = this.factory.createConnection();
-        PreparedStatement stmt;
+        if (idArquivo > 0) {
 
-        try {
+            String sql = "update inscricao set id_arquivo=? where id_proj=? and id_edital=?";
+            Connection conn = this.factory.createConnection();
+            PreparedStatement stmt;
 
-            stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, idArquivo);
-            stmt.setInt(2, inscricao.getProjeto().getId());
-            stmt.setInt(3, inscricao.getEdital().getId());
-        } catch (SQLException sqle) {
+            try {
 
-            throw new PersistenciaException("Falha ao configurar inserção do arquivo na inscrição", sqle);
-        }
+                stmt = conn.prepareStatement(sql);
+                stmt.setInt(1, idArquivo);
+                stmt.setInt(2, inscricao.getProjeto().getId());
+                stmt.setInt(3, inscricao.getEdital().getId());
+            } catch (SQLException sqle) {
 
-        try {
+                throw new PersistenciaException("Falha ao configurar inserção do arquivo na inscrição", sqle);
+            }
 
-            stmt.executeUpdate();
-        } catch (SQLException sqle) {
+            try {
 
-            throw new PersistenciaException("Falha ao inserir arquivo na inscrição!", sqle);
-        } finally {
+                stmt.executeUpdate();
+            } catch (SQLException sqle) {
 
-            this.factory.close(conn);
+                throw new PersistenciaException("Falha ao inserir arquivo na inscrição!", sqle);
+            } finally {
+
+                this.factory.close(conn);
+            }
         }
     }
-    
-    private boolean atualizaStatusProjeto(int idProjeto, StatusProjeto status){
-        
+
+    private boolean atualizaStatusProjeto(int idProjeto, StatusProjeto status) {
+
         String sql = "update projeto set status=? where id_proj = ?";
         Connection conn = this.factory.createConnection();
         PreparedStatement stmt;
