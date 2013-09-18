@@ -118,7 +118,7 @@
                         <input type="text" name="titulo" />       
 
                         <span style="clear: both; display: block;"></span>
-
+                        <!--
                         <span class="bloco">
                             <label  for="nome">Tipo edital</label><br/><br/>                             
                             <select id="tipo_edital" name="tipoEdital">
@@ -127,18 +127,17 @@
                                 <option value="<%=TipoEdital.ENSINO%>">Ensino</option>
                                 <option value="<%=TipoEdital.EXTENSAO%>">Extensão</option>                                
                             </select>
-                        </span>
-
+                        </span>                        
                         <span style="clear: both; display: block;"></span>
-
+                        -->
                         <span class="bloco">
                             <label for="dataxx">Prazo Inicial:</label>
-                            <input class="prazo" type="text" name="prazoInicial" id="prazoInicial" value="" />
+                            <input class="prazo" type="text" name="prazoInicial_xx" id="prazoInicial" value="" />
                         </span>
                             
                         <span class="bloco">
                             <label for="dataxx">Prazo Final:</label>
-                            <input class="prazo" type="text" name="prazoFinal" id="prazoFinal" value="" />
+                            <input class="prazo" type="text" name="prazoFinal_xx" id="prazoFinal" value="" />
                         </span>    
 
                         <span style="clear: both; display: block;"></span>

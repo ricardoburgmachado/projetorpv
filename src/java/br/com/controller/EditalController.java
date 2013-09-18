@@ -5,13 +5,20 @@
  */
 package br.com.controller;
 
+import Exceptions.DadoInconsistenteException;
+import Exceptions.PersistenciaException;
 import br.com.model.Arquivo;
 import br.com.model.Edital;
 import br.com.model.Permissao;
 import br.com.model.ProReitor;
+import br.com.model.TipoProjeto;
 import br.com.model.Usuario;
+import br.com.repositorio.RepositorioEdital;
 import br.com.repositorio.RepositorioPostgresFactory;
 import java.io.IOException;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,6 +36,7 @@ public class EditalController extends GenericController {
     /**
      * Método que apenas carrega o formulário para cadastro de editais
      *
+     * @param p_request
      * @return ModelAndView
      */
     @RequestMapping(value = "/edital_adiciona_show")
@@ -37,7 +45,6 @@ public class EditalController extends GenericController {
         this.request = p_request;
         Usuario user = (Usuario) request.getSession().getAttribute("usuario");
 
-        //%%%%%%%%%%%%%%%%%%% ATENÇÃO AQUI DEVE SER REVISTO ESSA LÓGICA DE AUTORIZAÇÃO  %%%%%%%%%%%%%%%%%%%
         if (!verificaAutorizacao(user, Permissao.CRUD_EDITAL)) {
 
             return new ModelAndView("login");
@@ -59,15 +66,62 @@ public class EditalController extends GenericController {
             return new ModelAndView("login");
         }
 
-        String[] split = arquivo.getOriginalFilename().split("\\.");
-        Arquivo arq = new Arquivo(arquivo.getName(), split[split.length - 1], arquivo.getBytes());
+        if(!arquivo.isEmpty()){ 
+            String[] split = arquivo.getOriginalFilename().split("\\.");
+            Arquivo arq = new Arquivo(arquivo.getName(), split[split.length - 1], arquivo.getBytes());
+            edital.setArquivo(arq);
+        }
+
         ProReitor pro = new ProReitor();
         pro.setId(user.getId());
         edital.setProReitor(pro);
-        edital.setArquivo(arq);
 
-        new RepositorioPostgresFactory().createRepositorioEdital().adiciona(edital);
-        return null;
+        edital.setTipo(TipoProjeto.fromString(user.getArea()));
+
+        String[] pI = request.getParameterValues("prazoInicial_xx");
+        String[] pF = request.getParameterValues("prazoFinal_xx");
+        
+        if (pI[0] != null && !pI[0].equals("")) {
+            String[] pISplit = pI[0].split("/");
+            edital.setPrazoInicial(new Date(Integer.parseInt(pISplit[0]) - 1900, Integer.parseInt(pISplit[1]) - 1, Integer.parseInt(pISplit[2])));
+        }
+
+        if ( pF[0] != null && !pF[0].equals("")) {
+            String[] pFSplit = pF[0].split("/");
+            edital.setPrazoFinal(new Date(Integer.parseInt(pFSplit[0]) - 1900, Integer.parseInt(pFSplit[1]) - 1, Integer.parseInt(pFSplit[2])));
+        }
+        
+        //new RepositorioPostgresFactory().createRepositorioEdital().adiciona(edital);
+        /**
+         * **************************************** *
+         */
+        List<String> inconsistencias = new LinkedList<>();
+
+        try {
+            new RepositorioPostgresFactory().createRepositorioEdital().adiciona(edital);
+        } catch (DadoInconsistenteException diex) {
+            do {
+                inconsistencias.add(diex.getMessage());
+                diex = diex.getException();
+            } while (diex != null);
+        } catch (PersistenciaException pex) {
+
+            inconsistencias.add(pex.getMessage());
+        }
+        /**
+         * **************************************** *
+         */
+        ModelAndView mv;
+        if (inconsistencias.size() > 0) {
+            mv = new ModelAndView("edital_adiciona");
+            mv.addObject("mensagem", inconsistencias);
+        } else {
+            mv = new ModelAndView("edital_adiciona");
+            mv.addObject("mensagem", "Projeto cadastrado com sucesso");
+        }
+        return mv;
+
+        //return new ModelAndView("edital_adiciona");
     }
 
     /**
@@ -99,15 +153,20 @@ public class EditalController extends GenericController {
 
         this.request = p_request;
         Usuario user = (Usuario) request.getSession().getAttribute("usuario");
-        if (!verificaAutorizacao(user, Permissao.CRUD_PROJETO)) {
+        if (!verificaAutorizacao(user, Permissao.CRUD_EDITAL)) {
 
             return new ModelAndView("login");
         }
-
+        
+        RepositorioEdital repositorioEdital = new RepositorioPostgresFactory().createRepositorioEdital();
+        List<Edital> editais = repositorioEdital.listarEditais(user.getId());
+        
         ModelAndView mv = new ModelAndView("edital_lista");
-        //if (projetos != null) {
-        //    mv.addObject("projetos", projetos);
-        //}
+        if (editais != null) {
+            mv.addObject("editais", editais);
+        }else{
+            mv.addObject("editais", null);
+        }
         return mv;
     }
 
