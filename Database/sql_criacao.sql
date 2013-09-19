@@ -74,11 +74,11 @@ CREATE SEQUENCE public.arquivo_id_arquivo_seq_1_1;
 
 CREATE TABLE public.arquivo (
                 id_arquivo INTEGER NOT NULL DEFAULT nextval('public.arquivo_id_arquivo_seq_1_1'),
-                id_edital INTEGER NOT NULL,
                 nome_arquivo VARCHAR(100) NOT NULL,
                 extensao VARCHAR(3) NOT NULL,
                 dados BYTEA NOT NULL,
-                CONSTRAINT arquivo_pk PRIMARY KEY (id_arquivo, id_edital)
+                id_edital INTEGER NOT NULL,
+                CONSTRAINT arquivo_pk PRIMARY KEY (id_arquivo)
 );
 
 
