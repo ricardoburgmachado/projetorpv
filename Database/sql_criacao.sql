@@ -1,17 +1,4 @@
 
-CREATE SEQUENCE public.arquivo_id_arquivo_seq_1_1;
-
-CREATE TABLE public.arquivo (
-                id_arquivo INTEGER NOT NULL DEFAULT nextval('public.arquivo_id_arquivo_seq_1_1'),
-                nome_arquivo VARCHAR(100) NOT NULL,
-                extensao VARCHAR(3) NOT NULL,
-                dados BYTEA NOT NULL,
-                CONSTRAINT arquivo_pk PRIMARY KEY (id_arquivo)
-);
-
-
-ALTER SEQUENCE public.arquivo_id_arquivo_seq_1_1 OWNED BY public.arquivo.id_arquivo;
-
 CREATE SEQUENCE public.papel_id_papel_seq;
 
 CREATE TABLE public.papel (
@@ -77,12 +64,25 @@ CREATE TABLE public.edital (
                 is_arquivo BOOLEAN,
                 id_usuario INTEGER NOT NULL,
                 tipo_edital VARCHAR(50),
-                id_arquivo INTEGER NOT NULL,
                 CONSTRAINT edital_pk PRIMARY KEY (id_edital)
 );
 
 
 ALTER SEQUENCE public.edital_id_edital_seq OWNED BY public.edital.id_edital;
+
+CREATE SEQUENCE public.arquivo_id_arquivo_seq_1_1;
+
+CREATE TABLE public.arquivo (
+                id_arquivo INTEGER NOT NULL DEFAULT nextval('public.arquivo_id_arquivo_seq_1_1'),
+                id_edital INTEGER NOT NULL,
+                nome_arquivo VARCHAR(100) NOT NULL,
+                extensao VARCHAR(3) NOT NULL,
+                dados BYTEA NOT NULL,
+                CONSTRAINT arquivo_pk PRIMARY KEY (id_arquivo, id_edital)
+);
+
+
+ALTER SEQUENCE public.arquivo_id_arquivo_seq_1_1 OWNED BY public.arquivo.id_arquivo;
 
 CREATE SEQUENCE public.projeto_id_proj_seq;
 
@@ -138,20 +138,6 @@ CREATE TABLE public.participante (
                 CONSTRAINT part_proj_pk PRIMARY KEY (id_usuario, id_proj)
 );
 
-
-ALTER TABLE public.edital ADD CONSTRAINT arquivo_edital_fk
-FOREIGN KEY (id_arquivo)
-REFERENCES public.arquivo (id_arquivo)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
-ALTER TABLE public.inscricao ADD CONSTRAINT arquivo_inscricao_fk
-FOREIGN KEY (id_arquivo)
-REFERENCES public.arquivo (id_arquivo)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
 
 ALTER TABLE public.papel_permissao ADD CONSTRAINT papel_papel_permissao_fk
 FOREIGN KEY (id_papel)
@@ -212,6 +198,20 @@ NOT DEFERRABLE;
 ALTER TABLE public.inscricao ADD CONSTRAINT edital_inscricao_fk
 FOREIGN KEY (id_edital)
 REFERENCES public.edital (id_edital)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.arquivo ADD CONSTRAINT edital_arquivo_fk
+FOREIGN KEY (id_edital)
+REFERENCES public.edital (id_edital)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.inscricao ADD CONSTRAINT arquivo_inscricao_fk
+FOREIGN KEY (id_arquivo)
+REFERENCES public.arquivo (id_arquivo)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
