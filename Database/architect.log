@@ -3171,3 +3171,1369 @@ NOT DEFERRABLE
 84378864 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
 84378864 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
 84378864 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+0    [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ArchitectUtils  - Log4J configured successfully
+3018 [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Beginning to read/merge new pl.ini data
+3219 [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Finished reading file.
+3220 [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Beginning to read/merge new pl.ini data
+3361 [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Finished reading file.
+5157 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.dbtree.DBTreeModel  - Changing a UUID. This should only be done during load.
+5164 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.dbtree.DBTreeModel  - Changing a UUID. This should only be done during load.
+5167 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.dbtree.DBTreeModel  - Changing a UUID. This should only be done during load.
+5169 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.dbtree.DBTreeModel  - Changing a UUID. This should only be done during load.
+5172 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.dbtree.DBTreeModel  - Changing a UUID. This should only be done during load.
+5174 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.dbtree.DBTreeModel  - Changing a UUID. This should only be done during load.
+5178 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.dbtree.DBTreeModel  - Changing a UUID. This should only be done during load.
+5181 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.dbtree.DBTreeModel  - Changing a UUID. This should only be done during load.
+5183 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.dbtree.DBTreeModel  - Changing a UUID. This should only be done during load.
+5185 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.dbtree.DBTreeModel  - Changing a UUID. This should only be done during load.
+5187 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.dbtree.DBTreeModel  - Changing a UUID. This should only be done during load.
+5189 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.dbtree.DBTreeModel  - Changing a UUID. This should only be done during load.
+5192 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.dbtree.DBTreeModel  - Changing a UUID. This should only be done during load.
+5193 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.dbtree.DBTreeModel  - Changing a UUID. This should only be done during load.
+5291 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - TablePane: Usuario (TABLE) is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5293 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - TablePane: Permissao (TABLE) is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5295 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - TablePane: Projeto (TABLE) is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5297 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - TablePane: Participante (TABLE) is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5297 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - TablePane: Custo (TABLE) is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5298 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - TablePane: AREA_CONHECIMENTO (TABLE) is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5299 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - TablePane: Papel (TABLE) is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5300 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - TablePane: Papel_Permissao (TABLE) is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5301 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - TablePane: Usuario_Papel (TABLE) is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5302 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - TablePane: Edital (TABLE) is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5304 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - TablePane: ARQUIVO (TABLE) is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5305 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - TablePane: Inscricao (TABLE) is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5354 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - Relationship: projeto_participante_fk is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5365 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - Relationship: projeto_Custo_fk is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5368 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - Relationship: area_conhecimento_projeto_fk is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5371 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - Relationship: permissao_papel_permissao_fk is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5374 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - Relationship: papel_papel_permissao_fk is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5379 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - Relationship: papel_usuario_papel_fk is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5380 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - Relationship: usuario_participante_fk is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5382 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - Relationship: usuario_usuario_papel_fk is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5384 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - Relationship: usuario_projeto_fk is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5387 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - Relationship: usuario_edital_fk is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5389 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - Relationship: arquivo_edital_fk is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5392 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - Relationship: projeto_inscricao_fk is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5398 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - Relationship: edital_inscricao_fk is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5400 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - Relationship: arquivo_inscricao_fk is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+7112 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+7113 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column login: VARCHAR(30)
+7115 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column senha: VARCHAR(16)
+7115 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Nome: VARCHAR(50)
+7116 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column CAMPUS: VARCHAR(50)
+7116 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+7116 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+7116 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Descrição: VARCHAR(30)
+7117 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+7117 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(100)
+7118 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PALAVRAS_CHAVE: VARCHAR(100)
+7118 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column RESUMO: VARCHAR(2000)
+7118 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column SIGILO: BOOLEAN
+7118 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+7119 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_PROJ: VARCHAR(50)
+7119 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column STATUS: VARCHAR(20)
+7119 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+7120 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+7120 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+7120 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+7120 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID: INTEGER
+7121 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO: VARCHAR
+7121 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column VALOR: DOUBLE
+7121 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(200)
+7121 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+7121 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+7121 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+7122 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+7122 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(30)
+7122 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+7122 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+7123 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+7123 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+7123 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+7123 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_FINAL: DATE
+7124 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_INICIAL: DATE
+7124 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(2000)
+7124 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+7124 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+7124 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_EDITAL: VARCHAR(50)
+7124 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+7125 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+7125 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column NOME_ARQUIVO: VARCHAR(100)
+7125 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column EXTENSAO: VARCHAR(3)
+7125 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DADOS: BLOB
+7126 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+7126 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+7126 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+7886 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+7886 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column login: VARCHAR(30)
+7886 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column senha: VARCHAR(16)
+7886 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Nome: VARCHAR(50)
+7886 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column CAMPUS: VARCHAR(50)
+7887 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+7887 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+7887 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Descrição: VARCHAR(30)
+7887 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+7887 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(100)
+7887 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PALAVRAS_CHAVE: VARCHAR(100)
+7888 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column RESUMO: VARCHAR(2000)
+7888 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column SIGILO: BOOLEAN
+7888 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+7888 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_PROJ: VARCHAR(50)
+7888 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column STATUS: VARCHAR(20)
+7888 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+7888 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+7889 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+7889 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+7889 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID: INTEGER
+7889 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO: VARCHAR
+7890 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column VALOR: DOUBLE
+7890 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(200)
+7890 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+7890 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+7890 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+7890 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+7890 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(30)
+7891 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+7891 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+7891 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+7891 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+7892 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+7892 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_FINAL: DATE
+7892 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_INICIAL: DATE
+7892 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(2000)
+7892 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+7892 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+7893 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_EDITAL: VARCHAR(50)
+7893 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+7893 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+7893 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column NOME_ARQUIVO: VARCHAR(100)
+7893 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column EXTENSAO: VARCHAR(3)
+7893 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DADOS: BLOB
+7894 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+7894 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+7894 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+9838 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+9838 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column login: VARCHAR(30)
+9838 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column senha: VARCHAR(16)
+9838 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Nome: VARCHAR(50)
+9839 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column CAMPUS: VARCHAR(50)
+9839 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+9839 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+9840 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Descrição: VARCHAR(30)
+9840 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+9840 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(100)
+9840 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PALAVRAS_CHAVE: VARCHAR(100)
+9841 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column RESUMO: VARCHAR(2000)
+9841 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column SIGILO: BOOLEAN
+9841 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+9841 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_PROJ: VARCHAR(50)
+9841 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column STATUS: VARCHAR(20)
+9842 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+9842 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+9842 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+9842 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+9843 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID: INTEGER
+9843 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO: VARCHAR
+9843 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column VALOR: DOUBLE
+9843 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(200)
+9843 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+9844 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+9844 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+9844 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+9844 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(30)
+9845 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+9845 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+9845 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+9845 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+9846 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+9846 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_FINAL: DATE
+9846 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_INICIAL: DATE
+9846 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(2000)
+9846 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+9846 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+9847 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_EDITAL: VARCHAR(50)
+9847 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+9847 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+9847 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column NOME_ARQUIVO: VARCHAR(100)
+9848 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column EXTENSAO: VARCHAR(3)
+9848 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DADOS: BLOB
+9848 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+9848 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+9848 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+20479 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+20479 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column login: VARCHAR(30)
+20480 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column senha: VARCHAR(16)
+20480 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Nome: VARCHAR(50)
+20480 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column CAMPUS: VARCHAR(50)
+20480 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+20480 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+20480 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Descrição: VARCHAR(30)
+20481 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+20481 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(100)
+20481 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PALAVRAS_CHAVE: VARCHAR(100)
+20481 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column RESUMO: VARCHAR(2000)
+20481 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column SIGILO: BOOLEAN
+20482 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+20482 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_PROJ: VARCHAR(50)
+20482 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column STATUS: VARCHAR(20)
+20482 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+20482 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+20482 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+20483 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+20483 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID: INTEGER
+20483 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO: VARCHAR
+20483 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column VALOR: DOUBLE
+20483 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(200)
+20483 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+20484 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+20484 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+20484 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+20484 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(30)
+20484 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+20484 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+20485 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+20485 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+20485 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+20485 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_FINAL: DATE
+20485 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_INICIAL: DATE
+20486 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(2000)
+20486 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+20486 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+20486 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_EDITAL: VARCHAR(50)
+20486 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+20486 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+20486 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column NOME_ARQUIVO: VARCHAR(100)
+20487 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column EXTENSAO: VARCHAR(3)
+20487 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DADOS: BLOB
+20487 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+20487 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+20487 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+20518 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+20519 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column login: VARCHAR(30)
+20519 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column senha: VARCHAR(16)
+20519 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Nome: VARCHAR(50)
+20519 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column CAMPUS: VARCHAR(50)
+20519 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+20519 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+20520 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Descrição: VARCHAR(30)
+20520 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+20520 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(100)
+20520 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PALAVRAS_CHAVE: VARCHAR(100)
+20520 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column RESUMO: VARCHAR(2000)
+20520 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column SIGILO: BOOLEAN
+20521 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+20521 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_PROJ: VARCHAR(50)
+20521 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column STATUS: VARCHAR(20)
+20521 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+20521 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+20521 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+20522 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+20522 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID: INTEGER
+20522 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO: VARCHAR
+20522 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column VALOR: DOUBLE
+20522 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(200)
+20523 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+20523 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+20523 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+20523 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+20523 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(30)
+20524 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+20524 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+20524 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+20525 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+20525 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+20526 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_FINAL: DATE
+20526 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_INICIAL: DATE
+20526 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(2000)
+20526 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+20526 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+20526 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_EDITAL: VARCHAR(50)
+20526 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+20527 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+20527 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column NOME_ARQUIVO: VARCHAR(100)
+20527 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column EXTENSAO: VARCHAR(3)
+20528 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DADOS: BLOB
+20528 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+20529 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+20529 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+36943 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+36943 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column login: VARCHAR(30)
+36944 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column senha: VARCHAR(16)
+36944 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Nome: VARCHAR(50)
+36944 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column CAMPUS: VARCHAR(50)
+36945 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+36945 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+36946 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Descrição: VARCHAR(30)
+36946 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+36947 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(100)
+36947 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PALAVRAS_CHAVE: VARCHAR(100)
+36947 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column RESUMO: VARCHAR(2000)
+36948 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column SIGILO: BOOLEAN
+36948 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+36949 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_PROJ: VARCHAR(50)
+36949 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column STATUS: VARCHAR(20)
+36949 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+36950 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+36950 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+36950 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+36951 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID: INTEGER
+36951 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO: VARCHAR
+36952 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column VALOR: DOUBLE
+36952 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(200)
+36952 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+36952 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+36952 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+36953 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+36953 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(30)
+36953 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+36953 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+36953 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+36953 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+36954 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+36954 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_FINAL: DATE
+36954 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_INICIAL: DATE
+36954 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(2000)
+36954 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+36954 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+36954 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_EDITAL: VARCHAR(50)
+36955 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+36955 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+36955 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column NOME_ARQUIVO: VARCHAR(100)
+36955 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column EXTENSAO: VARCHAR(3)
+36955 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DADOS: BLOB
+36956 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+36956 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+36956 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+37037 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+37038 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column login: VARCHAR(30)
+37038 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column senha: VARCHAR(16)
+37039 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Nome: VARCHAR(50)
+37039 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column CAMPUS: VARCHAR(50)
+37039 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+37040 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+37040 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Descrição: VARCHAR(30)
+37041 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+37041 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(100)
+37042 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PALAVRAS_CHAVE: VARCHAR(100)
+37042 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column RESUMO: VARCHAR(2000)
+37042 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column SIGILO: BOOLEAN
+37042 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+37043 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_PROJ: VARCHAR(50)
+37043 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column STATUS: VARCHAR(20)
+37043 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+37043 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+37044 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+37044 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+37044 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID: INTEGER
+37045 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO: VARCHAR
+37045 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column VALOR: DOUBLE
+37045 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(200)
+37045 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+37045 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+37046 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+37046 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+37046 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(30)
+37047 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+37047 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+37047 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+37047 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+37048 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+37048 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_FINAL: DATE
+37048 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_INICIAL: DATE
+37049 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(2000)
+37049 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+37049 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+37049 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_EDITAL: VARCHAR(50)
+37049 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+37050 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+37050 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column NOME_ARQUIVO: VARCHAR(100)
+37050 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column EXTENSAO: VARCHAR(3)
+37051 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DADOS: BLOB
+37051 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+37051 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+37051 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+44998 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+44999 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column login: VARCHAR(30)
+44999 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column senha: VARCHAR(16)
+45000 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Nome: VARCHAR(50)
+45000 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column CAMPUS: VARCHAR(50)
+45000 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+45001 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+45001 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Descrição: VARCHAR(30)
+45002 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+45002 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(100)
+45003 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PALAVRAS_CHAVE: VARCHAR(100)
+45003 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column RESUMO: VARCHAR(2000)
+45003 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column SIGILO: BOOLEAN
+45004 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+45004 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_PROJ: VARCHAR(50)
+45004 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column STATUS: VARCHAR(20)
+45005 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+45005 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+45006 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+45006 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+45006 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID: INTEGER
+45007 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO: VARCHAR
+45007 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column VALOR: DOUBLE
+45008 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(200)
+45008 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+45008 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+45009 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+45009 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+45010 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(30)
+45010 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+45011 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+45011 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+45011 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+45012 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+45012 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_FINAL: DATE
+45013 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_INICIAL: DATE
+45013 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(2000)
+45014 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+45014 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+45014 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_EDITAL: VARCHAR(50)
+45015 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+45015 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+45016 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column NOME_ARQUIVO: VARCHAR(100)
+45016 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column EXTENSAO: VARCHAR(3)
+45016 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DADOS: BLOB
+45017 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+45017 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+45018 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+45075 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+45075 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column login: VARCHAR(30)
+45075 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column senha: VARCHAR(16)
+45075 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Nome: VARCHAR(50)
+45075 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column CAMPUS: VARCHAR(50)
+45076 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+45076 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+45076 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Descrição: VARCHAR(30)
+45076 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+45076 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(100)
+45077 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PALAVRAS_CHAVE: VARCHAR(100)
+45077 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column RESUMO: VARCHAR(2000)
+45077 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column SIGILO: BOOLEAN
+45077 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+45077 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_PROJ: VARCHAR(50)
+45077 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column STATUS: VARCHAR(20)
+45077 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+45077 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+45078 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+45078 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+45078 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID: INTEGER
+45078 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO: VARCHAR
+45078 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column VALOR: DOUBLE
+45078 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(200)
+45079 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+45079 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+45079 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+45079 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+45079 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(30)
+45080 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+45080 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+45080 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+45080 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+45080 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+45080 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_FINAL: DATE
+45081 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_INICIAL: DATE
+45081 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(2000)
+45081 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+45081 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+45081 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_EDITAL: VARCHAR(50)
+45081 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+45081 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+45082 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column NOME_ARQUIVO: VARCHAR(100)
+45082 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column EXTENSAO: VARCHAR(3)
+45082 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DADOS: BLOB
+45082 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+45082 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+45082 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+60183 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+60184 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column login: VARCHAR(30)
+60184 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column senha: VARCHAR(16)
+60184 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Nome: VARCHAR(50)
+60184 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column CAMPUS: VARCHAR(50)
+60184 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+60185 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+60185 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Descrição: VARCHAR(30)
+60185 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+60185 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(100)
+60186 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PALAVRAS_CHAVE: VARCHAR(100)
+60186 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column RESUMO: VARCHAR(2000)
+60186 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column SIGILO: BOOLEAN
+60186 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+60186 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_PROJ: VARCHAR(50)
+60186 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column STATUS: VARCHAR(20)
+60187 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+60187 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+60187 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+60187 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+60188 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID: INTEGER
+60188 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO: VARCHAR
+60188 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column VALOR: DOUBLE
+60188 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(200)
+60188 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+60189 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+60189 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+60189 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+60189 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(30)
+60190 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+60190 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+60190 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+60190 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+60190 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+60191 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_FINAL: DATE
+60191 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_INICIAL: DATE
+60191 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(2000)
+60191 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+60191 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+60192 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_EDITAL: VARCHAR(50)
+60192 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+60192 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+60192 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column NOME_ARQUIVO: VARCHAR(100)
+60193 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column EXTENSAO: VARCHAR(3)
+60193 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DADOS: BLOB
+60193 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+60193 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+60193 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+60286 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+60287 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column login: VARCHAR(30)
+60287 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column senha: VARCHAR(16)
+60287 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Nome: VARCHAR(50)
+60287 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column CAMPUS: VARCHAR(50)
+60287 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+60287 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+60287 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Descrição: VARCHAR(30)
+60288 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+60288 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(100)
+60288 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PALAVRAS_CHAVE: VARCHAR(100)
+60288 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column RESUMO: VARCHAR(2000)
+60288 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column SIGILO: BOOLEAN
+60288 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+60288 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_PROJ: VARCHAR(50)
+60289 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column STATUS: VARCHAR(20)
+60289 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+60289 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+60289 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+60289 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+60289 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID: INTEGER
+60289 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO: VARCHAR
+60289 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column VALOR: DOUBLE
+60290 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(200)
+60290 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+60290 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+60290 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+60290 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+60290 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(30)
+60291 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+60291 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+60291 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+60291 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+60291 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+60291 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_FINAL: DATE
+60291 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_INICIAL: DATE
+60292 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(2000)
+60292 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+60292 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+60292 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_EDITAL: VARCHAR(50)
+60292 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+60292 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+60293 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column NOME_ARQUIVO: VARCHAR(100)
+60293 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column EXTENSAO: VARCHAR(3)
+60293 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DADOS: BLOB
+60293 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+60293 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+60293 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+68840 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Column removed. Syncing select/highlight lists. Removed index=7
+68840 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Not remembering as recent selection. Selected items: []
+68874 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+68874 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column login: VARCHAR(30)
+68874 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column senha: VARCHAR(16)
+68875 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Nome: VARCHAR(50)
+68875 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column CAMPUS: VARCHAR(50)
+68875 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+68875 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+68881 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Descrição: VARCHAR(30)
+68882 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+68882 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(100)
+68882 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PALAVRAS_CHAVE: VARCHAR(100)
+68882 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column RESUMO: VARCHAR(2000)
+68883 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column SIGILO: BOOLEAN
+68883 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+68883 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_PROJ: VARCHAR(50)
+68883 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column STATUS: VARCHAR(20)
+68883 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+68883 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+68883 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+68884 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+68884 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID: INTEGER
+68884 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO: VARCHAR
+68884 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column VALOR: DOUBLE
+68884 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(200)
+68884 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+68885 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+68885 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+68885 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+68885 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(30)
+68885 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+68885 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+68886 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+68886 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+68886 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+68886 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_FINAL: DATE
+68886 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_INICIAL: DATE
+68886 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(2000)
+68886 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+68886 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+68887 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_EDITAL: VARCHAR(50)
+68887 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+68887 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column NOME_ARQUIVO: VARCHAR(100)
+68887 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column EXTENSAO: VARCHAR(3)
+68887 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DADOS: BLOB
+68887 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+68888 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+68888 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+74951 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+74952 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column login: VARCHAR(30)
+74952 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column senha: VARCHAR(16)
+74953 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Nome: VARCHAR(50)
+74953 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column CAMPUS: VARCHAR(50)
+74953 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+74954 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+74955 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Descrição: VARCHAR(30)
+74955 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+74956 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(100)
+74956 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PALAVRAS_CHAVE: VARCHAR(100)
+74956 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column RESUMO: VARCHAR(2000)
+74957 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column SIGILO: BOOLEAN
+74957 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+74957 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_PROJ: VARCHAR(50)
+74958 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column STATUS: VARCHAR(20)
+74958 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+74958 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+74959 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+74959 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+74960 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID: INTEGER
+74960 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO: VARCHAR
+74961 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column VALOR: DOUBLE
+74961 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(200)
+74961 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+74962 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+74962 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+74962 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+74962 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(30)
+74963 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+74963 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+74963 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+74963 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+74963 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+74964 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_FINAL: DATE
+74964 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_INICIAL: DATE
+74964 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(2000)
+74964 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+74964 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+74964 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_EDITAL: VARCHAR(50)
+74965 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+74965 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column NOME_ARQUIVO: VARCHAR(100)
+74965 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column EXTENSAO: VARCHAR(3)
+74965 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DADOS: BLOB
+74966 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+74966 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+74966 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+76593 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+76594 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column login: VARCHAR(30)
+76594 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column senha: VARCHAR(16)
+76595 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Nome: VARCHAR(50)
+76595 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column CAMPUS: VARCHAR(50)
+76595 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+76596 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+76596 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Descrição: VARCHAR(30)
+76597 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+76597 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(100)
+76597 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PALAVRAS_CHAVE: VARCHAR(100)
+76598 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column RESUMO: VARCHAR(2000)
+76598 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column SIGILO: BOOLEAN
+76598 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+76599 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_PROJ: VARCHAR(50)
+76599 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column STATUS: VARCHAR(20)
+76599 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+76600 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+76600 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+76601 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+76601 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID: INTEGER
+76602 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO: VARCHAR
+76602 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column VALOR: DOUBLE
+76602 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(200)
+76602 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+76603 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+76603 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+76604 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+76604 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(30)
+76605 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+76605 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+76605 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+76606 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+76606 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+76607 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_FINAL: DATE
+76607 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_INICIAL: DATE
+76607 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(2000)
+76608 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+76608 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+76609 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_EDITAL: VARCHAR(50)
+76609 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+76609 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column NOME_ARQUIVO: VARCHAR(100)
+76610 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column EXTENSAO: VARCHAR(3)
+76610 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DADOS: BLOB
+76611 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+76611 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+76611 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+78562 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+78562 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column login: VARCHAR(30)
+78563 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column senha: VARCHAR(16)
+78563 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Nome: VARCHAR(50)
+78563 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column CAMPUS: VARCHAR(50)
+78563 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+78563 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+78564 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Descrição: VARCHAR(30)
+78564 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+78564 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(100)
+78564 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PALAVRAS_CHAVE: VARCHAR(100)
+78564 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column RESUMO: VARCHAR(2000)
+78565 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column SIGILO: BOOLEAN
+78565 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+78565 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_PROJ: VARCHAR(50)
+78565 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column STATUS: VARCHAR(20)
+78565 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+78565 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+78566 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+78566 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+78566 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID: INTEGER
+78566 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO: VARCHAR
+78566 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column VALOR: DOUBLE
+78567 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(200)
+78567 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+78567 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+78567 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+78567 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+78568 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(30)
+78568 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+78568 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+78569 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+78569 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+78570 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+78570 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_FINAL: DATE
+78570 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_INICIAL: DATE
+78570 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(2000)
+78570 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+78570 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+78571 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_EDITAL: VARCHAR(50)
+78571 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+78571 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column NOME_ARQUIVO: VARCHAR(100)
+78571 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column EXTENSAO: VARCHAR(3)
+78571 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DADOS: BLOB
+78572 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+78572 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+78572 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+95634 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+95635 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column login: VARCHAR(30)
+95636 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column senha: VARCHAR(16)
+95636 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Nome: VARCHAR(50)
+95636 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column CAMPUS: VARCHAR(50)
+95636 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+95637 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+95637 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Descrição: VARCHAR(30)
+95638 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+95638 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(100)
+95639 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PALAVRAS_CHAVE: VARCHAR(100)
+95639 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column RESUMO: VARCHAR(2000)
+95639 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column SIGILO: BOOLEAN
+95639 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+95640 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_PROJ: VARCHAR(50)
+95640 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column STATUS: VARCHAR(20)
+95640 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+95641 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+95641 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+95642 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+95642 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID: INTEGER
+95642 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO: VARCHAR
+95643 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column VALOR: DOUBLE
+95643 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(200)
+95643 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+95644 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+95644 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+95645 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+95645 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(30)
+95645 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+95646 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+95646 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+95647 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+95647 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+95647 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_FINAL: DATE
+95648 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_INICIAL: DATE
+95648 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(2000)
+95648 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+95649 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+95649 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_EDITAL: VARCHAR(50)
+95650 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+95650 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column NOME_ARQUIVO: VARCHAR(100)
+95650 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column EXTENSAO: VARCHAR(3)
+95650 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DADOS: BLOB
+95651 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+95651 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+95652 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+97092 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+97092 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column login: VARCHAR(30)
+97093 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column senha: VARCHAR(16)
+97093 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Nome: VARCHAR(50)
+97093 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column CAMPUS: VARCHAR(50)
+97094 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+97094 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+97094 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Descrição: VARCHAR(30)
+97095 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+97095 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(100)
+97096 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PALAVRAS_CHAVE: VARCHAR(100)
+97096 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column RESUMO: VARCHAR(2000)
+97096 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column SIGILO: BOOLEAN
+97097 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+97097 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_PROJ: VARCHAR(50)
+97097 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column STATUS: VARCHAR(20)
+97098 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+97098 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+97099 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+97099 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+97099 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID: INTEGER
+97100 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO: VARCHAR
+97100 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column VALOR: DOUBLE
+97100 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(200)
+97101 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+97101 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+97101 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+97102 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+97102 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(30)
+97102 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+97102 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+97103 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+97103 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+97103 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+97103 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_FINAL: DATE
+97103 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_INICIAL: DATE
+97104 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(2000)
+97104 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+97104 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+97104 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_EDITAL: VARCHAR(50)
+97104 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+97104 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column NOME_ARQUIVO: VARCHAR(100)
+97105 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column EXTENSAO: VARCHAR(3)
+97105 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DADOS: BLOB
+97105 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+97105 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+97105 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+97241 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+97242 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column login: VARCHAR(30)
+97242 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column senha: VARCHAR(16)
+97242 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Nome: VARCHAR(50)
+97243 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column CAMPUS: VARCHAR(50)
+97243 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+97244 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+97244 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Descrição: VARCHAR(30)
+97245 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+97245 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(100)
+97245 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PALAVRAS_CHAVE: VARCHAR(100)
+97246 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column RESUMO: VARCHAR(2000)
+97246 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column SIGILO: BOOLEAN
+97246 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+97247 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_PROJ: VARCHAR(50)
+97247 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column STATUS: VARCHAR(20)
+97247 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+97248 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+97248 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+97248 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+97249 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID: INTEGER
+97249 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO: VARCHAR
+97249 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column VALOR: DOUBLE
+97250 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(200)
+97250 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+97251 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+97251 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+97251 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+97252 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(30)
+97252 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+97252 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+97252 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+97252 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+97253 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+97253 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_FINAL: DATE
+97253 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_INICIAL: DATE
+97253 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(2000)
+97253 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+97253 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+97253 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_EDITAL: VARCHAR(50)
+97254 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+97254 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column NOME_ARQUIVO: VARCHAR(100)
+97254 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column EXTENSAO: VARCHAR(3)
+97254 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DADOS: BLOB
+97254 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+97254 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+97254 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+98456 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Column inserted. Syncing select/highlight lists. New index=1
+98456 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Was not the most recent selection; not restoring
+98463 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - Relationship: edital_arquivo_fk is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,1150x643,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=457,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+98488 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+98488 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column login: VARCHAR(30)
+98489 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column senha: VARCHAR(16)
+98489 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Nome: VARCHAR(50)
+98489 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column CAMPUS: VARCHAR(50)
+98489 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+98489 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+98490 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Descrição: VARCHAR(30)
+98490 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+98490 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(100)
+98490 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PALAVRAS_CHAVE: VARCHAR(100)
+98490 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column RESUMO: VARCHAR(2000)
+98490 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column SIGILO: BOOLEAN
+98490 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+98491 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_PROJ: VARCHAR(50)
+98491 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column STATUS: VARCHAR(20)
+98491 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+98491 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+98491 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+98491 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+98491 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID: INTEGER
+98491 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO: VARCHAR
+98492 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column VALOR: DOUBLE
+98492 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(200)
+98492 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+98492 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+98492 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+98492 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+98492 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(30)
+98493 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+98493 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+98493 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+98493 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+98493 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+98494 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_FINAL: DATE
+98494 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_INICIAL: DATE
+98494 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(2000)
+98494 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+98494 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+98494 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_EDITAL: VARCHAR(50)
+98494 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+98495 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+98495 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column NOME_ARQUIVO: VARCHAR(100)
+98495 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column EXTENSAO: VARCHAR(3)
+98495 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DADOS: BLOB
+98495 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+98495 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+98495 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+98501 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+98501 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Descrição: VARCHAR(30)
+98501 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+98501 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_FINAL: DATE
+98501 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_INICIAL: DATE
+98501 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(2000)
+98502 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+98502 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+98502 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_EDITAL: VARCHAR(50)
+98502 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+98502 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+98502 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column NOME_ARQUIVO: VARCHAR(100)
+98502 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column EXTENSAO: VARCHAR(3)
+98502 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DADOS: BLOB
+98503 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+98503 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+98503 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+98609 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+98610 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column login: VARCHAR(30)
+98610 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column senha: VARCHAR(16)
+98610 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Nome: VARCHAR(50)
+98610 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column CAMPUS: VARCHAR(50)
+98610 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+98611 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+98611 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Descrição: VARCHAR(30)
+98611 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+98611 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(100)
+98611 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PALAVRAS_CHAVE: VARCHAR(100)
+98612 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column RESUMO: VARCHAR(2000)
+98612 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column SIGILO: BOOLEAN
+98612 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+98612 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_PROJ: VARCHAR(50)
+98612 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column STATUS: VARCHAR(20)
+98612 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+98612 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+98613 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+98613 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+98613 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID: INTEGER
+98613 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO: VARCHAR
+98613 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column VALOR: DOUBLE
+98614 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(200)
+98614 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+98614 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+98614 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+98614 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+98615 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DESCRICAO: VARCHAR(30)
+98615 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PERMISSAO: INTEGER
+98615 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+98615 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+98615 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PAPEL: INTEGER
+98616 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+98616 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_FINAL: DATE
+98616 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PRAZO_INICIAL: DATE
+98616 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(2000)
+98616 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+98616 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+98616 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_EDITAL: VARCHAR(50)
+98617 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+98617 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+98617 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column NOME_ARQUIVO: VARCHAR(100)
+98617 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column EXTENSAO: VARCHAR(3)
+98617 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DADOS: BLOB
+98618 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+98618 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+98618 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+270255 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@75e31b8f, INTEGER:c97038ac-258f-49d2-986d-86cc8529f779 Property=name oldVal=UserDefinedSQLType newVal=INTEGER selectedItems=[]
+270257 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@75e31b8f, INTEGER:c97038ac-258f-49d2-986d-86cc8529f779 Property=precision oldVal=0 newVal=null selectedItems=[]
+270260 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@75e31b8f, INTEGER:c97038ac-258f-49d2-986d-86cc8529f779 Property=scale oldVal=0 newVal=null selectedItems=[]
+270263 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@75e31b8f, INTEGER:c97038ac-258f-49d2-986d-86cc8529f779 Property=precision oldVal=null newVal=0 selectedItems=[]
+270264 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@75e31b8f, INTEGER:c97038ac-258f-49d2-986d-86cc8529f779 Property=scale oldVal=null newVal=0 selectedItems=[]
+270273 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ID_EDITAL: INTEGER Property=autoIncrementSequenceName oldVal=edital_id_edital_seq newVal=edital_id_edital_seq_1 selectedItems=[]
+270274 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@acb6dd98, INTEGER:2ba9ee40-ecb0-4c42-ae5c-85f9f59aa231 Property=name oldVal=UserDefinedSQLType newVal=INTEGER selectedItems=[]
+270274 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@acb6dd98, INTEGER:2ba9ee40-ecb0-4c42-ae5c-85f9f59aa231 Property=precision oldVal=0 newVal=null selectedItems=[]
+270275 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@acb6dd98, INTEGER:2ba9ee40-ecb0-4c42-ae5c-85f9f59aa231 Property=scale oldVal=0 newVal=null selectedItems=[]
+270276 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@acb6dd98, INTEGER:2ba9ee40-ecb0-4c42-ae5c-85f9f59aa231 Property=precision oldVal=null newVal=0 selectedItems=[]
+270277 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@acb6dd98, INTEGER:2ba9ee40-ecb0-4c42-ae5c-85f9f59aa231 Property=scale oldVal=null newVal=0 selectedItems=[]
+270336 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+270336 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column login: VARCHAR(30)
+270336 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column senha: VARCHAR(16)
+270337 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Nome: VARCHAR(50)
+270337 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column CAMPUS: VARCHAR(50)
+270337 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+270337 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+270337 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(100)
+270337 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PALAVRAS_CHAVE: VARCHAR(100)
+270338 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column RESUMO: VARCHAR(2000)
+270338 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column SIGILO: BOOLEAN
+270338 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+270338 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_PROJ: VARCHAR(50)
+270338 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column STATUS: VARCHAR(20)
+270338 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+270338 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+270338 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+270339 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+270339 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+270339 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+270339 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column NOME_ARQUIVO: VARCHAR(100)
+270339 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column EXTENSAO: VARCHAR(3)
+270340 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column DADOS: BLOB
+270340 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+270340 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+270340 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+271388 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@75e31b8f, INTEGER:c97038ac-258f-49d2-986d-86cc8529f779 Property=precision oldVal=0 newVal=null selectedItems=[]
+271390 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@75e31b8f, INTEGER:c97038ac-258f-49d2-986d-86cc8529f779 Property=scale oldVal=0 newVal=null selectedItems=[]
+271395 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@75e31b8f, INTEGER:c97038ac-258f-49d2-986d-86cc8529f779 Property=precision oldVal=null newVal=0 selectedItems=[]
+271399 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@75e31b8f, INTEGER:c97038ac-258f-49d2-986d-86cc8529f779 Property=scale oldVal=null newVal=0 selectedItems=[]
+271402 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@acb6dd98, INTEGER:2ba9ee40-ecb0-4c42-ae5c-85f9f59aa231 Property=precision oldVal=0 newVal=null selectedItems=[]
+271402 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@acb6dd98, INTEGER:2ba9ee40-ecb0-4c42-ae5c-85f9f59aa231 Property=scale oldVal=0 newVal=null selectedItems=[]
+271403 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@acb6dd98, INTEGER:2ba9ee40-ecb0-4c42-ae5c-85f9f59aa231 Property=precision oldVal=null newVal=0 selectedItems=[]
+271404 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@acb6dd98, INTEGER:2ba9ee40-ecb0-4c42-ae5c-85f9f59aa231 Property=scale oldVal=null newVal=0 selectedItems=[]
+271405 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ID_EDITAL: INTEGER Property=autoIncrementSequenceName oldVal=edital_id_edital_seq_1 newVal=edital_id_edital_seq_1_1 selectedItems=[]
+271476 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+271477 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column login: VARCHAR(30)
+271477 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column senha: VARCHAR(16)
+271477 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column Nome: VARCHAR(50)
+271477 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column CAMPUS: VARCHAR(50)
+271477 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column AREA: VARCHAR(50)
+271477 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+271477 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TITULO: VARCHAR(100)
+271477 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column PALAVRAS_CHAVE: VARCHAR(100)
+271478 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column RESUMO: VARCHAR(2000)
+271478 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column SIGILO: BOOLEAN
+271478 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_AREA: INTEGER
+271478 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column TIPO_PROJ: VARCHAR(50)
+271478 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column STATUS: VARCHAR(20)
+271478 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column IS_ARQUIVO: BOOLEAN
+271478 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_USUARIO: INTEGER
+271478 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_PROJ: INTEGER
+271479 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_EDITAL: INTEGER
+271479 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column ID_ARQUIVO: INTEGER
+272345 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+CREATE SEQUENCE public.papel_id_papel_seq
+272374 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.papel (
+                id_papel INTEGER NOT NULL DEFAULT nextval('public.papel_id_papel_seq'),
+                descricao VARCHAR(30) NOT NULL,
+                CONSTRAINT papel_pk PRIMARY KEY (id_papel)
+)
+272375 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.papel_id_papel_seq OWNED BY public.papel.id_papel
+272375 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.area_conhecimento_id_area_seq_1
+272376 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.area_conhecimento (
+                id_area INTEGER NOT NULL DEFAULT nextval('public.area_conhecimento_id_area_seq_1'),
+                area VARCHAR(50),
+                CONSTRAINT area_conhecimento_pk PRIMARY KEY (id_area)
+)
+272376 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.area_conhecimento_id_area_seq_1 OWNED BY public.area_conhecimento.id_area
+272377 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.permissao_id_perm_seq
+272377 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.permissao (
+                id_perm INTEGER NOT NULL DEFAULT nextval('public.permissao_id_perm_seq'),
+                descricao VARCHAR(30) NOT NULL,
+                CONSTRAINT id_perm_pk PRIMARY KEY (id_perm)
+)
+272377 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.permissao_id_perm_seq OWNED BY public.permissao.id_perm
+272378 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.papel_permissao (
+                id_perm INTEGER NOT NULL,
+                id_papel INTEGER NOT NULL,
+                CONSTRAINT papel_permissao_pk PRIMARY KEY (id_perm, id_papel)
+)
+272378 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+CREATE SEQUENCE public.usuario_id_usuario_seq
+272379 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.usuario (
+                id_usuario INTEGER NOT NULL DEFAULT nextval('public.usuario_id_usuario_seq'),
+                login VARCHAR(30),
+                senha VARCHAR(16),
+                nome VARCHAR(50) NOT NULL,
+                campus VARCHAR(50),
+                area VARCHAR(50),
+                CONSTRAINT login_pk PRIMARY KEY (id_usuario)
+)
+272379 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.usuario_id_usuario_seq OWNED BY public.usuario.id_usuario
+272380 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.edital_id_edital_seq
+272380 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.edital (
+                id_edital INTEGER NOT NULL DEFAULT nextval('public.edital_id_edital_seq'),
+                prazo_final DATE,
+                prazo_inicial DATE,
+                titulo VARCHAR(2000),
+                is_arquivo BOOLEAN,
+                id_usuario INTEGER NOT NULL,
+                tipo_edital VARCHAR(50),
+                CONSTRAINT edital_pk PRIMARY KEY (id_edital)
+)
+272381 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.edital_id_edital_seq OWNED BY public.edital.id_edital
+272381 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.arquivo_id_arquivo_seq_1_1
+272382 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.arquivo (
+                id_arquivo INTEGER NOT NULL DEFAULT nextval('public.arquivo_id_arquivo_seq_1_1'),
+                id_edital INTEGER NOT NULL,
+                nome_arquivo VARCHAR(100) NOT NULL,
+                extensao VARCHAR(3) NOT NULL,
+                dados BYTEA NOT NULL,
+                CONSTRAINT arquivo_pk PRIMARY KEY (id_arquivo, id_edital)
+)
+272382 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.arquivo_id_arquivo_seq_1_1 OWNED BY public.arquivo.id_arquivo
+272382 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.projeto_id_proj_seq
+272383 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.projeto (
+                id_proj INTEGER NOT NULL DEFAULT nextval('public.projeto_id_proj_seq'),
+                TITULO VARCHAR(100),
+                PALAVRAS_CHAVE VARCHAR(100),
+                RESUMO VARCHAR(2000),
+                sigilo BOOLEAN DEFAULT false NOT NULL,
+                id_area INTEGER,
+                tipo_proj VARCHAR(50),
+                status VARCHAR(20) NOT NULL,
+                is_arquivo BOOLEAN DEFAULT false NOT NULL,
+                id_responsavel INTEGER NOT NULL,
+                CONSTRAINT id_pk PRIMARY KEY (id_proj)
+)
+272384 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.projeto_id_proj_seq OWNED BY public.projeto.id_proj
+272384 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.inscricao (
+                id_proj INTEGER NOT NULL,
+                id_edital INTEGER NOT NULL,
+                id_arquivo INTEGER,
+                CONSTRAINT inscricao_pk PRIMARY KEY (id_proj, id_edital)
+)
+272384 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+CREATE SEQUENCE public.custo_id_seq
+272385 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Custo (
+                ID INTEGER NOT NULL DEFAULT nextval('public.custo_id_seq'),
+                TIPO VARCHAR NOT NULL,
+                VALOR DOUBLE PRECISION NOT NULL,
+                DESCRICAO VARCHAR(200) NOT NULL,
+                id_proj INTEGER NOT NULL,
+                CONSTRAINT id PRIMARY KEY (ID)
+)
+272385 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.custo_id_seq OWNED BY public.Custo.ID
+272386 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.usuario_papel (
+                id_usuario INTEGER NOT NULL,
+                id_papel INTEGER NOT NULL,
+                CONSTRAINT usuario_papel_pk PRIMARY KEY (id_usuario, id_papel)
+)
+272386 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+CREATE TABLE public.participante (
+                id_usuario INTEGER NOT NULL,
+                id_proj INTEGER NOT NULL,
+                CONSTRAINT part_proj_pk PRIMARY KEY (id_usuario, id_proj)
+)
+272387 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER TABLE public.papel_permissao ADD CONSTRAINT papel_papel_permissao_fk
+FOREIGN KEY (id_papel)
+REFERENCES public.papel (id_papel)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+272387 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.usuario_papel ADD CONSTRAINT papel_usuario_papel_fk
+FOREIGN KEY (id_papel)
+REFERENCES public.papel (id_papel)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+272387 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.projeto ADD CONSTRAINT area_conhecimento_projeto_fk
+FOREIGN KEY (id_area)
+REFERENCES public.area_conhecimento (id_area)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+272388 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.papel_permissao ADD CONSTRAINT permissao_papel_permissao_fk
+FOREIGN KEY (id_perm)
+REFERENCES public.permissao (id_perm)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+272388 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.participante ADD CONSTRAINT usuario_participante_fk
+FOREIGN KEY (id_usuario)
+REFERENCES public.usuario (id_usuario)
+ON DELETE CASCADE
+ON UPDATE CASCADE
+NOT DEFERRABLE
+272389 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.usuario_papel ADD CONSTRAINT usuario_usuario_papel_fk
+FOREIGN KEY (id_usuario)
+REFERENCES public.usuario (id_usuario)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+272389 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.projeto ADD CONSTRAINT usuario_projeto_fk
+FOREIGN KEY (id_responsavel)
+REFERENCES public.usuario (id_usuario)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+272389 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.edital ADD CONSTRAINT usuario_edital_fk
+FOREIGN KEY (id_usuario)
+REFERENCES public.usuario (id_usuario)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+272390 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.inscricao ADD CONSTRAINT edital_inscricao_fk
+FOREIGN KEY (id_edital)
+REFERENCES public.edital (id_edital)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+272390 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.arquivo ADD CONSTRAINT edital_arquivo_fk
+FOREIGN KEY (id_edital)
+REFERENCES public.edital (id_edital)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+272390 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.inscricao ADD CONSTRAINT arquivo_inscricao_fk
+FOREIGN KEY (id_arquivo)
+REFERENCES public.arquivo (id_arquivo)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+272391 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.participante ADD CONSTRAINT projeto_participante_fk
+FOREIGN KEY (id_proj)
+REFERENCES public.projeto (id_proj)
+ON DELETE CASCADE
+ON UPDATE CASCADE
+NOT DEFERRABLE
+272391 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Custo ADD CONSTRAINT projeto_custo_fk
+FOREIGN KEY (id_proj)
+REFERENCES public.projeto (id_proj)
+ON DELETE CASCADE
+ON UPDATE CASCADE
+NOT DEFERRABLE
+272392 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.inscricao ADD CONSTRAINT projeto_inscricao_fk
+FOREIGN KEY (id_proj)
+REFERENCES public.projeto (id_proj)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+272419 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - The list size is :42
+274104 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - SQL_FILE_FILTER:Arquivos de script SQL:[sql, ddl]

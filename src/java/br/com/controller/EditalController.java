@@ -128,22 +128,29 @@ public class EditalController extends GenericController {
      * Método que apenas carrega o formulário para edição de projetos, com os
      * campos preenchidos
      *
-     * @param id
+     * @param p_request
+     * @param idEdital
      * @return ModelAndView
      */
     @RequestMapping(value = "/edital_edita_show")
-    public ModelAndView editalEditaShow(HttpServletRequest p_request, @RequestParam int id) {
+    public ModelAndView editalEditaShow(HttpServletRequest p_request, @RequestParam int idEdital) {
 
         this.request = p_request;
-        System.out.println("************** ID VINDA POR PARAMETRO: " + id);
-
+        System.out.println("************** ID VINDA POR PARAMETRO: " + idEdital);
+        
+        /*
         Usuario user = (Usuario) request.getSession().getAttribute("usuario");
-        if (!verificaAutorizacao(user, Permissao.CRUD_PROJETO)) {
+        if (!verificaAutorizacao(user, Permissao.CRUD_EDITAL)) {
 
             return new ModelAndView("login");
         }
-
-        ModelAndView mv = new ModelAndView("edital_edita");
+        */
+        //RepositorioEdital repositorioEdital = new RepositorioPostgresFactory().createRepositorioEdital();
+        //Edital edital = repositorioEdital.obtemEdital(idEdital, user.getId());
+                
+        System.out.println("************************* CAIU CONTROLLER");
+        ModelAndView mv = new ModelAndView("edital_l");
+        //mv.addObject("edital", edital);
 
         return mv;
     }

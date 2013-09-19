@@ -106,7 +106,7 @@
             <div id="conteudo_interno">
 
 
-                <form:form action="edital_adiciona" modelAttribute="edital" id="form_addedital" enctype="multipart/form-data">
+                <form:form action="edital_edita" modelAttribute="edital" id="form_addedital" enctype="multipart/form-data">
                     <h1>Editar Edital</h1>                                                                                                  
 
                     <fieldset> 
@@ -118,18 +118,7 @@
                         <input type="text" name="titulo" />       
 
                         <span style="clear: both; display: block;"></span>
-                        <!--
-                        <span class="bloco">
-                            <label  for="nome">Tipo edital</label><br/><br/>                             
-                            <select id="tipo_edital" name="tipoEdital">
-                                <option selected="selected" value="">Selecione</option>
-                                <option value="<%=TipoEdital.PESQUISA%>">Pesquisa</option>
-                                <option value="<%=TipoEdital.ENSINO%>">Ensino</option>
-                                <option value="<%=TipoEdital.EXTENSAO%>">Extensão</option>                                
-                            </select>
-                        </span>                        
-                        <span style="clear: both; display: block;"></span>
-                        -->
+                        
                         <span class="bloco">
                             <label for="dataxx">Prazo Inicial:</label>
                             <input class="prazo" type="text" name="prazoInicial_xx" id="prazoInicial" value="" />
