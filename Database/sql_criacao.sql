@@ -77,7 +77,7 @@ CREATE TABLE public.arquivo (
                 nome_arquivo VARCHAR(100) NOT NULL,
                 extensao VARCHAR(3) NOT NULL,
                 dados BYTEA NOT NULL,
-                id_edital INTEGER NOT NULL,
+                id_edital INTEGER,
                 CONSTRAINT arquivo_pk PRIMARY KEY (id_arquivo)
 );
 
