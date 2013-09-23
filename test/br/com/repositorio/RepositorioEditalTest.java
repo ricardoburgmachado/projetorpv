@@ -8,6 +8,7 @@ import Exceptions.DadoInconsistenteException;
 import Exceptions.PersistenciaException;
 import Exceptions.PrivacidadeException;
 import br.com.model.Edital;
+import br.com.model.Usuario;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -70,5 +71,34 @@ public class RepositorioEditalTest {
     public void testObtemSucesso(){
         
         repEdital.obtem(1, 1);
+        //repEdital.obtemEdital(1, 1);
+    }
+    
+    @Test(expected = DadoInconsistenteException.class)
+    public void testExcluiEditalInexistente(){
+        
+        Usuario user = this.facade.autenticaUsuario("joao", "joao");
+        this.facade.excluiEdital(3, user);
+    }
+    
+    @Test(expected = PrivacidadeException.class)
+    public void testExcluiEditalNaoPertencenteUsuario(){
+        
+        Usuario user = this.facade.autenticaUsuario("ivone", "ivone");
+        this.facade.excluiEdital(1, user);
+    }
+    
+    @Test (expected = AutorizacaoException.class)
+    public void testExcluiSemPermissao(){
+        
+        Usuario user = this.facade.autenticaUsuario("rafael", "rafael");
+        //System.out.println(user.getPermissoes());
+        this.facade.excluiEdital(1, user);    
+    }
+    
+    //@Test
+    public void testExcluirSucesso(){
+        
+        //assertEquals(true, repEdital.excluiEdital(1, 1));
     }
 }

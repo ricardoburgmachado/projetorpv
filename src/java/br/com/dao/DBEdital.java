@@ -144,6 +144,37 @@ public class DBEdital implements EditalDAO {
 
         return nextEdital(result);
     }
+    
+    @Override
+    public Edital obtem(int idEdital) throws PersistenciaException {
+        
+        String sql = "select * from edital natural join usuario where id_edital=?"; //FALTA OBTER PRO-REITOR RESPONSAVEL
+        Connection conn = this.factory.createConnection();
+        PreparedStatement stmt;
+        ResultSet result;
+
+        try {
+
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idEdital);
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar consulta para obtenção do edital!", sqle);
+        }
+
+        try {
+
+            result = stmt.executeQuery();
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao consultar pela edital!", sqle);
+        } finally {
+
+            this.factory.close(conn);
+        }
+
+        return nextEdital(result);
+    }
 
     private Edital nextEdital(ResultSet result) {
 
