@@ -363,15 +363,15 @@
    <relationship id="REL111" populated="true" UUID="e2c961a3-5fb5-475c-9184-772591b30617" deferrability="7" deleteRule="3" fk-table-ref="TAB82" fkCardinality="7" identifying="true" name="edital_inscricao_fk" physicalName="edital_inscricao_fk" pk-table-ref="TAB64" pkCardinality="2" updateRule="3" >
     <column-mapping id="CMP112" populated="true" UUID="512600dd-e541-4989-b9cf-e1bc5217051e" fk-column-ref="COL84" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL65" />
    </relationship>
-   <relationship id="REL113" populated="true" UUID="296d5de2-d9ab-495d-b5e0-1b2b17f25891" deferrability="7" deleteRule="3" fk-table-ref="TAB74" fkCardinality="7" identifying="false" name="edital_arquivo_fk" physicalName="edital_arquivo_fk" pk-table-ref="TAB64" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP114" populated="true" UUID="af07ec5e-5cb0-41ed-9d60-2122d1202723" fk-column-ref="COL79" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL65" />
+   <relationship id="REL113" populated="true" UUID="296d5de2-d9ab-495d-b5e0-1b2b17f25891" deferrability="7" deleteRule="0" fk-table-ref="TAB74" fkCardinality="7" identifying="false" name="edital_arquivo_fk" physicalName="edital_arquivo_fk" pk-table-ref="TAB64" pkCardinality="2" updateRule="0" >
+    <column-mapping id="CMP114" populated="true" UUID="36bbccdc-7dc5-47fc-9e97-f66ce6c093f0" fk-column-ref="COL79" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL65" />
    </relationship>
    <relationship id="REL115" populated="true" UUID="2afeedec-07d1-4846-a375-37f9cf2f387b" deferrability="7" deleteRule="3" fk-table-ref="TAB82" fkCardinality="7" identifying="false" name="arquivo_inscricao_fk" physicalName="arquivo_inscricao_fk" pk-table-ref="TAB74" pkCardinality="2" updateRule="3" >
     <column-mapping id="CMP116" populated="true" UUID="1468d04c-3262-4d99-9808-a4fa2ba6316c" fk-column-ref="COL85" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL75" />
    </relationship>
   </relationships>
  </target-database>
- <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="true" target-schema="public"> </ddl-generator>
+ <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="false" target-schema="public"> </ddl-generator>
  <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  <create-kettle-job-settings filePath="" jobName="" schemaName="" kettleJoinType="0" savingToFile="true" />
  <play-pen zoom="1.0" viewportX="0" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">

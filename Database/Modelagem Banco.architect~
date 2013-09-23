@@ -288,7 +288,7 @@
     <column id="COL78" populated="true" UUID="4c3bbebe-8a33-45aa-843a-84ce76ada87a" autoIncrement="false" autoIncrementSequenceName="arquivo_dados_seq" defaultValue="" name="DADOS" nullable="0" physicalName="dados" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="2004" userDefinedTypeUUID="5c50e616-a448-40e1-abcd-5bfc04dcc607" >
      <remarks></remarks>
     </column>
-    <column id="COL79" populated="true" UUID="33cf2b89-b2fd-4e54-8fb3-2054f803e41d" autoIncrement="false" autoIncrementSequenceName="edital_id_edital_seq" defaultValue="" name="ID_EDITAL" nullable="0" physicalName="id_edital" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+    <column id="COL79" populated="true" UUID="33cf2b89-b2fd-4e54-8fb3-2054f803e41d" autoIncrement="false" autoIncrementSequenceName="edital_id_edital_seq" defaultValue="" name="ID_EDITAL" nullable="1" physicalName="id_edital" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
     </folder>
@@ -363,8 +363,8 @@
    <relationship id="REL111" populated="true" UUID="e2c961a3-5fb5-475c-9184-772591b30617" deferrability="7" deleteRule="3" fk-table-ref="TAB82" fkCardinality="7" identifying="true" name="edital_inscricao_fk" physicalName="edital_inscricao_fk" pk-table-ref="TAB64" pkCardinality="2" updateRule="3" >
     <column-mapping id="CMP112" populated="true" UUID="512600dd-e541-4989-b9cf-e1bc5217051e" fk-column-ref="COL84" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL65" />
    </relationship>
-   <relationship id="REL113" populated="true" UUID="296d5de2-d9ab-495d-b5e0-1b2b17f25891" deferrability="7" deleteRule="3" fk-table-ref="TAB74" fkCardinality="7" identifying="false" name="edital_arquivo_fk" physicalName="edital_arquivo_fk" pk-table-ref="TAB64" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP114" populated="true" UUID="af07ec5e-5cb0-41ed-9d60-2122d1202723" fk-column-ref="COL79" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL65" />
+   <relationship id="REL113" populated="true" UUID="296d5de2-d9ab-495d-b5e0-1b2b17f25891" deferrability="7" deleteRule="0" fk-table-ref="TAB74" fkCardinality="7" identifying="false" name="edital_arquivo_fk" physicalName="edital_arquivo_fk" pk-table-ref="TAB64" pkCardinality="2" updateRule="0" >
+    <column-mapping id="CMP114" populated="true" UUID="36bbccdc-7dc5-47fc-9e97-f66ce6c093f0" fk-column-ref="COL79" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL65" />
    </relationship>
    <relationship id="REL115" populated="true" UUID="2afeedec-07d1-4846-a375-37f9cf2f387b" deferrability="7" deleteRule="3" fk-table-ref="TAB82" fkCardinality="7" identifying="false" name="arquivo_inscricao_fk" physicalName="arquivo_inscricao_fk" pk-table-ref="TAB74" pkCardinality="2" updateRule="3" >
     <column-mapping id="CMP116" populated="true" UUID="1468d04c-3262-4d99-9808-a4fa2ba6316c" fk-column-ref="COL85" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL75" />
@@ -384,7 +384,7 @@
   <table-pane table-ref="TAB47" x="312" y="467" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB52" x="20" y="468" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB58" x="441" y="583" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
-  <table-pane table-ref="TAB64" x="90" y="68" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB64" x="81" y="32" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB74" x="463" y="47" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB82" x="316" y="293" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-link relationship-ref="REL99" pkConnection="0.09433962264150944" fkConnection="0.6521739130434783" rLineColor="0x333333" pkLabelText="" fkLabelText="" orientation="72"/>
@@ -398,9 +398,9 @@
   <table-link relationship-ref="REL93" pkConnection="0.7619047619047619" fkConnection="0.41037735849056606" rLineColor="0x333333" pkLabelText="" fkLabelText="" orientation="65"/>
   <table-link relationship-ref="REL95" pkConnection="0.0" fkConnection="0.87248322147651" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="66"/>
   <table-link relationship-ref="REL103" pkConnection="0.17777777777777778" fkConnection="0.8" rLineColor="0x333333" pkLabelText="" fkLabelText="" orientation="18"/>
-  <table-link relationship-ref="REL111" pkConnection="0.8666666666666667" fkConnection="0.09941520467836257" rLineColor="0x333333" pkLabelText="" fkLabelText="" orientation="129"/>
+  <table-link relationship-ref="REL111" pkConnection="0.7481481481481481" fkConnection="0.09941520467836257" rLineColor="0x333333" pkLabelText="" fkLabelText="" orientation="129"/>
   <table-link relationship-ref="REL115" pkConnection="0.2562814070351759" fkConnection="0.7272727272727273" rLineColor="0x333333" pkLabelText="" fkLabelText="" orientation="132"/>
-  <table-link relationship-ref="REL113" pkConnection="1.0" fkConnection="0.0" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="33"/>
+  <table-link relationship-ref="REL113" pkConnection="0.9185185185185185" fkConnection="0.0" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="33"/>
  </play-pen>
  <critic-manager>
   <critic-grouping platformType="Generic" enabled="true">

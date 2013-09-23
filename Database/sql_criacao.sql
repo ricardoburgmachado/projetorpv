@@ -205,8 +205,8 @@ NOT DEFERRABLE;
 ALTER TABLE public.arquivo ADD CONSTRAINT edital_arquivo_fk
 FOREIGN KEY (id_edital)
 REFERENCES public.edital (id_edital)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
+ON DELETE CASCADE
+ON UPDATE CASCADE
 NOT DEFERRABLE;
 
 ALTER TABLE public.inscricao ADD CONSTRAINT arquivo_inscricao_fk
