@@ -580,7 +580,7 @@ public class DBProjeto implements ProjetoDAO {
     public List<Projeto> listarProjetos(int idResponsavel) throws PersistenciaException {
 
         //Busca pelos dados do projeto incluindo seus participantes e o papel de cada participante. Também busca pelo nome e id do responsável pelo projeto (Professor)
-        String sql = "select * from projeto inner join usuario on id_responsavel = id_usuario natural join area_conhecimento where id_responsavel=?";
+        String sql = "select * from projeto inner join usuario on id_responsavel = id_usuario inner join area_conhecimento using (id_area) where id_responsavel=?";
 
         PreparedStatement stmt = null;
         ResultSet result;

@@ -32,8 +32,8 @@ public class RepositorioFacade {
         this.repProjeto = repositorioFactory.createRepositorioProjeto();
         this.repEdital = repositorioFactory.createRepositorioEdital();
     }
-    
-     public void inscreveEdital(int idEdital, int idProjeto, Arquivo arquivo, Date dataInscricao, Usuario usuario) throws PersistenciaException, DadoInconsistenteException, PrivacidadeException, AutorizacaoException{
+
+    public void inscreveEdital(int idEdital, int idProjeto, Arquivo arquivo, Date dataInscricao, Usuario usuario) throws PersistenciaException, DadoInconsistenteException, PrivacidadeException, AutorizacaoException {
 
         Edital edital = repEdital.obtemEdital(idEdital);
         Projeto projeto = repProjeto.obter(idProjeto);
@@ -41,14 +41,19 @@ public class RepositorioFacade {
 
         this.repEdital.inscreveProjetoEdital(inscricao, usuario);
     }
-    
-     public Usuario autenticaUsuario(String login, String senha) throws PersistenciaException{
-        
+
+    public Usuario autenticaUsuario(String login, String senha) throws PersistenciaException {
+
         return this.repUsuario.autenticaUsuario(login, senha);
     }
-
-    public void excluiEdital(int idEdital, Usuario usuario) throws PersistenciaException, PrivacidadeException, AutorizacaoException, DadoInconsistenteException{
+    
+    public Edital obter(int idEdital, Usuario usuario){
         
+        return null;
+    }
+
+    public void excluiEdital(int idEdital, Usuario usuario) throws PersistenciaException, PrivacidadeException, AutorizacaoException, DadoInconsistenteException {
+
         this.repEdital.excluiEdital(this.repEdital.obtemEdital(idEdital), usuario);
     }
 }

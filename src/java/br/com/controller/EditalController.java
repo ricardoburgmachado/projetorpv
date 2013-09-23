@@ -5,8 +5,10 @@
  */
 package br.com.controller;
 
+import Exceptions.AutorizacaoException;
 import Exceptions.DadoInconsistenteException;
 import Exceptions.PersistenciaException;
+import Exceptions.PrivacidadeException;
 import br.com.model.Arquivo;
 import br.com.model.Edital;
 import br.com.model.Permissao;
@@ -14,8 +16,10 @@ import br.com.model.ProReitor;
 import br.com.model.TipoProjeto;
 import br.com.model.Usuario;
 import br.com.repositorio.RepositorioEdital;
+import br.com.repositorio.RepositorioFacade;
 import br.com.repositorio.RepositorioPostgresFactory;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -66,7 +70,7 @@ public class EditalController extends GenericController {
             return new ModelAndView("login");
         }
 
-        if(!arquivo.isEmpty()){ 
+        if (!arquivo.isEmpty()) {
             String[] split = arquivo.getOriginalFilename().split("\\.");
             Arquivo arq = new Arquivo(arquivo.getName(), split[split.length - 1], arquivo.getBytes());
             edital.setArquivo(arq);
@@ -80,17 +84,17 @@ public class EditalController extends GenericController {
 
         String[] pI = request.getParameterValues("prazoInicial_xx");
         String[] pF = request.getParameterValues("prazoFinal_xx");
-        
+
         if (pI[0] != null && !pI[0].equals("")) {
             String[] pISplit = pI[0].split("/");
             edital.setPrazoInicial(new Date(Integer.parseInt(pISplit[0]) - 1900, Integer.parseInt(pISplit[1]) - 1, Integer.parseInt(pISplit[2])));
         }
 
-        if ( pF[0] != null && !pF[0].equals("")) {
+        if (pF[0] != null && !pF[0].equals("")) {
             String[] pFSplit = pF[0].split("/");
             edital.setPrazoFinal(new Date(Integer.parseInt(pFSplit[0]) - 1900, Integer.parseInt(pFSplit[1]) - 1, Integer.parseInt(pFSplit[2])));
         }
-        
+
         //new RepositorioPostgresFactory().createRepositorioEdital().adiciona(edital);
         /**
          * **************************************** *
@@ -157,17 +161,97 @@ public class EditalController extends GenericController {
 
             return new ModelAndView("login");
         }
-        
+
         RepositorioEdital repositorioEdital = new RepositorioPostgresFactory().createRepositorioEdital();
         List<Edital> editais = repositorioEdital.listarEditais(user.getId());
-        
+
         ModelAndView mv = new ModelAndView("edital_lista");
         if (editais != null) {
             mv.addObject("editais", editais);
-        }else{
+        } else {
             mv.addObject("editais", null);
         }
         return mv;
     }
 
+    @RequestMapping(value = "/edital_exclui")
+    public ModelAndView excluiEdital(HttpServletRequest request, @RequestParam int id) {
+        
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        
+        if(user == null){
+            
+            return new ModelAndView("login");
+        }
+        
+        List<String> inconsistencias = new ArrayList<>();
+        RepositorioFacade facade = new RepositorioFacade();
+        ModelAndView mv = new ModelAndView("edital_lista");
+        
+        try{
+            
+            facade.excluiEdital(id, user);
+        }catch(AutorizacaoException aex){
+            
+            return new ModelAndView("login");
+        }catch(PrivacidadeException pex){
+            
+            return this.editalListaShow(request);
+        }catch(DadoInconsistenteException diex){
+
+            do{
+                
+                inconsistencias.add(diex.getMessage());
+                diex = diex.getException();
+            }while(diex.getException() != null);
+        }
+
+        if(!inconsistencias.isEmpty()){
+            
+            mv.addObject("inconsistencias", inconsistencias);
+        }
+        
+        return mv;
+    }
+    
+    @RequestMapping(value = "/edital_exibe")
+    public ModelAndView exibeEdital(HttpServletRequest request, @RequestParam int id) {
+        
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        
+        if(user == null){
+            
+            return new ModelAndView("login");
+        }
+        
+        List<String> inconsistencias = new ArrayList<>();
+        RepositorioFacade facade = new RepositorioFacade();
+        ModelAndView mv = new ModelAndView("edital_exibe");
+        
+        try{
+            
+            facade.excluiEdital(id, user);
+        }catch(AutorizacaoException aex){
+            
+            return new ModelAndView("login");
+        }catch(PrivacidadeException pex){
+            
+            inconsistencias.add(pex.getMessage());
+        }catch(DadoInconsistenteException diex){
+
+            do{
+                
+                inconsistencias.add(diex.getMessage());
+                diex = diex.getException();
+            }while(diex.getException() != null);
+        }
+
+        if(!inconsistencias.isEmpty()){
+            
+            mv.addObject("inconsistencias", inconsistencias);
+        }
+        
+        return mv;
+    }
+    
 }
