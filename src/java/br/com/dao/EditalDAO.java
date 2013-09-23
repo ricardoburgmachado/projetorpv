@@ -36,4 +36,6 @@ public interface EditalDAO {
     boolean verificaInscricao(int idEdital, int idProjeto) throws PersistenciaException;
     
     public List<Edital> listarEditais(int idResponsavel) throws PersistenciaException;
+    
+    public List<Arquivo> obterRetificacoes(int idEdital) throws PersistenciaException;
 }

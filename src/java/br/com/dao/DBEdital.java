@@ -5,7 +5,6 @@
 package br.com.dao;
 
 import Exceptions.PersistenciaException;
-import br.com.model.AreaConhecimento;
 import br.com.model.Arquivo;
 import br.com.model.Campus;
 import br.com.model.Edital;
@@ -13,7 +12,6 @@ import br.com.model.Inscricao;
 import br.com.model.ProReitor;
 import br.com.model.StatusProjeto;
 import br.com.model.TipoProjeto;
-import br.com.model.Usuario;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -264,7 +262,7 @@ public class DBEdital implements EditalDAO {
 
             if (result.next()) {
 
-                Arquivo arquivo = new Arquivo(result.getString("nome_arquivo"), result.getString("extensao"), result.getBytes("dados"));
+                Arquivo arquivo = new Arquivo(result.getInt("id_arquivo"), result.getString("nome_arquivo"), result.getString("extensao"), result.getBytes("dados"));
                 return arquivo;
             }
         } catch (SQLException sqle) {
@@ -531,5 +529,41 @@ public class DBEdital implements EditalDAO {
 
             throw new PersistenciaException("Não houve resultados!", ex);
         }
+    }
+
+    @Override
+    public List<Arquivo> obterRetificacoes(int idEdital) throws PersistenciaException {
+        
+        String sql = "select * from arquivo inner join retificacao using(id_arquivo) where id_edital=?";
+        Connection conn = this.factory.createConnection();
+        PreparedStatement stmt;
+        ResultSet result;
+        List<Arquivo> arquivos = new ArrayList<>();
+
+        try {
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idEdital);
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar consulta por retificações!", sqle);
+        }
+
+        try {
+            result = stmt.executeQuery();
+            Arquivo arquivo;
+            
+            do{
+                arquivo = nextArquivo(result);
+                arquivos.add(arquivo);
+            }while(arquivo != null);
+        } catch (SQLException ex) {
+            
+            throw new PersistenciaException("Falha ao consultar por retificações!", ex);
+        }finally{
+            
+            this.factory.close(conn);
+        }
+        
+        return arquivos;
     }
 }

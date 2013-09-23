@@ -141,6 +141,10 @@ public class Edital {
         return retificacoes;
     }
     
+    public void setRetificacoes(List<Arquivo> retificacoes) {
+        this.retificacoes = retificacoes;
+    }
+    
     public Inscricao inscreveProjeto(Projeto projeto, Arquivo arquivo, Date dataInscricao){
         
         Inscricao inscricao = new Inscricao(projeto, this, arquivo, dataInscricao);
@@ -148,5 +152,4 @@ public class Edital {
         
         return inscricao;
     }
-
 }

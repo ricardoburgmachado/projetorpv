@@ -83,6 +83,7 @@ public class RepositorioEdital {
             }
 
             edital.setArquivo(this.editalDao.obtemArquivo(idEdital));
+            edital.setRetificacoes(this.editalDao.obterRetificacoes(idEdital));
             return edital;
         }
 
