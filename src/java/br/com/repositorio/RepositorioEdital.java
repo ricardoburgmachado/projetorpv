@@ -14,6 +14,8 @@ import br.com.model.Inscricao;
 import br.com.model.Permissao;
 import br.com.model.StatusProjeto;
 import br.com.model.Usuario;
+import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -27,9 +29,46 @@ public class RepositorioEdital {
         this.editalDao = editalDao;
     }
 
-    public void adiciona(Edital edital) throws PersistenciaException {
+    public void adiciona(Edital edital) throws PersistenciaException, DadoInconsistenteException {
 
-        this.editalDao.adiciona(edital);
+        DadoInconsistenteException exception = null;
+
+        if (edital == null) {
+
+            throw new DadoInconsistenteException("Edital Inválido!<br/>");
+        }
+
+        if (verificaVazio(edital.getTitulo())) {
+
+            exception = new DadoInconsistenteException(exception, "Título não informado!<br/>");
+        }
+
+        if (verificaNulo(edital.getPrazoInicial())) {
+            exception = new DadoInconsistenteException(exception, "Prazo inicial não informado!<br/>");
+        }
+
+        if (!verificaNulo(edital.getPrazoInicial()) && !verificaNulo(edital.getPrazoFinal())) {
+            if (verificaPrazoMenor(edital.getPrazoInicial(), edital.getPrazoFinal())) {
+                exception = new DadoInconsistenteException(exception, "Prazo final menor que prazo inicial!<br/>");
+            }
+        }
+
+        if (verificaNulo(edital.getPrazoFinal())) {
+            exception = new DadoInconsistenteException(exception, "Prazo final não informado!<br/>");
+        }
+
+        if (verificaNulo(edital.getArquivo())) {
+            exception = new DadoInconsistenteException(exception, "Arquivo não anexado!<br/>");
+        }
+
+        if (exception == null) {
+
+            this.editalDao.adiciona(edital);
+        } else {
+
+            throw exception;
+        }
+
     }
 
     public Edital obtemEdital(int idEdital, int idResponsavel) throws PersistenciaException, DadoInconsistenteException, PrivacidadeException {
@@ -39,7 +78,6 @@ public class RepositorioEdital {
             Edital edital = this.editalDao.obtem(idEdital, idResponsavel);
 
             if (edital == null) {
-
                 throw new PrivacidadeException("Edital não pertencente ao usuário!");
             }
 
@@ -55,17 +93,12 @@ public class RepositorioEdital {
         return this.editalDao.obtem(idEdital);
     }
 
-    public boolean excluiEdital(int idEdital, int idResponsavel) throws PersistenciaException, DadoInconsistenteException, PrivacidadeException {
-
-        if (verificaConsistenciaExcluirEdital(idEdital, idResponsavel)) {
-
-            if (!this.editalDao.exclui(idEdital, idResponsavel)) {
-
-                throw new PrivacidadeException("Edital não pertencente ao usuário!");
-            }
+    public void excluiEdital(Edital edital, Usuario user) throws PersistenciaException, PrivacidadeException, DadoInconsistenteException {
+        
+        if(verificaConsistenciaExcluirEdital(edital, user)){
+            
+            this.editalDao.exclui(edital.getId(), user.getId());
         }
-
-        return true;
     }
 
     private boolean verificaConsistenciaObterEdital(int idEdital, int idResponsavel) throws PersistenciaException, DadoInconsistenteException {
@@ -78,13 +111,23 @@ public class RepositorioEdital {
         return true;
     }
 
-    private boolean verificaConsistenciaExcluirEdital(int idEdital, int idResponsavel) throws PersistenciaException, DadoInconsistenteException {
+    private boolean verificaConsistenciaExcluirEdital(Edital edital, Usuario usuario) throws PersistenciaException, DadoInconsistenteException, AutorizacaoException, PrivacidadeException {
 
-        if (!exists(idEdital)) {
+        if (!usuario.getPermissoes().contains(Permissao.CRUD_EDITAL)) {
+
+            throw new AutorizacaoException("Usuário sem permissão para excluir edital!");
+        }
+
+        if (edital == null) {
 
             throw new DadoInconsistenteException("Edital não existente!");
         }
-
+        
+        if(edital.getProReitor().getId() != usuario.getId()){
+            
+            throw new PrivacidadeException("Edital não pertencente ao usuário!");
+        }
+        
         return true;
     }
 
@@ -94,9 +137,9 @@ public class RepositorioEdital {
     }
 
     public void inscreveProjetoEdital(Inscricao inscricao, Usuario usuario) throws PersistenciaException, DadoInconsistenteException, PrivacidadeException, AutorizacaoException {
-        
-        if(verificaConsistenciaParaInscricao(inscricao, usuario)){
-            
+
+        if (verificaConsistenciaParaInscricao(inscricao, usuario)) {
+
             inscricao.getProjeto().setStatus(StatusProjeto.INSCRITO);
             this.editalDao.inscreveProjetoEdital(inscricao);
         }
@@ -135,14 +178,14 @@ public class RepositorioEdital {
 
             exception = new DadoInconsistenteException(exception, "Prazo para inscrição expirado!");
         }
-        
-        if (inscricao.getEdital().getTipo() != inscricao.getProjeto().getTipoProjeto()){
-            
+
+        if (inscricao.getEdital().getTipo() != inscricao.getProjeto().getTipoProjeto()) {
+
             exception = new DadoInconsistenteException(exception, "Propósitos incompatíveis. Edital para projetos de " + inscricao.getEdital().getTipo() + " e o projeto é de " + inscricao.getProjeto().getTipoProjeto());
         }
-        
-        if (this.editalDao.verificaInscricao(inscricao.getEdital().getId(), inscricao.getProjeto().getId())){
-            
+
+        if (this.editalDao.verificaInscricao(inscricao.getEdital().getId(), inscricao.getProjeto().getId())) {
+
             exception = new DadoInconsistenteException(exception, "Projeto já inscrito no edital!");
 
         } else if (!inscricao.getProjeto().getStatus().equals(StatusProjeto.HOMOLOGADO) && !inscricao.getProjeto().getStatus().equals(StatusProjeto.INSCRITO)) {
@@ -150,11 +193,55 @@ public class RepositorioEdital {
             exception = new DadoInconsistenteException(exception, "Projeto não homologado!");
         }
 
-        if(exception != null){
-            
+        if (exception != null) {
+
             throw exception;
         }
-        
+
         return true;
+    }
+
+    private boolean verificaNulo(Object obj) {
+
+        return obj == null;
+
+    }
+
+    private boolean verificaVazio(String campo) {
+
+        return verificaNulo(campo) || campo.equals("");
+    }
+
+    private boolean verificaPrazoMenor(Date ini, Date fim) {
+
+        /*
+         Calendar calendar = new GregorianCalendar(); 
+         System.out.println("*************DATA ATUAL: "+calendar.getTime().toString());
+         System.out.println("*************DATA INCIAL: "+ini);
+         System.out.println("*************DATA FINAL: "+fim);
+        
+        
+         if(calendar.getTime().after(ini)) {
+         System.out.println("É DEPOIS DA DATA ATUAL");
+         }
+        
+         if(calendar.getTime().before(ini)) {
+         System.out.println("É ANTES DA DATA ATUAL");
+         }
+        
+         if( ini.after(fim) &&  calendar.getTime().before(ini)){
+         System.out.println("RETURN TRUE NAS DATAS");
+         return true;
+         }else{
+         System.out.println("RETURN FALSE NAS DATAS");
+         return false;
+         }
+         */
+
+        return ini.after(fim);
+    }
+
+    public List<Edital> listarEditais(int idResponsavel) throws PersistenciaException, DadoInconsistenteException {
+        return this.editalDao.listarEditais(idResponsavel);
     }
 }

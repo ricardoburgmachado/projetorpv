@@ -213,7 +213,7 @@
 
                         <span class="bloco">
                             <label for="nome">Anexo (arquivo .PDF):</label>
-                            <input style="font-size: 12px; font-weight: normal; border: none; cursor: pointer" type="file" name="arquivo_xx"/> 
+                            <input accept="application/pdf" style="font-size: 12px; font-weight: normal; border: none; cursor: pointer" type="file" name="arquivo_xx"/> 
                         </span>
 
 

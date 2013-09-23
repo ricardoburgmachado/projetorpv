@@ -51,56 +51,51 @@
                 <c:import url="menu.jsp"/>
             </div>     
 
-
-
-
             <div id="conteudo_interno">
 
                 <h1>Listar Editais</h1>
 
                 <table id="lista_projetos">                    
+                    <c:choose>
+                        <c:when test="${editais != null && editais.size() > 0}">
 
-                    <tr class="sub_titulo">
-                        <td class="titulo">TITULO</td>
-                        <td class="tipo">TIPO</td>
-                        <td class="funcoes">AÇÕES</td>
-                    </tr>
+                            <tr class="sub_titulo">
+                                <td class="titulo">TITULO</td>
+                                <td class="tipo">TIPO</td>
+                                <!--<td class="status">STATUS</td>-->
+                                <td class="funcoes">AÇÕES</td>
+                            </tr>
+                            <c:forEach items="${editais}" var="edital">
 
-                    <tr class="linealt">
-                    <a>
-                        <td class="titulo">Titulo Teste</td>
-                        <td class="tipo" >PESQUISA</td>
-                        <td class="edita"><a title="Clique aqui para editar Edital" href="projeto_edita_show?id=9999999"></a></td>
-                    </a>
-                    </tr>
-
-                    <tr class="linealt">
-                    <a>
-                        <td class="titulo">Titulo Teste</td>
-                        <td class="tipo" >PESQUISA</td>
-                        <td class="edita"><a title="Clique aqui para editar Edital" href="projeto_edita_show?id=9999999"></a></td>
-                    </a>
-                    </tr>
-
-
-                    <tr class="linealt">
-                    <a>
-                        <td class="titulo">Titulo Teste</td>
-                        <td class="tipo" >PESQUISA</td>
-                        <td class="edita"><a title="Clique aqui para editar Edital" href="projeto_edita_show?id=9999999"></a></td>
-                    </a>
-                    </tr>
+                                <tr class="linealt">
+                                <a>
+                                    <td class="titulo">${edital.titulo}</td>
+                                    <td class="tipo" >${edital.tipo}</td>
+                                    <!--<td class="status">${projeto.status.descricao }</td>-->
+                                    <td class="edita"><a title="Clique aqui para editar Edital" href="edital_edita_show?id=${edital.id}"></a></td>
+                                    <!--<td class="exibe"><a title="Clique aqui para exibir detalhes do projeto" href="projeto_exibe?id=${edital.id}"></a></td>-->
+                                </a>
+                                </tr>
+                            </c:forEach>
 
 
-
-
-
-
+                        </c:when>
+                        <c:otherwise>
+                            <tr>
+                                <td class="titulo">
+                                    Não existe nenhum edital cadastrado por este usuário!
+                                </td>
+                            </tr>
+                        </c:otherwise>
+                    </c:choose>
 
                 </table>
 
             </div>
 
+
+
+            
         </div>
 
         <div id="rodape"></div>

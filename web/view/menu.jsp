@@ -17,10 +17,10 @@
             </ul> 
         </li>
         
-        <li><a href="<c:url value="/edital_lista_show_XXX"/>" class="mais">Editais</a>
+        <li><a href="<c:url value="/edital_lista_show"/>" class="mais">Editais</a>
             <ul>
                     <li><a href="<c:url value="/edital_adiciona_show"/>">Adicionar edital</a></li> 	
-                    <li><a href="<c:url value="/edital_lista_show_XXX"/>">Listar editais</a></li>
+                    <li><a href="<c:url value="/edital_lista_show"/>">Listar editais</a></li>
             </ul> 
         </li>
         

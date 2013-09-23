@@ -5,15 +5,22 @@
 package br.com.dao;
 
 import Exceptions.PersistenciaException;
+import br.com.model.AreaConhecimento;
 import br.com.model.Arquivo;
+import br.com.model.Campus;
 import br.com.model.Edital;
 import br.com.model.Inscricao;
+import br.com.model.ProReitor;
 import br.com.model.StatusProjeto;
 import br.com.model.TipoProjeto;
+import br.com.model.Usuario;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -29,21 +36,27 @@ public class DBEdital implements EditalDAO {
 
     @Override
     public void adiciona(Edital edital) throws PersistenciaException {
-
-        //String sql = "insert into edital (prazo_final, prazo_inicial, titulo, id_usuario, tipo_edital, id_arquivo) values (?,?,?,?,?,?)";
-        String sql = "insert into edital (id_edital, titulo, id_usuario, tipo_edital, id_arquivo) values (1, ?,?,?,?)";
+        
+        String sql = "insert into edital (titulo, id_usuario, tipo_edital, id_arquivo, prazo_inicial, prazo_final) values (?,?,?,?,?,?)";
         Connection conn = factory.createConnection();
         PreparedStatement stmt;
 
         try {
 
-            stmt = conn.prepareStatement(sql);
-            //stmt.setDate(1, new Date(edital.getPrazoFinal().getTime()));
-            //stmt.setDate(2, new Date(edital.getPrazoInicial().getTime()));
+            stmt = conn.prepareStatement(sql);           
             stmt.setString(1, edital.getTitulo());
             stmt.setInt(2, edital.getProReitor().getId());
             stmt.setString(3, edital.getTipo().toString());
-            stmt.setInt(4, adicionaArquivo(edital.getArquivo()));
+           
+            System.out.println("***************** ARQUIVO EDITAL: "+edital.getArquivo());
+            
+            //if(edital.getArquivo()!= null){
+                stmt.setInt(4, adicionaArquivo(edital.getArquivo()));
+            //}else{
+            //    stmt.setInt(4, 0);
+            //}            
+            stmt.setDate(5, new Date(edital.getPrazoInicial().getTime()));
+            stmt.setDate(6, new Date(edital.getPrazoFinal().getTime()));
         } catch (SQLException sqle) {
 
             throw new PersistenciaException("Falha ao configurar inserção do edital!", sqle);
@@ -124,7 +137,7 @@ public class DBEdital implements EditalDAO {
     @Override
     public Edital obtem(int idEdital, int idResponsavel) throws PersistenciaException {
 
-        String sql = "select * from edital where id_edital=? and id_usuario=?"; //FALTA OBTER PRO-REITOR RESPONSAVEL
+        String sql = "select * from edital natural join usuario where id_edital=? and id_usuario=?";
         Connection conn = this.factory.createConnection();
         PreparedStatement stmt;
         ResultSet result;
@@ -196,6 +209,13 @@ public class DBEdital implements EditalDAO {
                 edital.setPrazoInicial(result.getDate("prazo_inicial"));
                 edital.setTipo(TipoProjeto.valueOf(result.getString("tipo_edital")));
                 edital.setTitulo(result.getString("titulo"));
+                
+                ProReitor proReitor = new ProReitor();
+                proReitor.setId(result.getInt("id_usuario"));
+                proReitor.setNome(result.getString("nome"));
+                proReitor.setCampus(Campus.valueOf(result.getString("campus")));
+                proReitor.setArea(result.getString("area"));
+                edital.setProReitor(proReitor);
 
                 return edital;
             }
@@ -445,6 +465,71 @@ public class DBEdital implements EditalDAO {
         } finally {
 
             this.factory.close(conn);
+        }
+    }
+
+    @Override
+    public List<Edital> listarEditais(int idResponsavel) throws PersistenciaException {
+        
+        String sql = "select * from edital where id_usuario = ?";
+
+        PreparedStatement stmt = null;
+        ResultSet result;
+
+        try {
+            Connection connection = factory.createConnection();
+            
+            stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, idResponsavel);
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar consulta", sqle);
+        }
+
+        try {
+
+            result = stmt.executeQuery();
+        } catch (SQLException ex) {
+            System.out.println("ERRO : "+ex);
+            throw new PersistenciaException("Falha ao realizar consulta", ex);
+        }
+
+        return carregaEditais(result);
+        
+    }
+    
+    private List<Edital> carregaEditais(ResultSet result) {
+
+        List<Edital> editais = new ArrayList<Edital>();
+
+        if (verifyResult(result)) {
+
+            try {
+                do {
+                    Edital ed = new Edital();
+                    ed.setId(result.getInt("id_edital"));
+                    ed.setTitulo(result.getString("titulo"));
+                    ed.setTipo(TipoProjeto.fromString(result.getString("tipo_edital")));
+                    ed.setPrazoInicial(result.getDate("prazo_inicial"));
+                    ed.setPrazoFinal(result.getDate("prazo_final"));                    
+                    editais.add(ed);
+                } while (result.next());
+            } catch (SQLException ex) {
+
+                throw new PersistenciaException("Erro ao acessar propriedades do projeto", ex);
+            }
+        }
+
+        return editais;
+    }
+    
+    private boolean verifyResult(ResultSet result) throws PersistenciaException {
+
+        try {
+            return result != null && result.next();
+        } catch (SQLException ex) {
+
+            throw new PersistenciaException("Não houve resultados!", ex);
         }
     }
 }

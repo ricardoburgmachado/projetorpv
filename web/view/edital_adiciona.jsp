@@ -7,10 +7,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="<c:url value="/recursos/css/style.css"/>" />
-
 
 <!-- inicio multiselect -->
         <!--<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" /> -->
@@ -44,12 +42,7 @@
 
       
 
-        <!-- INICIO JQUERY TOAST MESSAGE-->
-        <script type="text/javascript" src="<c:url value="recursos/js/jqueryToastMessage/jquery.toastmessage-min.js"/>" ></script>
-        <script type="text/javascript" src="<c:url value="recursos/js/jqueryToastMessage/funcoes.js"/>" ></script> 
-        <link rel="stylesheet" href="<c:url value="recursos/js/jqueryToastMessage/css/jquery.toastmessage-min.css"/>" />        
-        <!-- FIM JQUERY TOAST MESSAGE-->
-
+       
 
         <!-- inicio importação biblioteca Jquery calendário -->
         
@@ -67,6 +60,11 @@
         <script type="text/javascript" src="<c:url value="recursos/js/jquery-ui-1.10.3.custom/js/calendario.js"/>" ></script>
         <!-- fim importação biblioteca Jquery calendário -->
 
+        <!-- INICIO JQUERY TOAST MESSAGE-->
+        <script type="text/javascript" src="<c:url value="recursos/js/jqueryToastMessage/jquery.toastmessage-min.js"/>" ></script>
+        <script type="text/javascript" src="<c:url value="recursos/js/jqueryToastMessage/funcoes.js"/>" ></script> 
+        <link rel="stylesheet" href="<c:url value="recursos/js/jqueryToastMessage/css/jquery.toastmessage-min.css"/>" />        
+        <!-- FIM JQUERY TOAST MESSAGE-->
 
 
 
@@ -116,7 +114,8 @@
                         <input type="text" name="titulo" />       
 
                         <span style="clear: both; display: block;"></span>
-
+                            
+                        <!--
                         <span class="bloco">
                             <label  for="nome">Tipo edital</label><br/><br/>                             
                             <select id="tipo_edital" name="tipo">
@@ -128,7 +127,7 @@
                         </span>
 
                         <span style="clear: both; display: block;"></span>
-
+                        -->
                         <span class="bloco">
                             <label for="dataxx">Prazo Inicial:</label>
                             <input class="prazo" type="text" name="prazoInicial_xx" id="prazoInicial" value="" />
