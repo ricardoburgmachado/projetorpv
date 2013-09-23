@@ -230,7 +230,7 @@ public class EditalController extends GenericController {
         
         try{
             
-            facade.excluiEdital(id, user);
+            mv.addObject("edital", facade.obter(id, user));
         }catch(AutorizacaoException aex){
             
             return new ModelAndView("login");

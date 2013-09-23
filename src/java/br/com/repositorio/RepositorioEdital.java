@@ -71,13 +71,14 @@ public class RepositorioEdital {
 
     }
 
-    public Edital obtemEdital(int idEdital, int idResponsavel) throws PersistenciaException, DadoInconsistenteException, PrivacidadeException {
+    public Edital obtemEdital(int idEdital, Usuario user) throws PersistenciaException, DadoInconsistenteException, PrivacidadeException {
 
-        if (verificaConsistenciaObterEdital(idEdital, idResponsavel)) {
+        if (verificaConsistenciaObterEdital(idEdital, user)) {
 
-            Edital edital = this.editalDao.obtem(idEdital, idResponsavel);
+            Edital edital = this.editalDao.obtem(idEdital, user.getId());
 
             if (edital == null) {
+                
                 throw new PrivacidadeException("Edital não pertencente ao usuário!");
             }
 
@@ -101,11 +102,16 @@ public class RepositorioEdital {
         }
     }
 
-    private boolean verificaConsistenciaObterEdital(int idEdital, int idResponsavel) throws PersistenciaException, DadoInconsistenteException {
+    private boolean verificaConsistenciaObterEdital(int idEdital, Usuario user) throws PersistenciaException, DadoInconsistenteException, AutorizacaoException{
 
         if (!exists(idEdital)) {
 
             throw new DadoInconsistenteException("Edital não existente!");
+        }
+        
+        if(!user.getPermissoes().contains(Permissao.CRUD_EDITAL)){
+            
+            throw new AutorizacaoException("Usuário sem permissão para excluir edital!");
         }
 
         return true;

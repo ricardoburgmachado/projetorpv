@@ -63,7 +63,7 @@
                                 <td class="titulo">TITULO</td>
                                 <td class="tipo">TIPO</td>
                                 <!--<td class="status">STATUS</td>-->
-                                <td class="funcoes" colspan="2">AÇÕES</td>
+                                <td class="funcoes" colspan="3">AÇÕES</td>
                             </tr>
                             <c:forEach items="${editais}" var="edital">
 
@@ -97,7 +97,7 @@
 
 
 
-            
+
         </div>
 
         <div id="rodape"></div>
