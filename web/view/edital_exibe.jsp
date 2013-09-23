@@ -60,6 +60,15 @@
                                 <td>${edital.tipo}</td>
                                 <td>${edital.arquivo.nomeArquivo}</td>
                             </tr>
+                            <c:forEach var="retificacao" items="${edital.retificacoes}">
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>${retificacao.nomeArquivo}</td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                         <div class="botoes">
