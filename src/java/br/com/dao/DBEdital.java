@@ -152,11 +152,11 @@ public class DBEdital implements EditalDAO {
 
         return nextEdital(result);
     }
-    
+
     @Override
     public Edital obtem(int idEdital) throws PersistenciaException {
         
-        String sql = "select * from edital where id_edital=?"; //FALTA OBTER PRO-REITOR RESPONSAVEL
+        String sql = "select * from edital natural join usuario where id_edital=?";
         Connection conn = this.factory.createConnection();
         PreparedStatement stmt;
         ResultSet result;
@@ -183,7 +183,6 @@ public class DBEdital implements EditalDAO {
 
         return nextEdital(result);
     }
-    
 
     private Edital nextEdital(ResultSet result) {
 
