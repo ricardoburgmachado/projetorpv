@@ -5,6 +5,7 @@
  */
 package br.com.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class Edital {
     private List<Inscricao> inscricoes;
     private ProReitor proReitor;
     private Arquivo arquivo;
+    private List<Arquivo> arquivos;
 
     public Edital() {
     }
@@ -150,4 +152,24 @@ public class Edital {
         return inscricao;
     }
 
+    
+    public String organizaData(Date d){ 
+        String formato = new SimpleDateFormat("dd/MM/YYYY").format(d);
+        return formato;
+    }
+
+    /**
+     * @return the arquivos
+     */
+    public List<Arquivo> getArquivos() {
+        return arquivos;
+    }
+
+    /**
+     * @param arquivos the arquivos to set
+     */
+    public void setArquivos(List<Arquivo> arquivos) {
+        this.arquivos = arquivos;
+    }
+    
 }

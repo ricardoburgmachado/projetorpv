@@ -23,6 +23,8 @@ public interface EditalDAO {
     
     Arquivo obtemArquivo(int idEdital) throws PersistenciaException;
     
+    List<Arquivo> obtemArquivos(int idEdital) throws PersistenciaException;
+    
     boolean exists(int idEdital) throws PersistenciaException;
     
     boolean exclui(int idEdital, int idResponsavel) throws PersistenciaException;
@@ -34,4 +36,8 @@ public interface EditalDAO {
     boolean verificaInscricao(int idEdital, int idProjeto) throws PersistenciaException;
     
     public List<Edital> listarEditais(int idResponsavel) throws PersistenciaException;
+    
+    void edita(Edital edital) throws PersistenciaException;
+    
+    void adicionaArquivo(Arquivo arquivo, int idEdital) throws PersistenciaException;
 }

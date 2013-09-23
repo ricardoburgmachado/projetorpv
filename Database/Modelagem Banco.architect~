@@ -279,7 +279,7 @@
     <column id="COL75" populated="true" UUID="d5e84905-2350-4358-b466-5ca396e2360a" autoIncrement="true" autoIncrementSequenceName="arquivo_id_arquivo_seq_1_1" defaultValue="" name="ID_ARQUIVO" nullable="0" physicalName="id_arquivo" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
-    <column id="COL76" populated="true" UUID="6cfceabd-4b67-4dbb-a3b8-36a0c27fee64" autoIncrement="false" autoIncrementSequenceName="edital_id_edital_seq" defaultValue="" name="ID_EDITAL" nullable="0" physicalName="id_edital" precision="0" primaryKeySeq="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+    <column id="COL76" populated="true" UUID="6cfceabd-4b67-4dbb-a3b8-36a0c27fee64" autoIncrement="false" autoIncrementSequenceName="edital_id_edital_seq_1" defaultValue="" name="ID_EDITAL" nullable="0" physicalName="id_edital" precision="0" primaryKeySeq="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
     <column id="COL77" populated="true" UUID="6b0cb8ff-245f-4113-9fd5-3641490a532c" autoIncrement="false" autoIncrementSequenceName="arquivo_nome_arquivo_seq" defaultValue="" name="NOME_ARQUIVO" nullable="0" physicalName="nome_arquivo" precision="100" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
@@ -309,7 +309,7 @@
     <column id="COL84" populated="true" UUID="6bc9eebf-5298-46be-a600-16384c794b8d" autoIncrement="false" autoIncrementSequenceName="projeto_id_proj_seq_1_1_1" defaultValue="" name="ID_PROJ" nullable="0" physicalName="id_proj" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
-    <column id="COL85" populated="true" UUID="47a035c3-4036-47cd-8b94-13a47c7256ff" autoIncrement="false" autoIncrementSequenceName="edital_id_edital_seq_1" defaultValue="" name="ID_EDITAL" nullable="0" physicalName="id_edital" precision="0" primaryKeySeq="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+    <column id="COL85" populated="true" UUID="47a035c3-4036-47cd-8b94-13a47c7256ff" autoIncrement="false" autoIncrementSequenceName="edital_id_edital_seq_1_1" defaultValue="" name="ID_EDITAL" nullable="0" physicalName="id_edital" precision="0" primaryKeySeq="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
     <column id="COL86" populated="true" UUID="5550f34a-50e0-4491-904b-757b42ed4563" autoIncrement="false" autoIncrementSequenceName="arquivo_id_arquivo_seq_1_2" defaultValue="" name="ID_ARQUIVO" nullable="1" physicalName="id_arquivo" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
@@ -372,7 +372,7 @@
    </relationship>
   </relationships>
  </target-database>
- <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="true" target-schema="public"> </ddl-generator>
+ <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="false" target-schema="public"> </ddl-generator>
  <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  <create-kettle-job-settings filePath="" jobName="" schemaName="" kettleJoinType="0" savingToFile="true" />
  <play-pen zoom="1.0" viewportX="0" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">

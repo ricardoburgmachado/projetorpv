@@ -62,6 +62,8 @@
                             <tr class="sub_titulo">
                                 <td class="titulo">TITULO</td>
                                 <td class="tipo">TIPO</td>
+                                <td class="tipo">PRAZOS</td>
+                                
                                 <!--<td class="status">STATUS</td>-->
                                 <td class="funcoes">AÇÕES</td>
                             </tr>
@@ -71,6 +73,7 @@
                                 <a>
                                     <td class="titulo">${edital.titulo}</td>
                                     <td class="tipo" >${edital.tipo}</td>
+                                    <td class="tipo" >Inicial: ${edital.prazoInicial}<br/>Final: ${edital.prazoFinal}</td>                                    
                                     <!--<td class="status">${projeto.status.descricao }</td>-->
                                     <td class="edita"><a title="Clique aqui para editar Edital" href="edital_edita_show?id=${edital.id}"></a></td>
                                     <!--<td class="exibe"><a title="Clique aqui para exibir detalhes do projeto" href="projeto_exibe?id=${edital.id}"></a></td>-->
