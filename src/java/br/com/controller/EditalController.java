@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
@@ -346,5 +348,57 @@ public class EditalController extends GenericController {
         return arrayBuilder.build();
     }
     
+    public ModelAndView inscreveProjeto(HttpServletRequest request, @RequestParam int id_projeto, @RequestParam int id_edital, @RequestParam MultipartFile file){
+        
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        RepositorioFacade facade = new RepositorioFacade();
+        ModelAndView mv = new ModelAndView("edital_inscreve");
+        List<String> inconsistencias = new ArrayList<>();
+        
+        try{
+            
+            facade.inscreveEdital(id_edital, id_projeto, createArquivo(file), new Date(), usuario);
+        }catch(AutorizacaoException aex){
+            
+            return new ModelAndView("login");
+        }catch(PrivacidadeException pex){
+            
+            inconsistencias.add(pex.getMessage());
+        }catch(DadoInconsistenteException diex){
+            
+            do{
+                inconsistencias.add(diex.getMessage());
+                diex = diex.getException();
+            }while(diex != null);
+        }
+        
+        if(!inconsistencias.isEmpty()){
+            
+            mv.addObject("inconsistencias", inconsistencias);
+            return mv;
+        }
+        
+        if(file == null || createArquivo(file) == null){
+            
+            mv.addObject("aviso", "Arquivo não informado! Mesmo assim a inscrição será efetuada!");
+            mv.addObject("sucesso", "Projeto inscrito com sucesso!");
+        }
+        
+        return mv;
+    }
     
+    private Arquivo createArquivo(MultipartFile file){
+        
+        String titulo = file.getOriginalFilename();
+        String[] split = file.getName().split("\\.");
+        String extensao = split[split.length-1];
+        
+        try {
+            
+            return new Arquivo(titulo, extensao, file.getBytes());
+        } catch (IOException ex) {
+            
+            return null;
+        }
+    }
 }
