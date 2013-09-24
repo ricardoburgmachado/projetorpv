@@ -1,5 +1,6 @@
 package br.com.controller;
 
+import Exceptions.AutorizacaoException;
 import Exceptions.DadoInconsistenteException;
 import Exceptions.PersistenciaException;
 import Exceptions.PrivacidadeException;
@@ -9,15 +10,21 @@ import br.com.model.AreaConhecimento;
 import br.com.model.Permissao;
 import br.com.model.Professor;
 import br.com.model.Projeto;
+import br.com.model.StatusProjeto;
 import br.com.model.TipoCusto;
 import br.com.model.TipoProjeto;
 import br.com.model.Usuario;
+import br.com.repositorio.RepositorioFacade;
 import br.com.repositorio.RepositorioPostgresFactory;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
+import javax.json.Json;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -96,7 +103,7 @@ public class ProjetoController extends GenericController {
 
             inconsistencias.add(pex.getMessage());
         }
-        
+
         /**
          * **************************************** *
          */
@@ -193,7 +200,7 @@ public class ProjetoController extends GenericController {
      */
     @RequestMapping(value = "/projeto_edita_show")
     public ModelAndView projetoEditaShow(HttpServletRequest p_request, @RequestParam int id) {
-        
+
         this.request = p_request;
         System.out.println("************** ID VINDA POR PARAMETRO: " + id);
 
@@ -330,7 +337,7 @@ public class ProjetoController extends GenericController {
             mv.addObject("projetos", projetos);
             mv.addObject("mensagem", "Projeto editado com sucesso!");
         }
-        
+
         return mv;
     }
 
@@ -351,6 +358,40 @@ public class ProjetoController extends GenericController {
         if (projetos != null) {
             mv.addObject("projetos", projetos);
         }
+        return mv;
+    }
+    
+    @RequestMapping (value= "/projeto_filtra")
+    public ModelAndView filtraProjetos(HttpServletRequest request) throws PersistenciaException{
+        
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        ModelAndView mv = new ModelAndView("projeto_inscreve");
+        RepositorioFacade facade = new RepositorioFacade();
+        List<String> inconsistencias = new ArrayList<>();
+        
+        if(user == null){
+            
+            return new ModelAndView("login");
+        }
+        
+        try{
+            
+            Set<StatusProjeto> status = new HashSet<>();
+            status.add(StatusProjeto.HOMOLOGADO);
+            status.add(StatusProjeto.INSCRITO);
+            List<Projeto> projetos = facade.filtrarProjetos(status, user);
+            
+            mv.addObject("projetos", projetos);
+        }catch(AutorizacaoException aex){
+            
+            return new ModelAndView("login");
+        }catch(DadoInconsistenteException diex){
+            
+            inconsistencias.add(diex.getMessage());
+            mv.addObject("inconsistencias", inconsistencias);
+            return mv;
+        }
+        
         return mv;
     }
 
@@ -444,15 +485,14 @@ public class ProjetoController extends GenericController {
             return new ModelAndView("login");
         }
 
-        List<String> inconsistencias = new LinkedList();
+        List<String> inconsistencias;
         ModelAndView mv;
 
         try {
 
             inconsistencias = submete(idProjeto, user.getId());
         } catch (PrivacidadeException pex) {
-            
-            System.out.println("######## PRIVACIDADE EXCEPTION #########");
+
             return this.projetoListaShow(request);
         }
 
@@ -482,10 +522,10 @@ public class ProjetoController extends GenericController {
         try {
 
             new RepositorioPostgresFactory().createRepositorioProjeto().submeterHomologacao(idProjeto, idResponsavel);
-        } catch (PrivacidadeException pex){
-            
+        } catch (PrivacidadeException pex) {
+
             throw pex;
-        }catch (DadoInconsistenteException diex) {
+        } catch (DadoInconsistenteException diex) {
 
             do {
 
@@ -498,29 +538,6 @@ public class ProjetoController extends GenericController {
         }
 
         return inconsistencias;
-    }
-
-    private Projeto criaProjeto(HttpServletRequest request) {
-
-        Projeto projeto = new Projeto();
-
-        projeto.setId(Integer.parseInt(request.getParameter("id")));
-        projeto.setTitulo(request.getParameter("titulo"));
-        projeto.setResumo(request.getParameter("resumo"));
-        projeto.setPalavrasChave(request.getParameter("palavrasChave"));
-        projeto.setTipoProjeto(TipoProjeto.fromString("tipoProjeto"));
-        projeto.setAreaConhecimento(new AreaConhecimento(Integer.valueOf(request.getParameter("areaConhecimento_x")), null));
-        projeto.setProfessor((Professor) request.getSession().getAttribute("usuario"));
-        projeto.setSigilo(Boolean.valueOf(request.getParameter("sigilo")));
-
-        atribuiParticipantes(projeto, request.getParameterValues("participantes_aluno"));
-        atribuiParticipantes(projeto, request.getParameterValues("participantes_professor"));
-        atribuiParticipantes(projeto, request.getParameterValues("participantes_externo"));
-
-        atribuiCustos(projeto, TipoCusto.CUSTEIO, request.getParameterValues("custeio_desc_x"), request.getParameterValues("custeio_val_x"));
-        atribuiCustos(projeto, TipoCusto.CUSTEIO, request.getParameterValues("capital_desc_x"), request.getParameterValues("capital_val_x"));
-
-        return projeto;
     }
 
     private void atribuiCustos(Projeto projeto, TipoCusto tipoCusto, String[] descricoes, String[] valores) {

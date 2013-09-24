@@ -12,11 +12,11 @@ import br.com.model.Arquivo;
 import br.com.model.Edital;
 import br.com.model.Inscricao;
 import br.com.model.Projeto;
-import br.com.model.TipoProjeto;
+import br.com.model.StatusProjeto;
 import br.com.model.Usuario;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
+import java.util.Set;
 
 /**
  *
@@ -63,5 +63,10 @@ public class RepositorioFacade {
     public List<Edital> filtrarEditais(Date data, int idProjeto) throws PersistenciaException {
 
         return this.repEdital.listarEditais(data, this.repProjeto.obter(idProjeto).getTipoProjeto());
+    }
+    
+    public List<Projeto> filtrarProjetos(Set<StatusProjeto> status, Usuario usuario) throws PersistenciaException, AutorizacaoException{
+        
+        return this.repProjeto.filtrarProjetos(usuario, status);
     }
 }

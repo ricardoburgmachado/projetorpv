@@ -24,6 +24,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -176,7 +177,7 @@ public class DBProjeto implements ProjetoDAO {
             stmt.setString(3, p.getResumo());
             stmt.setBoolean(4, p.getSigilo());
             stmt.setInt(5, p.getAreaConhecimento().getId());
-            stmt.setString(6, p.getTipoProjeto().toString());            
+            stmt.setString(6, p.getTipoProjeto().toString());
             stmt.setInt(7, p.getProfessor().getId());
             System.out.println("********************** ID PROFESSOR: " + p.getProfessor().getId());
             stmt.setInt(8, p.getId());
@@ -810,30 +811,46 @@ public class DBProjeto implements ProjetoDAO {
         try {
 
             stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, idProj);            
+            stmt.setInt(1, idProj);
             resultSet = stmt.executeQuery();
             resultSet.next();
             return resultSet.getString(1);
 
         } catch (SQLException sqle) {
-            System.out.println("************** ERRO: "+sql);
-            throw new PersistenciaException("Falha ao consultar status do projeto");             
+            System.out.println("************** ERRO: " + sql);
+            throw new PersistenciaException("Falha ao consultar status do projeto");
         }
     }
 
     @Override
-    public List<Projeto> listarProjetos(int idResponsavel, StatusProjeto status) throws PersistenciaException {
-        
-        String sql = "select * from projeto inner join usuario on id_responsavel = id_usuario inner join area_conhecimento using (id_area) where id_responsavel=? and status=?";
+    public List<Projeto> listarProjetos(int idResponsavel, Set<StatusProjeto> status) throws PersistenciaException {
+
+        StringBuilder sqlBuilder = new StringBuilder("select * from projeto inner join usuario on id_responsavel = id_usuario inner join area_conhecimento using (id_area) where id_responsavel=?");
+
+        if (status.size() > 0) {
+
+            sqlBuilder.append(" and status=?");
+            for (int i = 1; i < status.size(); i++) {
+
+                sqlBuilder.append("or status=?");
+            }
+        }
 
         PreparedStatement stmt = null;
         ResultSet result;
 
         try {
 
-            stmt = connection.prepareStatement(sql);
+            stmt = connection.prepareStatement(sqlBuilder.toString());
             stmt.setInt(1, idResponsavel);
-            stmt.setString(2, status.toString());
+            
+            int ini = 1;
+            StatusProjeto[] stts = (StatusProjeto[]) status.toArray();
+            
+            for(int i = 0; i< stts.length; i++){
+                
+                stmt.setString(ini + 1, stts[i].toString());
+            }
         } catch (SQLException sqle) {
 
             throw new PersistenciaException("Falha ao preparar consulta", sqle);
