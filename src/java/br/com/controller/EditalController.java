@@ -19,10 +19,16 @@ import br.com.repositorio.RepositorioEdital;
 import br.com.repositorio.RepositorioFacade;
 import br.com.repositorio.RepositorioPostgresFactory;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -311,5 +317,34 @@ public class EditalController extends GenericController {
         }
         
         return mv;
-    }    
+    }
+    
+    @RequestMapping (value = "/edital_filtra")
+    public JsonArray filtrarEditais(HttpServletRequest request, @RequestParam(required = true) int id){
+        
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        RepositorioFacade facade = new RepositorioFacade();
+        
+        List<Edital> editais = facade.filtrarEditais(new Date(), id);
+        
+        return editaisToJson(editais);
+    }
+    
+    private JsonArray editaisToJson(List<Edital> editais){
+        
+        JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+        JsonObjectBuilder objBuilder = Json.createObjectBuilder();
+        
+        for(Edital edital: editais){
+            
+            objBuilder.add("id", edital.getId());
+            objBuilder.add("titulo",edital.getTitulo());
+            JsonObject editalJson = objBuilder.build();
+            arrayBuilder.add(editalJson);
+        }
+        
+        return arrayBuilder.build();
+    }
+    
+    
 }

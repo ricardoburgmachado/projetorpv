@@ -251,6 +251,7 @@ public class RepositorioEdital {
     }
     
     public List<Edital> listarEditais(int idResponsavel) throws PersistenciaException, DadoInconsistenteException {
+        
         return this.editalDao.listarEditais(idResponsavel);
     }
     

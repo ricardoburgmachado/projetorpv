@@ -65,7 +65,7 @@ public class RepositorioFacade {
         return this.repEdital.listarEditais(data, this.repProjeto.obter(idProjeto).getTipoProjeto());
     }
     
-    public List<Projeto> filtrarProjetos(Set<StatusProjeto> status, Usuario usuario) throws PersistenciaException, AutorizacaoException{
+    public List<Projeto> filtrarProjetos(Set<StatusProjeto> status, Usuario usuario) throws PersistenciaException, AutorizacaoException, DadoInconsistenteException{
         
         return this.repProjeto.filtrarProjetos(usuario, status);
     }
