@@ -66,7 +66,7 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td>${retificacao.nomeArquivo}</td>
+                                    <td><a href="arquivo_edital_download?id_edital=${edital.id}&id_arquivo=${retificacao.idArquivo}">${retificacao.nomeArquivo}</a></td>
                                 </tr>
                             </c:forEach>
                         </tbody>

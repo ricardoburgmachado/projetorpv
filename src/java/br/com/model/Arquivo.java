@@ -43,4 +43,26 @@ public class Arquivo {
     public int getIdArquivo() {
         return idArquivo;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + this.idArquivo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Arquivo other = (Arquivo) obj;
+        if (this.idArquivo != other.idArquivo) {
+            return false;
+        }
+        return true;
+    }
 }

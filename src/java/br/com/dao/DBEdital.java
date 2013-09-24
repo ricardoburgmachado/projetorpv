@@ -649,6 +649,7 @@ public class DBEdital implements EditalDAO {
         return editais;
     }
 
+    @Override
     public void edita(Edital edital) throws PersistenciaException {
 
         String sql = "UPDATE edital SET titulo=?, prazo_inicial=?, prazo_final=? WHERE id_edital=? ";
@@ -710,6 +711,7 @@ public class DBEdital implements EditalDAO {
         }
     }
 
+    @Override
     public void retifica(int idArquivo, int idEdital) {
 
         String sql = "insert into retificacao (id_arquivo, id_edital) values (?,?)";

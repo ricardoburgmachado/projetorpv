@@ -69,4 +69,10 @@ public class RepositorioFacade {
         
         return this.repProjeto.filtrarProjetos(usuario, status);
     }
+    
+    public Arquivo obtemArquivoEdital(int idEdital, int idArquivo, Usuario user) throws PersistenciaException, AutorizacaoException, DadoInconsistenteException{
+        
+        return this.repEdital.obtemArquivo(idArquivo, idEdital, user);
+    }
+            
 }
