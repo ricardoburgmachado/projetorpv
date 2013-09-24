@@ -82,7 +82,7 @@ public class RepositorioEdital {
             }
 
             //edital.setArquivo(this.editalDao.obtemArquivo(idEdital));
-            edital.setArquivos(this.editalDao.obtemArquivos(idEdital));
+            //edital.setArquivos(this.editalDao.obtemArquivos(idEdital));
             return edital;
         }
 

@@ -40,4 +40,6 @@ public interface EditalDAO {
     void edita(Edital edital) throws PersistenciaException;
     
     void adicionaArquivo(Arquivo arquivo, int idEdital) throws PersistenciaException;
+    
+    void retifica(int idArquivo, int idEdital) throws PersistenciaException;
 }
