@@ -5,6 +5,7 @@
  */
 package br.com.repositorio;
 
+import Exceptions.AutorizacaoException;
 import Exceptions.DadoInconsistenteException;
 import Exceptions.PersistenciaException;
 import Exceptions.PrivacidadeException;
@@ -13,9 +14,11 @@ import br.com.model.Aluno;
 import br.com.model.AreaConhecimento;
 import br.com.model.Custo;
 import br.com.model.Externo;
+import br.com.model.Permissao;
 import br.com.model.Professor;
 import br.com.model.Projeto;
 import br.com.model.StatusProjeto;
+import br.com.model.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -159,6 +162,26 @@ public class RepositorioProjeto {
         }
 
         return projetos;
+    }
+    
+    public List<Projeto> listarProjetos(Usuario usuario, StatusProjeto status) throws PersistenciaException, AutorizacaoException {
+        
+        if(verificaConsistenciaParaListagem(usuario)){
+            
+            return this.projDAO.listarProjetos(usuario.getId(), status);
+        }
+        
+        return null;
+    }
+    
+    private boolean verificaConsistenciaParaListagem(Usuario usuario) throws AutorizacaoException{
+        
+        if(!usuario.getPermissoes().contains(Permissao.CRUD_PROJETO)){
+            
+            throw new AutorizacaoException("Usuário sem permissão para listagem!");
+        }
+        
+        return true;
     }
 
     public void submeterHomologacao(int idProjeto, int idResponsavel) throws PersistenciaException, DadoInconsistenteException{

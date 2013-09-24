@@ -20,31 +20,31 @@ public class Edital {
     private TipoProjeto tipo;
     private Date prazoInicial;
     private Date prazoFinal;
-    private boolean documento;//TRUE caso exista um arquivo 
     private List<Inscricao> inscricoes;
     private ProReitor proReitor;
     private Arquivo arquivo;
+    private List<Arquivo> retificacoes;
 
     public Edital() {
         
         this.inscricoes = new ArrayList<>();
+        this.retificacoes = new ArrayList<>();
     }
 
-    public Edital(int id, String titulo, TipoProjeto tipo, Date prazoIni, Date prazoFim, boolean docum, ProReitor proReitor) {
+    public Edital(int id, String titulo, TipoProjeto tipo, Date prazoIni, Date prazoFim, ProReitor proReitor) {
         
-        this(titulo, tipo, prazoIni, prazoFim, docum, proReitor);
+        this(titulo, tipo, prazoIni, prazoFim, proReitor);
         this.id = id;
-        this.inscricoes = new ArrayList<>();
     }
 
-    public Edital(String titulo, TipoProjeto tipo, Date prazoIni, Date prazoFim, boolean docum, ProReitor proReitor) {
+    public Edital(String titulo, TipoProjeto tipo, Date prazoIni, Date prazoFim, ProReitor proReitor) {
+        
+        this();
         this.titulo = titulo;
         this.tipo = tipo;
         this.prazoInicial = prazoIni;
         this.prazoFinal = prazoFim;
-        this.documento = docum;
         this.proReitor = proReitor;
-        this.inscricoes = new ArrayList<>();
     }
 
     /**
@@ -104,20 +104,6 @@ public class Edital {
     }
 
     /**
-     * @return the documento
-     */
-    public boolean isDocumento() {
-        return documento;
-    }
-
-    /**
-     * @param documento the documento to set
-     */
-    public void setDocumento(boolean documento) {
-        this.documento = documento;
-    }
-
-    /**
      * @return the proReitor
      */
     public ProReitor getProReitor() {
@@ -147,6 +133,19 @@ public class Edital {
         this.tipo = tipo;
     }
     
+    private void addRetificacao(Arquivo arquivo){
+        
+        this.retificacoes.add(arquivo);
+    }
+
+    public List<Arquivo> getRetificacoes() {
+        return retificacoes;
+    }
+    
+    public void setRetificacoes(List<Arquivo> retificacoes) {
+        this.retificacoes = retificacoes;
+    }
+    
     public Inscricao inscreveProjeto(Projeto projeto, Arquivo arquivo, Date dataInscricao){
         
         Inscricao inscricao = new Inscricao(projeto, this, arquivo, dataInscricao);
@@ -154,5 +153,4 @@ public class Edital {
         
         return inscricao;
     }
-
 }

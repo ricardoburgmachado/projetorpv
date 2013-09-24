@@ -13,6 +13,7 @@ import br.com.model.Edital;
 import br.com.model.Inscricao;
 import br.com.model.Permissao;
 import br.com.model.StatusProjeto;
+import br.com.model.TipoProjeto;
 import br.com.model.Usuario;
 import java.util.Date;
 import java.util.List;
@@ -71,17 +72,19 @@ public class RepositorioEdital {
 
     }
 
-    public Edital obtemEdital(int idEdital, int idResponsavel) throws PersistenciaException, DadoInconsistenteException, PrivacidadeException {
+    public Edital obtemEdital(int idEdital, Usuario user) throws PersistenciaException, DadoInconsistenteException, PrivacidadeException {
 
-        if (verificaConsistenciaObterEdital(idEdital, idResponsavel)) {
+        if (verificaConsistenciaObterEdital(idEdital, user)) {
 
-            Edital edital = this.editalDao.obtem(idEdital, idResponsavel);
+            Edital edital = this.editalDao.obtem(idEdital, user.getId());
 
             if (edital == null) {
+                
                 throw new PrivacidadeException("Edital não pertencente ao usuário!");
             }
 
             edital.setArquivo(this.editalDao.obtemArquivo(idEdital));
+            edital.setRetificacoes(this.editalDao.obterRetificacoes(idEdital));
             return edital;
         }
 
@@ -101,8 +104,13 @@ public class RepositorioEdital {
         }
     }
 
-    private boolean verificaConsistenciaObterEdital(int idEdital, int idResponsavel) throws PersistenciaException, DadoInconsistenteException {
-
+    private boolean verificaConsistenciaObterEdital(int idEdital, Usuario user) throws PersistenciaException, DadoInconsistenteException, AutorizacaoException{
+        
+        if(!user.getPermissoes().contains(Permissao.CRUD_EDITAL)){
+            
+            throw new AutorizacaoException("Usuário sem permissão para excluir edital!");
+        }
+        
         if (!exists(idEdital)) {
 
             throw new DadoInconsistenteException("Edital não existente!");
@@ -243,5 +251,10 @@ public class RepositorioEdital {
 
     public List<Edital> listarEditais(int idResponsavel) throws PersistenciaException, DadoInconsistenteException {
         return this.editalDao.listarEditais(idResponsavel);
+    }
+    
+    public List<Edital> listarEditais(Date data, TipoProjeto tipo) throws PersistenciaException{
+        
+        return this.editalDao.listarEditais(data, tipo);
     }
 }
