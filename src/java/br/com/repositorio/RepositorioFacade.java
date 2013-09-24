@@ -12,8 +12,11 @@ import br.com.model.Arquivo;
 import br.com.model.Edital;
 import br.com.model.Inscricao;
 import br.com.model.Projeto;
+import br.com.model.TipoProjeto;
 import br.com.model.Usuario;
 import java.util.Date;
+import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -46,14 +49,19 @@ public class RepositorioFacade {
 
         return this.repUsuario.autenticaUsuario(login, senha);
     }
-    
-    public Edital obter(int idEdital, Usuario usuario) throws PersistenciaException, PrivacidadeException, AutorizacaoException, DadoInconsistenteException{
-        
+
+    public Edital obter(int idEdital, Usuario usuario) throws PersistenciaException, PrivacidadeException, AutorizacaoException, DadoInconsistenteException {
+
         return repEdital.obtemEdital(idEdital, usuario);
     }
 
     public void excluiEdital(int idEdital, Usuario usuario) throws PersistenciaException, PrivacidadeException, AutorizacaoException, DadoInconsistenteException {
 
         this.repEdital.excluiEdital(this.repEdital.obtemEdital(idEdital), usuario);
+    }
+
+    public List<Edital> filtrarEditais(Date data, int idProjeto) throws PersistenciaException {
+
+        return this.repEdital.listarEditais(data, this.repProjeto.obter(idProjeto).getTipoProjeto());
     }
 }

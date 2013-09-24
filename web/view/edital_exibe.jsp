@@ -13,7 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="<c:url value="/recursos/css/style.css"/>"> 
-        <title>GIPA - Exibir ${edital == null ? 'Exibir Edital' : edital.titulo}</title>
+        <title>GIPA - Exibir ${edital == null ? 'Edital' : edital.titulo}</title>
     </head>
     <body>
 

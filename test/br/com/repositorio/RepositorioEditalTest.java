@@ -5,8 +5,6 @@
 package br.com.repositorio;
 
 import Exceptions.AutorizacaoException;
-import Exceptions.DadoInconsistenteException;
-import Exceptions.PrivacidadeException;
 import br.com.model.Arquivo;
 import br.com.model.Edital;
 import br.com.model.Inscricao;
@@ -17,7 +15,6 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -73,8 +70,8 @@ public class RepositorioEditalTest {
     // @Test
     public void testObtemSucesso() {
 
-        repEdital.obtemEdital(1, 1);
-        //repEdital.obtemEdital(1, 1);
+        Usuario user = this.facade.autenticaUsuario("joao", "joao");
+        this.facade.obter(1, user);
     }
 
     //@Test(expected = DadoInconsistenteException.class)

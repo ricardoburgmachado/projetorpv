@@ -13,6 +13,7 @@ import br.com.model.Edital;
 import br.com.model.Inscricao;
 import br.com.model.Permissao;
 import br.com.model.StatusProjeto;
+import br.com.model.TipoProjeto;
 import br.com.model.Usuario;
 import java.util.Date;
 import java.util.List;
@@ -104,15 +105,15 @@ public class RepositorioEdital {
     }
 
     private boolean verificaConsistenciaObterEdital(int idEdital, Usuario user) throws PersistenciaException, DadoInconsistenteException, AutorizacaoException{
-
-        if (!exists(idEdital)) {
-
-            throw new DadoInconsistenteException("Edital não existente!");
-        }
         
         if(!user.getPermissoes().contains(Permissao.CRUD_EDITAL)){
             
             throw new AutorizacaoException("Usuário sem permissão para excluir edital!");
+        }
+        
+        if (!exists(idEdital)) {
+
+            throw new DadoInconsistenteException("Edital não existente!");
         }
 
         return true;
@@ -250,5 +251,10 @@ public class RepositorioEdital {
 
     public List<Edital> listarEditais(int idResponsavel) throws PersistenciaException, DadoInconsistenteException {
         return this.editalDao.listarEditais(idResponsavel);
+    }
+    
+    public List<Edital> listarEditais(Date data, TipoProjeto tipo) throws PersistenciaException{
+        
+        return this.editalDao.listarEditais(data, tipo);
     }
 }

@@ -203,7 +203,7 @@ public class EditalController extends GenericController {
                 
                 inconsistencias.add(diex.getMessage());
                 diex = diex.getException();
-            }while(diex.getException() != null);
+            }while(diex != null);
         }
 
         if(!inconsistencias.isEmpty()){
@@ -243,7 +243,7 @@ public class EditalController extends GenericController {
                 
                 inconsistencias.add(diex.getMessage());
                 diex = diex.getException();
-            }while(diex.getException() != null);
+            }while(diex != null);
         }
 
         if(!inconsistencias.isEmpty()){

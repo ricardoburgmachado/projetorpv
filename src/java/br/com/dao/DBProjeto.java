@@ -820,4 +820,33 @@ public class DBProjeto implements ProjetoDAO {
             throw new PersistenciaException("Falha ao consultar status do projeto");             
         }
     }
+
+    @Override
+    public List<Projeto> listarProjetos(int idResponsavel, StatusProjeto status) throws PersistenciaException {
+        
+        String sql = "select * from projeto inner join usuario on id_responsavel = id_usuario inner join area_conhecimento using (id_area) where id_responsavel=? and status=?";
+
+        PreparedStatement stmt = null;
+        ResultSet result;
+
+        try {
+
+            stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, idResponsavel);
+            stmt.setString(2, status.toString());
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar consulta", sqle);
+        }
+
+        try {
+
+            result = stmt.executeQuery();
+        } catch (SQLException ex) {
+
+            throw new PersistenciaException("Falha ao realizar consulta", ex);
+        }
+
+        return carregaProjetos(result);
+    }
 }

@@ -28,22 +28,23 @@ public class Edital {
     public Edital() {
         
         this.inscricoes = new ArrayList<>();
+        this.retificacoes = new ArrayList<>();
     }
 
-    public Edital(int id, String titulo, TipoProjeto tipo, Date prazoIni, Date prazoFim, boolean docum, ProReitor proReitor) {
+    public Edital(int id, String titulo, TipoProjeto tipo, Date prazoIni, Date prazoFim, ProReitor proReitor) {
         
         this(titulo, tipo, prazoIni, prazoFim, proReitor);
         this.id = id;
-        this.inscricoes = new ArrayList<>();
     }
 
     public Edital(String titulo, TipoProjeto tipo, Date prazoIni, Date prazoFim, ProReitor proReitor) {
+        
+        this();
         this.titulo = titulo;
         this.tipo = tipo;
         this.prazoInicial = prazoIni;
         this.prazoFinal = prazoFim;
         this.proReitor = proReitor;
-        this.inscricoes = new ArrayList<>();
     }
 
     /**
