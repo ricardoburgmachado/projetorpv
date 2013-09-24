@@ -10,11 +10,19 @@ package br.com.model;
  */
 public class Arquivo {
     
+    private int idArquivo;
     private String nomeArquivo;
     private String extensao;
     private byte[] dados;
 
     public Arquivo(String nomeArquivo, String extensao, byte[] dados) {
+        this.nomeArquivo = nomeArquivo;
+        this.extensao = extensao;
+        this.dados = dados;
+    }
+
+    public Arquivo(int idArquivo, String nomeArquivo, String extensao, byte[] dados) {
+        this.idArquivo = idArquivo;
         this.nomeArquivo = nomeArquivo;
         this.extensao = extensao;
         this.dados = dados;
@@ -31,7 +39,8 @@ public class Arquivo {
     public byte[] getDados() {
         return dados;
     }
-    
-    
-    
+
+    public int getIdArquivo() {
+        return idArquivo;
+    }
 }

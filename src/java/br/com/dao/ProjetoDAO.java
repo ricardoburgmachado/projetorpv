@@ -12,6 +12,7 @@ import br.com.model.Custo;
 import br.com.model.Externo;
 import br.com.model.Professor;
 import br.com.model.Projeto;
+import br.com.model.StatusProjeto;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +53,8 @@ public interface ProjetoDAO {
      public void inserirParticipantes(int idProj, ArrayList<String> list) throws PersistenciaException;
      
      public List<Projeto> listarProjetos(int idResponsavel) throws PersistenciaException;
+     
+     public List<Projeto> listarProjetos(int idResponsavel, StatusProjeto status) throws PersistenciaException;
      
      public void carregaParticipantes(Projeto projeto) throws PersistenciaException;
      

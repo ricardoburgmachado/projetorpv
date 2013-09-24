@@ -50,7 +50,7 @@
  
     
     <bean id="repositorioProjeto" class="br.com.repositorio.RepositorioProjeto"></bean>
-    <bean id="repositorioUsuario" class="br.com.repositorio.RepositorioUsuario"></bean>
+    <bean id="repositorioUsuario" class="br.com.repositorio.RepositorioUsuario"></bean>   
     <bean id="custo" class="br.com.model.Custo"></bean>
  
  
