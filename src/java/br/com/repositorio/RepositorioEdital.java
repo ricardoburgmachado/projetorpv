@@ -85,6 +85,7 @@ public class RepositorioEdital {
 
             edital.setArquivo(this.editalDao.obtemArquivo(idEdital));
             edital.setRetificacoes(this.editalDao.obterRetificacoes(idEdital));
+
             return edital;
         }
 
@@ -256,5 +257,48 @@ public class RepositorioEdital {
     public List<Edital> listarEditais(Date data, TipoProjeto tipo) throws PersistenciaException{
         
         return this.editalDao.listarEditais(data, tipo);
+    }
+
+    public void edita(Edital edital) throws PersistenciaException, DadoInconsistenteException {
+
+        DadoInconsistenteException exception = null;
+
+        if (edital == null) {
+
+            throw new DadoInconsistenteException("Edital Inválido!<br/>");
+        }
+
+        if (verificaVazio(edital.getTitulo())) {
+
+            exception = new DadoInconsistenteException(exception, "Título não informado!<br/>");
+        }
+
+        if (verificaNulo(edital.getPrazoInicial())) {
+            exception = new DadoInconsistenteException(exception, "Prazo inicial não informado!<br/>");
+        }
+
+        if (!verificaNulo(edital.getPrazoInicial()) && !verificaNulo(edital.getPrazoFinal())) {
+            if (verificaPrazoMenor(edital.getPrazoInicial(), edital.getPrazoFinal())) {
+                exception = new DadoInconsistenteException(exception, "Prazo final menor que prazo inicial!<br/>");
+            }
+        }
+
+        if (verificaNulo(edital.getPrazoFinal())) {
+            exception = new DadoInconsistenteException(exception, "Prazo final não informado!<br/>");
+        }
+
+        /*
+        if (verificaNulo(edital.getArquivo())) {
+            exception = new DadoInconsistenteException(exception, "Arquivo não anexado!<br/>");
+        }
+        */        
+        if (exception == null) {
+
+            this.editalDao.edita(edital);
+        } else {
+
+            throw exception;
+        }
+
     }
 }

@@ -10,40 +10,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="<c:url value="/recursos/css/style.css"/>" />
 
-<!-- inicio multiselect -->
-        <!--<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" /> -->
-        <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>-->
-        <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>-->        
-
-        <!-- inicio opção de carregamento das bibliotecas acima setadas que são remotas -->
-        <link rel="stylesheet" href="<c:url value="/recursos/js/jquery/jquery-ui.css"/>" />
-        <script type="text/javascript" src="<c:url value="recursos/js/jquery/jquery2.js"/>" ></script>
-        <script type="text/javascript" src="<c:url value="recursos/js/jquery/jquery-ui.min.js"/>" ></script>
-        <!-- fim opção de carregamento das bibliotecas acima setadas que são remotas -->
-
-        <script type="text/javascript" src="<c:url value="recursos/js/multiselect/src/jquery.multiselect.js"/>" ></script>
-        <script type="text/javascript" src="<c:url value="recursos/js/multiselect/src/jquery.multiselect.filter.js"/>" ></script>
-
-        <link rel="stylesheet" href="<c:url value="recursos/js/multiselect/jquery.multiselect.css"/>" />        
-        <script type="text/javascript">
-            
-            var $a = jQuery.noConflict();            
-            $a(function() {
-                $a("#tipo_edital").multiselect({
-                    multiple: false,
-                    header: "Selecione um tipo",
-                    noneSelectedText: "Selecione um tipo",
-                });
-
-
-            });
-        </script>
-        <!-- fim multiselect -->
-
-      
-
-       
-
         <!-- inicio importação biblioteca Jquery calendário -->
         
         <link rel="stylesheet" href="<c:url value="/recursos/js/jquery-ui-1.10.3.custom/css/ui-lightness/jquery-ui-1.10.3.custom.css"/>" />
@@ -115,27 +81,14 @@
 
                         <span style="clear: both; display: block;"></span>
                             
-                        <!--
-                        <span class="bloco">
-                            <label  for="nome">Tipo edital</label><br/><br/>                             
-                            <select id="tipo_edital" name="tipo">
-                                <option selected="selected" value="">Selecione</option>
-                                <option value="<%=TipoProjeto.PESQUISA%>">Pesquisa</option>
-                                <option value="<%=TipoProjeto.ENSINO%>">Ensino</option>
-                                <option value="<%=TipoProjeto.EXTENSAO%>">Extensão</option>                                
-                            </select>
-                        </span>
-
-                        <span style="clear: both; display: block;"></span>
-                        -->
                         <span class="bloco">
                             <label for="dataxx">Prazo Inicial:</label>
-                            <input class="prazo" type="text" name="prazoInicial_xx" id="prazoInicial" value="" />
+                            <input style="width: 175px" class="prazo" type="date" name="prazoInicial_xx" id="prazoInicialxx" value="" />
                         </span>
                             
                         <span class="bloco">
                             <label for="dataxx">Prazo Final:</label>
-                            <input class="prazo" type="text" name="prazoFinal_xx" id="prazoFinal" value="" />
+                            <input style="width: 175px" class="prazo" type="date" name="prazoFinal_xx" id="prazoFinalxx" value="" />
                         </span>    
 
                         <span style="clear: both; display: block;"></span>

@@ -41,4 +41,10 @@ public interface EditalDAO {
     public List<Edital> listarEditais(Date data, TipoProjeto tipo) throws PersistenciaException;
     
     public List<Arquivo> obterRetificacoes(int idEdital) throws PersistenciaException;
+    
+    void edita(Edital edital) throws PersistenciaException;
+    
+    void adicionaArquivo(Arquivo arquivo, int idEdital) throws PersistenciaException;
+    
+    void retifica(int idArquivo, int idEdital) throws PersistenciaException;
 }
