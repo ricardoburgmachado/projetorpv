@@ -312,4 +312,18 @@ public class EditalController extends GenericController {
         
         return mv;
     }    
+    
+    @RequestMapping(value = "/teste_rafa")
+    public ModelAndView testeRafa() {
+        
+        ModelAndView mv = new ModelAndView("teste_rafa");
+        return mv;
+    }
+        
+    @RequestMapping(value = "/carrega_editais_ajax")
+    public String ajax() {
+        
+        return "redirect:view/ajax_resposta.jsp";
+    }
+
 }

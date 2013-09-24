@@ -798,3 +798,65 @@ ol#menurel li a {
 /* *************** FIM CADASTRO DE EDITAL *************** */
 
 
+/* *************** INICIO INSCRIÇÃO EDITAL *************** */
+#conteudo_interno #inscricao_edital {
+    display:block;
+    float:left;
+    padding: 0px 0px 10px 10px;
+    margin:  10px 0px 10px 10px;
+    width: 780px;
+    background-color: #E4E4E4;
+    border: 1px solid #444444;
+}
+
+#conteudo_interno #inscricao_edital #projetos {
+    display:block;
+    float:left;
+    width: 300px;
+    margin-top: 10px;
+}
+#conteudo_interno #inscricao_edital #inner_editais {
+    display: block; 
+    float: left; 
+    margin-top: 10px;
+    clear:both;
+    width: 390px; 
+    height: 70px; 
+    border: 1px solid black; 
+    visibility: hidden; 
+}
+#conteudo_interno #inscricao_edital #selected_editais {
+    display: block; 
+    float: left; 
+    width: 300px;
+    margin-top: 10px;
+    border: 1px solid black; 
+}
+
+#conteudo_interno #inscricao_edital #projeto_more {
+    display: block;
+    float: left;
+    width: 28px;
+    height: 28px;
+    text-align: center;
+    background:url(../imagens/more.png) no-repeat;
+    border: none;
+    margin-left: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+#conteudo_interno #inscricao_edital #inner_editais #edital_more {
+    display: block;
+    float: left;
+    width: 28px;
+    height: 28px;
+    text-align: center;
+    background:url(../imagens/more.png) no-repeat;
+    border: none;
+    margin-left: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* *************** FIM INSCRIÇÃO EDITAL *************** */
