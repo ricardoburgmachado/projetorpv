@@ -29,7 +29,7 @@
             <link rel="stylesheet" type="text/css" href="<c:url value="/recursos/css/iehacks.css"/>" />
         <![endif]-->    
 
-        <title>JSP Page</title>
+        <title>Inscrever projeto em edital</title>
     </head>
 
     <body>

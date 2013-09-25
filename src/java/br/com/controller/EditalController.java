@@ -361,7 +361,7 @@ public class EditalController extends GenericController {
 
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         RepositorioFacade facade = new RepositorioFacade();
-        ModelAndView mv = new ModelAndView("projeto_inscreve");
+        ModelAndView mv = new ProjetoController().filtraProjetos(request);
         List<String> inconsistencias = new ArrayList<>();
         
         if (file == null || createArquivo(file) == null) {
