@@ -33,7 +33,7 @@
                 <h1>Exibir Edital - ${edital == null ? '' : edital.titulo}</h1>
 
                 <c:if test="${not empty inconsistencias}">
-                    <div class="inconsistencias">
+                    <div id="inconsistencias">
                         <ul>
                             <c:forEach var="inconsistencia" items="${inconsistencias}">
                                 <li>${inconsistencia}</li>

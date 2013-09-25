@@ -337,7 +337,6 @@ public class EditalController extends GenericController {
         RepositorioFacade facade = new RepositorioFacade();
         
         return facade.filtrarEditais(new Date(), id_projeto);
-        //return new ModelAndView(editaisToJson(editais));
     }
 
     private JsonArray editaisToJson(List<Edital> editais) {
@@ -356,12 +355,18 @@ public class EditalController extends GenericController {
         return arrayBuilder.build();
     }
 
+    @RequestMapping(value = "/inscreve_edital")
     public ModelAndView inscreveProjeto(HttpServletRequest request, @RequestParam int id_projeto, @RequestParam int id_edital, @RequestParam MultipartFile file) {
 
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         RepositorioFacade facade = new RepositorioFacade();
-        ModelAndView mv = new ModelAndView("edital_inscreve");
+        ModelAndView mv = new ProjetoController().filtraProjetos(request);
         List<String> inconsistencias = new ArrayList<>();
+        
+        if (file == null || createArquivo(file) == null) {
+
+            mv.addObject("aviso", "Arquivo não informado! Mesmo assim a inscrição será efetuada!");
+        }
 
         try {
 
@@ -386,16 +391,11 @@ public class EditalController extends GenericController {
             return mv;
         }
 
-        if (file == null || createArquivo(file) == null) {
-
-            mv.addObject("aviso", "Arquivo não informado! Mesmo assim a inscrição será efetuada!");
-            mv.addObject("sucesso", "Projeto inscrito com sucesso!");
-        }
-
+        mv.addObject("sucesso", "Projeto inscrito com sucesso!");
         return mv;
     }
 
-    private Arquivo createArquivo(MultipartFile file) {
+    private Arquivo createArquivo(MultipartFile file) throws DadoInconsistenteException{
 
         String titulo = file.getOriginalFilename();
         String[] split = file.getName().split("\\.");
@@ -406,7 +406,7 @@ public class EditalController extends GenericController {
             return new Arquivo(titulo, extensao, file.getBytes());
         } catch (IOException ex) {
 
-            return null;
+            throw new DadoInconsistenteException("Arquivo Inválido!");
         }
     }
 

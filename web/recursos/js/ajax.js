@@ -22,8 +22,6 @@ function getEditaisAjax() {
         objetoHTML.innerHTML = text;
         return;
     }
-    //alert("SELECIONADO: " + value);le Technology education to people everywhere, in order to help them achieve their dreams and change the world.
-
     $.ajax({
         type: 'GET',
         async: false,
