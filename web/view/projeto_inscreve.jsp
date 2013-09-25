@@ -50,14 +50,24 @@
 
                 <h1>Inscrição de projeto em edital</h1>
                 
+                <c:if test="${not empty inconsistencias}">
+                    <div id="inconsistencias">
+                        <ul>
+                            <c:forEach var="inconsistencia" items="${inconsistencias}">
+                                <li>${inconsistencia}</li>
+                                </c:forEach>
+                        </ul>
+                    </div>
+                </c:if>
+                
                 <div id="inscricao_edital">
                     
-                    <form action="inscreve_edital" method="POST">
+                    <form action="inscreve_edital" method="POST" enctype="multipart/form-data">
                         
                         <fieldset class="field">
                             <legend title="Projeto"></legend>
                             <label for="projetos">Projeto</label>
-                            <select id="projetos" onchange="javascript:getEditaisAjax();">
+                            <select id="projetos" name="id_projeto" onchange="javascript:getEditaisAjax();">
                                 <option value="0">Selecione um projeto...</option>
                                 <c:forEach var="projeto" items="${projetos}">
                                     <option  value="${projeto.id}">${fn:length(projeto.titulo) > 40 ? fn:substring(projeto.titulo, 0, 37).concat('...') : projeto.titulo}</option>                               
@@ -68,10 +78,9 @@
                         <fieldset class="field">
                             <legend title="Edital"></legend>
                             <label for="editais">Edital</label>
-                            <select id="editais">
+                            <select name="id_edital" id="editais">
                                 
                             </select>
-                            <a href="edital_inscreve_show"><span class="exibe"></span></a>
                         </fieldset>
                         
                         <label for="file">Arquivo necessário</label>

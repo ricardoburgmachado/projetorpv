@@ -4,7 +4,7 @@ function constroiHTML(ret) {
     var text = "";
 
     for (var i = 0; i < ret.length; i++) {
-        text += " <option value=\"" + ret[i].titulo + "\">" + ret[i].titulo + "</option>";
+        text += " <option value=\"" + ret[i].id + "\">" + ret[i].titulo + "</option>";
     }
     
     objetoHTML.innerHTML = text;
@@ -22,7 +22,6 @@ function getEditaisAjax() {
         objetoHTML.innerHTML = text;
         return;
     }
-    //alert("SELECIONADO: " + value);le Technology education to people everywhere, in order to help them achieve their dreams and change the world.
 
     $.ajax({
         type: 'GET',
