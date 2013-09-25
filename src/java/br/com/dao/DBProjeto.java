@@ -832,7 +832,7 @@ public class DBProjeto implements ProjetoDAO {
             sqlBuilder.append(" and status=?");
             for (int i = 1; i < status.size(); i++) {
 
-                sqlBuilder.append("or status=?");
+                sqlBuilder.append(" or status=?");
             }
         }
 
@@ -844,16 +844,16 @@ public class DBProjeto implements ProjetoDAO {
             stmt = connection.prepareStatement(sqlBuilder.toString());
             stmt.setInt(1, idResponsavel);
             
-            int ini = 1;
-            StatusProjeto[] stts = (StatusProjeto[]) status.toArray();
+            int ini = 2;
+            Object[] stts =  status.toArray();
             
             for(int i = 0; i< stts.length; i++){
                 
-                stmt.setString(ini + 1, stts[i].toString());
+                stmt.setString(ini + i, stts[i].toString());
             }
         } catch (SQLException sqle) {
 
-            throw new PersistenciaException("Falha ao preparar consulta", sqle);
+            throw new PersistenciaException("Falha ao preparar consulta por projetos!", sqle);
         }
 
         try {
@@ -861,7 +861,7 @@ public class DBProjeto implements ProjetoDAO {
             result = stmt.executeQuery();
         } catch (SQLException ex) {
 
-            throw new PersistenciaException("Falha ao realizar consulta", ex);
+            throw new PersistenciaException("Falha ao realizar consulta por projetos!", ex);
         }
 
         return carregaProjetos(result);

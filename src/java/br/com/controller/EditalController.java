@@ -13,6 +13,7 @@ import br.com.model.Arquivo;
 import br.com.model.Edital;
 import br.com.model.Permissao;
 import br.com.model.ProReitor;
+import br.com.model.StatusProjeto;
 import br.com.model.TipoProjeto;
 import br.com.model.Usuario;
 import br.com.repositorio.RepositorioEdital;
@@ -23,8 +24,10 @@ import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.json.Json;
@@ -39,6 +42,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -319,20 +323,21 @@ public class EditalController extends GenericController {
         if (!inconsistencias.isEmpty()) {
 
             mv.addObject("inconsistencias", inconsistencias);
+
         }
 
         return mv;
     }
 
-    @RequestMapping(value = "/edital_filtra")
-    public JsonArray filtrarEditais(HttpServletRequest request, @RequestParam(required = true) int id) {
-
+    @RequestMapping(value = "/edital_filtra_ajax")
+    @ResponseBody
+    public List<Edital> filtrarEditais(HttpServletRequest request, @RequestParam(required = true) int id_projeto) {
+        
         Usuario user = (Usuario) request.getSession().getAttribute("usuario");
         RepositorioFacade facade = new RepositorioFacade();
-
-        List<Edital> editais = facade.filtrarEditais(new Date(), id);
-
-        return editaisToJson(editais);
+        
+        return facade.filtrarEditais(new Date(), id_projeto);
+        //return new ModelAndView(editaisToJson(editais));
     }
 
     private JsonArray editaisToJson(List<Edital> editais) {
@@ -435,7 +440,7 @@ public class EditalController extends GenericController {
         }
 
         iniciaDownload(response, arquivo);
-        
+
         return null;
     }
 
@@ -460,5 +465,46 @@ public class EditalController extends GenericController {
                 System.out.println(ex.getMessage());
             }
         }
+    }
+
+    //@RequestMapping(value = "/teste_rafa")
+    /*public ModelAndView testeRafa(HttpServletRequest request) {
+
+        ModelAndView mv = new ModelAndView("teste_rafa");
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        RepositorioFacade facade = new RepositorioFacade();
+        List<String> inconsistencias = new ArrayList<>();
+
+        try {
+
+            Set<StatusProjeto> status = new HashSet<>();
+            status.add(StatusProjeto.HOMOLOGADO);
+            status.add(StatusProjeto.INSCRITO);
+        } catch (AutorizacaoException aex) {
+
+            return new ModelAndView("login");
+        } catch (DadoInconsistenteException diex) {
+
+            do {
+                inconsistencias.add(diex.getMessage());
+                diex = diex.getException();
+            } while (diex != null);
+        }
+
+        if (!inconsistencias.isEmpty()) {
+
+            mv.addObject("inconsistencias", inconsistencias);
+            return mv;
+        }
+
+        mv.addObject("projetos", new RepositorioFacade().filtrarProjetos(null, null));
+        return mv;
+    }*/
+
+    @RequestMapping(value = "/carrega_editais_ajax")
+    public String ajax() {
+
+        
+        return "redirect:view/ajax_resposta.jsp";
     }
 }

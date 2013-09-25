@@ -361,7 +361,7 @@ public class ProjetoController extends GenericController {
         return mv;
     }
     
-    @RequestMapping (value= "/projeto_filtra")
+    @RequestMapping (value= "/projeto_inscreve_show")
     public ModelAndView filtraProjetos(HttpServletRequest request) throws PersistenciaException{
         
         Usuario user = (Usuario) request.getSession().getAttribute("usuario");
