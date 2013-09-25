@@ -57,7 +57,7 @@
 
 
                 <form:form action="edital_edita" modelAttribute="edital" id="form_addedital" enctype="multipart/form-data">
-                    <h1>Editar Edital</h1>                                                                                                  
+                    <h1>Retificar Edital</h1>                                                                                                  
 
                     <fieldset> 
 
@@ -87,6 +87,18 @@
                             <input style="font-size: 12px; font-weight: normal; border: none; cursor: pointer" type="file" name="arquivo_xx"/> 
                         </span>
 
+                        <span style="clear: both; display: block"></span>
+                        
+                        <a class="show_edital" href="arquivo_edital_download?id_edital=${edital.id}&id_arquivo=${edital.arquivo.idArquivo}" title="Clique aqui para visualizar o edital">
+                            Visualizar Edital
+                        </a>
+                        <% int count = 1;%>    
+                        <c:forEach var="retificacao" items="${edital.retificacoes}">
+                            <a class="show_retificacao" href="arquivo_edital_download?id_edital=${edital.id}&id_arquivo=${retificacao.idArquivo}" title="Clique aqui para visualizar a retificação">
+                                Visualizar Retificação <%=count%>
+                            </a>        
+                            <% count++;%>        
+                        </c:forEach>
 
                         <span style="clear: both; display: block"></span>
 

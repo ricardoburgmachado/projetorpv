@@ -792,9 +792,34 @@ ol#menurel li a {
     background: #303030;
     cursor:pointer;
     border:none;
-
+}
+#conteudo_interno #form_addedital .show_edital {
+    display:block;
+    float:left;
+    clear: both;
+    text-decoration: none;
+    font-size: 16px;
+    color: black;
+    cursor: pointer;
+    font-weight: bold
+}
+#conteudo_interno #form_addedital .show_edital:hover {
+    color: green;
 }
 
+#conteudo_interno #form_addedital .show_retificacao {
+    display:block;
+    float:left;
+    clear: both;
+    text-decoration: none;
+    font-size: 16px;
+    color: black;
+    cursor: pointer;
+    font-weight: bold
+}
+#conteudo_interno #form_addedital .show_retificacao:hover {
+    color: green;
+}
 /* *************** FIM CADASTRO DE EDITAL *************** */
 
 

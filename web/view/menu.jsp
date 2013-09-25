@@ -6,25 +6,36 @@
 
         <%
             Usuario user = (Usuario) request.getSession().getAttribute("usuario");
-            Permissao permissao = Permissao.ACESSO;
+            Permissao permissao = Permissao.CRUD_PROJETO;
             if(user != null && user.getPermissoes().contains(permissao)) {
         %>
-
         <li><a href="<c:url value="/projeto_lista_show"/>" class="mais">Projetos</a>
             <ul>
                     <li><a href="<c:url value="/projeto_adiciona_show"/>">Adicionar projeto</a></li> 	
                     <li><a href="<c:url value="/projeto_lista_show"/>">Listar projetos</a></li>
             </ul> 
         </li>
-        
+        <%
+            }       
+            permissao = Permissao.CRUD_EDITAL;
+            if(user != null && user.getPermissoes().contains(permissao)) {
+        %>        
         <li><a href="<c:url value="/edital_lista_show"/>" class="mais">Editais</a>
             <ul>
                     <li><a href="<c:url value="/edital_adiciona_show"/>">Adicionar edital</a></li> 	
                     <li><a href="<c:url value="/edital_lista_show"/>">Listar editais</a></li>
             </ul> 
         </li>
+        <%
+            }
+            permissao = Permissao.INSCRICAO_EDITAL;
+            if(user != null && user.getPermissoes().contains(permissao)) {
+        %>
         
+        <li><a href="<c:url value="/projeto_inscreve_show"/>" class="mais">Inscrição</a>
+        </li>
         <%
             }
         %>
+        
 
