@@ -58,7 +58,7 @@
                                 <td><fmt:formatDate type="date" value="${edital.prazoInicial}"/></td>
                                 <td><fmt:formatDate type="date" value="${edital.prazoFinal}"/></td>
                                 <td>${edital.tipo}</td>
-                                <td>${edital.arquivo.nomeArquivo}</td>
+                                <td><a href="arquivo_edital_download?id_edital=${edital.id}&id_arquivo=${edital.arquivo.idArquivo}">${edital.arquivo.nomeArquivo}</a></td>
                             </tr>
                             <c:forEach var="retificacao" items="${edital.retificacoes}">
                                 <tr>
@@ -66,7 +66,7 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td>${retificacao.nomeArquivo}</td>
+                                    <td><a href="arquivo_edital_download?id_edital=${edital.id}&id_arquivo=${retificacao.idArquivo}">${retificacao.nomeArquivo}</a></td>
                                 </tr>
                             </c:forEach>
                         </tbody>

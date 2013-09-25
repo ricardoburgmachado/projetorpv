@@ -21,6 +21,7 @@ import br.com.model.StatusProjeto;
 import br.com.model.Usuario;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -164,9 +165,9 @@ public class RepositorioProjeto {
         return projetos;
     }
     
-    public List<Projeto> listarProjetos(Usuario usuario, StatusProjeto status) throws PersistenciaException, AutorizacaoException {
+    public List<Projeto> filtrarProjetos(Usuario usuario, Set<StatusProjeto> status) throws PersistenciaException, AutorizacaoException {
         
-        if(verificaConsistenciaParaListagem(usuario)){
+        if(verificaConsistenciaParaFiltragem(usuario, status)){
             
             return this.projDAO.listarProjetos(usuario.getId(), status);
         }
@@ -174,11 +175,16 @@ public class RepositorioProjeto {
         return null;
     }
     
-    private boolean verificaConsistenciaParaListagem(Usuario usuario) throws AutorizacaoException{
+    private boolean verificaConsistenciaParaFiltragem(Usuario usuario, Set<StatusProjeto> status) throws AutorizacaoException, DadoInconsistenteException{
         
-        if(!usuario.getPermissoes().contains(Permissao.CRUD_PROJETO)){
+        if(!usuario.getPermissoes().contains(Permissao.CRUD_PROJETO) && !usuario.getPermissoes().contains(Permissao.INSCRICAO_EDITAL)){
             
             throw new AutorizacaoException("Usuário sem permissão para listagem!");
+        }
+        
+        if(status == null || status.isEmpty()){
+            
+            throw new DadoInconsistenteException("Conjunto de estados para filtragem não informado!");
         }
         
         return true;

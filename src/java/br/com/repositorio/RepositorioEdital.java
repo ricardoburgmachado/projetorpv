@@ -9,6 +9,7 @@ import Exceptions.DadoInconsistenteException;
 import Exceptions.PersistenciaException;
 import Exceptions.PrivacidadeException;
 import br.com.dao.EditalDAO;
+import br.com.model.Arquivo;
 import br.com.model.Edital;
 import br.com.model.Inscricao;
 import br.com.model.Permissao;
@@ -69,7 +70,6 @@ public class RepositorioEdital {
 
             throw exception;
         }
-
     }
 
     public Edital obtemEdital(int idEdital, Usuario user) throws PersistenciaException, DadoInconsistenteException, PrivacidadeException {
@@ -79,7 +79,7 @@ public class RepositorioEdital {
             Edital edital = this.editalDao.obtem(idEdital, user.getId());
 
             if (edital == null) {
-                
+
                 throw new PrivacidadeException("Edital não pertencente ao usuário!");
             }
 
@@ -91,27 +91,61 @@ public class RepositorioEdital {
 
         return null;
     }
-    
-    public Edital obtemEdital(int idEdital) throws PersistenciaException{
+
+    public Arquivo obtemArquivo(int idArquivo, int idEdital, Usuario user) throws PersistenciaException, AutorizacaoException, DadoInconsistenteException {
+
+        List<Arquivo> arquivos = this.editalDao.obterRetificacoes(idEdital);
+        arquivos.add(this.editalDao.obtemArquivo(idEdital));
         
+        if(verificaConsistenciaObterArquivo(arquivos, user, idArquivo)){
+            
+            for(Arquivo arquivo: arquivos){
+                
+                if(arquivo.getIdArquivo() == idArquivo){
+                    
+                    return arquivo;
+                }
+            }
+        }
+        
+        return null;
+    }
+
+    private boolean verificaConsistenciaObterArquivo(List<Arquivo> arquivosEdital, Usuario usuario, int idArquivo) throws PersistenciaException, AutorizacaoException, DadoInconsistenteException {
+
+        if (!usuario.getPermissoes().contains(Permissao.CRUD_EDITAL) && !usuario.getPermissoes().contains(Permissao.EXIBE_EDITAL)) {
+            
+            throw new AutorizacaoException("Usuário sem permissão para obter o arquivo!");
+        }
+        
+        if(!arquivosEdital.contains(new Arquivo(idArquivo, null, null, null))){
+            
+            throw new DadoInconsistenteException("Arquivo não existente ou não pertencente ao edital!");
+        }
+        
+        return true;
+    }
+
+    public Edital obtemEdital(int idEdital) throws PersistenciaException {
+
         return this.editalDao.obtem(idEdital);
     }
 
     public void excluiEdital(Edital edital, Usuario user) throws PersistenciaException, PrivacidadeException, DadoInconsistenteException {
-        
-        if(verificaConsistenciaExcluirEdital(edital, user)){
-            
+
+        if (verificaConsistenciaExcluirEdital(edital, user)) {
+
             this.editalDao.exclui(edital.getId(), user.getId());
         }
     }
 
-    private boolean verificaConsistenciaObterEdital(int idEdital, Usuario user) throws PersistenciaException, DadoInconsistenteException, AutorizacaoException{
-        
-        if(!user.getPermissoes().contains(Permissao.CRUD_EDITAL)){
-            
+    private boolean verificaConsistenciaObterEdital(int idEdital, Usuario user) throws PersistenciaException, DadoInconsistenteException, AutorizacaoException {
+
+        if (!user.getPermissoes().contains(Permissao.CRUD_EDITAL) && !user.getPermissoes().contains(Permissao.EXIBE_EDITAL)) {
+
             throw new AutorizacaoException("Usuário sem permissão para excluir edital!");
         }
-        
+
         if (!exists(idEdital)) {
 
             throw new DadoInconsistenteException("Edital não existente!");
@@ -131,12 +165,12 @@ public class RepositorioEdital {
 
             throw new DadoInconsistenteException("Edital não existente!");
         }
-        
-        if(edital.getProReitor().getId() != usuario.getId()){
-            
+
+        if (edital.getProReitor().getId() != usuario.getId()) {
+
             throw new PrivacidadeException("Edital não pertencente ao usuário!");
         }
-        
+
         return true;
     }
 
@@ -251,11 +285,12 @@ public class RepositorioEdital {
     }
 
     public List<Edital> listarEditais(int idResponsavel) throws PersistenciaException, DadoInconsistenteException {
+
         return this.editalDao.listarEditais(idResponsavel);
     }
-    
-    public List<Edital> listarEditais(Date data, TipoProjeto tipo) throws PersistenciaException{
-        
+
+    public List<Edital> listarEditais(Date data, TipoProjeto tipo) throws PersistenciaException {
+
         return this.editalDao.listarEditais(data, tipo);
     }
 
@@ -288,10 +323,10 @@ public class RepositorioEdital {
         }
 
         /*
-        if (verificaNulo(edital.getArquivo())) {
-            exception = new DadoInconsistenteException(exception, "Arquivo não anexado!<br/>");
-        }
-        */        
+         if (verificaNulo(edital.getArquivo())) {
+         exception = new DadoInconsistenteException(exception, "Arquivo não anexado!<br/>");
+         }
+         */
         if (exception == null) {
 
             this.editalDao.edita(edital);

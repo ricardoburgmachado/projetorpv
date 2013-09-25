@@ -15,6 +15,7 @@ import br.com.model.Projeto;
 import br.com.model.StatusProjeto;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -54,7 +55,7 @@ public interface ProjetoDAO {
      
      public List<Projeto> listarProjetos(int idResponsavel) throws PersistenciaException;
      
-     public List<Projeto> listarProjetos(int idResponsavel, StatusProjeto status) throws PersistenciaException;
+     public List<Projeto> listarProjetos(int idResponsavel, Set<StatusProjeto> status) throws PersistenciaException;
      
      public void carregaParticipantes(Projeto projeto) throws PersistenciaException;
      
