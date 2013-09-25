@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -322,8 +323,7 @@ public class EditalController extends GenericController {
         
     @RequestMapping(value = "/carrega_editais_ajax")
     public String ajax() {
-        
-        return "redirect:view/ajax_resposta.jsp";
+         return "redirect:view/ajax_resposta.jsp";
     }
 
 }

@@ -6,8 +6,10 @@ function constroiHTML(ret) {
     text += " <form:form action=\"detalhes_edital\">";
     text += "<select id=\"selected_editais\">";
 
-    for (var i = 0; i < ret.editais.length; i++) {
-        text += " <option value=\"" + ret.editais[i].titulo + "\">" + ret.editais[i].titulo + "</option>";
+    //for (var i = 0; i < ret.editais.length; i++) {
+    for (var i = 0; i < ret.length; i++) {
+        //text += " <option value=\"" + ret.editais[i].titulo + "\">" + ret.editais[i].titulo + "</option>";
+        text += " <option value=\"" + ret[i].titulo + "\">" + ret[i].titulo + "</option>";        
     }
     text += "</select>";
     text += "<input type=\"submit\" id=\"edital_more\" value=\"\">";
