@@ -38,14 +38,17 @@ INSERT INTO papel(id_papel, descricao)VALUES(5, 'EXTERNO');
 INSERT INTO permissao(id_perm, descricao)VALUES(1, 'CRUD_PROJETO');
 INSERT INTO permissao(id_perm, descricao)VALUES(2, 'ACESSO');
 INSERT INTO permissao(id_perm, descricao)VALUES(3, 'CRUD_EDITAL');
+INSERT INTO permissao(id_perm, descricao)VALUES(4, 'INSCRICAO');
+INSERT INTO permissao(id_perm, descricao)VALUES(5, 'EXIBE_EDITAL');
 /***************************** FIM cadastro PERMISSÃO **********************/
 
 
 /***************************** INICIO cadastro PAPEL PERMISSÃO**********************/
-INSERT INTO papel_permissao VALUES (1, 3);
-INSERT INTO papel_permissao VALUES (2, 3);
-INSERT INTO papel_permissao VALUES (3, 1);
-INSERT INTO papel_permissao VALUES (2, 1);
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (1, 3);
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (2, 3);
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (3, 1);
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (2, 1);
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (4, 3);
 /***************************** FIM cadastro PAPEL PERMISSÃO **********************/
 
 /***************************** INICIO cadastro usuarios **********************/
