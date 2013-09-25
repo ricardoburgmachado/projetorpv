@@ -76,7 +76,7 @@
                                     <td class="tipo" >Inicial: ${edital.prazoInicial}<br/>Final: ${edital.prazoFinal}</td>                                    
                                     <!--<td class="status">${projeto.status.descricao }</td>-->
                                     <td class="edita"><a title="Clique aqui para editar Edital" href="edital_edita_show?id=${edital.id}"></a></td>
-                                    <td class="exclui"><a href="edital_exclui?id=${edital.id}">Excluir</a></td>
+                                    <td class="exclui"><a href="edital_exclui?id=${edital.id}"></a></td>
                                     <td class="exibe"><a href="edital_exibe?id=${edital.id}"></a></td>
                                     <!--<td class="exibe"><a title="Clique aqui para exibir detalhes do projeto" href="projeto_exibe?id=${edital.id}"></a></td>-->
                                 </a>

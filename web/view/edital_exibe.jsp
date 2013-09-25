@@ -29,7 +29,8 @@
             </div>     
 
             <div id="conteudo_interno">
-
+                
+                <div id="edital_exibe">
                 <h1>Exibir Edital - ${edital == null ? '' : edital.titulo}</h1>
 
                 <c:if test="${not empty inconsistencias}">
@@ -79,6 +80,7 @@
                         </div>
                 </c:if>
             </div>
+            </div>    
         </div>
     </body>
 </html>

@@ -505,6 +505,20 @@ ol#menurel li a {
     background:url(../imagens/more_hover.png) no-repeat;
     border: none;
 } 
+#lista_projetos .linealt .exclui a{
+    display: block;
+    float: left;
+    width: 28px;
+    height: 28px;
+    text-align: center;
+    background:url(../imagens/exclui.png) no-repeat;
+    border: none;
+    margin-left: 10px;
+} 
+#lista_projetos .linealt .exclui a:hover{
+    background:url(../imagens/exclui_hover.png) no-repeat;
+    border: none;
+} 
 
 /* ************** FIM LISTA PROJETOS **************** */
 
@@ -885,3 +899,20 @@ ol#menurel li a {
 }
 
 /* *************** FIM INSCRIÇÃO EDITAL *************** */
+
+
+
+
+
+/* *************** INICIO EDITAL EXIBE*************** */
+#conteudo_interno #edital_exibe {
+    display:block;
+    float:left;
+    padding: 0px 0px 10px 10px;
+    margin:  10px 0px 10px 10px;
+    width: 780px;
+    background-color: #E4E4E4;
+    border: 1px solid #444444;
+}
+
+/* *************** FIM EDITAL EXIBE*************** */
