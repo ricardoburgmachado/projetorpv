@@ -282,7 +282,7 @@
     <column id="COL76" populated="true" UUID="6b0cb8ff-245f-4113-9fd5-3641490a532c" autoIncrement="false" autoIncrementSequenceName="arquivo_nome_arquivo_seq" defaultValue="" name="NOME_ARQUIVO" nullable="0" physicalName="nome_arquivo" precision="100" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL77" populated="true" UUID="1621c26e-35ac-4322-be67-9f02d9990b17" autoIncrement="false" autoIncrementSequenceName="arquivo_extensao_seq" defaultValue="" name="EXTENSAO" nullable="0" physicalName="extensao" precision="3" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL77" populated="true" UUID="1621c26e-35ac-4322-be67-9f02d9990b17" autoIncrement="false" autoIncrementSequenceName="arquivo_extensao_seq" defaultValue="" name="EXTENSAO" nullable="0" physicalName="extensao" precision="20" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
     <column id="COL78" populated="true" UUID="4c3bbebe-8a33-45aa-843a-84ce76ada87a" autoIncrement="false" autoIncrementSequenceName="arquivo_dados_seq" defaultValue="" name="DADOS" nullable="0" physicalName="dados" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="2004" userDefinedTypeUUID="5c50e616-a448-40e1-abcd-5bfc04dcc607" >
