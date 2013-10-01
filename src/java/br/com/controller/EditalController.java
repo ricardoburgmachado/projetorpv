@@ -260,7 +260,7 @@ public class EditalController extends GenericController {
 
         List<String> inconsistencias = new ArrayList<>();
         RepositorioFacade facade = new RepositorioFacade();
-        ModelAndView mv = new ModelAndView("edital_lista");
+        ModelAndView mv = editalListaShow(request);
 
         try {
 
