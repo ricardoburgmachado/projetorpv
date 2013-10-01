@@ -16,8 +16,6 @@ public class AreaConhecimento {
 
     public AreaConhecimento() {
     }
-    
-    
 
     /**
      * @return the id

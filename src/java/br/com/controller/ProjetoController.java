@@ -379,7 +379,7 @@ public class ProjetoController extends GenericController {
             Set<StatusProjeto> status = new HashSet<>();
             status.add(StatusProjeto.HOMOLOGADO);
             status.add(StatusProjeto.INSCRITO);
-            List<Projeto> projetos = facade.filtrarProjetos(status, user);
+            List<Projeto> projetos = facade.filtrarProjetosParaInscricao(status, user);
             
             mv.addObject("projetos", projetos);
         }catch(AutorizacaoException aex){

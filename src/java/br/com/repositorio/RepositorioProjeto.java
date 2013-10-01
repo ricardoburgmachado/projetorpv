@@ -189,6 +189,26 @@ public class RepositorioProjeto {
         
         return true;
     }
+    
+    public List<Projeto> listarProjetosSubmetidosHomologacao(Usuario usuario, Set<StatusProjeto> status){
+        
+        if(verificaConsistenciaListagemSubmetidos(usuario)){
+            
+            return this.projDAO.listarProjetos(usuario.getId(), status);
+        }
+        
+        return null;
+    }
+    
+    private boolean verificaConsistenciaListagemSubmetidos(Usuario usuario) throws AutorizacaoException{
+        
+        if(usuario == null || !usuario.getPermissoes().contains(Permissao.LISTA_SUBMETIDOS)){
+            
+            throw new AutorizacaoException("Usuário sem permissão para listagem dos projetos submetidos!");
+        }
+        
+        return true;
+    }
 
     public void submeterHomologacao(int idProjeto, int idResponsavel) throws PersistenciaException, DadoInconsistenteException{
 

@@ -5,11 +5,13 @@
 package br.com.dao;
 
 import Exceptions.PersistenciaException;
+import br.com.model.AreaConhecimento;
 import br.com.model.Arquivo;
 import br.com.model.Campus;
 import br.com.model.Edital;
 import br.com.model.Inscricao;
 import br.com.model.ProReitor;
+import br.com.model.Projeto;
 import br.com.model.StatusProjeto;
 import br.com.model.TipoProjeto;
 import java.sql.Connection;
@@ -131,28 +133,6 @@ public class DBEdital implements EditalDAO {
         return 0;
     }
 
-    private int getMaxIDEdital() throws PersistenciaException {
-
-        String sql = "select max(id_edital) as id from edital";
-        Connection conn = factory.createConnection();
-        PreparedStatement stmt;
-
-        try {
-
-            stmt = conn.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-
-                return rs.getInt("id");
-            }
-        } catch (SQLException sqle) {
-            throw new PersistenciaException("Falha ao obter id máximo de edital!", sqle);
-        }
-
-        return 0;
-    }
-
     @Override
     public Edital obtem(int idEdital, int idResponsavel) throws PersistenciaException {
 
@@ -222,12 +202,7 @@ public class DBEdital implements EditalDAO {
 
             if (result.next()) {
 
-                Edital edital = new Edital();
-                edital.setId(result.getInt("id_edital"));
-                edital.setPrazoFinal(result.getDate("prazo_final"));
-                edital.setPrazoInicial(result.getDate("prazo_inicial"));
-                edital.setTipo(TipoProjeto.valueOf(result.getString("tipo_edital")));
-                edital.setTitulo(result.getString("titulo"));
+                Edital edital = createEdital(result);
 
                 if (carregaProReitor) {
 
@@ -278,25 +253,6 @@ public class DBEdital implements EditalDAO {
         }
 
         return nextArquivo(result);
-    }
-
-    private List<Arquivo> carregaArquivos(ResultSet result) {
-
-        List<Arquivo> arquivos = new ArrayList<Arquivo>();
-
-        if (verifyResult(result)) {
-
-            try {
-                do {
-                    Arquivo arquivo = new Arquivo(result.getString("nome_arquivo"), result.getString("extensao"), result.getBytes("dados"));
-                    arquivos.add(arquivo);
-                } while (result.next());
-            } catch (SQLException ex) {
-
-                throw new PersistenciaException("Erro ao acessar propriedades do edital", ex);
-            }
-        }
-        return arquivos;
     }
 
     private Arquivo nextArquivo(ResultSet result) throws PersistenciaException {
@@ -737,5 +693,95 @@ public class DBEdital implements EditalDAO {
 
             factory.close(conn);
         }
+    }
+
+    public Inscricao obtemInscricao(int idProjeto, int idEdital) throws PersistenciaException {
+
+        Inscricao inscricao;
+        Connection conn = this.factory.createConnection();
+        PreparedStatement stmt;
+        ResultSet result;
+        String sql = "select *, edital.titulo as titulo_edital, projeto.titulo as titulo_projeto from inscricao inner join edital using (id_edital) inner join projeto using (id_proj) inner join area_conhecimento using (id_area) where id_proj = ? and id_edital = ?";
+
+        try {
+
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idProjeto);
+            stmt.setInt(2, idEdital);
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar consulta por inscrição!", sqle);
+        }
+
+        try {
+
+            result = stmt.executeQuery();
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao consultar por inscrição!", sqle);
+        } finally {
+
+            this.factory.close(conn);
+        }
+
+        return nextInscricao(result);
+    }
+
+    private Inscricao nextInscricao(ResultSet result) {
+
+        try {
+
+            if (result.next()) {
+
+                Projeto projeto = createProjeto(result);
+                Edital edital = createEdital(result);
+
+                return new Inscricao(projeto, edital);
+            }
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao obter dados do edital!", sqle);
+        }
+
+        return null;
+    }
+
+    private Projeto createProjeto(ResultSet result) throws SQLException {
+
+        Projeto projeto = new Projeto();
+        projeto.setId(result.getInt("id_proj"));
+        projeto.setAreaConhecimento(new AreaConhecimento(result.getString("area")));
+        projeto.setPalavrasChave(result.getString("palavras_chave"));
+        projeto.setResumo(result.getString("resumo"));
+        projeto.setStatus(StatusProjeto.valueOf(result.getString("status")));
+
+        try {
+
+            projeto.setTitulo(result.getString("titulo_projeto"));
+        } catch (SQLException sqle) {
+
+            projeto.setTitulo(result.getString("titulo"));
+        }
+
+        return projeto;
+    }
+
+    private Edital createEdital(ResultSet result) throws SQLException {
+
+        Edital edital = new Edital();
+        edital.setId(result.getInt("id_edital"));
+        edital.setPrazoFinal(result.getDate("prazo_final"));
+        edital.setPrazoInicial(result.getDate("prazo_inicial"));
+        edital.setTipo(TipoProjeto.valueOf(result.getString("tipo_edital")));
+
+        try {
+
+            edital.setTitulo(result.getString("titulo_edital"));
+        } catch (SQLException sqle) {
+
+            edital.setTitulo(result.getString("titulo"));
+        }
+
+        return edital;
     }
 }

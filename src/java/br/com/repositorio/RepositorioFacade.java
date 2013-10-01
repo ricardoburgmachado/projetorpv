@@ -65,9 +65,14 @@ public class RepositorioFacade {
         return this.repEdital.listarEditais(data, this.repProjeto.obter(idProjeto).getTipoProjeto());
     }
     
-    public List<Projeto> filtrarProjetos(Set<StatusProjeto> status, Usuario usuario) throws PersistenciaException, AutorizacaoException, DadoInconsistenteException{
+    public List<Projeto> filtrarProjetosParaInscricao(Set<StatusProjeto> status, Usuario usuario) throws PersistenciaException, AutorizacaoException, DadoInconsistenteException{
         
         return this.repProjeto.filtrarProjetos(usuario, status);
+    }
+    
+    public List<Projeto> listarProjetosSubmetidos(Usuario usuario, Set<StatusProjeto> status) throws PersistenciaException, AutorizacaoException{
+        
+        return this.repProjeto.listarProjetosSubmetidosHomologacao(usuario, status);
     }
     
     public Arquivo obtemArquivoEdital(int idEdital, int idArquivo, Usuario user) throws PersistenciaException, AutorizacaoException, DadoInconsistenteException{

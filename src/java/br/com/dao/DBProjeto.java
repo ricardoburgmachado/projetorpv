@@ -803,6 +803,7 @@ public class DBProjeto implements ProjetoDAO {
         return true;
     }
 
+    @Override
     public String consultaStatus(int idProj) {
 
         String sql = "SELECT status FROM " + PROJETO + " where id_proj=?";

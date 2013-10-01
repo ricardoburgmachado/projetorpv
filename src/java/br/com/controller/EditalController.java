@@ -339,22 +339,6 @@ public class EditalController extends GenericController {
         return facade.filtrarEditais(new Date(), id_projeto);
     }
 
-    private JsonArray editaisToJson(List<Edital> editais) {
-
-        JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
-        JsonObjectBuilder objBuilder = Json.createObjectBuilder();
-
-        for (Edital edital : editais) {
-
-            objBuilder.add("id", edital.getId());
-            objBuilder.add("titulo", edital.getTitulo());
-            JsonObject editalJson = objBuilder.build();
-            arrayBuilder.add(editalJson);
-        }
-
-        return arrayBuilder.build();
-    }
-
     @RequestMapping(value = "/inscreve_edital")
     public ModelAndView inscreveProjeto(HttpServletRequest request, @RequestParam int id_projeto, @RequestParam int id_edital, @RequestParam MultipartFile file) {
 
