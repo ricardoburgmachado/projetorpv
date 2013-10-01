@@ -40,6 +40,9 @@ INSERT INTO permissao(id_perm, descricao)VALUES(2, 'ACESSO');
 INSERT INTO permissao(id_perm, descricao)VALUES(3, 'CRUD_EDITAL');
 INSERT INTO permissao(id_perm, descricao)VALUES(4, 'INSCRICAO_EDITAL');
 INSERT INTO permissao(id_perm, descricao)VALUES(5, 'EXIBE_EDITAL');
+INSERT INTO permissao(id_perm, descricao)VALUES(6, 'PRESTAR_CONTAS');
+INSERT INTO permissao(id_perm, descricao)VALUES(7, 'DOWNLOAD_EDITAL');
+INSERT INTO permissao(id_perm, descricao)VALUES(8, 'ALTERAR_STATUS_PROJETO');
 /***************************** FIM cadastro PERMISSÃO **********************/
 
 
@@ -50,6 +53,10 @@ INSERT INTO papel_permissao(id_perm, id_papel) VALUES (3, 1);
 INSERT INTO papel_permissao(id_perm, id_papel) VALUES (2, 1);
 INSERT INTO papel_permissao(id_perm, id_papel) VALUES (4, 3);
 INSERT INTO papel_permissao(id_perm, id_papel) VALUES (5, 3);
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (1, 1); /** CRUD_PROJETO -> PRO REITOR **/
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (6, 3); /** PRESTAR_CONTAS -> PROFESSOR **/
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (7, 3); /** DOWNLOAD_EDITAL -> PROFESSOR **/	
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (8, 2); /** ALTERAR_STATUS_PROJETO -> COORDENADOR **/	
 /***************************** FIM cadastro PAPEL PERMISSÃO **********************/
 
 /***************************** INICIO cadastro usuarios **********************/
