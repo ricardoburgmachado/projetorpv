@@ -695,9 +695,9 @@ public class DBEdital implements EditalDAO {
         }
     }
 
+    @Override
     public Inscricao obtemInscricao(int idProjeto, int idEdital) throws PersistenciaException {
 
-        Inscricao inscricao;
         Connection conn = this.factory.createConnection();
         PreparedStatement stmt;
         ResultSet result;
@@ -783,5 +783,31 @@ public class DBEdital implements EditalDAO {
         }
 
         return edital;
+    }
+
+    @Override
+    public void excluiInscricao(int idProjeto, int idEdital) throws PersistenciaException {
+
+        Connection conn = this.factory.createConnection();
+        PreparedStatement stmt;
+        String sql = "delete from inscricao where id_proj=? and id_edital=?";
+
+        try {
+
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idProjeto);
+            stmt.setInt(2, idEdital);
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar exclusão de inscrição!", sqle);
+        }
+
+        try {
+
+            stmt.executeUpdate();
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao excluir inscrição!", sqle);
+        }
     }
 }

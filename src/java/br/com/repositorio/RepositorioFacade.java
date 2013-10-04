@@ -79,5 +79,10 @@ public class RepositorioFacade {
         
         return this.repEdital.obtemArquivo(idArquivo, idEdital, user);
     }
-            
+    
+    public void cancelaInscricao(int idEdital, int idProjeto, Usuario user, Date dataCancelamento) throws PersistenciaException, AutorizacaoException, PrivacidadeException, DadoInconsistenteException{
+        
+        Inscricao inscricao = this.repEdital.obtemInscricao(idProjeto, idEdital);
+        this.repEdital.cancelarInscricao(inscricao, user, dataCancelamento);
+    }         
 }

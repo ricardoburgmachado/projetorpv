@@ -1,5 +1,6 @@
 package br.com.model;
 
+import br.com.repositorio.RepositorioEdital;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;

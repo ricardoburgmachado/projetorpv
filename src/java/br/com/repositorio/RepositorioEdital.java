@@ -257,30 +257,6 @@ public class RepositorioEdital {
 
     private boolean verificaPrazoMenor(Date ini, Date fim) {
 
-        /*
-         Calendar calendar = new GregorianCalendar(); 
-         System.out.println("*************DATA ATUAL: "+calendar.getTime().toString());
-         System.out.println("*************DATA INCIAL: "+ini);
-         System.out.println("*************DATA FINAL: "+fim);
-        
-        
-         if(calendar.getTime().after(ini)) {
-         System.out.println("É DEPOIS DA DATA ATUAL");
-         }
-        
-         if(calendar.getTime().before(ini)) {
-         System.out.println("É ANTES DA DATA ATUAL");
-         }
-        
-         if( ini.after(fim) &&  calendar.getTime().before(ini)){
-         System.out.println("RETURN TRUE NAS DATAS");
-         return true;
-         }else{
-         System.out.println("RETURN FALSE NAS DATAS");
-         return false;
-         }
-         */
-
         return ini.after(fim);
     }
 
@@ -334,6 +310,44 @@ public class RepositorioEdital {
 
             throw exception;
         }
-
+    }
+    
+    protected Inscricao obtemInscricao(int idProjeto, int idEdital){
+        
+        return this.editalDao.obtemInscricao(idProjeto, idEdital);
+    }
+    
+    public void cancelarInscricao(Inscricao inscricao, Usuario usuario, Date dataCancelamento) throws AutorizacaoException, PrivacidadeException, DadoInconsistenteException, PersistenciaException{
+        
+        if(verificaConsistenciaCancelaInscricao(inscricao, usuario, dataCancelamento)){
+            
+            this.editalDao.excluiInscricao(inscricao.getProjeto().getId(), inscricao.getEdital().getId());
+        }
+    }
+    
+    private boolean verificaConsistenciaCancelaInscricao(Inscricao inscricao, Usuario usuario, Date dataCancelamento) throws AutorizacaoException, PrivacidadeException, DadoInconsistenteException{
+        
+        
+        if(usuario == null || !usuario.getPermissoes().contains(Permissao.CANCELAMENTO_INSCRICAO)){
+            
+            throw new AutorizacaoException("Usuário sem permissão para cancelar inscrição!");
+        }
+        
+        if(inscricao == null){
+            
+            throw new DadoInconsistenteException("Inscrição inexistente!");
+        }
+        
+        if(inscricao.getProjeto().getId() != usuario.getId()){
+            
+           throw new PrivacidadeException("Projeto não pertencente ao professor!");
+        }
+        
+        if(dataCancelamento.before(inscricao.getEdital().getPrazoInicial()) || dataCancelamento.after(inscricao.getEdital().getPrazoFinal())){
+            
+            throw new DadoInconsistenteException("Fora do prazo para cancelamento de inscrição!");
+        }
+        
+        return true;
     }
 }
