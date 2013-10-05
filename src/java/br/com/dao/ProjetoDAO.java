@@ -8,6 +8,7 @@ package br.com.dao;
 import Exceptions.PersistenciaException;
 import br.com.model.Aluno;
 import br.com.model.AreaConhecimento;
+import br.com.model.Campus;
 import br.com.model.Custo;
 import br.com.model.Externo;
 import br.com.model.Professor;
@@ -64,5 +65,7 @@ public interface ProjetoDAO {
      public void atualizaStatus(Projeto projeto) throws PersistenciaException;
      
      public String consultaStatus(int idProj) throws PersistenciaException;
+     
+     public List<Projeto> listarProjetos(int idResponsavel, Set<StatusProjeto> status, Campus campus) throws PersistenciaException;
      
 }

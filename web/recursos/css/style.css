@@ -73,7 +73,7 @@ h1 {
 
 
 .sub_topo .sub_sub{
-    
+
     display: block;
     float: right; 
     width: 400px; 
@@ -86,7 +86,7 @@ h1 {
     font-size: 15px; 
     width: 300px; 
     margin-top: 10px;
-         
+
 }
 
 .sub_topo .btn_sair{
@@ -914,5 +914,55 @@ ol#menurel li a {
     background-color: #E4E4E4;
     border: 1px solid #444444;
 }
-
 /* *************** FIM EDITAL EXIBE*************** */
+
+.tabela-lista{
+    width: 95%;    
+    margin: auto;
+    text-align: center;
+    font-size: 1rem;
+    text-overflow: ellipsis;
+    border-collapse: collapse;
+}
+
+.tabela-lista tr:nth-of-type(2n - 1){
+    background-color: lightgrey;
+}
+
+.tabela-lista thead, th{
+    background-color: darkslategrey;
+    color: white;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    border-style: none;
+}
+
+.tabela-lista td, th{
+    min-width: 50px;
+    border-collapse: collapse;
+    padding: 2px 2px;
+}
+
+.tabela-lista td{
+    border-bottom-style: dotted;
+    border-bottom-color: black;
+    vertical-align: middle;
+}
+
+a[href$=".pdf"]::before{
+    content: url(../imagens/pdf.png);
+    vertical-align: -50%;
+    margin-right: 5px;
+}
+
+a[href*="projeto_exibe"]{
+    color: transparent;
+    display: block;
+    width: 28px;
+    height: 28px;
+    text-align: center;
+    background:url(../imagens/more.png) no-repeat;
+    border: none;
+    margin: auto;
+    
+}

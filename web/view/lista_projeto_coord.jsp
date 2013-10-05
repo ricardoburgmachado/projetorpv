@@ -15,6 +15,12 @@
         <link rel="stylesheet" href="<c:url value="/recursos/css/style.css"/>">
     </head>
     <body>
+        
+        <div id="topo">
+            <div id="logo_brasil"></div> 
+            <c:import url="sub_topo.jsp"/>
+        </div>
+        
         <div id="all">
 
             <div id="menu">
@@ -37,8 +43,8 @@
                     <c:forEach var="projeto" items="${projetos}">
                         <tr>
                             <td title="Título do projeto">${projeto.titulo}</td>
-                            <td title="Categoria do projeto">${projeto.tipo}</td>
-                            <td title="Arquivo do projeto"><a href="arq_proj_down?id_proj=${projeto.id}&id_arq=${projeto.arquivo.id}" type="${projeto.arquivo.extensao}">${projeto.arquivo.titulo}</a></td>
+                            <td title="Categoria do projeto">${projeto.tipoProjeto}</td>
+                            <td title="Arquivo do projeto"><a href="<c:url value="/arquivos/${projeto.id }/${projeto.id}.pdf"/>">Arquivo</a></td>
                             <td title="Ação para homologação"><a title="Clique para homologar o projeto" href="projeto_homologa?id_proj=${projeto.id}">homologar</a></td>
                             <td title="Ação para não homologação"><a title="Clique para não homologar o projeto" href="projeto_nao_homologa?id_proj=${projeto.id}">não homologar</a></td>
                             <td title="Ação para visualização"><a title="Clique para visualizar detalhes do projeto" href="projeto_exibe?id=${projeto.id}">detalhes</a></td>
@@ -47,9 +53,7 @@
                     </tbody>
                 </table>
             </div>
-
         </div>
-
         <div id="rodape"></div>
     </body>
 </html>

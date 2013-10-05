@@ -24,7 +24,6 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import javax.json.Json;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,6 +41,14 @@ public class ProjetoController extends GenericController {
     @Autowired(required = true)
     RepositorioProjeto repositorioProjeto;
     RepositorioUsuario repositorioUsuario;
+    RepositorioFacade facade;
+
+    public ProjetoController() {
+        
+        this.facade = new RepositorioFacade();
+    }
+    
+    
 
     /**
      * Método que recebe os dados do formulário para efetivar o cadastro de um
@@ -539,25 +546,17 @@ public class ProjetoController extends GenericController {
 
         return inconsistencias;
     }
-
-    private void atribuiCustos(Projeto projeto, TipoCusto tipoCusto, String[] descricoes, String[] valores) {
-
-        if (!verificaNulo(projeto) && !verificaNulo(tipoCusto) && !verificaNulo(descricoes) && !verificaNulo(valores)) {
-
-            projeto.setCustos(projeto.getId(), tipoCusto, valores, descricoes);
-        }
-    }
-
-    private void atribuiParticipantes(Projeto projeto, String[] participantes) {
-
-        if (!verificaNulo(projeto) && !verificaNulo(participantes)) {
-
-            projeto.setParticipantesString(participantes);
-        }
-    }
-
-    private boolean verificaNulo(Object obj) {
-
-        return obj == null;
+    
+    @RequestMapping (value = "/projeto_lista_submetidos")
+    public ModelAndView listaProjetosSubmetidos(HttpServletRequest request){
+        
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        ModelAndView mv = new ModelAndView("lista_projeto_coord");
+        
+        HashSet<StatusProjeto> status = new HashSet<>();
+        status.add(StatusProjeto.SUBMETIDO_HOMOLOGACAO);
+        mv.addObject("projetos", facade.listarProjetosSubmetidos(usuario, status));
+        
+        return mv;
     }
 }

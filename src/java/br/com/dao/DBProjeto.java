@@ -844,12 +844,57 @@ public class DBProjeto implements ProjetoDAO {
 
             stmt = connection.prepareStatement(sqlBuilder.toString());
             stmt.setInt(1, idResponsavel);
-            
+
             int ini = 2;
-            Object[] stts =  status.toArray();
-            
-            for(int i = 0; i< stts.length; i++){
-                
+            Object[] stts = status.toArray();
+
+            for (int i = 0; i < stts.length; i++) {
+
+                stmt.setString(ini + i, stts[i].toString());
+            }
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar consulta por projetos!", sqle);
+        }
+
+        try {
+
+            result = stmt.executeQuery();
+        } catch (SQLException ex) {
+
+            throw new PersistenciaException("Falha ao realizar consulta por projetos!", ex);
+        }
+
+        return carregaProjetos(result);
+    }
+
+    @Override
+    public List<Projeto> listarProjetos(int idResponsavel, Set<StatusProjeto> status, Campus campus) throws PersistenciaException {
+
+        StringBuilder sqlBuilder = new StringBuilder("select * from projeto inner join usuario on id_responsavel = id_usuario inner join area_conhecimento using (id_area) where campus=?");
+
+        if (status.size() > 0) {
+
+            sqlBuilder.append(" and status=?");
+            for (int i = 1; i < status.size(); i++) {
+
+                sqlBuilder.append(" or status=?");
+            }
+        }
+
+        PreparedStatement stmt;
+        ResultSet result;
+
+        try {
+
+            stmt = connection.prepareStatement(sqlBuilder.toString());
+            stmt.setString(1, campus.toString());
+
+            int ini = 2;
+            Object[] stts = status.toArray();
+
+            for (int i = 0; i < stts.length; i++) {
+
                 stmt.setString(ini + i, stts[i].toString());
             }
         } catch (SQLException sqle) {
