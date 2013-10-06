@@ -1,8 +1,8 @@
 
-CREATE SEQUENCE public.arquivo_id_arquivo_seq_1_1;
+CREATE SEQUENCE public.arquivo_id_arquivo_seq;
 
 CREATE TABLE public.arquivo (
-                id_arquivo INTEGER NOT NULL DEFAULT nextval('public.arquivo_id_arquivo_seq_1_1'),
+                id_arquivo INTEGER NOT NULL DEFAULT nextval('public.arquivo_id_arquivo_seq'),
                 nome_arquivo VARCHAR(100) NOT NULL,
                 extensao VARCHAR(20) NOT NULL,
                 dados BYTEA NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE public.arquivo (
 );
 
 
-ALTER SEQUENCE public.arquivo_id_arquivo_seq_1_1 OWNED BY public.arquivo.id_arquivo;
+ALTER SEQUENCE public.arquivo_id_arquivo_seq OWNED BY public.arquivo.id_arquivo;
 
 CREATE SEQUENCE public.papel_id_papel_seq;
 
@@ -38,7 +38,7 @@ CREATE SEQUENCE public.permissao_id_perm_seq;
 
 CREATE TABLE public.permissao (
                 id_perm INTEGER NOT NULL DEFAULT nextval('public.permissao_id_perm_seq'),
-                descricao VARCHAR(30) NOT NULL,
+                descricao VARCHAR(40) NOT NULL,
                 CONSTRAINT id_perm_pk PRIMARY KEY (id_perm)
 );
 

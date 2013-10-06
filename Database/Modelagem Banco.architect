@@ -48,7 +48,7 @@
     <column id="COL11" populated="true" UUID="108f9c52-0a03-46b8-9033-7f515848d5ed" autoIncrement="true" autoIncrementSequenceName="permissao_id_perm_seq" defaultValue="" name="ID_PERMISSAO" nullable="0" physicalName="id_perm" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
-    <column id="COL12" populated="true" UUID="0df768b3-8bff-456c-9876-e999fc4261e6" autoIncrement="false" autoIncrementSequenceName="permissao_descricao_seq" defaultValue="" name="Descrição" nullable="0" physicalName="descricao" precision="30" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL12" populated="true" UUID="0df768b3-8bff-456c-9876-e999fc4261e6" autoIncrement="false" autoIncrementSequenceName="permissao_descricao_seq" defaultValue="" name="Descrição" nullable="0" physicalName="descricao" precision="40" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
     </folder>
@@ -276,7 +276,7 @@
   <table id="TAB74" populated="true" UUID="39583bc4-855f-40b7-8128-abf1acd01056" name="ARQUIVO" objectType="TABLE" physicalName="arquivo" >
    <remarks></remarks>
    <folder id="FOLTAB741" populated="true" name="Columns" physicalName="Columns" type="1">
-    <column id="COL75" populated="true" UUID="d5e84905-2350-4358-b466-5ca396e2360a" autoIncrement="true" autoIncrementSequenceName="arquivo_id_arquivo_seq_1_1" defaultValue="" name="ID_ARQUIVO" nullable="0" physicalName="id_arquivo" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+    <column id="COL75" populated="true" UUID="d5e84905-2350-4358-b466-5ca396e2360a" autoIncrement="true" autoIncrementSequenceName="arquivo_id_arquivo_seq" defaultValue="" name="ID_ARQUIVO" nullable="0" physicalName="id_arquivo" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
     <column id="COL76" populated="true" UUID="6b0cb8ff-245f-4113-9fd5-3641490a532c" autoIncrement="false" autoIncrementSequenceName="arquivo_nome_arquivo_seq" defaultValue="" name="NOME_ARQUIVO" nullable="0" physicalName="nome_arquivo" precision="100" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
@@ -326,10 +326,10 @@
   <table id="TAB88" populated="true" UUID="e2f15124-46be-4100-99d9-a904edaa1dfc" name="Retificacao" objectType="TABLE" physicalName="retificacao" >
    <remarks></remarks>
    <folder id="FOLTAB881" populated="true" name="Columns" physicalName="Columns" type="1">
-    <column id="COL89" populated="true" UUID="00952825-3c54-4c2b-89fc-859f13caf30d" autoIncrement="false" autoIncrementSequenceName="arquivo_id_arquivo_seq_1_1" defaultValue="" name="ID_ARQUIVO" nullable="0" physicalName="id_arquivo" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+    <column id="COL89" populated="true" UUID="00952825-3c54-4c2b-89fc-859f13caf30d" autoIncrement="false" autoIncrementSequenceName="arquivo_id_arquivo_seq_1_1_2" defaultValue="" name="ID_ARQUIVO" nullable="0" physicalName="id_arquivo" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
-    <column id="COL90" populated="true" UUID="2b28ae8e-b912-4da9-aa22-2aefc5fa7f0b" autoIncrement="false" autoIncrementSequenceName="edital_id_edital_seq" defaultValue="" name="ID_EDITAL" nullable="0" physicalName="id_edital" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+    <column id="COL90" populated="true" UUID="2b28ae8e-b912-4da9-aa22-2aefc5fa7f0b" autoIncrement="false" autoIncrementSequenceName="edital_id_edital_seq_1" defaultValue="" name="ID_EDITAL" nullable="0" physicalName="id_edital" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
     </folder>
