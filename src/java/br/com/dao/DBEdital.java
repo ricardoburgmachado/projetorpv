@@ -738,4 +738,36 @@ public class DBEdital implements EditalDAO {
             factory.close(conn);
         }
     }
+    
+    @Override
+    public List<Edital> listarEditais() throws PersistenciaException {
+
+        String sql = "select * from edital";
+
+        PreparedStatement stmt = null;
+        ResultSet result;
+
+        try {
+            Connection connection = factory.createConnection();
+
+            stmt = connection.prepareStatement(sql);
+
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar consulta", sqle);
+        }
+
+        try {
+
+            result = stmt.executeQuery();
+        } catch (SQLException ex) {
+            System.out.println("ERRO : " + ex);
+            throw new PersistenciaException("Falha ao realizar consulta", ex);
+        }
+
+        return carregaEditais(result);
+
+    }
+
+    
 }

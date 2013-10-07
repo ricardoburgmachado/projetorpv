@@ -352,8 +352,7 @@ public class ProjetoController extends GenericController {
         }
 
         RepositorioProjeto rp = new RepositorioPostgresFactory().createRepositorioProjeto();
-        Professor prof = (Professor) p_request.getSession().getAttribute("usuario");
-        List projetos = rp.listarProjetos(prof.getId());
+        List projetos = rp.listarProjetos(user.getId());
         ModelAndView mv = new ModelAndView("lista_projeto");
         if (projetos != null) {
             mv.addObject("projetos", projetos);
@@ -560,4 +559,36 @@ public class ProjetoController extends GenericController {
 
         return obj == null;
     }
+    
+    @RequestMapping(value = "/projeto_altera_status_show")
+    public ModelAndView projetoAlteraStatusShow(HttpServletRequest p_request, @RequestParam int id) {
+
+        this.request = p_request;
+        System.out.println("************** ID VINDA POR PARAMETRO: " + id);
+
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        if (!verificaAutorizacao(user, Permissao.CRUD_PROJETO)) {
+
+            return new ModelAndView("login");
+        }
+
+        this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
+        this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
+
+        Projeto projetoBD = this.repositorioProjeto.obter(id);
+
+
+        ModelAndView mv = new ModelAndView("projeto_altera_status");
+        mv.addObject("projeto", projetoBD);
+
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/projeto_altera_status")
+    public ModelAndView projetoAlteraStatus(HttpServletRequest p_request, @RequestParam int id) {
+        
+        return null;
+    }
+    
 }

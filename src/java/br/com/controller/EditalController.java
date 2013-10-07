@@ -466,4 +466,43 @@ public class EditalController extends GenericController {
             }
         }
     }
+    
+    
+    @RequestMapping(value = "/edital_professor_lista_show")
+    public ModelAndView editalProfessorListaShow(HttpServletRequest p_request) {
+
+        this.request = p_request;
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        if (!verificaAutorizacao(user, Permissao.CRUD_EDITAL)) {
+
+            return new ModelAndView("login");
+        }
+        RepositorioEdital repositorioEdital = new RepositorioPostgresFactory().createRepositorioEdital();
+        List<Edital> editais = repositorioEdital.listarEditais();
+        ModelAndView mv = new ModelAndView("edital_lista_professor");
+        mv.addObject("editais", editais);
+        return mv;
+    }
+
+    @RequestMapping(value = "/edital_download")
+    public ModelAndView editalDownload(HttpServletRequest p_request, @RequestParam int id) {
+
+        this.request = p_request;
+        System.out.println("************** ID VINDA POR PARAMETRO: " + id);
+
+
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        if (!verificaAutorizacao(user, Permissao.CRUD_EDITAL)) {
+            return new ModelAndView("login");
+        }
+
+        RepositorioEdital repositorioEdital = new RepositorioPostgresFactory().createRepositorioEdital();
+        RepositorioFacade facade = new RepositorioFacade();
+        Edital edital = facade.obter(id, user);
+        ModelAndView mv = new ModelAndView("edital_download_professor");
+        mv.addObject("edital", edital);
+        return mv;
+    }
+    
+    
 }

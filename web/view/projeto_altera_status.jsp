@@ -1,6 +1,7 @@
 <%@page import="java.util.List"%>
 <%@page import="br.com.controller.ProjetoController"%>
 <%@page import="br.com.model.TipoProjeto"%>
+<%@page import="br.com.model.StatusProjeto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -16,7 +17,7 @@
 
 
         <!-- inicio multiselect -->
-       <!--<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" /> -->
+        <!--<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" /> -->
         <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>-->
         <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>-->        
 
@@ -33,31 +34,10 @@
         <script type="text/javascript">
             $(function() {
 
-                $("#partipantes_professor").multiselect({
-                    multiple: true,
-                    header: "Selecione professor(es)",
-                    noneSelectedText: "Selecione professor(es)"
-                }).multiselectfilter();
-                $("#partipantes_aluno").multiselect({
-                    multiple: true,
-                    header: "Selecione aluno(s)",
-                    noneSelectedText: "Selecione aluno(s)",
-                }).multiselectfilter();
-                $("#partipantes_externo").multiselect({
-                    multiple: true,
-                    header: "Selecione",
-                    noneSelectedText: "Selecione",
-                }).multiselectfilter();
-
-                $("#area_conhecimento").multiselect({
+                $("#status_projeto").multiselect({
                     multiple: false,
-                    header: "Selecione uma área ",
-                    noneSelectedText: "Selecione uma área",
-                });
-                $("#tipo_projeto").multiselect({
-                    multiple: false,
-                    header: "Selecione um tipo",
-                    noneSelectedText: "Selecione um tipo",
+                    header: "Selecione um status",
+                    noneSelectedText: "Selecione um status",
                 });
 
 
@@ -106,13 +86,12 @@
             <div id="conteudo_interno">
 
 
-                <form:form action="projeto_edita" modelAttribute="projeto" id="form_addprojeto" enctype="multipart/form-data">
+                <form:form action="projeto_altera_status" modelAttribute="projeto" id="form_addprojeto" enctype="multipart/form-data">
                     <h1>Alterar status do projeto</h1>                                                                                                  
 
                     <fieldset> 
                         
-                        <% 
-                            
+                        <%                             
                             if(request.getAttribute("sucesso") != null){
                                 
                                out.println("<span class=\"sucesso\">" + request.getAttribute("sucesso") + "</span>");
@@ -134,24 +113,31 @@
 
                         <label>Título:</label>
 
-                        <input type="text" disabled="true" name="titulo" value="${projeto.titulo}" />       
-
-
-
-                        <span class="bloco">
-                            <label  for="nome">Tipo projeto:</label><br/><br/> 
-                            <select id="tipo_projeto" name="tipoProjeto">
-                                <option <c:if test="${projeto.tipoProjeto eq 'PESQUISA'}">selected="selected"</c:if> value="<%=TipoProjeto.PESQUISA%>">Pesquisa</option>
-                                <option <c:if test="${projeto.tipoProjeto eq 'ENSINO'}">selected="selected"</c:if> value="<%=TipoProjeto.ENSINO%>">Ensino</option>
-                                <option <c:if test="${projeto.tipoProjeto eq 'EXTENSAO'}">selected="selected"</c:if> value="<%=TipoProjeto.EXTENSAO%>">Extensão</option>                                
-                                </select>
-                            </span>
-
+                        <input style="width: 500px" type="text" disabled="true" name="titulo" value="${projeto.titulo}" />       
 
                         <span style="clear: both; display: block;"></span>
 
+                        <span class="bloco">
+                            <label  for="nome">Status projeto:</label><br/><br/> 
+                            <select id="status_projeto" name="status">
+                                <option <c:if test="${projeto.status eq 'CRIADO'}">selected="selected"</c:if> value="<%=StatusProjeto.CRIADO%>">Não homologado</option>
+                                <option <c:if test="${projeto.status eq 'SUBMETIDO_HOMOLOGACAO'}">selected="selected"</c:if> value="<%=StatusProjeto.SUBMETIDO_HOMOLOGACAO%>">Submetido para homologação</option>
+                                <option <c:if test="${projeto.status eq 'HOMOLOGADO'}">selected="selected"</c:if> value="<%=StatusProjeto.HOMOLOGADO%>">Homologado</option>
+                                <option <c:if test="${projeto.status eq 'INSCRITO'}">selected="selected"</c:if> value="<%=StatusProjeto.INSCRITO%>">Inscrito</option>                                
+                            </select>
+                         </span>
+
+                            
+                         <span style="clear: both; display: block;"></span>
+                            <span class="bloco">
+                            <label for="nome">Anexo (respaldo da avaliação):</label>
+                            <input style="font-size: 12px; font-weight: normal; border: none; cursor: pointer" type="file" name="arquivo_xx"/> 
+                         </span>
+
+                            
+                        <span style="clear: both; display: block;"></span>
+
                             <input class="enviar_form" type="submit" value="Alterar status"/>
-                            <a href="submete_homologacao?idProjeto=${projeto.id}"><button type="button" class="submeter_form">Submeter</button></a>
                         </fieldset>
                 </form:form>    
 

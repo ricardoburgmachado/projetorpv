@@ -336,4 +336,11 @@ public class RepositorioEdital {
         }
 
     }
+    
+    public List<Edital> listarEditais() throws PersistenciaException, DadoInconsistenteException {
+
+        return this.editalDao.listarEditais();
+    }
+
+    
 }
