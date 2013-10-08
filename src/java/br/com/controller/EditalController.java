@@ -466,4 +466,11 @@ public class EditalController extends GenericController {
         
         return mv;
     }
+    
+    public ModelAndView cancelaInscricao(HttpServletRequest request, int id_edital, int id_projeto){
+        
+        ModelAndView mv = listaInscricoes(request);
+        
+        return mv;
+    }
 }

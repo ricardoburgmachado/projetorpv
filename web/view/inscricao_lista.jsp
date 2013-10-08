@@ -14,7 +14,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>GIPA - Lista de Incrições</title>
-        
+
         <link rel="stylesheet" href="<c:url value="/recursos/css/style.css"/>" />
     </head>
     <body>
@@ -34,22 +34,28 @@
 
                 <h1>Lista de Inscrições</h1>
 
+                <c:if test="${not empty inconsistencias}">
+                    <ul class="inconsistencias">
+                        <c:forEach var="inconsistencia" items="${inconsistencias}">
+                            <li>${inconsistencia}</li>
+                            </c:forEach>
+                    </ul>
+                </c:if>
+
                 <div class="listagem">
                     <c:forEach var="inscricao" items="${inscricoes}">
                         <div class="item-lista">
 
                             <ul title="Dados da inscrição">
-                                <li>Projeto: ${inscricao.projeto.titulo}</li>
-                                <li>Edital: ${inscricao.edital.titulo}</li>
-                                <li>Arquivo: <span class="arquivo">${inscricao.arquivo.nomeArquivo}</span></li>
-                                <li>Prazo final do edital: <fmt:formatDate type="date" dateStyle="medium" value="${inscricao.edital.prazoFinal}" /></li>
+                                <li><span class="titulo">Projeto:</span> ${inscricao.projeto.titulo}</li>
+                                <li><span class="titulo">Edital:</span> ${inscricao.edital.titulo}</li>
+                                <li><span class="titulo">Arquivo:</span> <span class="arquivo">${inscricao.arquivo.nomeArquivo}</span></li>
+                                <li><span class="titulo">Prazo final do edital:</span> <fmt:formatDate type="date" dateStyle="medium" value="${inscricao.edital.prazoFinal}" /></li>
                             </ul>
 
-                            <div class="botoes">
-                                <c:if test="${now < inscricao.edital.prazoFinal}">
-                                    <a title="Cancelar inscrição" href="inscricao_cancela?id_projeto=${inscricao.projeto.id}&id_edital=${inscricao.edital.id}"<span class="botao cancela">Cancelar Inscrição</span></a>
-                                </c:if>
-                            </div>
+                            <c:if test="${now < inscricao.edital.prazoFinal}">
+                                <a class="botao botao-vertical" title="Cancelar inscrição" href="inscricao_cancela?id_projeto=${inscricao.projeto.id}&id_edital=${inscricao.edital.id}">Cancelar</a>
+                            </c:if>
                         </div>
                     </c:forEach>
                 </div>

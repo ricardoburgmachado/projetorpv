@@ -73,7 +73,7 @@ h1 {
 
 
 .sub_topo .sub_sub{
-    
+
     display: block;
     float: right; 
     width: 400px; 
@@ -86,7 +86,7 @@ h1 {
     font-size: 15px; 
     width: 300px; 
     margin-top: 10px;
-         
+
 }
 
 .sub_topo .btn_sair{
@@ -918,18 +918,58 @@ ol#menurel li a {
 /* *************** FIM EDITAL EXIBE*************** */
 
 .listagem{
-    width: 90%;
+    width: 98%;
     margin: auto;
     background-color: lightgray;
 }
 
 .listagem > div{
     width: 100%;
+    float: left;
+    margin-left: 5px;
+    margin-top: 3px;
     background-color: darkgray;
+    font-size: 1rem;
 }
 
 .listagem > div ul{
+    float: left;
     display: block;
     list-style: none;
-    padding-left: 0px;
+    padding: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.listagem > div ul:hover{
+    overflow: visible;    
+}
+
+.botao-vertical{
+    float: right;
+    vertical-align: middle;
+    margin-top: 20px;
+    margin-right: 5px;
+}
+
+.botao{
+    display: block;
+    border-radius: 3px 3px 3px 3px;
+    background-color: lightgrey;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 5px;
+}
+
+
+.botao[href*="cancela"]{
+    font-size: 1.5rem;
+    padding: 10px;
+    color: red;
+}
+
+.titulo{
+    font-weight: bold;
+    color: white;
+    font-size: 1.1rem;
 }
