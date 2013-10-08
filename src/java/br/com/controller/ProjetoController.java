@@ -7,6 +7,7 @@ import Exceptions.PrivacidadeException;
 import br.com.repositorio.RepositorioProjeto;
 import br.com.repositorio.RepositorioUsuario;
 import br.com.model.AreaConhecimento;
+import br.com.model.Arquivo;
 import br.com.model.Permissao;
 import br.com.model.Professor;
 import br.com.model.Projeto;
@@ -587,61 +588,32 @@ public class ProjetoController extends GenericController {
 
     @RequestMapping(value = "/projeto_altera_status", method = RequestMethod.POST)
     public ModelAndView projetoAlteraStatus(@ModelAttribute Projeto p_projeto, HttpServletRequest p_request,
-            @RequestParam(value = "arquivo_xx", required = false) MultipartFile arquivo) {
+            @RequestParam(value = "arquivo_xx", required = false) MultipartFile arquivo) throws IOException {
         
         this.request = p_request;
 
         Usuario user = (Usuario) request.getSession().getAttribute("usuario");
         if (!verificaAutorizacao(user, Permissao.ALTERAR_STATUS_PROJETO)) {
-
             return new ModelAndView("login");
         }
-
-        //AQUI SERÁ FEITA A INCLUSÃO DOS DADOS DO PROJETO NO BD E RETORNARÁ O ID IDENTIFICADOR DO BD PARA PARA DEFINIR O NOME DO ARQUIVO                
-        AreaConhecimento area = new AreaConhecimento();
-        area.setId(request.getParameter("areaConhecimento_x"));
-        p_projeto.setAreaConhecimento(area);
-
-        String[] custeios_val = request.getParameterValues("custeio_val_x");
-        String[] custeios_desc = request.getParameterValues("custeio_desc_x");
-        String[] capitais_val = request.getParameterValues("capital_val_x");
-        String[] capitais_desc = request.getParameterValues("capital_desc_x");
-
-        String[] participantes_aluno = request.getParameterValues("participantes_aluno");
-        String[] participantes_prof = request.getParameterValues("participantes_professor");
-        String[] participantes_externo = request.getParameterValues("participantes_externo");
-
-        Professor prof = (Professor) this.request.getSession().getAttribute("usuario");
-        p_projeto.setProfessor(prof);
-
+        
         this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
         this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
 
-        if (capitais_val != null && capitais_desc != null) {
-            p_projeto.setCustos(p_projeto.getId(), TipoCusto.CAPITAL, capitais_val, capitais_desc);
+        if (!arquivo.isEmpty()) {
+            String[] split = arquivo.getOriginalFilename().split("\\.");
+            Arquivo arq = new Arquivo(arquivo.getName(), arquivo.getContentType(), arquivo.getBytes());
+            p_projeto.setRespaldo(arq);
         }
 
-        if (custeios_val != null && custeios_desc != null) {
-            p_projeto.setCustos(p_projeto.getId(), TipoCusto.CUSTEIO, custeios_val, custeios_desc);
-        }
-
-        if (participantes_aluno != null) {
-            p_projeto.setParticipantesString(participantes_aluno);
-        }
-        if (participantes_prof != null) {
-            p_projeto.setParticipantesString(participantes_prof);
-        }
-        if (participantes_externo != null) {
-            p_projeto.setParticipantesString(participantes_externo);
-        }
-
-        /**
-         * **************************************** *
-         */
+      
+        
+        
+        
         List<String> inconsistencias = new LinkedList<>();
 
         try {
-            repositorioProjeto.editar(p_projeto);
+            repositorioProjeto.alteraStatusProjeto(p_projeto);
         } catch (DadoInconsistenteException diex) {
             do {
                 inconsistencias.add(diex.getMessage());
@@ -651,28 +623,15 @@ public class ProjetoController extends GenericController {
 
             inconsistencias.add(pex.getMessage());
         }
-        /**
-         * **************************************** *
-         */
-        if (!arquivo.isEmpty()) {
-            processarArquivo(p_projeto.getId(), arquivo);
-        }
-
+        
+       
+        
         ModelAndView mv;
         if (inconsistencias.size() > 0) {
-
+            this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();          
             Projeto projetoBD = this.repositorioProjeto.obter(p_projeto.getId());
-
-            projetoBD.setParticipantesAluno(repositorioProjeto.getParticAlunos(p_projeto.getId()));
-            projetoBD.setParticipantesProfessor(repositorioProjeto.getParticProfessores(p_projeto.getId()));
-            projetoBD.setParticipantesExterno(repositorioProjeto.getParticExternos(p_projeto.getId()));
-            mv = new ModelAndView("projeto_edita");
+            mv = new ModelAndView("projeto_altera_status");
             mv.addObject("projeto", projetoBD);
-            mv.addObject("area_conhecimento", repositorioProjeto.listarAreas());
-            mv.addObject("custos", repositorioProjeto.getCustos(p_projeto.getId()));
-            mv.addObject("participantes_aluno", repositorioUsuario.listar("ALUNO"));
-            mv.addObject("participantes_externo", repositorioUsuario.listar("EXTERNO"));
-            mv.addObject("participantes_professor", repositorioUsuario.listar("PROFESSOR"));
             mv.addObject("mensagem", inconsistencias);
         } else {
 
@@ -680,10 +639,10 @@ public class ProjetoController extends GenericController {
             //mv = new ModelAndView("lista_projeto");
             mv = this.projetoEditaShow(request, p_projeto.getId());
             mv.addObject("projetos", projetos);
-            mv.addObject("mensagem", "Projeto editado com sucesso!");
+            mv.addObject("mensagem", "Status do projeto alterado com sucesso!");
         }
-
-        return mv;
+             
+        return mv;        
     }
     
 }

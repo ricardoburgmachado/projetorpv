@@ -8,6 +8,7 @@ package br.com.dao;
 import Exceptions.PersistenciaException;
 import br.com.model.Aluno;
 import br.com.model.AreaConhecimento;
+import br.com.model.Arquivo;
 import br.com.model.Campus;
 import br.com.model.Custo;
 import br.com.model.Externo;
@@ -866,4 +867,119 @@ public class DBProjeto implements ProjetoDAO {
 
         return carregaProjetos(result);
     }
+    
+    public void respalda(int idArquivo, int idProjeto) {
+
+        String sql = "INSERT INTO respaldo (id_arquivo, id_proj) VALUES (?,?)";
+        //Connection conn = factory.createConnection();
+        PreparedStatement stmt;
+        try {
+            stmt = connection.prepareStatement(sql);            
+            stmt.setInt(1, idArquivo);
+            stmt.setInt(2, idProjeto);
+
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao configurar retificação do edital!", sqle);
+        }
+
+        try {
+
+            stmt.execute();
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao retificar edital!", sqle);
+        } finally {
+
+            //factory.close(conn);
+        }
+    }
+    
+    @Override
+    public void alteraStatus(Projeto projeto) throws PersistenciaException {
+
+        String sql = "update " + PROJETO + " set status=? where id_proj=?";
+        PreparedStatement stmt = null;
+
+        try {
+
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, projeto.getStatus().toString());
+            stmt.setInt(2, projeto.getId());
+            respalda(adicionaArquivo(projeto.getRespaldo()), projeto.getId());
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar atualização");
+        }
+
+        try {
+
+            stmt.executeUpdate();
+        } catch (SQLException sqle) {
+
+            System.out.println(sqle);
+            throw new PersistenciaException("Falha ao atualizar registro");
+        }
+    }
+    
+    
+    private int adicionaArquivo(Arquivo arquivo) throws PersistenciaException {
+
+        if (arquivo == null) {
+
+            return 0;
+        }
+
+        String sql = "insert into arquivo (nome_arquivo, extensao, dados) values (?, ?, ?)";
+        //Connection conn = factory.createConnection();
+        PreparedStatement stmt;
+
+        try {
+
+            //stmt = conn.prepareStatement(sql);
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, arquivo.getNomeArquivo());
+            stmt.setString(2, arquivo.getExtensao());
+            stmt.setBytes(3, arquivo.getDados());
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao configurar inserção do arquivo!", sqle);
+        }
+
+        try {
+
+            stmt.execute();
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao inserir arquivo!", sqle);
+        } finally {
+
+            //factory.close(conn);
+        }
+
+        return getMaxIDArquivo();
+    }
+
+    private int getMaxIDArquivo() throws PersistenciaException {
+
+        String sql = "select max(id_arquivo) as id from arquivo";
+        //Connection conn = factory.createConnection();
+        PreparedStatement stmt;
+        try {
+
+            //stmt = conn.prepareStatement(sql);
+            stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+
+                return rs.getInt("id");
+            }
+        } catch (SQLException sqle) {
+            throw new PersistenciaException("Falha ao obter id máximo de arquivo!", sqle);
+        }
+
+        return 0;
+    }
+    
 }

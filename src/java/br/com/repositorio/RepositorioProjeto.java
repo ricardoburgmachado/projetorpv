@@ -362,4 +362,31 @@ public class RepositorioProjeto {
             return true;
         }
     }
+    
+    /**
+     * Método utilizado para alterar o status (feito pelo Pro-reitor)
+     * @param p 
+     */
+    public void alteraStatusProjeto(Projeto p){
+    
+         
+         
+         DadoInconsistenteException exception = null;
+
+
+        if (verificaNulo(p.getStatus())) {
+            exception = new DadoInconsistenteException(exception, "Status do projeto não informado <br/>");
+        }
+
+        if (p.getRespaldo() == null) {
+            exception = new DadoInconsistenteException(exception, "Arquivo respaldo não anexado <br/>");
+        }
+
+        if (exception == null) {
+            projDAO.alteraStatus(p);            
+        } else {
+            throw exception;
+        }
+
+    }
 }

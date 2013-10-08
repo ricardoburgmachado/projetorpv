@@ -22,6 +22,7 @@ public class Projeto {
     private Campus campus;
     private boolean sigilo;
     private StatusProjeto status;
+    private Arquivo respaldo;
     
     
     public Projeto(){
@@ -289,6 +290,20 @@ public class Projeto {
     @Override
     public String toString() {
         return "Projeto{" + "id=" + id + ", titulo=" + titulo + ", palavrasChave=" + palavrasChave + ", resumo=" + resumo + ", tipoProjeto=" + tipoProjeto + ", participantes=" + participantes + ", participantesString=" + participantesString + ", participantesAluno=" + participantesAluno + ", participantesProfessor=" + participantesProfessor + ", participantesExterno=" + participantesExterno + ", professor=" + professor + ", arquivo=" + arquivo + ", custos=" + custos + ", areaConhecimento=" + areaConhecimento + ", campus=" + campus + ", sigilo=" + sigilo + '}';
+    }
+
+    /**
+     * @return the respaldo
+     */
+    public Arquivo getRespaldo() {
+        return respaldo;
+    }
+
+    /**
+     * @param respaldo the respaldo to set
+     */
+    public void setRespaldo(Arquivo respaldo) {
+        this.respaldo = respaldo;
     }
     
     

@@ -7,6 +7,7 @@
         <%
             Usuario user = (Usuario) request.getSession().getAttribute("usuario");
             Permissao permissao = Permissao.CRUD_PROJETO;
+
             if(user != null && user.getPermissoes().contains(permissao)) {
         %>
         <li><a href="<c:url value="/projeto_lista_show"/>" class="mais">Projetos</a>
@@ -16,7 +17,24 @@
             </ul> 
         </li>
         <%
-            }       
+            }            
+        %>
+        
+        <%
+           permissao = Permissao.ALTERAR_STATUS_PROJETO;
+            if(user != null && user.getPermissoes().contains(permissao)) {
+        %>
+        <!-- AQUI DEVE SER DISPONIBILIZADO O LINK PARA A LISTAGEM DE PROJETOS QUE O RAFA DEVE FAZSER-->
+        <!-- <li><a href="<c:url value="/projeto_lista_showXXXXX"/>" class="mais">Projetos</a>
+        </li>
+        -->
+        <%
+            }            
+        %>
+        
+        
+        
+        <%
             permissao = Permissao.CRUD_EDITAL;
             if(user != null && user.getPermissoes().contains(permissao)) {
         %>        
