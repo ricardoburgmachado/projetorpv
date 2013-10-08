@@ -86,7 +86,7 @@
     <column id="COL22" populated="true" UUID="3039cd70-1c98-46ab-a32a-2ed84fd952b4" autoIncrement="false" autoIncrementSequenceName="projeto_tipo_proj_seq" defaultValue="" name="TIPO_PROJ" nullable="1" physicalName="tipo_proj" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL23" populated="true" UUID="0718df64-bf0b-4654-91ba-b45064086764" autoIncrement="false" autoIncrementSequenceName="projeto_status_seq" defaultValue="" name="STATUS" nullable="0" physicalName="status" precision="20" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL23" populated="true" UUID="0718df64-bf0b-4654-91ba-b45064086764" autoIncrement="false" autoIncrementSequenceName="projeto_status_seq" defaultValue="" name="STATUS" nullable="0" physicalName="status" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
     <column id="COL24" populated="true" UUID="14b1fe06-5dcc-47e9-9bd5-8f3338828326" autoIncrement="false" autoIncrementSequenceName="projeto_is_arquivo_seq" defaultValue="false" name="IS_ARQUIVO" nullable="0" physicalName="is_arquivo" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="16" userDefinedTypeUUID="a26374aa-3026-4bb8-b564-eb2e186dfa5d" >
@@ -423,7 +423,7 @@
  <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="true" target-schema="public"> </ddl-generator>
  <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  <create-kettle-job-settings filePath="" jobName="" schemaName="" kettleJoinType="0" savingToFile="true" />
- <play-pen zoom="1.0" viewportX="50" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
+ <play-pen zoom="1.0" viewportX="0" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
   <table-pane table-ref="TAB1" x="550" y="459" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB10" x="20" y="311" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB15" x="748" y="297" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>

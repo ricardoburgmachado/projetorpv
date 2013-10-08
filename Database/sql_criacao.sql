@@ -100,7 +100,7 @@ CREATE TABLE public.projeto (
                 sigilo BOOLEAN DEFAULT false NOT NULL,
                 id_area INTEGER,
                 tipo_proj VARCHAR(50),
-                status VARCHAR(20) NOT NULL,
+                status VARCHAR(50) NOT NULL,
                 is_arquivo BOOLEAN DEFAULT false NOT NULL,
                 id_responsavel INTEGER NOT NULL,
                 CONSTRAINT id_pk PRIMARY KEY (id_proj)
