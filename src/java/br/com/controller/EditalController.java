@@ -39,6 +39,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class EditalController extends GenericController {
 
     HttpServletRequest request;
+    RepositorioFacade facade;
+    
+    public EditalController(){
+        
+        this.facade = new RepositorioFacade();
+    }
 
     /**
      * Método que apenas carrega o formulário para cadastro de editais
@@ -369,10 +375,14 @@ public class EditalController extends GenericController {
     }
 
     private Arquivo createArquivo(MultipartFile file) throws DadoInconsistenteException{
-
+        
+        if(file.isEmpty()){
+            
+            return null;
+        }
+        
         String titulo = file.getOriginalFilename();
-        String[] split = file.getName().split("\\.");
-        String extensao = split[split.length - 1];
+        String extensao = file.getContentType();
 
         try {
 
@@ -438,5 +448,22 @@ public class EditalController extends GenericController {
                 System.out.println(ex.getMessage());
             }
         }
+    }
+    
+    @RequestMapping (value = "/inscricao_lista")
+    public ModelAndView listaInscricoes(HttpServletRequest request){
+        
+        ModelAndView mv = new ModelAndView("inscricao_lista");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        
+        try{
+            
+            mv.addObject("inscricoes", this.facade.listarInscricoesDoUsuario(usuario));
+        }catch (AutorizacaoException aex){
+            
+            return new ModelAndView("login");
+        }
+        
+        return mv;
     }
 }

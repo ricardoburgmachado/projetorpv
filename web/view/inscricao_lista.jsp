@@ -8,11 +8,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="now" class="java.util.Date"/>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>GIPA - Lista de Incrições</title>
+        
+        <link rel="stylesheet" href="<c:url value="/recursos/css/style.css"/>" />
     </head>
     <body>
 
@@ -44,7 +47,7 @@
 
                             <div class="botoes">
                                 <c:if test="${now < inscricao.edital.prazoFinal}">
-                                    <a title="Cancelar inscrição" href="inscricao_cancela?id_projeto=${inscricao.projeto.id}&${inscricao.edital.id}"<span class="botao cancela"></span></a>
+                                    <a title="Cancelar inscrição" href="inscricao_cancela?id_projeto=${inscricao.projeto.id}&id_edital=${inscricao.edital.id}"<span class="botao cancela">Cancelar Inscrição</span></a>
                                 </c:if>
                             </div>
                         </div>

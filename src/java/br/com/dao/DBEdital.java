@@ -824,10 +824,7 @@ public class DBEdital implements EditalDAO {
         PreparedStatement stmt;
         ResultSet result;
         List<Inscricao> inscricoes = new ArrayList<>();
-        String sql = "select *, edital.titulo as titulo_edital, projeto.titulo as titulo_projeto, inscricao.id_arquivo as ident_arquivo "
-                + "from inscricao inner join edital using (id_edital) inner join projeto using (id_proj) "
-                + "inner join area_conhecimento using (id_area) inner join arquivo on inscricao.id_arquivo = arquivo.id_arquivo"
-                + "where id_usuario = ?";
+        String sql = "select *, edital.titulo as titulo_edital, projeto.titulo as titulo_projeto, inscricao.id_arquivo as ident_arquivo from inscricao inner join edital using (id_edital) inner join projeto using (id_proj) inner join area_conhecimento using (id_area) left outer join arquivo on inscricao.id_arquivo = arquivo.id_arquivo where id_responsavel = ?";
 
         try {
 

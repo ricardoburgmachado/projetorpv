@@ -916,3 +916,20 @@ ol#menurel li a {
 }
 
 /* *************** FIM EDITAL EXIBE*************** */
+
+.listagem{
+    width: 90%;
+    margin: auto;
+    background-color: lightgray;
+}
+
+.listagem > div{
+    width: 100%;
+    background-color: darkgray;
+}
+
+.listagem > div ul{
+    display: block;
+    list-style: none;
+    padding-left: 0px;
+}
