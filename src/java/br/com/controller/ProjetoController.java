@@ -360,38 +360,38 @@ public class ProjetoController extends GenericController {
         }
         return mv;
     }
-    
-    @RequestMapping (value= "/projeto_inscreve_show")
-    public ModelAndView filtraProjetos(HttpServletRequest request) throws PersistenciaException{
-        
+
+    @RequestMapping(value = "/projeto_inscreve_show")
+    public ModelAndView filtraProjetos(HttpServletRequest request) throws PersistenciaException {
+
         Usuario user = (Usuario) request.getSession().getAttribute("usuario");
         ModelAndView mv = new ModelAndView("projeto_inscreve");
         RepositorioFacade facade = new RepositorioFacade();
         List<String> inconsistencias = new ArrayList<>();
-        
-        if(user == null){
-            
+
+        if (user == null) {
+
             return new ModelAndView("login");
         }
-        
-        try{
-            
+
+        try {
+
             Set<StatusProjeto> status = new HashSet<>();
             status.add(StatusProjeto.HOMOLOGADO);
             status.add(StatusProjeto.INSCRITO);
             List<Projeto> projetos = facade.filtrarProjetos(status, user);
-            
+
             mv.addObject("projetos", projetos);
-        }catch(AutorizacaoException aex){
-            
+        } catch (AutorizacaoException aex) {
+
             return new ModelAndView("login");
-        }catch(DadoInconsistenteException diex){
-            
+        } catch (DadoInconsistenteException diex) {
+
             inconsistencias.add(diex.getMessage());
             mv.addObject("inconsistencias", inconsistencias);
             return mv;
         }
-        
+
         return mv;
     }
 
@@ -560,7 +560,7 @@ public class ProjetoController extends GenericController {
 
         return obj == null;
     }
-    
+
     @RequestMapping(value = "/projeto_altera_status_show")
     public ModelAndView projetoAlteraStatusShow(HttpServletRequest p_request, @RequestParam int id) {
 
@@ -578,10 +578,8 @@ public class ProjetoController extends GenericController {
 
         Projeto projetoBD = this.repositorioProjeto.obter(id);
 
-
         ModelAndView mv = new ModelAndView("projeto_altera_status");
         mv.addObject("projeto", projetoBD);
-
 
         return mv;
     }
@@ -589,14 +587,14 @@ public class ProjetoController extends GenericController {
     @RequestMapping(value = "/projeto_altera_status", method = RequestMethod.POST)
     public ModelAndView projetoAlteraStatus(@ModelAttribute Projeto p_projeto, HttpServletRequest p_request,
             @RequestParam(value = "arquivo_xx", required = false) MultipartFile arquivo) throws IOException {
-        
+
         this.request = p_request;
 
         Usuario user = (Usuario) request.getSession().getAttribute("usuario");
         if (!verificaAutorizacao(user, Permissao.ALTERAR_STATUS_PROJETO)) {
             return new ModelAndView("login");
         }
-        
+
         this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
         this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
 
@@ -606,10 +604,6 @@ public class ProjetoController extends GenericController {
             p_projeto.setRespaldo(arq);
         }
 
-      
-        
-        
-        
         List<String> inconsistencias = new LinkedList<>();
 
         try {
@@ -623,26 +617,23 @@ public class ProjetoController extends GenericController {
 
             inconsistencias.add(pex.getMessage());
         }
-        
-       
-        
+
         ModelAndView mv;
         if (inconsistencias.size() > 0) {
-            this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();          
+            this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
             Projeto projetoBD = this.repositorioProjeto.obter(p_projeto.getId());
             mv = new ModelAndView("projeto_altera_status");
             mv.addObject("projeto", projetoBD);
             mv.addObject("mensagem", inconsistencias);
         } else {
-
-            List projetos = this.repositorioProjeto.listarProjetos(p_projeto.getProfessor().getId());
-            //mv = new ModelAndView("lista_projeto");
-            mv = this.projetoEditaShow(request, p_projeto.getId());
-            mv.addObject("projetos", projetos);
+            this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
+            Projeto projetoBD = this.repositorioProjeto.obter(p_projeto.getId());
+            mv = new ModelAndView("projeto_altera_status");
+            mv.addObject("projeto", projetoBD);
             mv.addObject("mensagem", "Status do projeto alterado com sucesso!");
         }
-             
-        return mv;        
+
+        return mv;
     }
-    
+
 }
