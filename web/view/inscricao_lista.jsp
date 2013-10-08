@@ -53,7 +53,7 @@
                                 <li><span class="title">Prazo final do edital:</span> <fmt:formatDate type="date" dateStyle="medium" value="${inscricao.edital.prazoFinal}" /></li>
                             </ul>
 
-                            <c:if test="${now < inscricao.edital.prazoFinal}">
+                            <c:if test="${now <= inscricao.edital.prazoFinal}">
                                 <a class="botao botao-vertical" title="Cancelar inscrição" href="inscricao_cancela?id_projeto=${inscricao.projeto.id}&id_edital=${inscricao.edital.id}">Cancelar</a>
                             </c:if>
                         </div>
