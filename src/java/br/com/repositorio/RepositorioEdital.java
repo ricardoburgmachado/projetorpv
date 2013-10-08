@@ -350,4 +350,24 @@ public class RepositorioEdital {
         
         return true;
     }
+    
+    public List<Inscricao> listarInscricoes (int idEdital, Usuario usuario) throws AutorizacaoException, PersistenciaException{
+        
+        if(verificaConsistenciaListarIncricoes(usuario)){
+            
+            return this.editalDao.listarInscricoes(idEdital, usuario.getId());
+        }
+        
+        return null;
+    }
+    
+    private boolean verificaConsistenciaListarIncricoes(Usuario usuario) throws AutorizacaoException{
+        
+        if(!usuario.getPermissoes().contains(Permissao.LISTAGEM_INSCRICOES)){
+            
+            throw new AutorizacaoException("Usuário sem permissão para listar inscrições!");
+        }
+        
+        return true;
+    }
 }

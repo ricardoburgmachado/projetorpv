@@ -51,4 +51,6 @@ public interface EditalDAO {
     Inscricao obtemInscricao(int idProjeto, int idEdital) throws PersistenciaException;
     
     void excluiInscricao(int idProjeto, int idEdital) throws PersistenciaException;
+    
+    List<Inscricao> listarInscricoes(int idEdital, int idUsuario) throws PersistenciaException;
 }

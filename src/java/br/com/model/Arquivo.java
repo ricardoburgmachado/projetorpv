@@ -43,7 +43,7 @@ public class Arquivo {
     public int getIdArquivo() {
         return idArquivo;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -64,5 +64,9 @@ public class Arquivo {
             return false;
         }
         return true;
+    }
+
+    public void setIdArquivo(int idArquivo) {
+        this.idArquivo = idArquivo;
     }
 }
