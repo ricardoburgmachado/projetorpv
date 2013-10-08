@@ -818,7 +818,7 @@ public class DBEdital implements EditalDAO {
     }
 
     @Override
-    public List<Inscricao> listarInscricoes(int idEdital, int idUsuario) throws PersistenciaException {
+    public List<Inscricao> listarInscricoes(int idUsuario) throws PersistenciaException {
 
         Connection conn = this.factory.createConnection();
         PreparedStatement stmt;
@@ -827,13 +827,12 @@ public class DBEdital implements EditalDAO {
         String sql = "select *, edital.titulo as titulo_edital, projeto.titulo as titulo_projeto, inscricao.id_arquivo as ident_arquivo "
                 + "from inscricao inner join edital using (id_edital) inner join projeto using (id_proj) "
                 + "inner join area_conhecimento using (id_area) inner join arquivo on inscricao.id_arquivo = arquivo.id_arquivo"
-                + "where id_usuario = ? and id_edital = ?";
+                + "where id_usuario = ?";
 
         try {
 
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, idUsuario);
-            stmt.setInt(2, idEdital);
         } catch (SQLException sqle) {
 
             throw new PersistenciaException("Falha ao preparar consulta por inscrições!", sqle);

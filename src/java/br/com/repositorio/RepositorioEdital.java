@@ -351,11 +351,11 @@ public class RepositorioEdital {
         return true;
     }
     
-    public List<Inscricao> listarInscricoes (int idEdital, Usuario usuario) throws AutorizacaoException, PersistenciaException{
+    public List<Inscricao> listarInscricoes (Usuario usuario) throws AutorizacaoException, PersistenciaException{
         
         if(verificaConsistenciaListarIncricoes(usuario)){
             
-            return this.editalDao.listarInscricoes(idEdital, usuario.getId());
+            return this.editalDao.listarInscricoes(usuario.getId());
         }
         
         return null;

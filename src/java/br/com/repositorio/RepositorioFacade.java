@@ -86,8 +86,8 @@ public class RepositorioFacade {
         this.repEdital.cancelarInscricao(inscricao, user, dataCancelamento);
     }  
     
-    public List<Inscricao> listarInscricoesDoUsuario(int idEdital, Usuario usuario) throws PersistenciaException, AutorizacaoException{
+    public List<Inscricao> listarInscricoesDoUsuario(Usuario usuario) throws PersistenciaException, AutorizacaoException{
         
-        return this.repEdital.listarInscricoes(idEdital, usuario);
+        return this.repEdital.listarInscricoes(usuario);
     }
 }
