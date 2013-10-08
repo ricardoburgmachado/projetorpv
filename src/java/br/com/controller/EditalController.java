@@ -467,10 +467,32 @@ public class EditalController extends GenericController {
         return mv;
     }
     
-    public ModelAndView cancelaInscricao(HttpServletRequest request, int id_edital, int id_projeto){
+    @RequestMapping (value = "/inscricao_cancela")
+    public ModelAndView cancelaInscricao(HttpServletRequest request, @RequestParam int id_edital, @RequestParam int id_projeto){
         
-        ModelAndView mv = listaInscricoes(request);
+        ModelAndView mv;
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        List<String> inconsistencias = new ArrayList<>();
         
+        try{
+            
+            this.facade.cancelaInscricao(id_edital, id_projeto, user, new Date());
+        }catch(AutorizacaoException aex){
+            
+            return new ModelAndView("login");
+        }catch(PrivacidadeException pex){
+            
+            inconsistencias.add(pex.getMessage());
+        }catch(DadoInconsistenteException diex){
+            
+            do{
+                inconsistencias.add(diex.getMessage());
+                diex = diex.getException();
+            }while(diex != null);
+        }
+        
+        mv = listaInscricoes(request);
+        mv.addObject("inconsistencias", inconsistencias);
         return mv;
     }
 }

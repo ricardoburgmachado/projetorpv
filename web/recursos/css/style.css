@@ -923,6 +923,21 @@ ol#menurel li a {
     background-color: lightgray;
 }
 
+.inconsistencias{
+    display: block;
+    font-size: 1.2rem;
+    color: red;
+    padding-left: 5px;
+    list-style-position: inside;
+}
+
+#conteudo_interno .inconsistencias{
+    width: 100%;
+    float: left;
+    margin-left: 10px;
+    margin-top: 3px;
+}
+
 .listagem > div{
     width: 100%;
     float: left;
@@ -968,7 +983,7 @@ ol#menurel li a {
     color: red;
 }
 
-.titulo{
+.title{
     font-weight: bold;
     color: white;
     font-size: 1.1rem;

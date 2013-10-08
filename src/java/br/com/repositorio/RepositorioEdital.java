@@ -319,7 +319,7 @@ public class RepositorioEdital {
     
     public void cancelarInscricao(Inscricao inscricao, Usuario usuario, Date dataCancelamento) throws AutorizacaoException, PrivacidadeException, DadoInconsistenteException, PersistenciaException{
         
-        if(verificaConsistenciaCancelaInscricao(inscricao, usuario, dataCancelamento)){
+if(verificaConsistenciaCancelaInscricao(inscricao, usuario, dataCancelamento)){
             
             this.editalDao.excluiInscricao(inscricao.getProjeto().getId(), inscricao.getEdital().getId());
         }
@@ -338,7 +338,7 @@ public class RepositorioEdital {
             throw new DadoInconsistenteException("Inscrição inexistente!");
         }
         
-        if(inscricao.getProjeto().getId() != usuario.getId()){
+        if(inscricao.getProjeto().getProfessor().getId() != usuario.getId()){
             
            throw new PrivacidadeException("Projeto não pertencente ao professor!");
         }

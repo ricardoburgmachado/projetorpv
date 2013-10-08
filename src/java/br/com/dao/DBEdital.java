@@ -11,6 +11,7 @@ import br.com.model.Campus;
 import br.com.model.Edital;
 import br.com.model.Inscricao;
 import br.com.model.ProReitor;
+import br.com.model.Professor;
 import br.com.model.Projeto;
 import br.com.model.StatusProjeto;
 import br.com.model.TipoProjeto;
@@ -768,6 +769,10 @@ public class DBEdital implements EditalDAO {
 
             projeto.setTitulo(result.getString("titulo"));
         }
+        
+        Professor professor = new Professor();
+        professor.setId(result.getInt("id_responsavel"));
+        projeto.setProfessor(professor);
 
         return projeto;
     }

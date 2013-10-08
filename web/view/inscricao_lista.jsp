@@ -47,10 +47,10 @@
                         <div class="item-lista">
 
                             <ul title="Dados da inscrição">
-                                <li><span class="titulo">Projeto:</span> ${inscricao.projeto.titulo}</li>
-                                <li><span class="titulo">Edital:</span> ${inscricao.edital.titulo}</li>
-                                <li><span class="titulo">Arquivo:</span> <span class="arquivo">${inscricao.arquivo.nomeArquivo}</span></li>
-                                <li><span class="titulo">Prazo final do edital:</span> <fmt:formatDate type="date" dateStyle="medium" value="${inscricao.edital.prazoFinal}" /></li>
+                                <li><span class="title">Projeto:</span> ${inscricao.projeto.titulo}</li>
+                                <li><span class="title">Edital:</span> ${inscricao.edital.titulo}</li>
+                                <li><span class="title">Arquivo:</span> <span class="arquivo">${inscricao.arquivo.nomeArquivo}</span></li>
+                                <li><span class="title">Prazo final do edital:</span> <fmt:formatDate type="date" dateStyle="medium" value="${inscricao.edital.prazoFinal}" /></li>
                             </ul>
 
                             <c:if test="${now < inscricao.edital.prazoFinal}">

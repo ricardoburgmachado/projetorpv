@@ -84,6 +84,8 @@ public class RepositorioFacade {
         
         Inscricao inscricao = this.repEdital.obtemInscricao(idProjeto, idEdital);
         this.repEdital.cancelarInscricao(inscricao, user, dataCancelamento);
+        inscricao.getProjeto().setStatus(StatusProjeto.HOMOLOGADO);
+        this.repProjeto.atualizaStatus(inscricao.getProjeto());
     }  
     
     public List<Inscricao> listarInscricoesDoUsuario(Usuario usuario) throws PersistenciaException, AutorizacaoException{
