@@ -202,7 +202,7 @@ public class RepositorioProjeto {
     
     private boolean verificaConsistenciaListagemSubmetidos(Usuario usuario) throws AutorizacaoException{
         
-        if(usuario == null || !usuario.getPermissoes().contains(Permissao.LISTA_SUBMETIDOS)){
+        if(usuario == null || !usuario.getPermissoes().contains(Permissao.LISTAGEM_SUBMETIDOS)){
             
             throw new AutorizacaoException("Usuário sem permissão para listagem dos projetos submetidos!");
         }
