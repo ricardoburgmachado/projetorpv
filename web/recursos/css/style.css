@@ -989,10 +989,18 @@ ol#menurel li a {
     font-size: 1.1rem;
 }
 
-a[href$=".pdf"]::before, .arquivo::after{
+a[href$=".pdf"]::before {
     content: url(../imagens/pdf.png);
     vertical-align: -50%;
-    margin-right: 5px;
+    margin: 0px 5px;
+    padding: 0px;
+}
+
+a[type="application/pdf"]::after{
+    content: url(../imagens/pdf_icon.png);
+    vertical-align: -30%;
+    margin: 0px 5px;
+    padding: 0px;
 }
 
 .arquivo{
