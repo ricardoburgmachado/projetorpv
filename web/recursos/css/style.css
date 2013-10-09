@@ -917,12 +917,19 @@ ol#menurel li a {
 /* *************** FIM EDITAL EXIBE*************** */
 
 .tabela-lista{
-    width: 95%;    
-    margin: auto;
+    width: 97%;
+    margin: 5px auto;
     text-align: center;
     font-size: 1rem;
     text-overflow: ellipsis;
     border-collapse: collapse;
+    box-sizing: border-box;
+}
+
+.listagem-float{
+    display: block;
+    float: left;
+    margin: 5px 15px;
 }
 
 .tabela-lista tr:nth-of-type(2n - 1){
@@ -944,6 +951,9 @@ ol#menurel li a {
 }
 
 .tabela-lista td{
+    display: table-cell;
+    overflow: hidden;
+    text-overflow: ellipsis;
     border-bottom-style: dotted;
     border-bottom-color: black;
     vertical-align: middle;
@@ -964,5 +974,22 @@ a[href*="projeto_exibe"]{
     background:url(../imagens/more.png) no-repeat;
     border: none;
     margin: auto;
-    
+}
+
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+    *zoom: 1;
 }

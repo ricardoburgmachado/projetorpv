@@ -30,7 +30,7 @@
             <div id="conteudo_interno">
                 <h1>Projetos para Homologação</h1>
                 
-                <table class="tabela-lista" title="Tabela de Projetos">
+                <table class="tabela-lista cf listagem-float" title="Tabela de Projetos">
                     <thead>
                         <tr>
                             <th>Título do Projeto</th>
