@@ -49,7 +49,7 @@
                             <ul title="Dados da inscrição">
                                 <li><span class="title">Projeto:</span> ${inscricao.projeto.titulo}</li>
                                 <li><span class="title">Edital:</span> ${inscricao.edital.titulo}</li>
-                                <li><span class="title">Arquivo:</span> <span class="arquivo">${inscricao.arquivo.nomeArquivo}</span></li>
+                                <li><span class="title">Arquivo:</span><a class="arquivo" href="down_arquivo_inscricao?id_projeto=${inscricao.projeto.id}&id_edital=${inscricao.edital.id}" title="Download do arquivo" type="${inscricao.arquivo.extensao}"> ${inscricao.arquivo.nomeArquivo}</a></li>
                                 <li><span class="title">Prazo final do edital:</span> <fmt:formatDate type="date" dateStyle="medium" value="${inscricao.edital.prazoFinal}" /></li>
                             </ul>
 

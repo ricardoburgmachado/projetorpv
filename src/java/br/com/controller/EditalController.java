@@ -40,9 +40,9 @@ public class EditalController extends GenericController {
 
     HttpServletRequest request;
     RepositorioFacade facade;
-    
-    public EditalController(){
-        
+
+    public EditalController() {
+
         this.facade = new RepositorioFacade();
     }
 
@@ -327,10 +327,10 @@ public class EditalController extends GenericController {
     @RequestMapping(value = "/edital_filtra_ajax")
     @ResponseBody
     public List<Edital> filtrarEditais(HttpServletRequest request, @RequestParam(required = true) int id_projeto) {
-        
+
         Usuario user = (Usuario) request.getSession().getAttribute("usuario");
         RepositorioFacade facade = new RepositorioFacade();
-        
+
         return facade.filtrarEditais(new Date(), id_projeto);
     }
 
@@ -341,7 +341,7 @@ public class EditalController extends GenericController {
         RepositorioFacade facade = new RepositorioFacade();
         ModelAndView mv = new ProjetoController().filtraProjetos(request);
         List<String> inconsistencias = new ArrayList<>();
-        
+
         if (file == null || createArquivo(file) == null) {
 
             mv.addObject("aviso", "Arquivo não informado! Mesmo assim a inscrição será efetuada!");
@@ -374,13 +374,13 @@ public class EditalController extends GenericController {
         return mv;
     }
 
-    private Arquivo createArquivo(MultipartFile file) throws DadoInconsistenteException{
-        
-        if(file.isEmpty()){
-            
+    private Arquivo createArquivo(MultipartFile file) throws DadoInconsistenteException {
+
+        if (file.isEmpty()) {
+
             return null;
         }
-        
+
         String titulo = file.getOriginalFilename();
         String extensao = file.getContentType();
 
@@ -449,48 +449,78 @@ public class EditalController extends GenericController {
             }
         }
     }
-    
-    @RequestMapping (value = "/inscricao_lista")
-    public ModelAndView listaInscricoes(HttpServletRequest request){
-        
+
+    @RequestMapping(value = "/inscricao_lista")
+    public ModelAndView listaInscricoes(HttpServletRequest request) {
+
         ModelAndView mv = new ModelAndView("inscricao_lista");
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-        
-        try{
-            
+
+        try {
+
             mv.addObject("inscricoes", this.facade.listarInscricoesDoUsuario(usuario));
-        }catch (AutorizacaoException aex){
-            
+        } catch (AutorizacaoException aex) {
+
             return new ModelAndView("login");
         }
-        
+
         return mv;
     }
-    
-    @RequestMapping (value = "/inscricao_cancela")
-    public ModelAndView cancelaInscricao(HttpServletRequest request, @RequestParam int id_edital, @RequestParam int id_projeto){
-        
+
+    @RequestMapping(value = "/inscricao_cancela")
+    public ModelAndView cancelaInscricao(HttpServletRequest request, @RequestParam int id_edital, @RequestParam int id_projeto) {
+
         ModelAndView mv;
         Usuario user = (Usuario) request.getSession().getAttribute("usuario");
         List<String> inconsistencias = new ArrayList<>();
-        
-        try{
-            
+
+        try {
+
             this.facade.cancelaInscricao(id_edital, id_projeto, user, new Date());
-        }catch(AutorizacaoException aex){
-            
+        } catch (AutorizacaoException aex) {
+
             return new ModelAndView("login");
-        }catch(PrivacidadeException pex){
-            
+        } catch (PrivacidadeException pex) {
+
             inconsistencias.add(pex.getMessage());
-        }catch(DadoInconsistenteException diex){
-            
-            do{
+        } catch (DadoInconsistenteException diex) {
+
+            do {
                 inconsistencias.add(diex.getMessage());
                 diex = diex.getException();
-            }while(diex != null);
+            } while (diex != null);
         }
-        
+
+        mv = listaInscricoes(request);
+        mv.addObject("inconsistencias", inconsistencias);
+        return mv;
+    }
+
+    @RequestMapping(value = "/down_arquivo_inscricao")
+    public ModelAndView downloadArquivoInscricao(HttpServletRequest request, HttpServletResponse response, @RequestParam int id_edital, @RequestParam int id_projeto) {
+
+        ModelAndView mv;
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        List<String> inconsistencias = new ArrayList<>();
+
+        try {
+
+            Arquivo arquivo = this.facade.obtemArquivoInscricao(user, id_edital, id_projeto);
+            this.iniciaDownload(response, arquivo);
+        } catch (AutorizacaoException aex) {
+
+            return new ModelAndView("login");
+        } catch (PrivacidadeException pex) {
+
+            inconsistencias.add(pex.getMessage());
+        } catch (DadoInconsistenteException diex) {
+
+            do {
+                inconsistencias.add(diex.getMessage());
+                diex = diex.getException();
+            } while (diex != null);
+        }
+
         mv = listaInscricoes(request);
         mv.addObject("inconsistencias", inconsistencias);
         return mv;

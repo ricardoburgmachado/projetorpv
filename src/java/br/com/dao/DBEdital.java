@@ -702,7 +702,7 @@ public class DBEdital implements EditalDAO {
         Connection conn = this.factory.createConnection();
         PreparedStatement stmt;
         ResultSet result;
-        String sql = "select *, edital.titulo as titulo_edital, projeto.titulo as titulo_projeto from inscricao inner join edital using (id_edital) inner join projeto using (id_proj) inner join area_conhecimento using (id_area) where id_proj = ? and id_edital = ?";
+        String sql = "select *, edital.titulo as titulo_edital, projeto.titulo as titulo_projeto from inscricao inner join edital using (id_edital) inner join projeto using (id_proj) inner join area_conhecimento using (id_area) left outer join arquivo on inscricao.id_arquivo = arquivo.id_arquivo where id_proj = ? and id_edital = ?";
 
         try {
 
@@ -725,7 +725,7 @@ public class DBEdital implements EditalDAO {
             this.factory.close(conn);
         }
 
-        return nextInscricao(result, false);
+        return nextInscricao(result, true);
     }
 
     private Inscricao nextInscricao(ResultSet result, boolean carregaArquivo) {

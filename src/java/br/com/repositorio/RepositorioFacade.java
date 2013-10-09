@@ -92,4 +92,16 @@ public class RepositorioFacade {
         
         return this.repEdital.listarInscricoes(usuario);
     }
+    
+    public Arquivo obtemArquivoInscricao(Usuario usuario, int idEdital, int idProjeto) throws PersistenciaException, PrivacidadeException, DadoInconsistenteException, AutorizacaoException{
+        
+        Inscricao inscricao = this.repEdital.obtemInscricao(idProjeto, idEdital);
+        
+        if(this.repEdital.verificaConsistenciaDownloadArqInscricao(inscricao, usuario)){
+            
+            return inscricao.getArquivo();
+        }
+        
+        return null;
+    }
 }
