@@ -555,7 +555,14 @@ public class ProjetoController extends GenericController {
         
         HashSet<StatusProjeto> status = new HashSet<>();
         status.add(StatusProjeto.SUBMETIDO_HOMOLOGACAO);
-        mv.addObject("projetos", facade.listarProjetosSubmetidos(usuario, status));
+        
+        try{
+            
+            mv.addObject("projetos", facade.listarProjetosSubmetidos(usuario, status));
+        }catch(AutorizacaoException aex){
+            
+            return new ModelAndView("login");
+        }
         
         return mv;
     }
