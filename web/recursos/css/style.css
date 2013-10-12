@@ -917,8 +917,8 @@ ol#menurel li a {
 /* *************** FIM EDITAL EXIBE*************** */
 
 .tabela-lista{
-    width: 97%;
-    margin: 5px auto;
+    width: 98%;
+    margin: auto;
     text-align: center;
     font-size: 1rem;
     text-overflow: ellipsis;
@@ -929,14 +929,14 @@ ol#menurel li a {
 .listagem-float{
     display: block;
     float: left;
-    margin: 5px 15px;
+    margin: 3px 12px;
 }
 
 .tabela-lista tr:nth-of-type(2n - 1){
     background-color: lightgrey;
 }
 
-.tabela-lista thead, th{
+.tabela-lista thead th{
     background-color: darkslategrey;
     color: white;
     font-size: 0.9rem;
@@ -992,4 +992,96 @@ a[href*="projeto_exibe"]{
  */
 .cf {
     *zoom: 1;
+}
+
+.listagem{
+    width: 98%;
+    margin: auto;
+    background-color: lightgray;
+}
+
+.inconsistencias{
+    display: block;
+    font-size: 1.2rem;
+    color: red;
+    padding-left: 5px;
+    list-style-position: inside;
+}
+
+#conteudo_interno .inconsistencias{
+    width: 100%;
+    float: left;
+    margin-left: 10px;
+    margin-top: 3px;
+}
+
+.listagem > div{
+    width: 100%;
+    float: left;
+    margin-left: 5px;
+    margin-top: 3px;
+    background-color: darkgray;
+    font-size: 1rem;
+}
+
+.listagem > div ul{
+    float: left;
+    display: block;
+    list-style: none;
+    padding: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.listagem > div ul:hover{
+    overflow: visible;    
+}
+
+.botao-vertical{
+    float: right;
+    vertical-align: middle;
+    margin-top: 20px;
+    margin-right: 5px;
+}
+
+.botao{
+    display: block;
+    border-radius: 3px 3px 3px 3px;
+    background-color: lightgrey;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 5px;
+}
+
+
+.botao[href*="cancela"]{
+    font-size: 1.5rem;
+    padding: 10px;
+    color: red;
+}
+
+.title{
+    font-weight: bold;
+    color: white;
+    font-size: 1.1rem;
+}
+
+a[href$=".pdf"]::before {
+    content: url(../imagens/pdf.png);
+    vertical-align: -50%;
+    margin: 0px 5px;
+    padding: 0px;
+}
+
+a[type="application/pdf"]::after{
+    content: url(../imagens/pdf_icon.png);
+    vertical-align: -30%;
+    margin: 0px 5px;
+    padding: 0px;
+}
+
+.arquivo{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
 }

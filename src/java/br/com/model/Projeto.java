@@ -10,11 +10,11 @@ public class Projeto {
     private String palavrasChave;
     private String resumo;
     private TipoProjeto tipoProjeto;
-    private ArrayList<Usuario> participantes = new ArrayList<Usuario>();
-    private ArrayList<String> participantesString = new ArrayList<String>();
-    private ArrayList<Aluno> participantesAluno = new ArrayList<Aluno>();
-    private ArrayList<Professor> participantesProfessor = new ArrayList<Professor>();
-    private ArrayList<Externo> participantesExterno = new ArrayList<Externo>();
+    private ArrayList<Usuario> participantes = new ArrayList<>();
+    private ArrayList<String> participantesString = new ArrayList<>();
+    private ArrayList<Aluno> participantesAluno = new ArrayList<>();
+    private ArrayList<Professor> participantesProfessor = new ArrayList<>();
+    private ArrayList<Externo> participantesExterno = new ArrayList<>();
     private Professor professor;
     private boolean arquivo;
     private ArrayList<Custo> custos = new ArrayList<>();

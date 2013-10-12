@@ -230,6 +230,11 @@ public class RepositorioProjeto {
             this.projDAO.atualizaStatus(projeto);
         }
     }
+    
+    protected void atualizaStatus(Projeto projeto) throws PersistenciaException{
+        
+        this.projDAO.atualizaStatus(projeto);
+    }
 
     private DadoInconsistenteException verificaConsistenciaParaSubmissao(Projeto projeto, int idUsuario) throws PersistenciaException {
 

@@ -11,6 +11,7 @@ import br.com.model.Campus;
 import br.com.model.Edital;
 import br.com.model.Inscricao;
 import br.com.model.ProReitor;
+import br.com.model.Professor;
 import br.com.model.Projeto;
 import br.com.model.StatusProjeto;
 import br.com.model.TipoProjeto;
@@ -695,13 +696,13 @@ public class DBEdital implements EditalDAO {
         }
     }
 
+    @Override
     public Inscricao obtemInscricao(int idProjeto, int idEdital) throws PersistenciaException {
 
-        Inscricao inscricao;
         Connection conn = this.factory.createConnection();
         PreparedStatement stmt;
         ResultSet result;
-        String sql = "select *, edital.titulo as titulo_edital, projeto.titulo as titulo_projeto from inscricao inner join edital using (id_edital) inner join projeto using (id_proj) inner join area_conhecimento using (id_area) where id_proj = ? and id_edital = ?";
+        String sql = "select *, edital.titulo as titulo_edital, projeto.titulo as titulo_projeto from inscricao inner join edital using (id_edital) inner join projeto using (id_proj) inner join area_conhecimento using (id_area) left outer join arquivo on inscricao.id_arquivo = arquivo.id_arquivo where id_proj = ? and id_edital = ?";
 
         try {
 
@@ -724,10 +725,10 @@ public class DBEdital implements EditalDAO {
             this.factory.close(conn);
         }
 
-        return nextInscricao(result);
+        return nextInscricao(result, true);
     }
 
-    private Inscricao nextInscricao(ResultSet result) {
+    private Inscricao nextInscricao(ResultSet result, boolean carregaArquivo) {
 
         try {
 
@@ -736,7 +737,13 @@ public class DBEdital implements EditalDAO {
                 Projeto projeto = createProjeto(result);
                 Edital edital = createEdital(result);
 
-                return new Inscricao(projeto, edital);
+                if (carregaArquivo) {
+
+                    return new Inscricao(projeto, edital, createArquivo(result));
+                } else {
+
+                    return new Inscricao(projeto, edital);
+                }
             }
         } catch (SQLException sqle) {
 
@@ -762,6 +769,10 @@ public class DBEdital implements EditalDAO {
 
             projeto.setTitulo(result.getString("titulo"));
         }
+        
+        Professor professor = new Professor();
+        professor.setId(result.getInt("id_responsavel"));
+        projeto.setProfessor(professor);
 
         return projeto;
     }
@@ -783,5 +794,85 @@ public class DBEdital implements EditalDAO {
         }
 
         return edital;
+    }
+
+    @Override
+    public void excluiInscricao(int idProjeto, int idEdital) throws PersistenciaException {
+
+        Connection conn = this.factory.createConnection();
+        PreparedStatement stmt;
+        String sql = "delete from inscricao where id_proj=? and id_edital=?";
+
+        try {
+
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idProjeto);
+            stmt.setInt(2, idEdital);
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar exclusão de inscrição!", sqle);
+        }
+
+        try {
+
+            stmt.executeUpdate();
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao excluir inscrição!", sqle);
+        }
+    }
+
+    @Override
+    public List<Inscricao> listarInscricoes(int idUsuario) throws PersistenciaException {
+
+        Connection conn = this.factory.createConnection();
+        PreparedStatement stmt;
+        ResultSet result;
+        List<Inscricao> inscricoes = new ArrayList<>();
+        String sql = "select *, edital.titulo as titulo_edital, projeto.titulo as titulo_projeto, inscricao.id_arquivo as ident_arquivo from inscricao inner join edital using (id_edital) inner join projeto using (id_proj) inner join area_conhecimento using (id_area) left outer join arquivo on inscricao.id_arquivo = arquivo.id_arquivo where id_responsavel = ?";
+
+        try {
+
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idUsuario);
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar consulta por inscrições!", sqle);
+        }
+
+        try {
+
+            result = stmt.executeQuery();
+            Inscricao inscricao;
+            
+            while ((inscricao = nextInscricao(result, true)) != null) {
+                
+                inscricoes.add(inscricao);
+            }
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao consultar por inscrições!", sqle);
+        } finally {
+
+            this.factory.close(conn);
+        }
+
+        return inscricoes;
+    }
+
+    private Arquivo createArquivo(ResultSet result) throws SQLException {
+
+        Arquivo arquivo = new Arquivo(result.getString("nome_arquivo"), result.getString("extensao"), result.getBytes("dados"));
+
+        try {
+
+            arquivo.setIdArquivo(result.getInt("id_arquivo"));
+        } catch (SQLException sqle) {
+
+            arquivo.setIdArquivo(result.getInt("ident_arquivo"));
+        }
+
+        return arquivo;
+
     }
 }

@@ -96,33 +96,33 @@ public class RepositorioEdital {
 
         List<Arquivo> arquivos = this.editalDao.obterRetificacoes(idEdital);
         arquivos.add(this.editalDao.obtemArquivo(idEdital));
-        
-        if(verificaConsistenciaObterArquivo(arquivos, user, idArquivo)){
-            
-            for(Arquivo arquivo: arquivos){
-                
-                if(arquivo.getIdArquivo() == idArquivo){
-                    
+
+        if (verificaConsistenciaObterArquivo(arquivos, user, idArquivo)) {
+
+            for (Arquivo arquivo : arquivos) {
+
+                if (arquivo.getIdArquivo() == idArquivo) {
+
                     return arquivo;
                 }
             }
         }
-        
+
         return null;
     }
 
     private boolean verificaConsistenciaObterArquivo(List<Arquivo> arquivosEdital, Usuario usuario, int idArquivo) throws PersistenciaException, AutorizacaoException, DadoInconsistenteException {
 
         if (!usuario.getPermissoes().contains(Permissao.CRUD_EDITAL) && !usuario.getPermissoes().contains(Permissao.EXIBE_EDITAL)) {
-            
+
             throw new AutorizacaoException("Usuário sem permissão para obter o arquivo!");
         }
-        
-        if(!arquivosEdital.contains(new Arquivo(idArquivo, null, null, null))){
-            
+
+        if (!arquivosEdital.contains(new Arquivo(idArquivo, null, null, null))) {
+
             throw new DadoInconsistenteException("Arquivo não existente ou não pertencente ao edital!");
         }
-        
+
         return true;
     }
 
@@ -257,30 +257,6 @@ public class RepositorioEdital {
 
     private boolean verificaPrazoMenor(Date ini, Date fim) {
 
-        /*
-         Calendar calendar = new GregorianCalendar(); 
-         System.out.println("*************DATA ATUAL: "+calendar.getTime().toString());
-         System.out.println("*************DATA INCIAL: "+ini);
-         System.out.println("*************DATA FINAL: "+fim);
-        
-        
-         if(calendar.getTime().after(ini)) {
-         System.out.println("É DEPOIS DA DATA ATUAL");
-         }
-        
-         if(calendar.getTime().before(ini)) {
-         System.out.println("É ANTES DA DATA ATUAL");
-         }
-        
-         if( ini.after(fim) &&  calendar.getTime().before(ini)){
-         System.out.println("RETURN TRUE NAS DATAS");
-         return true;
-         }else{
-         System.out.println("RETURN FALSE NAS DATAS");
-         return false;
-         }
-         */
-
         return ini.after(fim);
     }
 
@@ -334,6 +310,84 @@ public class RepositorioEdital {
 
             throw exception;
         }
+    }
 
+    protected Inscricao obtemInscricao(int idProjeto, int idEdital) {
+
+        return this.editalDao.obtemInscricao(idProjeto, idEdital);
+    }
+
+    public void cancelarInscricao(Inscricao inscricao, Usuario usuario, Date dataCancelamento) throws AutorizacaoException, PrivacidadeException, DadoInconsistenteException, PersistenciaException {
+
+        if (verificaConsistenciaCancelaInscricao(inscricao, usuario, dataCancelamento)) {
+
+            this.editalDao.excluiInscricao(inscricao.getProjeto().getId(), inscricao.getEdital().getId());
+        }
+    }
+
+    private boolean verificaConsistenciaCancelaInscricao(Inscricao inscricao, Usuario usuario, Date dataCancelamento) throws AutorizacaoException, PrivacidadeException, DadoInconsistenteException {
+
+
+        if (usuario == null || !usuario.getPermissoes().contains(Permissao.CANCELAMENTO_INSCRICAO)) {
+
+            throw new AutorizacaoException("Usuário sem permissão para cancelar inscrição!");
+        }
+
+        if (inscricao == null) {
+
+            throw new DadoInconsistenteException("Inscrição inexistente!");
+        }
+
+        if (inscricao.getProjeto().getProfessor().getId() != usuario.getId()) {
+
+            throw new PrivacidadeException("Inscrição não pertencente ao usuário!");
+        }
+
+        if (dataCancelamento.before(inscricao.getEdital().getPrazoInicial()) || dataCancelamento.after(inscricao.getEdital().getPrazoFinal())) {
+
+            throw new DadoInconsistenteException("Fora do prazo para cancelamento de inscrição!");
+        }
+
+        return true;
+    }
+
+    public List<Inscricao> listarInscricoes(Usuario usuario) throws AutorizacaoException, PersistenciaException {
+
+        if (verificaConsistenciaListarIncricoes(usuario)) {
+
+            return this.editalDao.listarInscricoes(usuario.getId());
+        }
+
+        return null;
+    }
+
+    private boolean verificaConsistenciaListarIncricoes(Usuario usuario) throws AutorizacaoException {
+
+        if (!usuario.getPermissoes().contains(Permissao.LISTAGEM_INSCRICOES)) {
+
+            throw new AutorizacaoException("Usuário sem permissão para listar inscrições!");
+        }
+
+        return true;
+    }
+    
+    protected boolean verificaConsistenciaDownloadArqInscricao(Inscricao inscricao, Usuario usuario){
+        
+        if (usuario == null || !usuario.getPermissoes().contains(Permissao.LISTAGEM_INSCRICOES)) {
+
+            throw new AutorizacaoException("Usuário sem permissão para obter arquivo da inscrição!");
+        }
+
+        if (inscricao == null || inscricao.getArquivo() == null) {
+
+            throw new DadoInconsistenteException("Inscrição ou arquivo inexistente!");
+        }
+
+        if (inscricao.getProjeto().getProfessor().getId() != usuario.getId()) {
+
+            throw new PrivacidadeException("Inscrição não pertencente ao usuário!");
+        }
+
+        return true;
     }
 }

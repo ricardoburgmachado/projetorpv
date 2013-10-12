@@ -13,7 +13,6 @@ import br.com.model.Arquivo;
 import br.com.model.Edital;
 import br.com.model.Permissao;
 import br.com.model.ProReitor;
-import br.com.model.StatusProjeto;
 import br.com.model.TipoProjeto;
 import br.com.model.Usuario;
 import br.com.repositorio.RepositorioEdital;
@@ -21,20 +20,10 @@ import br.com.repositorio.RepositorioFacade;
 import br.com.repositorio.RepositorioPostgresFactory;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonObject;
-import javax.json.JsonObjectBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
@@ -50,6 +39,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class EditalController extends GenericController {
 
     HttpServletRequest request;
+    RepositorioFacade facade;
+
+    public EditalController() {
+
+        this.facade = new RepositorioFacade();
+    }
 
     /**
      * Método que apenas carrega o formulário para cadastro de editais
@@ -332,10 +327,10 @@ public class EditalController extends GenericController {
     @RequestMapping(value = "/edital_filtra_ajax")
     @ResponseBody
     public List<Edital> filtrarEditais(HttpServletRequest request, @RequestParam(required = true) int id_projeto) {
-        
+
         Usuario user = (Usuario) request.getSession().getAttribute("usuario");
         RepositorioFacade facade = new RepositorioFacade();
-        
+
         return facade.filtrarEditais(new Date(), id_projeto);
     }
 
@@ -346,7 +341,7 @@ public class EditalController extends GenericController {
         RepositorioFacade facade = new RepositorioFacade();
         ModelAndView mv = new ProjetoController().filtraProjetos(request);
         List<String> inconsistencias = new ArrayList<>();
-        
+
         if (file == null || createArquivo(file) == null) {
 
             mv.addObject("aviso", "Arquivo não informado! Mesmo assim a inscrição será efetuada!");
@@ -379,11 +374,15 @@ public class EditalController extends GenericController {
         return mv;
     }
 
-    private Arquivo createArquivo(MultipartFile file) throws DadoInconsistenteException{
+    private Arquivo createArquivo(MultipartFile file) throws DadoInconsistenteException {
+
+        if (file.isEmpty()) {
+
+            return null;
+        }
 
         String titulo = file.getOriginalFilename();
-        String[] split = file.getName().split("\\.");
-        String extensao = split[split.length - 1];
+        String extensao = file.getContentType();
 
         try {
 
@@ -449,5 +448,81 @@ public class EditalController extends GenericController {
                 System.out.println(ex.getMessage());
             }
         }
+    }
+
+    @RequestMapping(value = "/inscricao_lista")
+    public ModelAndView listaInscricoes(HttpServletRequest request) {
+
+        ModelAndView mv = new ModelAndView("inscricao_lista");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+
+        try {
+
+            mv.addObject("inscricoes", this.facade.listarInscricoesDoUsuario(usuario));
+        } catch (AutorizacaoException aex) {
+
+            return new ModelAndView("login");
+        }
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/inscricao_cancela")
+    public ModelAndView cancelaInscricao(HttpServletRequest request, @RequestParam int id_edital, @RequestParam int id_projeto) {
+
+        ModelAndView mv;
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        List<String> inconsistencias = new ArrayList<>();
+
+        try {
+
+            this.facade.cancelaInscricao(id_edital, id_projeto, user, new Date());
+        } catch (AutorizacaoException aex) {
+
+            return new ModelAndView("login");
+        } catch (PrivacidadeException pex) {
+
+            inconsistencias.add(pex.getMessage());
+        } catch (DadoInconsistenteException diex) {
+
+            do {
+                inconsistencias.add(diex.getMessage());
+                diex = diex.getException();
+            } while (diex != null);
+        }
+
+        mv = listaInscricoes(request);
+        mv.addObject("inconsistencias", inconsistencias);
+        return mv;
+    }
+
+    @RequestMapping(value = "/down_arquivo_inscricao")
+    public ModelAndView downloadArquivoInscricao(HttpServletRequest request, HttpServletResponse response, @RequestParam int id_edital, @RequestParam int id_projeto) {
+
+        ModelAndView mv;
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        List<String> inconsistencias = new ArrayList<>();
+
+        try {
+
+            Arquivo arquivo = this.facade.obtemArquivoInscricao(user, id_edital, id_projeto);
+            this.iniciaDownload(response, arquivo);
+        } catch (AutorizacaoException aex) {
+
+            return new ModelAndView("login");
+        } catch (PrivacidadeException pex) {
+
+            inconsistencias.add(pex.getMessage());
+        } catch (DadoInconsistenteException diex) {
+
+            do {
+                inconsistencias.add(diex.getMessage());
+                diex = diex.getException();
+            } while (diex != null);
+        }
+
+        mv = listaInscricoes(request);
+        mv.addObject("inconsistencias", inconsistencias);
+        return mv;
     }
 }

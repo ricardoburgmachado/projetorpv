@@ -79,5 +79,29 @@ public class RepositorioFacade {
         
         return this.repEdital.obtemArquivo(idArquivo, idEdital, user);
     }
+    
+    public void cancelaInscricao(int idEdital, int idProjeto, Usuario user, Date dataCancelamento) throws PersistenciaException, AutorizacaoException, PrivacidadeException, DadoInconsistenteException{
+        
+        Inscricao inscricao = this.repEdital.obtemInscricao(idProjeto, idEdital);
+        this.repEdital.cancelarInscricao(inscricao, user, dataCancelamento);
+        inscricao.getProjeto().setStatus(StatusProjeto.HOMOLOGADO);
+        this.repProjeto.atualizaStatus(inscricao.getProjeto());
+    }  
+    
+    public List<Inscricao> listarInscricoesDoUsuario(Usuario usuario) throws PersistenciaException, AutorizacaoException{
+        
+        return this.repEdital.listarInscricoes(usuario);
+    }
+    
+    public Arquivo obtemArquivoInscricao(Usuario usuario, int idEdital, int idProjeto) throws PersistenciaException, PrivacidadeException, DadoInconsistenteException, AutorizacaoException{
+        
+        Inscricao inscricao = this.repEdital.obtemInscricao(idProjeto, idEdital);
+        
+        if(this.repEdital.verificaConsistenciaDownloadArqInscricao(inscricao, usuario)){
             
+            return inscricao.getArquivo();
+        }
+        
+        return null;
+    }
 }
