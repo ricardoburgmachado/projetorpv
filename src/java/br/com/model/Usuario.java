@@ -16,7 +16,7 @@ public abstract class Usuario {
     private String nome;
     private Campus campus;
     private List<Permissao> permissoes;
-    private String area;
+    private TipoProjeto area;
 
     public Usuario() {
         
@@ -149,14 +149,14 @@ public abstract class Usuario {
     /**
      * @return the area
      */
-    public String getArea() {
+    public TipoProjeto getArea() {
         return area;
     }
 
     /**
      * @param area the area to set
      */
-    public void setArea(String area) {
+    public void setArea(TipoProjeto area) {
         this.area = area;
     }
 }

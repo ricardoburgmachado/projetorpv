@@ -94,7 +94,7 @@ public class EditalController extends GenericController {
         pro.setId(user.getId());
         edital.setProReitor(pro);
 
-        edital.setTipo(TipoProjeto.fromString(user.getArea()));
+        edital.setTipo(user.getArea());
 
         String[] pI = request.getParameterValues("prazoInicial_xx");
         String[] pF = request.getParameterValues("prazoFinal_xx");
@@ -201,7 +201,7 @@ public class EditalController extends GenericController {
         pro.setId(user.getId());
         edital.setProReitor(pro);
 
-        edital.setTipo(TipoProjeto.fromString(user.getArea()));
+        edital.setTipo(user.getArea());
         System.out.println("************ ID DO EDITAL: " + edital.getId());
         String[] pI = request.getParameterValues("prazoInicial_xx");
         String[] pF = request.getParameterValues("prazoFinal_xx");

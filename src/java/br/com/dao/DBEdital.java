@@ -210,7 +210,7 @@ public class DBEdital implements EditalDAO {
                     proReitor.setId(result.getInt("id_usuario"));
                     proReitor.setNome(result.getString("nome"));
                     proReitor.setCampus(Campus.valueOf(result.getString("campus")));
-                    proReitor.setArea(result.getString("area"));
+                    proReitor.setArea(TipoProjeto.valueOf(result.getString("area")));
                     edital.setProReitor(proReitor);
                 }
 
