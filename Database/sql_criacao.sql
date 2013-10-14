@@ -100,7 +100,7 @@ CREATE TABLE public.projeto (
                 sigilo BOOLEAN DEFAULT false NOT NULL,
                 id_area INTEGER,
                 tipo_proj VARCHAR(50),
-                status VARCHAR(20) NOT NULL,
+                status VARCHAR(50) NOT NULL,
                 is_arquivo BOOLEAN DEFAULT false NOT NULL,
                 id_responsavel INTEGER NOT NULL,
                 CONSTRAINT id_pk PRIMARY KEY (id_proj)
@@ -108,6 +108,13 @@ CREATE TABLE public.projeto (
 
 
 ALTER SEQUENCE public.projeto_id_proj_seq OWNED BY public.projeto.id_proj;
+
+CREATE TABLE public.respaldo (
+                id_arquivo INTEGER NOT NULL,
+                id_proj INTEGER NOT NULL,
+                CONSTRAINT respaldo_pk PRIMARY KEY (id_arquivo)
+);
+
 
 CREATE TABLE public.inscricao (
                 id_proj INTEGER NOT NULL,
@@ -164,6 +171,13 @@ FOREIGN KEY (id_arquivo)
 REFERENCES public.arquivo (id_arquivo)
 ON DELETE CASCADE
 ON UPDATE CASCADE
+NOT DEFERRABLE;
+
+ALTER TABLE public.respaldo ADD CONSTRAINT arquivo_respaldo_fk
+FOREIGN KEY (id_arquivo)
+REFERENCES public.arquivo (id_arquivo)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
 ALTER TABLE public.papel_permissao ADD CONSTRAINT papel_papel_permissao_fk
@@ -251,6 +265,13 @@ ON UPDATE CASCADE
 NOT DEFERRABLE;
 
 ALTER TABLE public.inscricao ADD CONSTRAINT projeto_inscricao_fk
+FOREIGN KEY (id_proj)
+REFERENCES public.projeto (id_proj)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.respaldo ADD CONSTRAINT projeto_respaldo_fk
 FOREIGN KEY (id_proj)
 REFERENCES public.projeto (id_proj)
 ON DELETE NO ACTION
