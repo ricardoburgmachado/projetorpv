@@ -72,7 +72,7 @@ INSERT INTO papel_permissao(id_perm, id_papel) VALUES (12, 2); /** ALTERAR_STATU
 
 /***************************** INICIO cadastro usuarios **********************/
 INSERT INTO usuario VALUES (1, 'joao', 'joao', 'joão da silva','ALEGRETE');
-INSERT INTO usuario VALUES (2, 'maria', 'maria', 'maria da silva','ALEGRETE');
+INSERT INTO usuario VALUES (2, 'maria', 'maria', 'maria da silva','ALEGRETE', 'PESQUISA');
 INSERT INTO usuario VALUES (3, 'alfredo', 'alfredo', 'alfredo picareta','ALEGRETE');
 INSERT INTO usuario VALUES (4, 'joaquim', 'joaquim', 'joaquim santos','ALEGRETE');
 INSERT INTO usuario VALUES (5, 'rafael', 'rafael', 'rafael santos','ALEGRETE');
