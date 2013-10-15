@@ -23,6 +23,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -541,6 +542,61 @@ public class DBProjeto implements ProjetoDAO {
     }
 
     @Override
+    public void adicionaParticipantes(int idProjeto, Set<Usuario> participantes) throws PersistenciaException {
+
+       for(Usuario particip: participantes){
+           
+           inserirParticipante(idProjeto, particip.getId());
+       }
+    }
+
+    @Override
+    public void removeParticipantes(int idProjeto, Set<Usuario> participantes) throws PersistenciaException {
+        
+        if(participantes == null || participantes.isEmpty()){
+            
+            return;
+        }
+        
+        String sql = "delete from participantes where id_proj=? and id_usuario=?";
+        PreparedStatement stmt = constroiSQLAtualizaParticipantes(sql, idProjeto, participantes);
+
+        try {
+           
+            stmt.executeUpdate();
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao remover participantes do projeto!", sqle);
+        }
+    }
+    
+    private PreparedStatement constroiSQLAtualizaParticipantes(String sql, int idProjeto, Collection<Usuario> participantes) throws PersistenciaException{
+        
+        StringBuilder sqlBuilder = new StringBuilder(sql);
+        for (int i = 0; i < participantes.size() - 1; i++) {
+            sqlBuilder.append(" or id_usuario=?");
+        }
+        PreparedStatement stmt;
+
+        try {
+
+            stmt = connection.prepareStatement(sqlBuilder.toString());
+            stmt.setInt(1, idProjeto);
+            int i = 2;
+            for (Usuario particip : participantes) {
+
+                stmt.setInt(i, particip.getId());
+                i++;
+            }
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar atualização de participantes do projeto!", sqle);
+        }
+        
+        return stmt;
+    }
+
+    @Override
     public void atualizaParticipantes(int idProj, ArrayList<String> u) throws PersistenciaException {
 
         System.out.println("&&&&&&&&&&&&&&&&&&& CAIU MÉTODO ATUALIZA PARTICIPANTES");
@@ -655,16 +711,17 @@ public class DBProjeto implements ProjetoDAO {
      * persistência
      */
     @Override
-    public void carregaParticipantes(Projeto projeto) throws PersistenciaException {
+    public List<Usuario> carregaParticipantes(int idProjeto) throws PersistenciaException {
 
         String sql = "select * from projeto natural join participante natural join usuario natural join usuario_papel natural join papel where id_proj=?";
         PreparedStatement stmt = null;
         ResultSet result = null;
+        ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 
         try {
 
             stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, projeto.getId());
+            stmt.setInt(1, idProjeto);
         } catch (SQLException ex) {
 
             throw new PersistenciaException("Falha ao preparar consulta!", ex);
@@ -682,7 +739,6 @@ public class DBProjeto implements ProjetoDAO {
 
             try {
 
-                ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
                 do {
 
                     Usuario usuario = Usuario.instantiateUsuario(result.getString("descricao"));
@@ -693,13 +749,13 @@ public class DBProjeto implements ProjetoDAO {
                     usuario.setId(result.getInt("id_usuario"));
                     usuarios.add(usuario);
                 } while (result.next());
-
-                projeto.setParticipantes(usuarios);
             } catch (SQLException ex) {
 
                 throw new PersistenciaException("Falha ao acessar o resultado da consulta", ex);
             }
         }
+        
+        return usuarios;
     }
 
     /**

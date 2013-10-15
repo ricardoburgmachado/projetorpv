@@ -1,7 +1,7 @@
 package br.com.model;
 
 import java.util.ArrayList;
-
+import java.util.List;
 
 public class Projeto {
 
@@ -10,7 +10,7 @@ public class Projeto {
     private String palavrasChave;
     private String resumo;
     private TipoProjeto tipoProjeto;
-    private ArrayList<Usuario> participantes = new ArrayList<>();
+    private List<Usuario> participantes = new ArrayList<>();
     private ArrayList<String> participantesString = new ArrayList<>();
     private ArrayList<Aluno> participantesAluno = new ArrayList<>();
     private ArrayList<Professor> participantesProfessor = new ArrayList<>();
@@ -22,10 +22,9 @@ public class Projeto {
     private Campus campus;
     private boolean sigilo;
     private StatusProjeto status;
-    
-    
-    public Projeto(){
-        
+
+    public Projeto() {
+
         this.status = StatusProjeto.CRIADO;
     }
 
@@ -102,14 +101,14 @@ public class Projeto {
     /**
      * @return the participantes
      */
-    public ArrayList<Usuario> getParticipantes() {
+    public List<Usuario> getParticipantes() {
         return participantes;
     }
 
     /**
      * @param participantes the participantes to set
      */
-    public void setParticipantes(ArrayList<Usuario> participantes) {
+    public void setParticipantes(List<Usuario> participantes) {
         this.participantes = participantes;
     }
 
@@ -283,13 +282,10 @@ public class Projeto {
     public void setStatus(StatusProjeto status) {
         this.status = status;
     }
-    
-    
 
     @Override
     public String toString() {
         return "Projeto{" + "id=" + id + ", titulo=" + titulo + ", palavrasChave=" + palavrasChave + ", resumo=" + resumo + ", tipoProjeto=" + tipoProjeto + ", participantes=" + participantes + ", participantesString=" + participantesString + ", participantesAluno=" + participantesAluno + ", participantesProfessor=" + participantesProfessor + ", participantesExterno=" + participantesExterno + ", professor=" + professor + ", arquivo=" + arquivo + ", custos=" + custos + ", areaConhecimento=" + areaConhecimento + ", campus=" + campus + ", sigilo=" + sigilo + '}';
     }
-    
-    
+
 }

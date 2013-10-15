@@ -20,6 +20,8 @@ import br.com.model.Projeto;
 import br.com.model.StatusProjeto;
 import br.com.model.Usuario;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -160,8 +162,19 @@ public class RepositorioProjeto {
         if(verificaConsistenciaEditaProjetoExec(projeto, usuario)){
             
             this.projDAO.editar(projeto);
-            
+            this.atualizaParticipantes(projeto.getId(), this.projDAO.carregaParticipantes(projeto.getId()), projeto.getParticipantes());
         }
+    }
+    
+    private void atualizaParticipantes(int idProjeto, Collection<Usuario> antigosParticips, Collection<Usuario> novosParticips){
+        
+        Set<Usuario> antigos = new HashSet<>(antigosParticips);
+        antigos.retainAll(novosParticips);
+        this.projDAO.removeParticipantes(idProjeto, antigos);
+        
+        Set<Usuario> novos  = new HashSet<>(novosParticips);
+        novos.removeAll(antigosParticips);
+        this.projDAO.adicionaParticipantes(idProjeto, novos);
     }
 
     private boolean verificaConsistenciaEditaProjetoExec(Projeto projeto, Usuario usuario) throws DadoInconsistenteException, PrivacidadeException, AutorizacaoException {
@@ -208,7 +221,7 @@ public class RepositorioProjeto {
         for (Projeto proj : projetos) {
 
             this.projDAO.carregaCustos(proj);
-            this.projDAO.carregaParticipantes(proj);
+            proj.setParticipantes(this.projDAO.carregaParticipantes(idResponsavel));
         }
 
         return projetos;
