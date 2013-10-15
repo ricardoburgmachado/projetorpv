@@ -44,11 +44,9 @@ public class ProjetoController extends GenericController {
     RepositorioFacade facade;
 
     public ProjetoController() {
-        
+
         this.facade = new RepositorioFacade();
     }
-    
-    
 
     /**
      * Método que recebe os dados do formulário para efetivar o cadastro de um
@@ -202,6 +200,7 @@ public class ProjetoController extends GenericController {
      * Método que apenas carrega o formulário para edição de projetos, com os
      * campos preenchidos
      *
+     * @param p_request
      * @param id
      * @return ModelAndView
      */
@@ -209,31 +208,23 @@ public class ProjetoController extends GenericController {
     public ModelAndView projetoEditaShow(HttpServletRequest p_request, @RequestParam int id) {
 
         this.request = p_request;
-        System.out.println("************** ID VINDA POR PARAMETRO: " + id);
 
-        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
-        if (!verificaAutorizacao(user, Permissao.CRUD_PROJETO)) {
+        ModelAndView mv = new ModelAndView("projeto_edita");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        
+        try {
+
+            Projeto projeto = facade.obtemProjeto(usuario, id);
+            mv.addObject("projeto", projeto);
+            mv.addObject("area_conhecimento", facade.listarAreas());
+            mv.addObject("custos", projeto.getCustos());
+            mv.addObject("participantes_aluno", facade.listarParticipantes("ALUNO"));
+            mv.addObject("participantes_externo", facade.listarParticipantes("EXTERNO"));
+            mv.addObject("participantes_professor", facade.listarParticipantes("PROFESSOR"));
+        } catch (AutorizacaoException aex) {
 
             return new ModelAndView("login");
         }
-
-        this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
-        this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
-
-        Projeto projetoBD = this.repositorioProjeto.obter(id);
-
-        projetoBD.setParticipantesAluno(repositorioProjeto.getParticAlunos(id));
-        projetoBD.setParticipantesProfessor(repositorioProjeto.getParticProfessores(id));
-        projetoBD.setParticipantesExterno(repositorioProjeto.getParticExternos(id));
-
-        ModelAndView mv = new ModelAndView("projeto_edita");
-
-        mv.addObject("projeto", projetoBD);
-        mv.addObject("area_conhecimento", repositorioProjeto.listarAreas());
-        mv.addObject("custos", repositorioProjeto.getCustos(id));
-        mv.addObject("participantes_aluno", repositorioUsuario.listar("ALUNO"));
-        mv.addObject("participantes_externo", repositorioUsuario.listar("EXTERNO"));
-        mv.addObject("participantes_professor", repositorioUsuario.listar("PROFESSOR"));
 
         return mv;
     }
@@ -323,7 +314,7 @@ public class ProjetoController extends GenericController {
         ModelAndView mv;
         if (inconsistencias.size() > 0) {
 
-            Projeto projetoBD = this.repositorioProjeto.obter(p_projeto.getId());
+            Projeto projetoBD = facade.obtemProjeto(user, p_projeto.getId());
 
             projetoBD.setParticipantesAluno(repositorioProjeto.getParticAlunos(p_projeto.getId()));
             projetoBD.setParticipantesProfessor(repositorioProjeto.getParticProfessores(p_projeto.getId()));
@@ -359,7 +350,7 @@ public class ProjetoController extends GenericController {
         }
 
         RepositorioProjeto rp = new RepositorioPostgresFactory().createRepositorioProjeto();
-        Professor prof = (Professor) p_request.getSession().getAttribute("usuario");
+        Usuario prof = (Usuario) p_request.getSession().getAttribute("usuario");
         List projetos = rp.listarProjetos(prof.getId());
         ModelAndView mv = new ModelAndView("lista_projeto");
         if (projetos != null) {
@@ -367,38 +358,38 @@ public class ProjetoController extends GenericController {
         }
         return mv;
     }
-    
-    @RequestMapping (value= "/projeto_inscreve_show")
-    public ModelAndView filtraProjetos(HttpServletRequest request) throws PersistenciaException{
-        
+
+    @RequestMapping(value = "/projeto_inscreve_show")
+    public ModelAndView filtraProjetos(HttpServletRequest request) throws PersistenciaException {
+
         Usuario user = (Usuario) request.getSession().getAttribute("usuario");
         ModelAndView mv = new ModelAndView("projeto_inscreve");
         RepositorioFacade facade = new RepositorioFacade();
         List<String> inconsistencias = new ArrayList<>();
-        
-        if(user == null){
-            
+
+        if (user == null) {
+
             return new ModelAndView("login");
         }
-        
-        try{
-            
+
+        try {
+
             Set<StatusProjeto> status = new HashSet<>();
             status.add(StatusProjeto.HOMOLOGADO);
             status.add(StatusProjeto.INSCRITO);
             List<Projeto> projetos = facade.filtrarProjetosParaInscricao(status, user);
-            
+
             mv.addObject("projetos", projetos);
-        }catch(AutorizacaoException aex){
-            
+        } catch (AutorizacaoException aex) {
+
             return new ModelAndView("login");
-        }catch(DadoInconsistenteException diex){
-            
+        } catch (DadoInconsistenteException diex) {
+
             inconsistencias.add(diex.getMessage());
             mv.addObject("inconsistencias", inconsistencias);
             return mv;
         }
-        
+
         return mv;
     }
 
@@ -414,7 +405,7 @@ public class ProjetoController extends GenericController {
         }
 
         this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
-        Projeto projetoBD = this.repositorioProjeto.obter(id);
+        Projeto projetoBD = facade.obtemProjeto(user,id);
         projetoBD.setParticipantesAluno(repositorioProjeto.getParticAlunos(id));
         projetoBD.setParticipantesProfessor(repositorioProjeto.getParticProfessores(id));
         projetoBD.setParticipantesExterno(repositorioProjeto.getParticExternos(id));
@@ -462,7 +453,7 @@ public class ProjetoController extends GenericController {
         ModelAndView mv;
         if (inconsistencias.size() > 0) {
 
-            Projeto projetoBD = this.repositorioProjeto.obter(id);
+            Projeto projetoBD = facade.obtemProjeto(user,id);
             projetoBD.setParticipantesAluno(repositorioProjeto.getParticAlunos(id));
             projetoBD.setParticipantesProfessor(repositorioProjeto.getParticProfessores(id));
             projetoBD.setParticipantesExterno(repositorioProjeto.getParticExternos(id));
@@ -497,7 +488,7 @@ public class ProjetoController extends GenericController {
 
         try {
 
-            inconsistencias = submete(idProjeto, user.getId());
+            inconsistencias = submete(idProjeto, user);
         } catch (PrivacidadeException pex) {
 
             return this.projetoListaShow(request);
@@ -522,13 +513,13 @@ public class ProjetoController extends GenericController {
         return mv;
     }
 
-    private List<String> submete(int idProjeto, int idResponsavel) throws PrivacidadeException {
+    private List<String> submete(int idProjeto, Usuario usuario) throws PrivacidadeException {
 
         List<String> inconsistencias = new LinkedList<>();
 
         try {
 
-            new RepositorioPostgresFactory().createRepositorioProjeto().submeterHomologacao(idProjeto, idResponsavel);
+            new RepositorioPostgresFactory().createRepositorioProjeto().submeterHomologacao(idProjeto, usuario);
         } catch (PrivacidadeException pex) {
 
             throw pex;
@@ -546,24 +537,24 @@ public class ProjetoController extends GenericController {
 
         return inconsistencias;
     }
-    
-    @RequestMapping (value = "/projeto_lista_submetidos")
-    public ModelAndView listaProjetosSubmetidos(HttpServletRequest request){
-        
+
+    @RequestMapping(value = "/projeto_lista_submetidos")
+    public ModelAndView listaProjetosSubmetidos(HttpServletRequest request) {
+
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         ModelAndView mv = new ModelAndView("lista_projeto_coord");
-        
+
         HashSet<StatusProjeto> status = new HashSet<>();
         status.add(StatusProjeto.SUBMETIDO_HOMOLOGACAO);
-        
-        try{
-            
+
+        try {
+
             mv.addObject("projetos", facade.listarProjetosSubmetidos(usuario, status));
-        }catch(AutorizacaoException aex){
-            
+        } catch (AutorizacaoException aex) {
+
             return new ModelAndView("login");
         }
-        
+
         return mv;
     }
 }

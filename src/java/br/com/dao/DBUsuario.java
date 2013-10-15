@@ -145,7 +145,9 @@ public class DBUsuario implements UsuarioDAO {
             user.setNome(result.getString("nome"));
             user.setSenha(result.getString("senha"));
             user.setCampus(Campus.valueOf(result.getString("campus")));
-            user.setArea(TipoProjeto.valueOf(result.getString("area")));
+            
+            if(result.getString("area") != null) 
+                user.setArea(TipoProjeto.valueOf(result.getString("area")));
 
             do {
 

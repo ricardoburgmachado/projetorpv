@@ -99,8 +99,18 @@ public class RepositorioProjeto {
         }
     }
 
-    public Projeto obter(int id) {
+    public Projeto obter(int id, Usuario usuario) throws PersistenciaException, AutorizacaoException {
+        
+        if(usuario == null || !usuario.getPermissoes().contains(Permissao.CRUD_PROJETO)){
+            
+            throw new AutorizacaoException("Usuário sem permissão para visualizar projeto!");
+        }
 
+        return projDAO.obter(id);
+    }
+    
+    protected Projeto obter(int id) throws PersistenciaException {
+        
         return projDAO.obter(id);
     }
 
@@ -164,60 +174,60 @@ public class RepositorioProjeto {
 
         return projetos;
     }
-    
+
     public List<Projeto> filtrarProjetos(Usuario usuario, Set<StatusProjeto> status) throws PersistenciaException, AutorizacaoException {
-        
-        if(verificaConsistenciaParaFiltragem(usuario, status)){
-            
+
+        if (verificaConsistenciaParaFiltragem(usuario, status)) {
+
             return this.projDAO.listarProjetos(usuario.getId(), status);
         }
-        
+
         return null;
     }
-    
-    private boolean verificaConsistenciaParaFiltragem(Usuario usuario, Set<StatusProjeto> status) throws AutorizacaoException, DadoInconsistenteException{
-        
-        if(!usuario.getPermissoes().contains(Permissao.CRUD_PROJETO) && !usuario.getPermissoes().contains(Permissao.INSCRICAO_EDITAL)){
-            
+
+    private boolean verificaConsistenciaParaFiltragem(Usuario usuario, Set<StatusProjeto> status) throws AutorizacaoException, DadoInconsistenteException {
+
+        if (!usuario.getPermissoes().contains(Permissao.CRUD_PROJETO) && !usuario.getPermissoes().contains(Permissao.INSCRICAO_EDITAL)) {
+
             throw new AutorizacaoException("Usuário sem permissão para listagem!");
         }
-        
-        if(status == null || status.isEmpty()){
-            
+
+        if (status == null || status.isEmpty()) {
+
             throw new DadoInconsistenteException("Conjunto de estados para filtragem não informado!");
         }
-        
+
         return true;
     }
-    
-    public List<Projeto> listarProjetosSubmetidosHomologacao(Usuario usuario, Set<StatusProjeto> status){
-        
-        if(verificaConsistenciaListagemSubmetidos(usuario)){
-            
+
+    public List<Projeto> listarProjetosSubmetidosHomologacao(Usuario usuario, Set<StatusProjeto> status) {
+
+        if (verificaConsistenciaListagemSubmetidos(usuario)) {
+
             return this.projDAO.listarProjetos(usuario.getId(), status, usuario.getCampus(), usuario.getArea());
         }
-        
+
         return null;
     }
-    
-    private boolean verificaConsistenciaListagemSubmetidos(Usuario usuario) throws AutorizacaoException{
-        
-        if(usuario == null || !usuario.getPermissoes().contains(Permissao.LISTAGEM_SUBMETIDOS)){
-            
+
+    private boolean verificaConsistenciaListagemSubmetidos(Usuario usuario) throws AutorizacaoException {
+
+        if (usuario == null || !usuario.getPermissoes().contains(Permissao.LISTAGEM_SUBMETIDOS)) {
+
             throw new AutorizacaoException("Usuário sem permissão para listagem dos projetos submetidos!");
         }
-        
+
         return true;
     }
 
-    public void submeterHomologacao(int idProjeto, int idResponsavel) throws PersistenciaException, DadoInconsistenteException{
+    public void submeterHomologacao(int idProjeto, Usuario usuario) throws PersistenciaException, DadoInconsistenteException {
 
-        Projeto projeto = obter(idProjeto);
+        Projeto projeto = obter(idProjeto, usuario);
 
-        submeterHomologacao(projeto, idResponsavel);
+        submeterHomologacao(projeto, usuario.getId());
     }
 
-    public void submeterHomologacao(Projeto projeto, int idResponsavel) throws PersistenciaException, DadoInconsistenteException{
+    public void submeterHomologacao(Projeto projeto, int idResponsavel) throws PersistenciaException, DadoInconsistenteException {
 
         DadoInconsistenteException exception = verificaConsistenciaParaSubmissao(projeto, idResponsavel);
 
@@ -230,9 +240,9 @@ public class RepositorioProjeto {
             this.projDAO.atualizaStatus(projeto);
         }
     }
-    
-    protected void atualizaStatus(Projeto projeto) throws PersistenciaException{
-        
+
+    protected void atualizaStatus(Projeto projeto) throws PersistenciaException {
+
         this.projDAO.atualizaStatus(projeto);
     }
 
@@ -327,9 +337,9 @@ public class RepositorioProjeto {
 
             exception = new DadoInconsistenteException(exception, "Deve haver professor associado ao projeto!");
         }
-        
-        if(!projeto.getArquivo()){
-            
+
+        if (!projeto.getArquivo()) {
+
             exception = new DadoInconsistenteException(exception, "Dave haver arquivo associado ao projeto!");
         }
 
