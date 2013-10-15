@@ -100,17 +100,17 @@ public class RepositorioProjeto {
     }
 
     public Projeto obter(int id, Usuario usuario) throws PersistenciaException, AutorizacaoException {
-        
-        if(usuario == null || !usuario.getPermissoes().contains(Permissao.CRUD_PROJETO)){
-            
+
+        if (usuario == null || !usuario.getPermissoes().contains(Permissao.CRUD_PROJETO)) {
+
             throw new AutorizacaoException("Usuário sem permissão para visualizar projeto!");
         }
 
         return projDAO.obter(id);
     }
-    
+
     protected Projeto obter(int id) throws PersistenciaException {
-        
+
         return projDAO.obter(id);
     }
 
@@ -144,22 +144,61 @@ public class RepositorioProjeto {
     }
 
     public void editar(Projeto p) {
-
-        DadoInconsistenteException exception = null;
-
+        
         if (verificaVazio(p.getTitulo())) {
 
-            exception = new DadoInconsistenteException(exception, "Título não informado <br/>");
+            throw new DadoInconsistenteException("Título não informado <br/>");
         }
 
-        if (exception == null) {
-            projDAO.editar(p);
-            projDAO.atualizaCustos(p.getId(), p.getCustos());
-            projDAO.atualizaParticipantes(p.getId(), p.getParticipantesString());
-        } else {
-            throw exception;
+        projDAO.editar(p);
+        projDAO.atualizaCustos(p.getId(), p.getCustos());
+        projDAO.atualizaParticipantes(p.getId(), p.getParticipantesString());
+    }
+    
+    public void editaProjetoEmExecucao(Projeto projeto, Usuario usuario)  throws DadoInconsistenteException, PrivacidadeException, AutorizacaoException, PersistenciaException{
+        
+        if(verificaConsistenciaEditaProjetoExec(projeto, usuario)){
+            
+            this.projDAO.editar(projeto);
+            
+        }
+    }
+
+    private boolean verificaConsistenciaEditaProjetoExec(Projeto projeto, Usuario usuario) throws DadoInconsistenteException, PrivacidadeException, AutorizacaoException {
+
+        DadoInconsistenteException diex = null;
+
+        if (usuario == null || !usuario.getPermissoes().contains(Permissao.CRUD_PROJETO)) {
+
+            throw new AutorizacaoException("Usuário sem permissão para editar projeto!");
         }
 
+        if (projeto == null) {
+
+            throw new DadoInconsistenteException("Projeto não informado!");
+        }
+
+        if (projeto.getProfessor().getId() != usuario.getId()) {
+
+            throw new PrivacidadeException("Projeto não pertencente ao usuário!");
+        }
+
+        if (projeto.getResumo() == null || projeto.getResumo().equals("")) {
+
+            diex = new DadoInconsistenteException("Resumo não informado!");
+        }
+
+        if (projeto.getPalavrasChave() == null || projeto.getPalavrasChave().equals("")) {
+
+            diex = new DadoInconsistenteException(diex, "Palavras-chave não informadas!");
+        }
+
+        if (diex != null) {
+
+            throw diex;
+        }
+
+        return true;
     }
 
     public List<Projeto> listarProjetos(int idResponsavel) {

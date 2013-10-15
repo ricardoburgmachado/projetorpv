@@ -211,10 +211,11 @@ public class ProjetoController extends GenericController {
 
         ModelAndView mv = new ModelAndView("projeto_edita");
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        Projeto projeto;
         
         try {
 
-            Projeto projeto = facade.obtemProjeto(usuario, id);
+            projeto = facade.obtemProjeto(usuario, id);
             mv.addObject("projeto", projeto);
             mv.addObject("area_conhecimento", facade.listarAreas());
             mv.addObject("custos", projeto.getCustos());
@@ -225,8 +226,18 @@ public class ProjetoController extends GenericController {
 
             return new ModelAndView("login");
         }
+        
+        if(!projeto.getStatus().equals(StatusProjeto.CRIADO) && !projeto.getStatus().equals(StatusProjeto.SUBMETIDO_HOMOLOGACAO)){
+            
+            mv.setViewName("projeto_exec_edita");
+        }
 
         return mv;
+    }
+    
+    public ModelAndView editaProjetoEmExecucao(HttpServletRequest request){
+        
+        return null;
     }
 
     /**
