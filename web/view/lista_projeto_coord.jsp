@@ -27,10 +27,10 @@
                 <c:import url="menu.jsp"/>
             </div>     
 
-            <div id="conteudo_interno">
+            <div id="conteudo_interno" class="cf">
                 <h1>Projetos para Homologação</h1>
                 
-                <table class="tabela-lista cf listagem-float" title="Tabela de Projetos">
+                <table class="tabela-lista" title="Tabela de Projetos">
                     <thead>
                         <tr>
                             <th>Título do Projeto</th>
@@ -45,9 +45,9 @@
                             <td title="Título do projeto">${projeto.titulo}</td>
                             <td title="Categoria do projeto">${projeto.tipoProjeto}</td>
                             <td title="Arquivo do projeto"><a href="<c:url value="/arquivos/${projeto.id }/${projeto.id}.pdf"/>">Arquivo</a></td>
-                            <td title="Ação para homologação"><a title="Clique para homologar o projeto" href="projeto_homologa?id_proj=${projeto.id}">homologar</a></td>
-                            <td title="Ação para não homologação"><a title="Clique para não homologar o projeto" href="projeto_nao_homologa?id_proj=${projeto.id}">não homologar</a></td>
-                            <td title="Ação para visualização"><a title="Clique para visualizar detalhes do projeto" href="projeto_exibe?id=${projeto.id}">detalhes</a></td>
+                            <td title="Ação para homologação"><a title="Clique para homologar o projeto" href="projeto_homologa?id_proj=${projeto.id}"></a></td>
+                            <td title="Ação para não homologação"><a title="Clique para não homologar o projeto" href="projeto_nao_homologa?id_proj=${projeto.id}"></a></td>
+                            <td title="Ação para visualização"><a title="Clique para visualizar detalhes do projeto" href="projeto_exibe?id=${projeto.id}"></a></td>
                         </tr>
                     </c:forEach>
                     </tbody>

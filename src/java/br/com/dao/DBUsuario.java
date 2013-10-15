@@ -9,6 +9,7 @@ import br.com.model.Campus;
 import br.com.model.Externo;
 import br.com.model.Permissao;
 import br.com.model.Professor;
+import br.com.model.TipoProjeto;
 import br.com.model.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -144,7 +145,7 @@ public class DBUsuario implements UsuarioDAO {
             user.setNome(result.getString("nome"));
             user.setSenha(result.getString("senha"));
             user.setCampus(Campus.valueOf(result.getString("campus")));
-            user.setArea(result.getString("area"));
+            user.setArea(TipoProjeto.valueOf(result.getString("area")));
 
             do {
 

@@ -14,6 +14,7 @@ import br.com.model.Externo;
 import br.com.model.Professor;
 import br.com.model.Projeto;
 import br.com.model.StatusProjeto;
+import br.com.model.TipoProjeto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -66,6 +67,6 @@ public interface ProjetoDAO {
      
      public String consultaStatus(int idProj) throws PersistenciaException;
      
-     public List<Projeto> listarProjetos(int idResponsavel, Set<StatusProjeto> status, Campus campus) throws PersistenciaException;
+     public List<Projeto> listarProjetos(int idResponsavel, Set<StatusProjeto> status, Campus campus, TipoProjeto tipo) throws PersistenciaException;
      
 }

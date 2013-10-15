@@ -917,7 +917,7 @@ ol#menurel li a {
 /* *************** FIM EDITAL EXIBE*************** */
 
 .tabela-lista{
-    width: 98%;
+    width: 97%;
     margin: auto;
     text-align: center;
     font-size: 1rem;
@@ -936,7 +936,7 @@ ol#menurel li a {
     background-color: lightgrey;
 }
 
-.tabela-lista thead th{
+.tabela-lista th{
     background-color: darkslategrey;
     color: white;
     font-size: 0.9rem;
@@ -945,7 +945,6 @@ ol#menurel li a {
 }
 
 .tabela-lista td, th{
-    min-width: 50px;
     border-collapse: collapse;
     padding: 2px 2px;
 }
@@ -976,13 +975,31 @@ a[href*="projeto_exibe"]{
     margin: auto;
 }
 
-.cf:before,
-.cf:after {
+a[href*="projeto_homologa"]{
+    display: block;
+    width: 28px;
+    height: 28px;
+    border: none;
+    margin: auto;
+    background: url('../imagens/like.png') no-repeat;
+}
+
+a[href*="projeto_nao_homologa"]{
+    display: block;
+    width: 28px;
+    height: 28px;
+    border: none;
+    margin: auto;
+    background: url('../imagens/unlike.png') no-repeat;
+}
+
+.cf::before,
+.cf::after {
     content: " "; /* 1 */
     display: table; /* 2 */
 }
 
-.cf:after {
+.cf::after {
     clear: both;
 }
 

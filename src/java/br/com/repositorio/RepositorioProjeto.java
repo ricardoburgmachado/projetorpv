@@ -194,7 +194,7 @@ public class RepositorioProjeto {
         
         if(verificaConsistenciaListagemSubmetidos(usuario)){
             
-            return this.projDAO.listarProjetos(usuario.getId(), status, usuario.getCampus());
+            return this.projDAO.listarProjetos(usuario.getId(), status, usuario.getCampus(), usuario.getArea());
         }
         
         return null;

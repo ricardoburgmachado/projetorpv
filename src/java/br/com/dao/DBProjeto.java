@@ -869,9 +869,9 @@ public class DBProjeto implements ProjetoDAO {
     }
 
     @Override
-    public List<Projeto> listarProjetos(int idResponsavel, Set<StatusProjeto> status, Campus campus) throws PersistenciaException {
+    public List<Projeto> listarProjetos(int idResponsavel, Set<StatusProjeto> status, Campus campus, TipoProjeto tipo) throws PersistenciaException {
 
-        StringBuilder sqlBuilder = new StringBuilder("select * from projeto inner join usuario on id_responsavel = id_usuario inner join area_conhecimento using (id_area) where campus=?");
+        StringBuilder sqlBuilder = new StringBuilder("select * from projeto inner join usuario on id_responsavel = id_usuario inner join area_conhecimento using (id_area) where campus=? and tipo_proj=?");
 
         if (status.size() > 0) {
 
@@ -889,8 +889,9 @@ public class DBProjeto implements ProjetoDAO {
 
             stmt = connection.prepareStatement(sqlBuilder.toString());
             stmt.setString(1, campus.toString());
+            stmt.setString(2, tipo.toString());
 
-            int ini = 2;
+            int ini = 3;
             Object[] stts = status.toArray();
 
             for (int i = 0; i < stts.length; i++) {
