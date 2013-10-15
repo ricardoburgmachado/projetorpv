@@ -105,27 +105,18 @@
             <div id="conteudo_interno">
 
 
-                <form:form action="projeto_edita" modelAttribute="projeto" id="form_addprojeto" enctype="multipart/form-data">
-                    <h1>Editar Projeto</h1>                                                                                                  
+                <form:form action="projeto_exec_edita" modelAttribute="projeto" id="form_addprojeto" enctype="multipart/form-data">
+                    <h1>Edição de Projeto em Execução</h1>                                                                                                  
 
                     <fieldset> 
 
-                        <%
-
-                            if (request.getAttribute("sucesso") != null) {
-
-                                out.println("<span class=\"sucesso\">" + request.getAttribute("sucesso") + "</span>");
-                            } else if (request.getAttribute("inconsistencias") != null) {
-
-                                List<String> inconsistencias = (List<String>) request.getAttribute("inconsistencias");
-                                out.println("<ul>");
-                                for (String inconsistencia : inconsistencias) {
-                                    out.println("<li>" + inconsistencia + "</li>");
-                                }
-                                out.println("</ul>");
-                            }
-
-                        %>
+                        <c:if test="${not empty inconsistencias}">
+                            <ul class="inconsistencias">
+                                <c:forEach var="inconsistencia" items="${inconsistencias}">
+                                    <li>${inconsistencia}</li>
+                                    </c:forEach>
+                            </ul>
+                        </c:if>
 
                         <!-- PRESTAR ATENÇÃO AQUI, DEVE SER RECUPERADO O ID DO PROFESSOR QUE ESTARÁ NA SESSÃO -->
                         <input type="hidden" name="id" value=${projeto.id} />            

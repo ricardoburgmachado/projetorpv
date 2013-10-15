@@ -558,7 +558,7 @@ public class DBProjeto implements ProjetoDAO {
             return;
         }
         
-        String sql = "delete from participantes where id_proj=? and id_usuario=?";
+        String sql = "delete from participante where id_proj=? and id_usuario=?";
         PreparedStatement stmt = constroiSQLAtualizaParticipantes(sql, idProjeto, participantes);
 
         try {

@@ -126,4 +126,9 @@ public class RepositorioFacade {
         
         return this.repUsuario.listar(papel);
     }
+    
+    public void editaProjetoExec(Projeto projeto, Usuario usuario) throws AutorizacaoException, PrivacidadeException, DadoInconsistenteException, PersistenciaException{
+        
+        this.repProjeto.editaProjetoEmExecucao(projeto, usuario);
+    }
 }

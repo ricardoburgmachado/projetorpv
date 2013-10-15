@@ -15,7 +15,7 @@
 
 
         <!-- inicio multiselect -->
-       <!--<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" /> -->
+        <!--<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" /> -->
         <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>-->
         <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>-->        
 
@@ -69,8 +69,8 @@
         <script type="text/javascript" src="<c:url value="recursos/js/jqueryToastMessage/funcoes.js"/>" ></script> 
         <link rel="stylesheet" href="<c:url value="recursos/js/jqueryToastMessage/css/jquery.toastmessage-min.css"/>" />        
         <!-- FIM JQUERY TOAST MESSAGE-->
-        
-        
+
+
 
         <script type="text/javascript" src="<c:url value="recursos/js/funcoes.js"/>" ></script>
 
@@ -82,13 +82,13 @@
         <title>JSP Page</title>
     </head>
     <c:choose>
-         <c:when test="${not empty mensagem}">
-                <body onload="javascript:showErrorToast('${mensagem}');">
+        <c:when test="${not empty mensagem}">
+            <body onload="javascript:showErrorToast('${mensagem}');">
             </c:when>
             <c:otherwise>
-                <body>
+            <body>
             </c:otherwise>
-     </c:choose> 
+        </c:choose> 
 
         <div id="topo">
             <div id="logo_brasil"></div> 
@@ -109,23 +109,14 @@
                     <h1>Editar Projeto</h1>                                                                                                  
 
                     <fieldset> 
-                        
-                        <% 
-                            
-                            if(request.getAttribute("sucesso") != null){
-                                
-                               out.println("<span class=\"sucesso\">" + request.getAttribute("sucesso") + "</span>");
-                            }else if(request.getAttribute("inconsistencias") != null){
-                                
-                                List<String> inconsistencias = (List<String>) request.getAttribute("inconsistencias");
-                                out.println("<ul>");
-                                for(String inconsistencia: inconsistencias){
-                                    out.println("<li>" + inconsistencia + "</li>");
-                                }
-                                out.println("</ul>");
-                            }
-                            
-                        %>
+
+                        <c:if test="${not empty inconsistencias}">
+                            <ul class="inconsistencias">
+                                <c:forEach var="inconsistencia" items="${inconsistencias}">
+                                    <li>${inconsistencia}</li>
+                                    </c:forEach>
+                            </ul>
+                        </c:if>
 
                         <!-- PRESTAR ATENÇÃO AQUI, DEVE SER RECUPERADO O ID DO PROFESSOR QUE ESTARÁ NA SESSÃO -->
                         <input type="hidden" name="id" value=${projeto.id} />       
@@ -170,7 +161,7 @@
                                 <label>Participantes (alunos):</label><br/><br/>                           
                                 <select id="partipantes_aluno" name="participantes_aluno" multiple="multiple">
                                 <c:forEach items="${participantes_aluno}" var="aluno">                                        
-                                        <option <c:forEach items="${projeto.participantesAluno}" var="alunoSel"><c:if test="${aluno.id == alunoSel.id}">selected="selected"</c:if></c:forEach>  value=${aluno.id}>${aluno.nome}</option>                                                                    
+                                    <option <c:forEach items="${projeto.participantesAluno}" var="alunoSel"><c:if test="${aluno.id == alunoSel.id}">selected="selected"</c:if></c:forEach>  value=${aluno.id}>${aluno.nome}</option>                                                                    
                                 </c:forEach>
                             </select>
                         </span>
@@ -220,9 +211,9 @@
                                 <c:forEach items="${custos}" var="custoBD">
                                     <c:if test="${custoBD.tipoCusto eq 'CAPITAL'}">
                                         <p class="campo_capital" id="campo_capital_<%=countCapitais_x%>">
-                                           <span style="display:block;float:left; clear:both">
+                                            <span style="display:block;float:left; clear:both">
                                                 <span style="display:block;float:left">Valor:</span><span style="display:block;float:left;margin-left:60px">Descrição:</span>
-                                           </span>
+                                            </span>
                                             <input onkeydown="Mascara(this, Valor);" style="width: 75px; display: block; float: left" type="text" name="capital_val_x" value="${custoBD.valor}"/> 
                                             <textarea style="width: 150px; height: 35px; display: block; float: left; clear: none; margin-left: 10px; margin-top: 0px" name=capital_desc_x cols=35 rows=3>${custoBD.descricao}</textarea> 
                                             <a style="width:100px;text-decoration:none;color:black;display:block;float:left;margin-top:10px;margin-left:5px" href="#" onclick="deletarCapital('campo_capital_<%=countCapitais_x%>');
@@ -243,9 +234,9 @@
                                 <c:forEach items="${custos}" var="custoBD">
                                     <c:if test="${custoBD.tipoCusto eq 'CUSTEIO'}">
                                         <p class="campo_custeio" id="campo_custeio_<%=countCusteios_x%>">
-                                           <span style="display:block;float:left; clear:both">
+                                            <span style="display:block;float:left; clear:both">
                                                 <span style="display:block;float:left">Valor:</span><span style="display:block;float:left;margin-left:60px">Descrição:</span>
-                                           </span>
+                                            </span>
                                             <input onkeydown="Mascara(this, Valor);" style="width: 75px; display: block; float: left" type="text" name="custeio_val_x" value="${custoBD.valor}"/> 
                                             <textarea style="width: 150px; height: 35px; display: block; float: left; clear: none; margin-left: 10px; margin-top: 0px" name=custeio_desc_x cols=35 rows=3>${custoBD.descricao}</textarea> 
                                             <a style="width:100px;text-decoration:none;color:black;display:block;float:left;margin-top:10px;margin-left:5px" href="#" onclick="deletarCusteio('campo_custeio_<%=countCusteios_x%>');
@@ -273,7 +264,7 @@
 
                             <input class="enviar_form" type="submit" value="Editar"/>
                             <a href="submete_homologacao?idProjeto=${projeto.id}"><button type="button" class="submeter_form">Submeter</button></a>
-                        </fieldset>
+                    </fieldset>
                 </form:form>    
 
 

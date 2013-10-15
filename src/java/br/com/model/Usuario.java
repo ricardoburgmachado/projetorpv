@@ -25,6 +25,10 @@ public abstract class Usuario {
 
     }
 
+    public Usuario(int id) {
+        this.id = id;
+    }
+
     public Usuario(String login, String senha, String nome, Campus campus, List<Permissao> permissoes) {
         this.login = login;
         this.senha = senha;

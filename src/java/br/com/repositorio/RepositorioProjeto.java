@@ -169,7 +169,7 @@ public class RepositorioProjeto {
     private void atualizaParticipantes(int idProjeto, Collection<Usuario> antigosParticips, Collection<Usuario> novosParticips){
         
         Set<Usuario> antigos = new HashSet<>(antigosParticips);
-        antigos.retainAll(novosParticips);
+        antigos.removeAll(novosParticips);
         this.projDAO.removeParticipantes(idProjeto, antigos);
         
         Set<Usuario> novos  = new HashSet<>(novosParticips);

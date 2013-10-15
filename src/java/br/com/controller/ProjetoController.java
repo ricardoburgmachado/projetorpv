@@ -212,7 +212,7 @@ public class ProjetoController extends GenericController {
         ModelAndView mv = new ModelAndView("projeto_edita");
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         Projeto projeto;
-        
+
         try {
 
             projeto = facade.obtemProjeto(usuario, id);
@@ -226,18 +226,85 @@ public class ProjetoController extends GenericController {
 
             return new ModelAndView("login");
         }
-        
-        if(!projeto.getStatus().equals(StatusProjeto.CRIADO) && !projeto.getStatus().equals(StatusProjeto.SUBMETIDO_HOMOLOGACAO)){
-            
+
+        if (!projeto.getStatus().equals(StatusProjeto.CRIADO) && !projeto.getStatus().equals(StatusProjeto.SUBMETIDO_HOMOLOGACAO)) {
+
             mv.setViewName("projeto_exec_edita");
         }
 
         return mv;
     }
-    
-    public ModelAndView editaProjetoEmExecucao(HttpServletRequest request){
+
+    @RequestMapping (value = "/projeto_exec_edita")
+    public ModelAndView editaProjetoEmExecucao(HttpServletRequest request, @ModelAttribute Projeto p_projeto) {
+
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        List<String> inconsistencias = new ArrayList<>();
+        ModelAndView mv = this.projetoListaShow(request);
+
+        try {
+
+            Projeto projeto = this.facade.obtemProjeto(user, p_projeto.getId());
+            projeto.setResumo(p_projeto.getResumo());
+            projeto.setPalavrasChave(p_projeto.getPalavrasChave());
+            projeto.setParticipantes(getParticipantes(request));
+            
+            this.facade.editaProjetoExec(projeto, user);
+
+        } catch (AutorizacaoException aex) {
+
+            return new ModelAndView("login");
+        } catch (PrivacidadeException pex) {
+
+            inconsistencias.add(pex.getMessage());
+        } catch (DadoInconsistenteException diex) {
+
+            do {
+
+                inconsistencias.add(diex.getMessage());
+                diex = diex.getException();
+            } while (diex != null);
+        }
+
+        if(!inconsistencias.isEmpty()){
+            
+            mv.addObject("inconsistencias", inconsistencias);
+            mv.setViewName("projeto_exec_edita");
+        }
         
-        return null;
+        return mv;
+    }
+
+    private List<Usuario> getParticipantes(HttpServletRequest request) {
+
+        List<Usuario> participantes = new ArrayList<>();
+
+        String[] participantes_aluno = request.getParameterValues("participantes_aluno");
+        String[] participantes_prof = request.getParameterValues("participantes_professor");
+        String[] participantes_externo = request.getParameterValues("participantes_externo");
+        
+        participantes.addAll(criaListaParticipantes(participantes_prof));
+        participantes.addAll(criaListaParticipantes(participantes_aluno));
+        participantes.addAll(criaListaParticipantes(participantes_externo));
+
+        return participantes;
+    }
+
+    private List<Usuario> criaListaParticipantes(String[] codParticipantes) {
+
+        List<Usuario> lista = new ArrayList<>();
+        
+        if(codParticipantes == null){
+            
+            return lista;
+        }
+
+        for (String codParticipante : codParticipantes) {
+            lista.add(new Usuario(Integer.parseInt(codParticipante)) {
+            });
+        }
+
+        return lista;
     }
 
     /**
@@ -416,7 +483,7 @@ public class ProjetoController extends GenericController {
         }
 
         this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
-        Projeto projetoBD = facade.obtemProjeto(user,id);
+        Projeto projetoBD = facade.obtemProjeto(user, id);
         projetoBD.setParticipantesAluno(repositorioProjeto.getParticAlunos(id));
         projetoBD.setParticipantesProfessor(repositorioProjeto.getParticProfessores(id));
         projetoBD.setParticipantesExterno(repositorioProjeto.getParticExternos(id));
@@ -464,7 +531,7 @@ public class ProjetoController extends GenericController {
         ModelAndView mv;
         if (inconsistencias.size() > 0) {
 
-            Projeto projetoBD = facade.obtemProjeto(user,id);
+            Projeto projetoBD = facade.obtemProjeto(user, id);
             projetoBD.setParticipantesAluno(repositorioProjeto.getParticAlunos(id));
             projetoBD.setParticipantesProfessor(repositorioProjeto.getParticProfessores(id));
             projetoBD.setParticipantesExterno(repositorioProjeto.getParticExternos(id));
