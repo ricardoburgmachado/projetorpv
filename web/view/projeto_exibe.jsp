@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="br.com.model.Permissao"%>
 <%@page import="br.com.controller.ProjetoController"%>
 <%@page import="br.com.model.TipoProjeto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -261,15 +263,18 @@
                     </tr>
                     <tr>
                         <td class="subtitulo">
-                                FUNCIONALIDADES
+                            FUNCIONALIDADES
                         </td>
                     </tr>
 
-                    <tr>
-                        <td style="display: block; float: left; ">
-                            <a id="excluir_projeto" href="projeto_exclui?id=${projeto.id}" >Deletar projeto</a>
-                        </td>
-                    </tr>
+                    <c:if test="${projeto.status == 'CRIADO'}">
+
+                        <tr>
+                            <td style="display: block; float: left; ">
+                                <a id="excluir_projeto" href="projeto_exclui?id=${projeto.id}" >Deletar projeto</a>
+                            </td>
+                        </tr>
+                    </c:if>
                 </table>
 
 
