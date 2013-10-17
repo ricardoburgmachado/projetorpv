@@ -109,6 +109,20 @@ CREATE TABLE public.projeto (
 
 ALTER SEQUENCE public.projeto_id_proj_seq OWNED BY public.projeto.id_proj;
 
+CREATE SEQUENCE public.recado_id_recado_seq;
+
+CREATE TABLE public.recado (
+                id_recado INTEGER NOT NULL DEFAULT nextval('public.recado_id_recado_seq'),
+                conteudo VARCHAR(300) NOT NULL,
+                data_envio DATE NOT NULL,
+                id_usuario INTEGER NOT NULL,
+                id_proj INTEGER,
+                CONSTRAINT recado_pk PRIMARY KEY (id_recado)
+);
+
+
+ALTER SEQUENCE public.recado_id_recado_seq OWNED BY public.recado.id_recado;
+
 CREATE TABLE public.respaldo (
                 id_arquivo INTEGER NOT NULL,
                 id_proj INTEGER NOT NULL,
@@ -236,6 +250,13 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
+ALTER TABLE public.recado ADD CONSTRAINT usuario_recado_fk
+FOREIGN KEY (id_usuario)
+REFERENCES public.usuario (id_usuario)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
 ALTER TABLE public.inscricao ADD CONSTRAINT edital_inscricao_fk
 FOREIGN KEY (id_edital)
 REFERENCES public.edital (id_edital)
@@ -276,4 +297,11 @@ FOREIGN KEY (id_proj)
 REFERENCES public.projeto (id_proj)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.recado ADD CONSTRAINT projeto_recado_fk
+FOREIGN KEY (id_proj)
+REFERENCES public.projeto (id_proj)
+ON DELETE CASCADE
+ON UPDATE CASCADE
 NOT DEFERRABLE;
