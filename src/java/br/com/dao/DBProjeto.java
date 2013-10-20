@@ -13,11 +13,13 @@ import br.com.model.Custo;
 import br.com.model.Externo;
 import br.com.model.Professor;
 import br.com.model.Projeto;
+import br.com.model.Recado;
 import br.com.model.StatusProjeto;
 import br.com.model.TipoCusto;
 import br.com.model.TipoProjeto;
 import br.com.model.Usuario;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -544,34 +546,34 @@ public class DBProjeto implements ProjetoDAO {
     @Override
     public void adicionaParticipantes(int idProjeto, Set<Usuario> participantes) throws PersistenciaException {
 
-       for(Usuario particip: participantes){
-           
-           inserirParticipante(idProjeto, particip.getId());
-       }
+        for (Usuario particip : participantes) {
+
+            inserirParticipante(idProjeto, particip.getId());
+        }
     }
 
     @Override
     public void removeParticipantes(int idProjeto, Set<Usuario> participantes) throws PersistenciaException {
-        
-        if(participantes == null || participantes.isEmpty()){
-            
+
+        if (participantes == null || participantes.isEmpty()) {
+
             return;
         }
-        
+
         String sql = "delete from participante where id_proj=? and id_usuario=?";
         PreparedStatement stmt = constroiSQLAtualizaParticipantes(sql, idProjeto, participantes);
 
         try {
-           
+
             stmt.executeUpdate();
         } catch (SQLException sqle) {
 
             throw new PersistenciaException("Falha ao remover participantes do projeto!", sqle);
         }
     }
-    
-    private PreparedStatement constroiSQLAtualizaParticipantes(String sql, int idProjeto, Collection<Usuario> participantes) throws PersistenciaException{
-        
+
+    private PreparedStatement constroiSQLAtualizaParticipantes(String sql, int idProjeto, Collection<Usuario> participantes) throws PersistenciaException {
+
         StringBuilder sqlBuilder = new StringBuilder(sql);
         for (int i = 0; i < participantes.size() - 1; i++) {
             sqlBuilder.append(" or id_usuario=?");
@@ -592,7 +594,7 @@ public class DBProjeto implements ProjetoDAO {
 
             throw new PersistenciaException("Falha ao preparar atualização de participantes do projeto!", sqle);
         }
-        
+
         return stmt;
     }
 
@@ -754,7 +756,7 @@ public class DBProjeto implements ProjetoDAO {
                 throw new PersistenciaException("Falha ao acessar o resultado da consulta", ex);
             }
         }
-        
+
         return usuarios;
     }
 
@@ -968,5 +970,60 @@ public class DBProjeto implements ProjetoDAO {
         }
 
         return carregaProjetos(result);
+    }
+
+    @Override
+    public void addRecado(int idProjeto, int idRemetente, Recado recado) throws PersistenciaException {
+
+        String sql = "intert into recado (conteudo, data_envio, id_usuario, id_proj) values (?, ?, ? ,?)";
+        PreparedStatement stmt;
+
+        try {
+
+            stmt = this.connection.prepareStatement(sql);
+            stmt.setString(1, recado.getConteudo());
+            stmt.setDate(2, new Date(recado.getDataEnvio().getTime()));
+            stmt.setInt(3, idRemetente);
+            stmt.setInt(4, idProjeto);
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar adição de recado ao projeto!", sqle);
+        }
+
+        try {
+
+            stmt.executeUpdate();
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao adicionar recado ao projeto!", sqle);
+        }
+    }
+
+    @Override
+    public List<Recado> listarRecados(int idProjeto) throws PersistenciaException {
+        
+        List<Recado> recados = new ArrayList<>();
+        
+        String sql = "select * from recado where id_proj = ?";
+        PreparedStatement stmt;
+
+        try {
+
+            stmt = this.connection.prepareStatement(sql);
+            stmt.setInt(1, idProjeto);
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar consulta por recados do projeto!", sqle);
+        }
+
+        try {
+
+            stmt.executeUpdate();
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao consultar recados do projeto!", sqle);
+        }
+        
+        return recados;
     }
 }
