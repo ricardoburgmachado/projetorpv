@@ -47,6 +47,7 @@ INSERT INTO permissao(id_perm, descricao)VALUES(9, 'LISTAGEM_INSCRICOES');
 INSERT INTO permissao(id_perm, descricao)VALUES(10, 'PRESTAR_CONTAS');
 INSERT INTO permissao(id_perm, descricao)VALUES(11, 'DOWNLOAD_EDITAL');
 INSERT INTO permissao(id_perm, descricao)VALUES(12, 'ALTERAR_STATUS_PROJETO');
+INSERT INTO permissao(id_perm, descricao)VALUES(13, 'CONTEMPLACAO_EDITAL');
 /***************************** FIM cadastro PERMISSÃO **********************/
 
 
@@ -68,11 +69,12 @@ INSERT INTO papel_permissao(id_perm, id_papel) VALUES (1, 1); /** CRUD_PROJETO -
 INSERT INTO papel_permissao(id_perm, id_papel) VALUES (10, 3); /** PRESTAR_CONTAS -> PROFESSOR **/
 INSERT INTO papel_permissao(id_perm, id_papel) VALUES (11, 3); /** DOWNLOAD_EDITAL -> PROFESSOR **/	
 INSERT INTO papel_permissao(id_perm, id_papel) VALUES (12, 2); /** ALTERAR_STATUS_PROJETO -> COORDENADOR **/	
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (13, 1);
 /***************************** FIM cadastro PAPEL PERMISSÃO **********************/
 
 /***************************** INICIO cadastro usuarios **********************/
 INSERT INTO usuario VALUES (1, 'joao', 'joao', 'joão da silva','ALEGRETE');
-INSERT INTO usuario VALUES (2, 'maria', 'maria', 'maria da silva','ALEGRETE');
+INSERT INTO usuario VALUES (2, 'maria', 'maria', 'maria da silva','ALEGRETE', 'PESQUISA');
 INSERT INTO usuario VALUES (3, 'alfredo', 'alfredo', 'alfredo picareta','ALEGRETE');
 INSERT INTO usuario VALUES (4, 'joaquim', 'joaquim', 'joaquim santos','ALEGRETE');
 INSERT INTO usuario VALUES (5, 'rafael', 'rafael', 'rafael santos','ALEGRETE');
