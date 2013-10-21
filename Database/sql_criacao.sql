@@ -109,6 +109,13 @@ CREATE TABLE public.projeto (
 
 ALTER SEQUENCE public.projeto_id_proj_seq OWNED BY public.projeto.id_proj;
 
+CREATE TABLE public.prestacao_contas (
+                id_arquivo INTEGER NOT NULL,
+                id_proj INTEGER NOT NULL,
+                CONSTRAINT prestacao_contas_pk PRIMARY KEY (id_arquivo)
+);
+
+
 CREATE TABLE public.respaldo (
                 id_arquivo INTEGER NOT NULL,
                 id_proj INTEGER NOT NULL,
@@ -174,6 +181,13 @@ ON UPDATE CASCADE
 NOT DEFERRABLE;
 
 ALTER TABLE public.respaldo ADD CONSTRAINT arquivo_respaldo_fk
+FOREIGN KEY (id_arquivo)
+REFERENCES public.arquivo (id_arquivo)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.prestacao_contas ADD CONSTRAINT arquivo_prestacao_contas_fk
 FOREIGN KEY (id_arquivo)
 REFERENCES public.arquivo (id_arquivo)
 ON DELETE NO ACTION
@@ -272,6 +286,13 @@ ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
 ALTER TABLE public.respaldo ADD CONSTRAINT projeto_respaldo_fk
+FOREIGN KEY (id_proj)
+REFERENCES public.projeto (id_proj)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.prestacao_contas ADD CONSTRAINT projeto_prestacao_contas_fk
 FOREIGN KEY (id_proj)
 REFERENCES public.projeto (id_proj)
 ON DELETE NO ACTION
