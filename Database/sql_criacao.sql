@@ -120,6 +120,7 @@ CREATE TABLE public.inscricao (
                 id_proj INTEGER NOT NULL,
                 id_edital INTEGER NOT NULL,
                 id_arquivo INTEGER,
+                aprovada BOOLEAN,
                 CONSTRAINT inscricao_pk PRIMARY KEY (id_proj, id_edital)
 );
 
