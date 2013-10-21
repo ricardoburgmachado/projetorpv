@@ -13,6 +13,7 @@ import br.com.model.Arquivo;
 import br.com.model.Edital;
 import br.com.model.Inscricao;
 import br.com.model.Permissao;
+import br.com.model.Projeto;
 import br.com.model.StatusProjeto;
 import br.com.model.TipoProjeto;
 import br.com.model.Usuario;
@@ -327,7 +328,6 @@ public class RepositorioEdital {
 
     private boolean verificaConsistenciaCancelaInscricao(Inscricao inscricao, Usuario usuario, Date dataCancelamento) throws AutorizacaoException, PrivacidadeException, DadoInconsistenteException {
 
-
         if (usuario == null || !usuario.getPermissoes().contains(Permissao.CANCELAMENTO_INSCRICAO)) {
 
             throw new AutorizacaoException("Usuário sem permissão para cancelar inscrição!");
@@ -370,9 +370,9 @@ public class RepositorioEdital {
 
         return true;
     }
-    
-    protected boolean verificaConsistenciaDownloadArqInscricao(Inscricao inscricao, Usuario usuario){
-        
+
+    protected boolean verificaConsistenciaDownloadArqInscricao(Inscricao inscricao, Usuario usuario) {
+
         if (usuario == null || !usuario.getPermissoes().contains(Permissao.LISTAGEM_INSCRICOES)) {
 
             throw new AutorizacaoException("Usuário sem permissão para obter arquivo da inscrição!");
@@ -386,6 +386,46 @@ public class RepositorioEdital {
         if (inscricao.getProjeto().getProfessor().getId() != usuario.getId()) {
 
             throw new PrivacidadeException("Inscrição não pertencente ao usuário!");
+        }
+
+        return true;
+    }
+
+    protected void contemplar(Inscricao inscricao, Usuario usuario) throws DadoInconsistenteException, AutorizacaoException, PersistenciaException {
+
+        /*if(verificaConsistenciaContemplacao(projeto, usuario)){
+            
+         projeto.setStatus(StatusProjeto.CONTEMPLADO);
+         this.projDAO.atualizaStatus(projeto);
+         }*/
+    }
+
+    protected void naoContemplar(Projeto projeto, Usuario usuario) throws DadoInconsistenteException, AutorizacaoException, PersistenciaException {
+
+    }
+
+    private boolean verificaConsistenciaContemplacao(Inscricao inscricao, Usuario usuario) throws DadoInconsistenteException, AutorizacaoException {
+
+        DadoInconsistenteException diex = null;
+
+        if (usuario == null || usuario.getPermissoes() == null || !usuario.getPermissoes().contains(Permissao.CONTEMPLACAO_PROJETO)) {
+
+            throw new AutorizacaoException("Usuário sem permissão para contemplar/não contemplar projeto!");
+        }
+
+        if (inscricao == null) {
+
+            throw new DadoInconsistenteException("Inscrição inexistente!");
+        }
+
+        if (!usuario.getArea().equals(inscricao.getProjeto().getTipoProjeto())) {
+
+            diex = new DadoInconsistenteException(diex, "Pró-reitor de área diferente da do projeto!");
+        }
+
+        if (diex != null) {
+
+            throw diex;
         }
 
         return true;

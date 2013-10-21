@@ -13,6 +13,7 @@ import br.com.model.Inscricao;
 import br.com.model.ProReitor;
 import br.com.model.Professor;
 import br.com.model.Projeto;
+import br.com.model.Recado;
 import br.com.model.StatusProjeto;
 import br.com.model.TipoProjeto;
 import java.sql.Connection;
@@ -769,7 +770,7 @@ public class DBEdital implements EditalDAO {
 
             projeto.setTitulo(result.getString("titulo"));
         }
-        
+
         Professor professor = new Professor();
         professor.setId(result.getInt("id_responsavel"));
         projeto.setProfessor(professor);
@@ -844,9 +845,9 @@ public class DBEdital implements EditalDAO {
 
             result = stmt.executeQuery();
             Inscricao inscricao;
-            
+
             while ((inscricao = nextInscricao(result, true)) != null) {
-                
+
                 inscricoes.add(inscricao);
             }
         } catch (SQLException sqle) {
@@ -874,5 +875,69 @@ public class DBEdital implements EditalDAO {
 
         return arquivo;
 
+    }
+
+    @Override
+    public void addRecadoInscricao(int idEdital, int idProjeto, int idRemetente, Recado recado) throws PersistenciaException {
+
+        String sql = "intert into recado (conteudo, data_envio, id_usuario, id_proj) values (?, ?, ? ,?)";
+        PreparedStatement stmt;
+        Connection conn = this.factory.createConnection();
+
+        try {
+
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, recado.getConteudo());
+            stmt.setDate(2, new Date(recado.getDataEnvio().getTime()));
+            stmt.setInt(3, idRemetente);
+            stmt.setInt(4, idProjeto);
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar adição de recado ao projeto!", sqle);
+        }
+
+        try {
+
+            stmt.executeUpdate();
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao adicionar recado ao projeto!", sqle);
+        }finally{
+            
+            this.factory.close(conn);
+        }
+    }
+
+    @Override
+    public List<Recado> listarRecadosInscricao(int idEdital, int idProjeto) throws PersistenciaException {
+
+        List<Recado> recados = new ArrayList<>();
+
+        String sql = "select * from recado where id_proj = ?";
+        PreparedStatement stmt;
+        Connection conn = this.factory.createConnection();
+
+        try {
+
+            
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idProjeto);
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar consulta por recados do projeto!", sqle);
+        }
+
+        try {
+
+            stmt.executeUpdate();
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao consultar recados do projeto!", sqle);
+        }finally{
+            
+            this.factory.close(conn);
+        }
+
+        return recados;
     }
 }

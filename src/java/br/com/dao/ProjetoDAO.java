@@ -84,8 +84,6 @@ public interface ProjetoDAO {
 
     public List<Projeto> listarProjetos(int idResponsavel, Set<StatusProjeto> status, Campus campus, TipoProjeto tipo) throws PersistenciaException;
     
-    public void addRecado(int idProjeto, int idRemetente, Recado recado) throws PersistenciaException;
     
-    public List<Recado> listarRecados(int idProjeto) throws PersistenciaException;
 
 }

@@ -450,39 +450,8 @@ public class RepositorioProjeto {
         }
     }
     
-    protected void contemplar(Projeto projeto, Usuario usuario) throws DadoInconsistenteException, AutorizacaoException, PersistenciaException{
+    protected void atualizaStatusProjeto(Projeto projeto){
         
-        if(verificaConsistenciaContemplacao(projeto, usuario)){
-            
-            projeto.setStatus(StatusProjeto.CONTEMPLADO);
-            this.projDAO.atualizaStatus(projeto);
-        }
-    }
-    
-    private boolean verificaConsistenciaContemplacao(Projeto projeto, Usuario usuario) throws DadoInconsistenteException, AutorizacaoException{
-        
-        DadoInconsistenteException diex = null;
-        
-        if(usuario == null || usuario.getPermissoes() == null || !usuario.getPermissoes().contains(Permissao.CONTEMPLACAO_PROJETO)){
-            
-            throw new AutorizacaoException("Usuário sem permissão para contemplar projeto!");
-        }
-        
-        if(projeto == null || !projeto.getStatus().equals(StatusProjeto.INSCRITO)){
-            
-            diex = new DadoInconsistenteException("O projeto precisa estar inscrito num edital e não estar contemplado!");
-        }
-        
-        if(projeto == null || !usuario.getArea().equals(projeto.getTipoProjeto())){
-            
-            diex = new DadoInconsistenteException(diex, "Pró-reitor de área diferente da do projeto!");
-        }
-        
-        if(diex != null){
-            
-            throw diex;
-        }
-        
-        return true;
+        this.projDAO.atualizaStatus(projeto);
     }
 }
