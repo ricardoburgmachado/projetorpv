@@ -131,4 +131,10 @@ public class RepositorioFacade {
         
         this.repProjeto.editaProjetoEmExecucao(projeto, usuario);
     }
+    
+    public void contemplarProjeto(int idProjeto, Usuario usuario) throws AutorizacaoException, DadoInconsistenteException, PersistenciaException{
+        
+        Projeto projeto = this.repProjeto.obter(idProjeto);
+        this.repProjeto.contemplar(projeto, usuario);
+    }
 }
