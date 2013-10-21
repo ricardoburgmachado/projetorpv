@@ -116,17 +116,10 @@
                         <input style="width: 500px" type="text" disabled="true" name="titulo" value="${projeto.titulo}" />       
 
                         <span style="clear: both; display: block;"></span>
-
-                        <span class="bloco">
-                            <label  for="nome">Status projeto:</label><br/><br/> 
-                            <select id="status_projeto" name="status">
-                                <option <c:if test="${projeto.status eq 'CRIADO'}">selected="selected"</c:if> value="<%=StatusProjeto.CRIADO%>">Não homologado</option>
-                                <option <c:if test="${projeto.status eq 'SUBMETIDO_HOMOLOGACAO'}">selected="selected"</c:if> value="<%=StatusProjeto.SUBMETIDO_HOMOLOGACAO%>">Submetido para homologação</option>
-                                <option <c:if test="${projeto.status eq 'HOMOLOGADO'}">selected="selected"</c:if> value="<%=StatusProjeto.HOMOLOGADO%>">Homologado</option>
-                                <option <c:if test="${projeto.status eq 'INSCRITO'}">selected="selected"</c:if> value="<%=StatusProjeto.INSCRITO%>">Inscrito</option>                                
-                            </select>
-                         </span>
-
+                        
+                        <label  for="nome">Status projeto:</label><br/><br/> 
+                        <input <c:if test="${projeto.status eq 'HOMOLOGADO'}">checked="checked"</c:if>   style=" margin-top: 10px; height: 10px; width: 20px; cursor: pointer" type="radio" name="status_x" value="true"><span style="display: block; float: left; margin-top: 10px; ">Homologado</span>
+                        <input  <c:if test="${projeto.status eq 'CRIADO'}">checked="checked"</c:if> style=" margin-top: 10px; margin-left: 25px; clear: none; height: 10px; width: 20px; cursor: pointer" type="radio" name="status_x" value="false" ><span style="display: block; float: left; margin-top: 10px; ">Não Homologado</span>
                             
                          <span style="clear: both; display: block;"></span>
                             <span class="bloco">

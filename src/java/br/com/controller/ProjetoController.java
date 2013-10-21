@@ -604,6 +604,14 @@ public class ProjetoController extends GenericController {
             p_projeto.setRespaldo(arq);
         }
 
+        boolean status = Boolean.valueOf(request.getParameter("status_x"));
+        
+        if(status){
+            p_projeto.setStatus(StatusProjeto.HOMOLOGADO);
+        }else{
+            p_projeto.setStatus(StatusProjeto.CRIADO);
+        }      
+        
         List<String> inconsistencias = new LinkedList<>();
 
         try {
@@ -635,5 +643,86 @@ public class ProjetoController extends GenericController {
 
         return mv;
     }
+    
+
+    @RequestMapping(value = "/projeto_presta_contas_show")
+    public ModelAndView projetoPrestaContasShow(HttpServletRequest p_request, @RequestParam int id) {
+
+        this.request = p_request;
+        System.out.println("************** ID VINDA POR PARAMETRO: " + id);
+
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        //if (!verificaAutorizacao(user, Permissao.ALTERAR_STATUS_PROJETO)) {
+
+        //    return new ModelAndView("login");
+        //}
+
+        this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
+        this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
+
+        Projeto projetoBD = this.repositorioProjeto.obter(id);
+
+        ModelAndView mv = new ModelAndView("projeto_presta_contas");
+        mv.addObject("projeto", projetoBD);
+
+        return mv;
+    }
+
+    
+    
+    @RequestMapping(value = "/projeto_presta_contas", method = RequestMethod.POST)
+    public ModelAndView projetoPrestaContas(@ModelAttribute Projeto p_projeto, HttpServletRequest p_request,
+            @RequestParam(value = "arquivo_xx", required = false) MultipartFile arquivo) throws IOException {
+
+        this.request = p_request;
+
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        if (!verificaAutorizacao(user, Permissao.CRUD_PROJETO)) {
+            return new ModelAndView("login");
+        }
+
+        this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
+        this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
+
+        if (!arquivo.isEmpty()) {
+            String[] split = arquivo.getOriginalFilename().split("\\.");
+            Arquivo arq = new Arquivo(arquivo.getName(), arquivo.getContentType(), arquivo.getBytes());
+            p_projeto.setPrestacaoConta(arq);
+        }
+        
+        List<String> inconsistencias = new LinkedList<>();
+
+        try {
+            repositorioProjeto.alteraStatusProjeto(p_projeto);
+        } catch (DadoInconsistenteException diex) {
+            do {
+                inconsistencias.add(diex.getMessage());
+                diex = diex.getException();
+            } while (diex != null);
+        } catch (PersistenciaException pex) {
+
+            inconsistencias.add(pex.getMessage());
+        }
+
+        ModelAndView mv;
+        if (inconsistencias.size() > 0) {
+            this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
+            Projeto projetoBD = this.repositorioProjeto.obter(p_projeto.getId());
+            mv = new ModelAndView("projeto_altera_status");
+            mv.addObject("projeto", projetoBD);
+            mv.addObject("mensagem", inconsistencias);
+        } else {
+            this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
+            Projeto projetoBD = this.repositorioProjeto.obter(p_projeto.getId());
+            mv = new ModelAndView("projeto_altera_status");
+            mv.addObject("projeto", projetoBD);
+            mv.addObject("mensagem", "Status do projeto alterado com sucesso!");
+        }
+
+        return mv;
+    }
+    
+    
+    
 
 }

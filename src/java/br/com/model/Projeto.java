@@ -23,7 +23,7 @@ public class Projeto {
     private boolean sigilo;
     private StatusProjeto status;
     private Arquivo respaldo;
-    
+    private Arquivo prestacaoConta;
     
     public Projeto(){
         
@@ -304,6 +304,20 @@ public class Projeto {
      */
     public void setRespaldo(Arquivo respaldo) {
         this.respaldo = respaldo;
+    }
+
+    /**
+     * @return the prestacao_conta
+     */
+    public Arquivo getPrestacaoConta() {
+        return prestacaoConta;
+    }
+
+    /**
+     * @param prestacao_conta the prestacao_conta to set
+     */
+    public void setPrestacaoConta(Arquivo prestacao_conta) {
+        this.prestacaoConta = prestacao_conta;
     }
     
     
