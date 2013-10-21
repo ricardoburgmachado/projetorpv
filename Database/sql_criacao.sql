@@ -109,21 +109,6 @@ CREATE TABLE public.projeto (
 
 ALTER SEQUENCE public.projeto_id_proj_seq OWNED BY public.projeto.id_proj;
 
-CREATE SEQUENCE public.recado_id_recado_seq;
-
-CREATE TABLE public.recado (
-                id_recado INTEGER NOT NULL DEFAULT nextval('public.recado_id_recado_seq'),
-                conteudo VARCHAR(300) NOT NULL,
-                data_envio DATE NOT NULL,
-                id_usuario INTEGER NOT NULL,
-                id_proj INTEGER,
-                CONSTRAINT recado_pk PRIMARY KEY (id_recado)
-);
-
-
-ALTER SEQUENCE public.recado_id_recado_seq OWNED BY public.recado.id_recado;
-
-
 CREATE TABLE public.respaldo (
                 id_arquivo INTEGER NOT NULL,
                 id_proj INTEGER NOT NULL,
@@ -138,6 +123,21 @@ CREATE TABLE public.inscricao (
                 CONSTRAINT inscricao_pk PRIMARY KEY (id_proj, id_edital)
 );
 
+
+CREATE SEQUENCE public.recado_id_recado_seq;
+
+CREATE TABLE public.recado (
+                id_recado INTEGER NOT NULL DEFAULT nextval('public.recado_id_recado_seq'),
+                conteudo VARCHAR(300) NOT NULL,
+                data_envio DATE NOT NULL,
+                id_usuario INTEGER NOT NULL,
+                id_proj INTEGER,
+                id_edital INTEGER,
+                CONSTRAINT recado_pk PRIMARY KEY (id_recado)
+);
+
+
+ALTER SEQUENCE public.recado_id_recado_seq OWNED BY public.recado.id_recado;
 
 CREATE SEQUENCE public.custo_id_seq;
 
@@ -189,13 +189,6 @@ ON UPDATE CASCADE
 NOT DEFERRABLE;
 
 ALTER TABLE public.respaldo ADD CONSTRAINT arquivo_respaldo_fk
-FOREIGN KEY (id_arquivo)
-REFERENCES public.arquivo (id_arquivo)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
-ALTER TABLE public.prestacao_contas ADD CONSTRAINT arquivo_prestacao_contas_fk
 FOREIGN KEY (id_arquivo)
 REFERENCES public.arquivo (id_arquivo)
 ON DELETE NO ACTION
@@ -307,17 +300,9 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-<<<<<<< HEAD
-ALTER TABLE public.prestacao_contas ADD CONSTRAINT projeto_prestacao_contas_fk
-FOREIGN KEY (id_proj)
-REFERENCES public.projeto (id_proj)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-=======
-ALTER TABLE public.recado ADD CONSTRAINT projeto_recado_fk
-FOREIGN KEY (id_proj)
-REFERENCES public.projeto (id_proj)
+ALTER TABLE public.recado ADD CONSTRAINT inscricao_recado_fk
+FOREIGN KEY (id_proj, id_edital)
+REFERENCES public.inscricao (id_proj, id_edital)
 ON DELETE CASCADE
 ON UPDATE CASCADE
->>>>>>> b900a853a24eadfb142935da30db9635a54a2bbd
 NOT DEFERRABLE;
