@@ -981,5 +981,32 @@ public class DBProjeto implements ProjetoDAO {
 
         return 0;
     }
+
+    @Override
+    public void prestaContas(Projeto projeto) throws PersistenciaException {
+        String sql = "INSERT INTO prestacao_contas (id_arquivo, id_proj) VALUES (?,?)";
+        //Connection conn = factory.createConnection();
+        PreparedStatement stmt;
+        try {
+            stmt = connection.prepareStatement(sql);            
+            stmt.setInt(1, adicionaArquivo(projeto.getPrestacaoConta())  );
+            stmt.setInt(2, projeto.getId());
+
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao configurar retificação do edital!", sqle);
+        }
+
+        try {
+
+            stmt.execute();
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao retificar edital!", sqle);
+        } finally {
+
+            //factory.close(conn);
+        }        
+    }
     
 }

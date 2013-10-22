@@ -490,6 +490,21 @@ ol#menurel li a {
     border: none;
 } 
 
+#lista_projetos .linealt .presta_contas a{
+    display: block;
+    float: left;
+    width: 28px;
+    height: 28px;
+    text-align: center;
+    background:url(../imagens/prestacao_contas.png) no-repeat;
+    border: none;
+    margin-left: 7px;
+} 
+
+#lista_projetos .linealt .presta_contas a:hover{
+    background:url(../imagens/prestacao_contas_hover.png) no-repeat;
+    border: none;
+} 
 
 #lista_projetos .linealt .exibe a{
     display: block;

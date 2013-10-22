@@ -141,8 +141,8 @@
 
                     <fieldset> 
 
-                        <!-- PRESTAR ATENÇÃO AQUI, DEVE SER RECUPERADO O ID DO PROFESSOR QUE ESTARÁ NA SESSÃO -->
-                        <input type="hidden" name="id" value=1 />       
+
+                        <input type="hidden" name="id" value=${projeto.id} />       
 
 
                         <label>Título:</label>

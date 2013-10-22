@@ -46,23 +46,37 @@ public class RepositorioEdital {
         }
 
         if (verificaNulo(edital.getPrazoInicial())) {
-            exception = new DadoInconsistenteException(exception, "Prazo inicial não informado!<br/>");
+            exception = new DadoInconsistenteException(exception, "Prazo inicial(inscrição) não informado!<br/>");
         }
 
         if (!verificaNulo(edital.getPrazoInicial()) && !verificaNulo(edital.getPrazoFinal())) {
             if (verificaPrazoMenor(edital.getPrazoInicial(), edital.getPrazoFinal())) {
-                exception = new DadoInconsistenteException(exception, "Prazo final menor que prazo inicial!<br/>");
+                exception = new DadoInconsistenteException(exception, "Prazo final(inscrição) menor que prazo inicial!<br/>");
             }
         }
-
+        
         if (verificaNulo(edital.getPrazoFinal())) {
-            exception = new DadoInconsistenteException(exception, "Prazo final não informado!<br/>");
+            exception = new DadoInconsistenteException(exception, "Prazo final não(inscrição) informado!<br/>");
         }
 
         if (verificaNulo(edital.getArquivo())) {
             exception = new DadoInconsistenteException(exception, "Arquivo não anexado!<br/>");
         }
+        
+        if (verificaNulo(edital.getPrazoIniPrestCont())) {
+            exception = new DadoInconsistenteException(exception, "Prazo inicial(prestar contas) não informado!<br/>");
+        }
 
+        if (!verificaNulo(edital.getPrazoIniPrestCont()) && !verificaNulo(edital.getPrazoFimPrestCont())) {
+            if (verificaPrazoMenor(edital.getPrazoIniPrestCont(), edital.getPrazoFimPrestCont())) {
+                exception = new DadoInconsistenteException(exception, "Prazo final(prestar contas) menor que prazo inicial!<br/>");
+            }
+        }
+        
+        if (verificaNulo(edital.getPrazoFimPrestCont())) {
+            exception = new DadoInconsistenteException(exception, "Prazo final(prestar contas) não informado!<br/>");
+        }        
+        
         if (exception == null) {
 
             this.editalDao.adiciona(edital);

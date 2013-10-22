@@ -676,6 +676,8 @@ public class ProjetoController extends GenericController {
 
         this.request = p_request;
 
+        System.out.println(" *********************** CAIU EM PROJETO PRESTA CONTAS");
+        
         Usuario user = (Usuario) request.getSession().getAttribute("usuario");
         if (!verificaAutorizacao(user, Permissao.CRUD_PROJETO)) {
             return new ModelAndView("login");
@@ -691,9 +693,10 @@ public class ProjetoController extends GenericController {
         }
         
         List<String> inconsistencias = new LinkedList<>();
-
+        
+        
         try {
-            repositorioProjeto.alteraStatusProjeto(p_projeto);
+            repositorioProjeto.prestaContas(p_projeto);
         } catch (DadoInconsistenteException diex) {
             do {
                 inconsistencias.add(diex.getMessage());
@@ -708,15 +711,15 @@ public class ProjetoController extends GenericController {
         if (inconsistencias.size() > 0) {
             this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
             Projeto projetoBD = this.repositorioProjeto.obter(p_projeto.getId());
-            mv = new ModelAndView("projeto_altera_status");
+            mv = new ModelAndView("projeto_presta_contas");
             mv.addObject("projeto", projetoBD);
             mv.addObject("mensagem", inconsistencias);
         } else {
             this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
-            Projeto projetoBD = this.repositorioProjeto.obter(p_projeto.getId());
-            mv = new ModelAndView("projeto_altera_status");
-            mv.addObject("projeto", projetoBD);
-            mv.addObject("mensagem", "Status do projeto alterado com sucesso!");
+            List projetos = repositorioProjeto.listarProjetos(user.getId());
+            mv = new ModelAndView("lista_projeto");
+            mv.addObject("projetos", projetos);
+            mv.addObject("mensagem", "Prestação de contas realizada com sucesso!");
         }
 
         return mv;

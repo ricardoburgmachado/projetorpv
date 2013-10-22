@@ -82,18 +82,19 @@
                         <span style="clear: both; display: block;"></span>
                             
                         <span class="bloco">
-                            <label for="dataxx">Prazo Inicial:</label>
+                            <label for="dataxx">Prazo Inicial(inscrição):</label>
                             <input style="width: 175px" class="prazo" type="date" name="prazoInicial_xx" id="prazoInicialxx" value="" />
                         </span>
                             
                         <span class="bloco">
-                            <label for="dataxx">Prazo Final:</label>
+                            <label for="dataxx">Prazo Final(inscrição):</label>
                             <input style="width: 175px" class="prazo" type="date" name="prazoFinal_xx" id="prazoFinalxx" value="" />
                         </span>    
 
                         <span style="clear: both; display: block;"></span>
 
-
+                        
+                        
                         <span class="bloco">
                             <label for="nome">Anexo (arquivo .PDF):</label>
                             <input style="font-size: 12px; font-weight: normal; border: none; cursor: pointer" type="file" name="arquivo_xx"/> 
@@ -103,8 +104,18 @@
                         <span style="clear: both; display: block;"></span>
 
 
+                        <span class="bloco">
+                            <label for="dataxx">Prazo Inicial(prestar conta):</label>
+                            <input style="width: 175px" class="prazo" type="date" name="prazoInicial_prest_xx" id="prazoInicialxx" value="" />
+                        </span>
+                            
+                        <span class="bloco">
+                            <label for="dataxx">Prazo Final(prestar conta):</label>
+                            <input style="width: 175px" class="prazo" type="date" name="prazoFinal_prest_xx" id="prazoFinalxx" value="" />
+                        </span>    
 
-                        <span style="clear: both; display: block"></span>
+                        <span style="clear: both; display: block;"></span>
+                        
 
                         <input class="enviar_form" type="submit" value="Adicionar"/>
 

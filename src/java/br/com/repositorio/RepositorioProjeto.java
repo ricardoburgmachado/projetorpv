@@ -368,8 +368,6 @@ public class RepositorioProjeto {
      * @param p 
      */
     public void alteraStatusProjeto(Projeto p){
-    
-         
          
          DadoInconsistenteException exception = null;
 
@@ -389,4 +387,22 @@ public class RepositorioProjeto {
         }
 
     }
+    
+    public void prestaContas(Projeto projeto){
+         DadoInconsistenteException exception = null;
+
+
+        if (projeto.getPrestacaoConta() == null) {
+            exception = new DadoInconsistenteException(exception, "Arquivo não anexado <br/>");
+        }
+
+        if (exception == null) {
+            projDAO.prestaContas(projeto);
+        } else {
+            throw exception;
+        }
+  
+     }
+    
+    
 }

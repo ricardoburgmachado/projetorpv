@@ -99,15 +99,30 @@ public class EditalController extends GenericController {
         String[] pI = request.getParameterValues("prazoInicial_xx");
         String[] pF = request.getParameterValues("prazoFinal_xx");
 
-        if (pI[0] != null && !pI[0].equals("")) {
+        String[] pIPrestConta = request.getParameterValues("prazoInicial_prest_xx");
+        String[] pFPrestConta = request.getParameterValues("prazoFinal_prest_xx");
+        
+        if(pI[0] != null && !pI[0].equals("")) {
             String[] pISplit = pI[0].split("-");
             edital.setPrazoInicial(new Date(Integer.parseInt(pISplit[0]) - 1900, Integer.parseInt(pISplit[1]) - 1, Integer.parseInt(pISplit[2])));
         }
 
-        if (pF[0] != null && !pF[0].equals("")) {
+        if(pF[0] != null && !pF[0].equals("")) {
             String[] pFSplit = pF[0].split("-");
             edital.setPrazoFinal(new Date(Integer.parseInt(pFSplit[0]) - 1900, Integer.parseInt(pFSplit[1]) - 1, Integer.parseInt(pFSplit[2])));
         }
+        
+        if(pIPrestConta[0] != null && !pIPrestConta[0].equals("")) {
+            String[] pISplit = pI[0].split("-");
+            edital.setPrazoIniPrestCont(new Date(Integer.parseInt(pISplit[0]) - 1900, Integer.parseInt(pISplit[1]) - 1, Integer.parseInt(pISplit[2])));
+        }
+        
+        if(pFPrestConta[0] != null && !pFPrestConta[0].equals("")) {
+            String[] pISplit = pI[0].split("-");
+            edital.setPrazoFimPrestCont(new Date(Integer.parseInt(pISplit[0]) - 1900, Integer.parseInt(pISplit[1]) - 1, Integer.parseInt(pISplit[2])));
+        }
+
+        
         List<String> inconsistencias = new LinkedList<>();
 
         try {

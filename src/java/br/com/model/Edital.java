@@ -25,6 +25,8 @@ public class Edital {
     private ProReitor proReitor;
     private Arquivo arquivo;
     private List<Arquivo> retificacoes;
+    private Date prazoIniPrestCont;
+    private Date prazoFimPrestCont;
 
 
     public Edital() {
@@ -159,5 +161,33 @@ public class Edital {
     public String organizaData(Date d){ 
         String formato = new SimpleDateFormat("dd/MM/YYYY").format(d);
         return formato;
+    }
+
+    /**
+     * @return the prazoIniPrestCont
+     */
+    public Date getPrazoIniPrestCont() {
+        return prazoIniPrestCont;
+    }
+
+    /**
+     * @param prazoIniPrestCont the prazoIniPrestCont to set
+     */
+    public void setPrazoIniPrestCont(Date prazoIniPrestCont) {
+        this.prazoIniPrestCont = prazoIniPrestCont;
+    }
+
+    /**
+     * @return the prazoFimPrestCont
+     */
+    public Date getPrazoFimPrestCont() {
+        return prazoFimPrestCont;
+    }
+
+    /**
+     * @param prazoFimPrestCont the prazoFimPrestCont to set
+     */
+    public void setPrazoFimPrestCont(Date prazoFimPrestCont) {
+        this.prazoFimPrestCont = prazoFimPrestCont;
     }
 }
