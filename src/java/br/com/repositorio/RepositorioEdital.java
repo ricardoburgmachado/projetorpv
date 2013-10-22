@@ -401,12 +401,11 @@ public class RepositorioEdital {
         }
     }
 
-    protected void naoContemplar(Inscricao inscricao, Usuario usuario, Recado recado) throws DadoInconsistenteException, AutorizacaoException, PersistenciaException {
+    protected void naoContemplar(Inscricao inscricao, Usuario usuario) throws DadoInconsistenteException, AutorizacaoException, PersistenciaException {
         
         if (verificaConsistenciaContemplacao(inscricao, usuario)) {
 
-            this.editalDao.atualizaStatusInscricao(inscricao.getEdital().getId(), inscricao.getProjeto().getId(), false);
-            if (recado != null) this.editalDao.addRecadoInscricao(inscricao.getEdital().getId(), inscricao.getProjeto().getId(), usuario.getId(), recado);
+            this.editalDao.excluiInscricao(inscricao.getProjeto().getId(), inscricao.getProjeto().getId());
         }
     }
 
