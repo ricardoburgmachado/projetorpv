@@ -1041,6 +1041,11 @@ a[href*="projeto_nao_homologa"]{
     font-size: 1rem;
 }
 
+.inscricao_aprovada{
+    
+    background-color: lime;
+}
+
 .listagem > div ul{
     float: left;
     display: block;

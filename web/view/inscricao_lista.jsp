@@ -44,19 +44,19 @@
 
                 <div class="listagem">
                     <c:forEach var="inscricao" items="${inscricoes}">
-                        <div class="item-lista">
+                        <div class="item-lista <c:if test="${inscricao.aprovada}">inscricao_aprovada</c:if>">
 
-                            <ul title="Dados da inscrição">
-                                <li><span class="title">Projeto:</span> ${inscricao.projeto.titulo}</li>
+                                <ul title="Dados da inscrição">
+                                    <li><span class="title">Projeto:</span> ${inscricao.projeto.titulo}</li>
                                 <li><span class="title">Edital:</span> ${inscricao.edital.titulo}</li>
-                                <c:choose>
-                                    <c:when test="${empty inscricao.arquivo.dados}">
-                                    <li><span class="title">Arquivo:</span></li>
-                                    </c:when>
-                                    <c:otherwise>
-                                    <li><span class="title">Arquivo:</span><a class="arquivo" href="down_arquivo_inscricao?id_projeto=${inscricao.projeto.id}&id_edital=${inscricao.edital.id}" title="Download do arquivo" type="${inscricao.arquivo.extensao}"> ${inscricao.arquivo.nomeArquivo}</a></li>
-                                    </c:otherwise>
-                                </c:choose>
+                                    <c:choose>
+                                        <c:when test="${empty inscricao.arquivo.dados}">
+                                        <li><span class="title">Arquivo:</span></li>
+                                        </c:when>
+                                        <c:otherwise>
+                                        <li><span class="title">Arquivo:</span><a class="arquivo" href="down_arquivo_inscricao?id_projeto=${inscricao.projeto.id}&id_edital=${inscricao.edital.id}" title="Download do arquivo" type="${inscricao.arquivo.extensao}"> ${inscricao.arquivo.nomeArquivo}</a></li>
+                                        </c:otherwise>
+                                    </c:choose>
                                 <li><span class="title">Prazo final do edital:</span> <fmt:formatDate type="date" dateStyle="medium" value="${inscricao.edital.prazoFinal}" /></li>
                             </ul>
 
