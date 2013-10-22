@@ -874,13 +874,12 @@ public class DBEdital implements EditalDAO {
         }
 
         return arquivo;
-
     }
 
     @Override
     public void addRecadoInscricao(int idEdital, int idProjeto, int idRemetente, Recado recado) throws PersistenciaException {
 
-        String sql = "intert into recado (conteudo, data_envio, id_usuario, id_proj) values (?, ?, ? ,?)";
+        String sql = "intert into recado (conteudo, data_envio, id_usuario, id_edital, id_proj) values (?, ?, ?, ?, ?)";
         PreparedStatement stmt;
         Connection conn = this.factory.createConnection();
 
@@ -890,7 +889,8 @@ public class DBEdital implements EditalDAO {
             stmt.setString(1, recado.getConteudo());
             stmt.setDate(2, new Date(recado.getDataEnvio().getTime()));
             stmt.setInt(3, idRemetente);
-            stmt.setInt(4, idProjeto);
+            stmt.setInt(4, idEdital);
+            stmt.setInt(5, idProjeto);
         } catch (SQLException sqle) {
 
             throw new PersistenciaException("Falha ao preparar adição de recado ao projeto!", sqle);
@@ -902,8 +902,8 @@ public class DBEdital implements EditalDAO {
         } catch (SQLException sqle) {
 
             throw new PersistenciaException("Falha ao adicionar recado ao projeto!", sqle);
-        }finally{
-            
+        } finally {
+
             this.factory.close(conn);
         }
     }
@@ -911,17 +911,84 @@ public class DBEdital implements EditalDAO {
     @Override
     public List<Recado> listarRecadosInscricao(int idEdital, int idProjeto) throws PersistenciaException {
 
-        List<Recado> recados = new ArrayList<>();
+        List<Recado> recados;
 
-        String sql = "select * from recado where id_proj = ?";
+        String sql = "select * from recado where id_edital = ? and id_proj = ?";
         PreparedStatement stmt;
         Connection conn = this.factory.createConnection();
 
         try {
 
-            
             stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, idProjeto);
+            stmt.setInt(1, idEdital);
+            stmt.setInt(2, idProjeto);
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar consulta por recados do projeto!", sqle);
+        }
+
+        try {
+
+            ResultSet result = stmt.executeQuery();
+            recados = carregaRecados(result);
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao consultar recados do projeto!", sqle);
+        } finally {
+
+            this.factory.close(conn);
+        }
+
+        return recados;
+    }
+
+    private List<Recado> carregaRecados(ResultSet result) throws PersistenciaException {
+
+        List<Recado> recados = new ArrayList<>();
+        Recado recado;
+
+        while ((recado = nextRecado(result)) != null) {
+
+            recados.add(recado);
+        }
+
+        return recados;
+    }
+
+    private Recado nextRecado(ResultSet result) throws PersistenciaException {
+
+        Recado recado = null;
+
+        try {
+
+            if (result.next()) {
+
+                recado = new Recado();
+                recado.setConteudo(result.getString("conteudo"));
+                recado.setDataEnvio(result.getDate("data_envio"));
+                ProReitor usuario = new ProReitor();
+                usuario.setId(result.getInt("id_usuario"));
+                recado.setRemetente(usuario);
+            }
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Impossível acessar dados do recado!", sqle);
+        }
+
+        return recado;
+    }
+
+    private void atualizaStatusInscricao(int idEdital, int idProjeto, boolean contempla) throws PersistenciaException {
+
+        String sql = "update inscricao set  id_edital = ? and id_proj = ?";
+        PreparedStatement stmt;
+        Connection conn = this.factory.createConnection();
+
+        try {
+
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idEdital);
+            stmt.setInt(2, idProjeto);
         } catch (SQLException sqle) {
 
             throw new PersistenciaException("Falha ao preparar consulta por recados do projeto!", sqle);
@@ -933,11 +1000,9 @@ public class DBEdital implements EditalDAO {
         } catch (SQLException sqle) {
 
             throw new PersistenciaException("Falha ao consultar recados do projeto!", sqle);
-        }finally{
-            
+        } finally {
+
             this.factory.close(conn);
         }
-
-        return recados;
     }
 }

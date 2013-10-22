@@ -393,11 +393,10 @@ public class RepositorioEdital {
 
     protected void contemplar(Inscricao inscricao, Usuario usuario) throws DadoInconsistenteException, AutorizacaoException, PersistenciaException {
 
-        /*if(verificaConsistenciaContemplacao(projeto, usuario)){
-            
-         projeto.setStatus(StatusProjeto.CONTEMPLADO);
-         this.projDAO.atualizaStatus(projeto);
-         }*/
+        if(verificaConsistenciaContemplacao(inscricao, usuario)){
+ 
+        
+         }
     }
 
     protected void naoContemplar(Projeto projeto, Usuario usuario) throws DadoInconsistenteException, AutorizacaoException, PersistenciaException {
@@ -410,7 +409,7 @@ public class RepositorioEdital {
 
         if (usuario == null || usuario.getPermissoes() == null || !usuario.getPermissoes().contains(Permissao.CONTEMPLACAO_PROJETO)) {
 
-            throw new AutorizacaoException("Usuário sem permissão para contemplar/não contemplar projeto!");
+            throw new AutorizacaoException("Usuário sem permissão para contemplar projeto!");
         }
 
         if (inscricao == null) {
