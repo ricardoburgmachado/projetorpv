@@ -103,6 +103,8 @@ CREATE TABLE public.projeto (
                 status VARCHAR(50) NOT NULL,
                 is_arquivo BOOLEAN DEFAULT false NOT NULL,
                 id_responsavel INTEGER NOT NULL,
+                inicio DATE NOT NULL,
+                fim DATE NOT NULL,
                 CONSTRAINT id_pk PRIMARY KEY (id_proj)
 );
 
@@ -141,6 +143,7 @@ CREATE TABLE public.inscricao (
                 id_proj INTEGER NOT NULL,
                 id_edital INTEGER NOT NULL,
                 id_arquivo INTEGER,
+                aprovada BOOLEAN,
                 CONSTRAINT inscricao_pk PRIMARY KEY (id_proj, id_edital)
 );
 
@@ -316,8 +319,8 @@ NOT DEFERRABLE;
 ALTER TABLE public.recado ADD CONSTRAINT projeto_recado_fk
 FOREIGN KEY (id_proj)
 REFERENCES public.projeto (id_proj)
-ON DELETE CASCADE
-ON UPDATE CASCADE
+ON DELETE SET NULL
+ON UPDATE SET NULL
 NOT DEFERRABLE;
 
 ALTER TABLE public.prestacao_contas ADD CONSTRAINT projeto_prestacao_contas_fk
