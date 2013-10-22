@@ -8,7 +8,6 @@ import Exceptions.PersistenciaException;
 import br.com.model.Arquivo;
 import br.com.model.Edital;
 import br.com.model.Inscricao;
-import br.com.model.Recado;
 import br.com.model.TipoProjeto;
 import java.util.Date;
 import java.util.List;
@@ -56,4 +55,6 @@ public interface EditalDAO {
     List<Inscricao> listarInscricoes(int idUsuario) throws PersistenciaException;
     
     void atualizaStatusInscricao(int idEdital, int idProjeto, boolean aprovada) throws PersistenciaException;
+    
+    boolean existeInscricao(int idProjeto) throws PersistenciaException;
 }

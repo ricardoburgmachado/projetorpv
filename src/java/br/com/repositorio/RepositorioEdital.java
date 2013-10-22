@@ -13,8 +13,6 @@ import br.com.model.Arquivo;
 import br.com.model.Edital;
 import br.com.model.Inscricao;
 import br.com.model.Permissao;
-import br.com.model.Projeto;
-import br.com.model.Recado;
 import br.com.model.StatusProjeto;
 import br.com.model.TipoProjeto;
 import br.com.model.Usuario;
@@ -400,12 +398,24 @@ public class RepositorioEdital {
         }
     }
 
-    protected void naoContemplar(Inscricao inscricao, Usuario usuario) throws DadoInconsistenteException, AutorizacaoException, PersistenciaException {
+    /**
+     * Exclui o registro de inscrição do projeto no edital.
+     * @param inscricao Inscrição a ser concluída.
+     * @param usuario Usuário que realiza a operação.
+     * @return true se for a única inscrição corrente do projeto.
+     * @throws DadoInconsistenteException 
+     * @throws AutorizacaoException
+     * @throws PersistenciaException 
+     */
+    protected boolean naoContemplar(Inscricao inscricao, Usuario usuario) throws DadoInconsistenteException, AutorizacaoException, PersistenciaException {
         
         if (verificaConsistenciaContemplacao(inscricao, usuario)) {
 
             this.editalDao.excluiInscricao(inscricao.getProjeto().getId(), inscricao.getProjeto().getId());
+            return this.editalDao.existeInscricao(inscricao.getProjeto().getId());
         }
+        
+        return false;
     }
 
     private boolean verificaConsistenciaContemplacao(Inscricao inscricao, Usuario usuario) throws DadoInconsistenteException, AutorizacaoException {

@@ -728,6 +728,33 @@ public class DBEdital implements EditalDAO {
 
         return nextInscricao(result, true);
     }
+    
+    public boolean existeInscricao(int idProjeto) throws PersistenciaException{
+        
+        String sql = "select id_inscricao from inscricao where id_proj=?";
+        Connection conn = this.factory.createConnection();
+        PreparedStatement stmt;
+        
+        try{
+            
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idProjeto);
+        }catch(SQLException sqle){
+            
+            throw new PersistenciaException("Falha ao preparar consulta por inscrições pendentes!", sqle);
+        }
+        
+        try{
+            
+            return stmt.executeQuery().next();
+        }catch(SQLException sqle){
+            
+            throw new PersistenciaException("Falha ao consultar por inscrições pendentes!", sqle);
+        }finally{
+            
+            this.factory.close(conn);
+        }
+    }
 
     private Inscricao nextInscricao(ResultSet result, boolean carregaArquivo) {
 
