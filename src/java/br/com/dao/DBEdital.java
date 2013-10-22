@@ -35,7 +35,7 @@ public class DBEdital implements EditalDAO {
     @Override
     public void adiciona(Edital edital) throws PersistenciaException {
 
-        String sql = "insert into edital (titulo, id_usuario, tipo_edital, prazo_inicial, prazo_final, id_arquivo) values (?,?,?,?,?,?)";
+        String sql = "insert into edital (titulo, id_usuario, tipo_edital, prazo_inicial, prazo_final, id_arquivo, prazo_ini_prest_cont, prazo_fim_prest_cont) values (?,?,?,?,?,?,?,?)";
 
         Connection conn = factory.createConnection();
         PreparedStatement stmt;
@@ -55,6 +55,9 @@ public class DBEdital implements EditalDAO {
             } else {
                 stmt.setInt(6, 0);
             }
+            
+            stmt.setDate(7, new Date(edital.getPrazoIniPrestCont().getTime()));
+            stmt.setDate(8, new Date(edital.getPrazoFimPrestCont().getTime()));
         } catch (SQLException sqle) {
 
             throw new PersistenciaException("Falha ao configurar inserção do edital!", sqle);

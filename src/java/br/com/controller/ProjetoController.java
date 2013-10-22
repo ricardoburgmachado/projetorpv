@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -81,6 +82,20 @@ public class ProjetoController extends GenericController {
         Professor prof = (Professor) request.getSession().getAttribute("usuario");
         p_projeto.setProfessor(prof);
 
+        String[] inicio = request.getParameterValues("inicio_xx");
+        String[] fim = request.getParameterValues("fim_xx");
+        
+         if(inicio[0] != null && !inicio[0].equals("")) {
+            String[] pISplit = inicio[0].split("-");
+            //edital.setPrazoInicial(new Date(Integer.parseInt(pISplit[0]) - 1900, Integer.parseInt(pISplit[1]) - 1, Integer.parseInt(pISplit[2])));
+            p_projeto.setInicio(new Date(Integer.parseInt(pISplit[0]) - 1900, Integer.parseInt(pISplit[1]) - 1, Integer.parseInt(pISplit[2])));
+        }
+
+        if(fim[0] != null && !fim[0].equals("")) {
+            String[] pFSplit = fim[0].split("-");
+            p_projeto.setFim(new Date(Integer.parseInt(pFSplit[0]) - 1900, Integer.parseInt(pFSplit[1]) - 1, Integer.parseInt(pFSplit[2])));
+        }
+        
         //this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
         //this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
         //int idRetorno = repositorioProjeto.inserir(p_projeto);
@@ -725,7 +740,24 @@ public class ProjetoController extends GenericController {
         return mv;
     }
     
-    
+    @RequestMapping(value = "/projetos_registrados_lista_show")
+    public ModelAndView projetosRegistradosListaShow(HttpServletRequest p_request) {
+
+        this.request = p_request;
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        //if(!verificaAutorizacao(user, Permissao.CRUD_PROJETO)) {
+
+        //    return new ModelAndView("login");
+        //}
+
+        RepositorioProjeto rp = new RepositorioPostgresFactory().createRepositorioProjeto();
+        List projetos = rp.listarProjetos(user.getId());
+        ModelAndView mv = new ModelAndView("projetos_registrados_lista");
+        if (projetos != null) {
+            mv.addObject("projetos", projetos);
+        }
+        return mv;
+    }
     
 
 }

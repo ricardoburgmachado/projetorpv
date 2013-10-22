@@ -1,6 +1,7 @@
 package br.com.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class Projeto {
@@ -24,6 +25,8 @@ public class Projeto {
     private StatusProjeto status;
     private Arquivo respaldo;
     private Arquivo prestacaoConta;
+    private Date inicio;
+    private Date fim;
     
     public Projeto(){
         
@@ -320,5 +323,37 @@ public class Projeto {
         this.prestacaoConta = prestacao_conta;
     }
     
+    public boolean isExecutando(){
+    
+      return false;
+    }
+
+    /**
+     * @return the inicio
+     */
+    public Date getInicio() {
+        return inicio;
+    }
+
+    /**
+     * @param inicio the inicio to set
+     */
+    public void setInicio(Date inicio) {
+        this.inicio = inicio;
+    }
+
+    /**
+     * @return the fim
+     */
+    public Date getFim() {
+        return fim;
+    }
+
+    /**
+     * @param fim the fim to set
+     */
+    public void setFim(Date fim) {
+        this.fim = fim;
+    }
     
 }

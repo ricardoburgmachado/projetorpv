@@ -113,13 +113,13 @@ public class EditalController extends GenericController {
         }
         
         if(pIPrestConta[0] != null && !pIPrestConta[0].equals("")) {
-            String[] pISplit = pI[0].split("-");
-            edital.setPrazoIniPrestCont(new Date(Integer.parseInt(pISplit[0]) - 1900, Integer.parseInt(pISplit[1]) - 1, Integer.parseInt(pISplit[2])));
+            String[] pIPCSplit = pIPrestConta[0].split("-");
+            edital.setPrazoIniPrestCont(new Date(Integer.parseInt(pIPCSplit[0]) - 1900, Integer.parseInt(pIPCSplit[1]) - 1, Integer.parseInt(pIPCSplit[2])));
         }
         
         if(pFPrestConta[0] != null && !pFPrestConta[0].equals("")) {
-            String[] pISplit = pI[0].split("-");
-            edital.setPrazoFimPrestCont(new Date(Integer.parseInt(pISplit[0]) - 1900, Integer.parseInt(pISplit[1]) - 1, Integer.parseInt(pISplit[2])));
+            String[] pIPCSplit = pFPrestConta[0].split("-");
+            edital.setPrazoFimPrestCont(new Date(Integer.parseInt(pIPCSplit[0]) - 1900, Integer.parseInt(pIPCSplit[1]) - 1, Integer.parseInt(pIPCSplit[2])));
         }
 
         

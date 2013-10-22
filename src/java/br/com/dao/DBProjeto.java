@@ -1009,4 +1009,10 @@ public class DBProjeto implements ProjetoDAO {
         }        
     }
     
+        
+    /*
+    SELECT * FROM projeto INNER JOIN usuario
+    ON projeto.id_responsavel = usuario.id_usuario
+    WHERE usuario.campus = 'ALEGRETE' AND projeto.tipo_proj = 'ENSINO'
+    */
 }
