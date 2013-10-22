@@ -55,7 +55,9 @@ public interface EditalDAO {
     
     List<Inscricao> listarInscricoes(int idUsuario) throws PersistenciaException;
     
-    public void addRecadoInscricao(int idEdital, int idProjeto, int idRemetente, Recado recado) throws PersistenciaException;
+    void addRecadoInscricao(int idEdital, int idProjeto, int idRemetente, Recado recado) throws PersistenciaException;
     
-    public List<Recado> listarRecadosInscricao(int idEdital, int idProjeto) throws PersistenciaException;
+    List<Recado> listarRecadosInscricao(int idEdital, int idProjeto) throws PersistenciaException;
+    
+    void atualizaStatusInscricao(int idEdital, int idProjeto, boolean aprovada) throws PersistenciaException;
 }

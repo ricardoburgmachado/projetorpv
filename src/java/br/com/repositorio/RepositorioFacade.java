@@ -13,6 +13,7 @@ import br.com.model.Arquivo;
 import br.com.model.Edital;
 import br.com.model.Inscricao;
 import br.com.model.Projeto;
+import br.com.model.Recado;
 import br.com.model.StatusProjeto;
 import br.com.model.Usuario;
 import java.util.Date;
@@ -132,9 +133,17 @@ public class RepositorioFacade {
         this.repProjeto.editaProjetoEmExecucao(projeto, usuario);
     }
     
-    public void contemplarProjeto(int idProjeto, Usuario usuario) throws AutorizacaoException, DadoInconsistenteException, PersistenciaException{
+    public void contemplarProjeto(int idProjeto, int idEdital, Usuario usuario, Recado recado) throws AutorizacaoException, DadoInconsistenteException, PersistenciaException{
         
-        Projeto projeto = this.repProjeto.obter(idProjeto);
-        this.repProjeto.contemplar(projeto, usuario);
+        Inscricao inscricao = this.repEdital.obtemInscricao(idProjeto, idEdital);
+        this.repEdital.contemplar(inscricao, usuario, recado);
+        inscricao.getProjeto().setStatus(StatusProjeto.CONTEMPLADO);
+        this.repProjeto.atualizaStatus(inscricao.getProjeto());
+    }
+    
+    public void naoContemplarProjeto(int idProjeto, int idEdital, Usuario usuario, Recado recado) throws AutorizacaoException, DadoInconsistenteException, PersistenciaException{
+        
+        Inscricao inscricao = this.repEdital.obtemInscricao(idProjeto, idEdital);
+        this.repEdital.naoContemplar(inscricao, usuario, recado);
     }
 }

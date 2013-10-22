@@ -14,6 +14,7 @@ import br.com.model.Edital;
 import br.com.model.Inscricao;
 import br.com.model.Permissao;
 import br.com.model.Projeto;
+import br.com.model.Recado;
 import br.com.model.StatusProjeto;
 import br.com.model.TipoProjeto;
 import br.com.model.Usuario;
@@ -391,16 +392,22 @@ public class RepositorioEdital {
         return true;
     }
 
-    protected void contemplar(Inscricao inscricao, Usuario usuario) throws DadoInconsistenteException, AutorizacaoException, PersistenciaException {
+    protected void contemplar(Inscricao inscricao, Usuario usuario, Recado recado) throws DadoInconsistenteException, AutorizacaoException, PersistenciaException {
 
-        if(verificaConsistenciaContemplacao(inscricao, usuario)){
- 
-        
-         }
+        if (verificaConsistenciaContemplacao(inscricao, usuario)) {
+
+            this.editalDao.atualizaStatusInscricao(inscricao.getEdital().getId(), inscricao.getProjeto().getId(), true);
+            if (recado != null)  this.editalDao.addRecadoInscricao(inscricao.getEdital().getId(), inscricao.getProjeto().getId(), usuario.getId(), recado);
+        }
     }
 
-    protected void naoContemplar(Projeto projeto, Usuario usuario) throws DadoInconsistenteException, AutorizacaoException, PersistenciaException {
+    protected void naoContemplar(Inscricao inscricao, Usuario usuario, Recado recado) throws DadoInconsistenteException, AutorizacaoException, PersistenciaException {
+        
+        if (verificaConsistenciaContemplacao(inscricao, usuario)) {
 
+            this.editalDao.atualizaStatusInscricao(inscricao.getEdital().getId(), inscricao.getProjeto().getId(), false);
+            if (recado != null) this.editalDao.addRecadoInscricao(inscricao.getEdital().getId(), inscricao.getProjeto().getId(), usuario.getId(), recado);
+        }
     }
 
     private boolean verificaConsistenciaContemplacao(Inscricao inscricao, Usuario usuario) throws DadoInconsistenteException, AutorizacaoException {
@@ -409,7 +416,7 @@ public class RepositorioEdital {
 
         if (usuario == null || usuario.getPermissoes() == null || !usuario.getPermissoes().contains(Permissao.CONTEMPLACAO_PROJETO)) {
 
-            throw new AutorizacaoException("Usuário sem permissão para contemplar projeto!");
+            throw new AutorizacaoException("Usuário sem permissão para contemplar/não contemplar projeto!");
         }
 
         if (inscricao == null) {
@@ -420,6 +427,11 @@ public class RepositorioEdital {
         if (!usuario.getArea().equals(inscricao.getProjeto().getTipoProjeto())) {
 
             diex = new DadoInconsistenteException(diex, "Pró-reitor de área diferente da do projeto!");
+        }
+        
+        if(inscricao.isAprovada()){
+            
+            diex =  new DadoInconsistenteException(diex, "Projeto já contemplado!");
         }
 
         if (diex != null) {

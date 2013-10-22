@@ -737,14 +737,12 @@ public class DBEdital implements EditalDAO {
 
                 Projeto projeto = createProjeto(result);
                 Edital edital = createEdital(result);
+                Inscricao inscricao = new Inscricao(projeto, edital);
+                inscricao.setAprovada(result.getBoolean("aprovada"));
 
-                if (carregaArquivo) {
-
-                    return new Inscricao(projeto, edital, createArquivo(result));
-                } else {
-
-                    return new Inscricao(projeto, edital);
-                }
+                if (carregaArquivo) inscricao.setArquivo(createArquivo(result));
+                
+                return inscricao;
             }
         } catch (SQLException sqle) {
 
@@ -978,20 +976,22 @@ public class DBEdital implements EditalDAO {
         return recado;
     }
 
-    private void atualizaStatusInscricao(int idEdital, int idProjeto, boolean contempla) throws PersistenciaException {
+    @Override
+    public void atualizaStatusInscricao(int idEdital, int idProjeto, boolean aprovada) throws PersistenciaException {
 
-        String sql = "update inscricao set  id_edital = ? and id_proj = ?";
+        String sql = "update inscricao set aprovada = ? where id_edital = ? and id_proj = ?";
         PreparedStatement stmt;
         Connection conn = this.factory.createConnection();
 
         try {
 
             stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, idEdital);
-            stmt.setInt(2, idProjeto);
+            stmt.setBoolean(1, aprovada);
+            stmt.setInt(2, idEdital);
+            stmt.setInt(3, idProjeto);
         } catch (SQLException sqle) {
 
-            throw new PersistenciaException("Falha ao preparar consulta por recados do projeto!", sqle);
+            throw new PersistenciaException("Falha ao preparar atualização do status da inscrição!", sqle);
         }
 
         try {
@@ -999,7 +999,7 @@ public class DBEdital implements EditalDAO {
             stmt.executeUpdate();
         } catch (SQLException sqle) {
 
-            throw new PersistenciaException("Falha ao consultar recados do projeto!", sqle);
+            throw new PersistenciaException("Falha ao atualizar status da inscrição!", sqle);
         } finally {
 
             this.factory.close(conn);

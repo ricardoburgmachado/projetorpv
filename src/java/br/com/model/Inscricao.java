@@ -18,7 +18,7 @@ public class Inscricao {
     private Edital edital;
     private Arquivo arquivo;
     private Date dataInscricao;
-    private boolean aprovado;
+    private boolean aprovada;
     private List<Recado> recados;
 
     public Inscricao(Projeto projeto, Edital edital, Arquivo arquivo, Date dataInscricao) {
@@ -91,6 +91,14 @@ public class Inscricao {
             this.recados.remove(recado);
         }
 
+    }
+
+    public boolean isAprovada() {
+        return aprovada;
+    }
+
+    public void setAprovada(boolean aprovada) {
+        this.aprovada = aprovada;
     }
 
 }
