@@ -11,6 +11,7 @@ import br.com.model.AreaConhecimento;
 import br.com.model.Campus;
 import br.com.model.Custo;
 import br.com.model.Externo;
+import br.com.model.ProReitor;
 import br.com.model.Professor;
 import br.com.model.Projeto;
 import br.com.model.Recado;
@@ -970,5 +971,99 @@ public class DBProjeto implements ProjetoDAO {
         }
 
         return carregaProjetos(result);
+    }
+    
+    @Override
+    public void addRecado(int idProjeto, Recado recado) throws PersistenciaException {
+
+        String sql = "intert into recado (conteudo, data_envio, id_usuario, id_proj) values (?, ?, ?, ?)";
+        PreparedStatement stmt;
+        Connection conn = this.connection;
+
+        try {
+
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, recado.getConteudo());
+            stmt.setDate(2, new Date(recado.getDataEnvio().getTime()));
+            stmt.setInt(3, recado.getRemetente().getId());            
+            stmt.setInt(4, idProjeto);
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar adição de recado ao projeto!", sqle);
+        }
+
+        try {
+
+            stmt.executeUpdate();
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao adicionar recado ao projeto!", sqle);
+        }
+    }
+    
+    @Override
+    public List<Recado> listarRecados(int idProjeto) throws PersistenciaException {
+
+        List<Recado> recados;
+
+        String sql = "select * from recado where id_proj = ?";
+        PreparedStatement stmt;
+        Connection conn = this.connection;
+
+        try {
+
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idProjeto);
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar consulta por recados do projeto!", sqle);
+        }
+
+        try {
+
+            ResultSet result = stmt.executeQuery();
+            recados = carregaRecados(result);
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao consultar recados do projeto!", sqle);
+        }
+
+        return recados;
+    }
+
+    private List<Recado> carregaRecados(ResultSet result) throws PersistenciaException {
+
+        List<Recado> recados = new ArrayList<>();
+        Recado recado;
+
+        while ((recado = nextRecado(result)) != null) {
+
+            recados.add(recado);
+        }
+
+        return recados;
+    }
+
+    private Recado nextRecado(ResultSet result) throws PersistenciaException {
+
+        Recado recado = null;
+
+        try {
+
+            if (result.next()) {
+
+                recado = new Recado();
+                recado.setConteudo(result.getString("conteudo"));
+                recado.setDataEnvio(result.getDate("data_envio"));
+                ProReitor usuario = new ProReitor();
+                usuario.setId(result.getInt("id_usuario"));
+                recado.setRemetente(usuario);
+            }
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Impossível acessar dados do recado!", sqle);
+        }
+
+        return recado;
     }
 }

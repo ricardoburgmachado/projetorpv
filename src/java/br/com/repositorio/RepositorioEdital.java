@@ -392,12 +392,11 @@ public class RepositorioEdital {
         return true;
     }
 
-    protected void contemplar(Inscricao inscricao, Usuario usuario, Recado recado) throws DadoInconsistenteException, AutorizacaoException, PersistenciaException {
+    protected void contemplar(Inscricao inscricao, Usuario usuario) throws DadoInconsistenteException, AutorizacaoException, PersistenciaException {
 
         if (verificaConsistenciaContemplacao(inscricao, usuario)) {
 
             this.editalDao.atualizaStatusInscricao(inscricao.getEdital().getId(), inscricao.getProjeto().getId(), true);
-            if (recado != null)  this.editalDao.addRecadoInscricao(inscricao.getEdital().getId(), inscricao.getProjeto().getId(), usuario.getId(), recado);
         }
     }
 

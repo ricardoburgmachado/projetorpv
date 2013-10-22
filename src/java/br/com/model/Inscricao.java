@@ -19,10 +19,9 @@ public class Inscricao {
     private Arquivo arquivo;
     private Date dataInscricao;
     private boolean aprovada;
-    private List<Recado> recados;
+    
 
     public Inscricao(Projeto projeto, Edital edital, Arquivo arquivo, Date dataInscricao) {
-        this.recados = new ArrayList<>();
         this.projeto = projeto;
         this.edital = edital;
         this.arquivo = arquivo;
@@ -69,29 +68,7 @@ public class Inscricao {
         this.dataInscricao = dataInscricao;
     }
 
-    public List<Recado> getRecados() {
-        return recados;
-    }
-
-    public void setRecados(List<Recado> recados) {
-        this.recados = recados;
-    }
-
-    public Recado addRecado(String conteudo, Usuario remetente, Date dataEnvio) {
-
-        Recado recado = new Recado(conteudo, remetente, dataEnvio);
-        this.recados.add(recado);
-        return recado;
-    }
-
-    public void removeRecado(Recado recado) {
-
-        if (recado != null) {
-
-            this.recados.remove(recado);
-        }
-
-    }
+    
 
     public boolean isAprovada() {
         return aprovada;

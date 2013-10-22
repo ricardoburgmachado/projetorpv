@@ -17,6 +17,7 @@ import br.com.model.Externo;
 import br.com.model.Permissao;
 import br.com.model.Professor;
 import br.com.model.Projeto;
+import br.com.model.Recado;
 import br.com.model.StatusProjeto;
 import br.com.model.Usuario;
 import java.util.ArrayList;
@@ -429,7 +430,16 @@ public class RepositorioProjeto {
         } else {
             throw exception;
         }
-
+    }
+    
+    protected void addRecado(Projeto projeto, Recado recado) throws PersistenciaException{
+        
+        this.projDAO.addRecado(projeto.getId(), recado);
+    }
+    
+    protected List<Recado> listarRecados(int idProjeto) throws PersistenciaException{
+        
+        return this.projDAO.listarRecados(idProjeto);
     }
 
     /**

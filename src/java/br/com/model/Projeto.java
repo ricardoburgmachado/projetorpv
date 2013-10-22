@@ -23,9 +23,11 @@ public class Projeto {
     private Campus campus;
     private boolean sigilo;
     private StatusProjeto status;
+    private List<Recado> recados;
 
     public Projeto() {
 
+        this.recados = new ArrayList<>();
         this.status = StatusProjeto.CRIADO;
     }
 
@@ -282,6 +284,30 @@ public class Projeto {
 
     public void setStatus(StatusProjeto status) {
         this.status = status;
+    }
+    
+    public List<Recado> getRecados() {
+        return recados;
+    }
+
+    public void setRecados(List<Recado> recados) {
+        this.recados = recados;
+    }
+
+    public Recado addRecado(String conteudo, Usuario remetente, Date dataEnvio) {
+
+        Recado recado = new Recado(conteudo, remetente, dataEnvio);
+        this.recados.add(recado);
+        return recado;
+    }
+
+    public void removeRecado(Recado recado) {
+
+        if (recado != null) {
+
+            this.recados.remove(recado);
+        }
+
     }
 
     @Override
