@@ -75,7 +75,7 @@ INSERT INTO papel_permissao(id_perm, id_papel) VALUES (14, 1); /** ACESSAR_PROJ_
 /***************************** FIM cadastro PAPEL PERMISSÃO **********************/
 
 /***************************** INICIO cadastro usuarios **********************/
-INSERT INTO usuario VALUES (1, 'joao', 'joao', 'joão da silva','ALEGRETE');
+INSERT INTO usuario VALUES (1, 'joao', 'joao', 'joão da silva','ALEGRETE', 'ENSINO');
 INSERT INTO usuario VALUES (2, 'maria', 'maria', 'maria da silva','ALEGRETE', 'PESQUISA');
 INSERT INTO usuario VALUES (3, 'alfredo', 'alfredo', 'alfredo picareta','ALEGRETE');
 INSERT INTO usuario VALUES (4, 'joaquim', 'joaquim', 'joaquim santos','ALEGRETE');
@@ -88,6 +88,9 @@ INSERT INTO usuario VALUES (10, 'wolmir', 'wolmir', 'wolmir','ALEGRETE');
 INSERT INTO usuario VALUES (11, 'jose', 'jose', 'José','ALEGRETE');
 INSERT INTO usuario VALUES (12, 'paulo', 'paulo', 'Paulo','ALEGRETE');
 INSERT INTO usuario VALUES (13, 'carlos', 'carlos', 'Carlos','ALEGRETE');
+INSERT INTO usuario VALUES (14, 'cristiano', 'cristiano', 'cristiano moreira','ALEGRETE', 'EXTENSAO');
+INSERT INTO usuario VALUES (15 'rubia', 'rubia', 'Rubia','ALEGRETE');
+INSERT INTO usuario VALUES (16 'francisco', 'francisco', 'francisco','ALEGRETE');
 /***************************** FIM cadastro usuarios **********************/
 
 /***************************** INICIO cadastro participantes **********************/
@@ -100,20 +103,22 @@ INSERT INTO participante(id_particip , id_usuario)VALUES(2, 5);
 
 
 /***************************** INICIO cadastro usuario papel **********************/
-INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(1, 1);
-INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(2, 2);
-INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(3, 5);
-INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(3, 4);
-INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(3, 13);
-INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(3, 12);
-INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(4, 11);
-INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(4, 10);
-INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(5, 9);
-INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(1, 8);
-INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(1, 7);
-INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(1, 6);
-INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(5, 3);
-
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(2, 1);  /** COORDENADOR (ENSINO) -> JOAO **/
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(2, 2);  /** COORDENADOR (PESQUISA)-> MARIA **/
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(3, 5);  /** PROFESSOR -> RAFAEL **/
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(3, 4);  /** PROFESSOR -> JOAQUIM **/
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(3, 13); /** PROFESSOR -> CARLOS **/
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(3, 12); /** PROFESSOR -> PAULO **/
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(4, 11); /** ALUNO -> JOSE **/
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(4, 10); /** ALUNO -> WOLMIR **/
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(5, 9);  /** EXTERNO -> FABIO **/
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(1, 8);  /** PRO REITOR (PESQUISA)-> RICARDO **/
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(1, 7);  /** PRO REITOR (EXTENSAO)-> IVONE **/
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(1, 6);  /** PRO REITOR (ENSINO)-> ROGERIO **/
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(5, 3);  /** EXTERNO -> ALFREDO **/
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(2, 14); /** COORDENADOR (EXTENSAO) -> CRISTIANO **/
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(4, 15); /** ALUNO -> RUBIA **/
+INSERT INTO usuario_papel(id_papel, id_usuario)VALUES(4, 16); /** ALUNO -> FRANCISCO **/
 /***************************** FIM cadastro usuario papel **********************/
 
 /***************************** INICIO cadastro projeto **********************/
