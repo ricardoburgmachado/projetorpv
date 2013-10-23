@@ -312,6 +312,42 @@ public class RepositorioEdital {
         }
     }
 
+    public Inscricao exibeInscricao(int idProjeto, int idEdital, Usuario usuario) throws AutorizacaoException, PrivacidadeException, PersistenciaException {
+        
+        Inscricao inscricao = this.obtemInscricao(idProjeto, idEdital);
+        Edital edital = this.obtemEdital(idEdital);
+        edital.setArquivo(this.editalDao.obtemArquivo(idEdital));
+        inscricao.setEdital(edital);
+        
+        if(verificaConsistenciaExibeInscricao(inscricao, usuario)){
+            
+            return inscricao;
+        }
+
+        return null;
+    }
+
+    private boolean verificaConsistenciaExibeInscricao(Inscricao inscricao, Usuario usuario) throws AutorizacaoException, PrivacidadeException {
+
+        if (usuario == null || !usuario.getPermissoes().contains(Permissao.CONTEMPLACAO_PROJETO)) {
+
+            throw new AutorizacaoException("Usuário sem autorização para contemplar/não contemplar projeto!");
+        }
+        
+        if(inscricao.getEdital().getProReitor().getId() != usuario.getId()){
+            
+            throw new PrivacidadeException("Edital da inscrição não pertencente ao pró-reitor!");
+        }
+        
+        /*if(!inscricao.getEdital().getTipo().equals(usuario.getArea())){
+            
+            throw new PrivacidadeException("Área do projeto diferente da área pela qual o usuário é responsável!");
+        }*/
+        
+        
+        return true;
+    }
+
     protected Inscricao obtemInscricao(int idProjeto, int idEdital) {
 
         return this.editalDao.obtemInscricao(idProjeto, idEdital);
@@ -400,21 +436,22 @@ public class RepositorioEdital {
 
     /**
      * Exclui o registro de inscrição do projeto no edital.
+     *
      * @param inscricao Inscrição a ser concluída.
      * @param usuario Usuário que realiza a operação.
      * @return true se for a única inscrição corrente do projeto.
-     * @throws DadoInconsistenteException 
+     * @throws DadoInconsistenteException
      * @throws AutorizacaoException
-     * @throws PersistenciaException 
+     * @throws PersistenciaException
      */
     protected boolean naoContemplar(Inscricao inscricao, Usuario usuario) throws DadoInconsistenteException, AutorizacaoException, PersistenciaException {
-        
+
         if (verificaConsistenciaContemplacao(inscricao, usuario)) {
 
             this.editalDao.excluiInscricao(inscricao.getProjeto().getId(), inscricao.getProjeto().getId());
             return this.editalDao.existeInscricao(inscricao.getProjeto().getId());
         }
-        
+
         return false;
     }
 
@@ -436,10 +473,10 @@ public class RepositorioEdital {
 
             diex = new DadoInconsistenteException(diex, "Pró-reitor de área diferente da do projeto!");
         }
-        
-        if(inscricao.isAprovada()){
-            
-            diex =  new DadoInconsistenteException(diex, "Projeto já contemplado!");
+
+        if (inscricao.isAprovada()) {
+
+            diex = new DadoInconsistenteException(diex, "Projeto já contemplado!");
         }
 
         if (diex != null) {

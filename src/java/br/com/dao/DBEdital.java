@@ -13,7 +13,6 @@ import br.com.model.Inscricao;
 import br.com.model.ProReitor;
 import br.com.model.Professor;
 import br.com.model.Projeto;
-import br.com.model.Recado;
 import br.com.model.StatusProjeto;
 import br.com.model.TipoProjeto;
 import java.sql.Connection;
@@ -729,6 +728,7 @@ public class DBEdital implements EditalDAO {
         return nextInscricao(result, true);
     }
     
+    @Override
     public boolean existeInscricao(int idProjeto) throws PersistenciaException{
         
         String sql = "select id_inscricao from inscricao where id_proj=?";
@@ -787,6 +787,7 @@ public class DBEdital implements EditalDAO {
         projeto.setPalavrasChave(result.getString("palavras_chave"));
         projeto.setResumo(result.getString("resumo"));
         projeto.setStatus(StatusProjeto.valueOf(result.getString("status")));
+        projeto.setArquivo(result.getBoolean("is_arquivo"));
 
         try {
 

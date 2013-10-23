@@ -155,4 +155,9 @@ public class RepositorioFacade {
         
         this.repProjeto.addRecado(inscricao.getProjeto(), recado);
     }
+    
+    public Inscricao exibeInscricao(int idEdital, int idProjeto, Usuario usuario) throws AutorizacaoException, PrivacidadeException, PersistenciaException {
+        
+        return this.repEdital.exibeInscricao(idProjeto, idEdital, usuario);
+    }
 }

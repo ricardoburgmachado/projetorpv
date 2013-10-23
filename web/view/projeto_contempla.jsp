@@ -34,54 +34,61 @@
 
                 <h1>Contemplação de Inscrições</h1>
 
-                <c:if test="${not empty inconsistencias}">
-                    <ul class="inconsistencias">
-                        <c:forEach var="inconsistencia" items="${inconsistencias}">
-                            <li>${inconsistencia}</li>
-                            </c:forEach>
-                    </ul>
-                </c:if>
-
-                <div class="flexbox">
-                    <div class="round-border">
-                        <h2>Projeto</h2>
-                        <ul>
-                            <li><span class="title">Título: </span>${inscricao.projeto.titulo}</li>
-                            <li><span class="title">Palavras-chave: </span>${inscricao.projeto.palavrasChave}</li>
-                            <li><span class="title">Arquivo: </span><a class="arquivo" href="" title="Download do arquivo" type="${inscricao.projeto.arquivo.extensao}">${inscricao.projeto.arquivo.nomeArquivo}</a></li>
+                <div class="inside-conteudo">
+                    <c:if test="${not empty inconsistencias}">
+                        <ul class="inconsistencias">
+                            <c:forEach var="inconsistencia" items="${inconsistencias}">
+                                <li>${inconsistencia}</li>
+                                </c:forEach>
                         </ul>
+                    </c:if>
 
-                        <a class="botao botao-vertical" href="">Visualizar</a>
+                    <div class="flexbox flex-space">
+                        <div class="round-border flex-grow div-exibe-objeto">
+                            <h2>Projeto</h2>
+
+                            <div class="flexbox flex-space">
+
+                                <ul class="lista-objeto">
+                                    <li><span class="title">Título: </span>${inscricao.projeto.titulo}</li>
+                                    <li><span class="title">Palavras-chave: </span>${inscricao.projeto.palavrasChave}</li>
+                                    <li><span class="title">Arquivo: </span><c:if test="${inscricao.projeto.arquivo}"><a title="Clique aqui para visualizar o arquivo" href="<c:url value="/arquivos/${projeto.id }/${projeto.id}.pdf"/>">Clique aqui para visualizar o arquivo</a></c:if></li>
+                                    </ul>
+
+                                    <a class="botao botao-vertical" href="">Visualizar</a>
+                                </div>
+
+                            </div>
+
+                            <div class="round-border flex-grow div-exibe-objeto">
+                                <h2>Edital</h2>
+
+                                <div class="flexbox flex-space">
+                                    <ul class="lista-objeto">
+                                        <li><span class="title">Título: </span>${inscricao.edital.titulo}</li>
+                                    <li><span class="title">Prazo Final: </span><fmt:formatDate type="date" dateStyle="medium" value="${inscricao.edital.prazoFinal}" /></li>
+                                    <li><span class="title">Arquivo: </span><a class="arquivo" href="" title="Download do arquivo" type="${inscricao.edital.arquivo.extensao}">${inscricao.edital.arquivo.nomeArquivo}</a></li>
+                                </ul>
+
+                                <a class="botao botao-vertical" href="">Visualizar</a>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="round-border">
-                        <h2>Edital</h2>
-                        <ul>
-                            <li><span class="title">Título: </span>${inscricao.edital.titulo}</li>
-                            <li><span class="title">Prazo Final: </span><fmt:formatDate type="date" dateStyle="medium" value="${inscricao.edital.prazoFinal}" /></li>
-                            <li><span class="title">Arquivo: </span><a class="arquivo" href="" title="Download do arquivo" type="${inscricao.edital.arquivo.extensao}">${inscricao.edital.arquivo.nomeArquivo}</a></li>
-                        </ul>
+                    <div class="round-border" id="form-contempacao-container">
 
-                        <a class="botao botao-vertical" href="">Visualizar</a>
+                        <h2>Formulário de contemplação</h2>
+                        <form id="form-contemplacao" title="Formulário de contemplação da inscrição" method="post">
+
+                            <label for="recado">Recado: </label>
+                            <textarea id="recado" name="recado"></textarea>
+                            <input class="botao round-border" type="submit" value="Contemplar" onclick="this.form.action = 'inscricao_contempla';"/>
+                            <input class="botao round-border" type="submit" value="Não Contemplar" onclick="this.form.action = 'inscricao_nao_contempla';"/>
+                        </form>
                     </div>
                 </div>
-
-                <div class="round-border">
-                    
-                    <h2>Formulário de contemplação</h2>
-                    <form title="Formulário de contemplação da inscrição" method="post">
-                        
-                        <label for="recado">Recado: </label>
-                        <textarea id="recado" name="recado"></textarea>
-                        <input class="botao round-border" type="submit" value="Contemplar" onclick="this.form.action='inscricao_contempla';"/>
-                        <input class="botao round-border" type="submit" value="Não Contemplar" onclick="this.form.action='inscricao_nao_contempla';"/>
-                    </form>
-                </div>
-
             </div>
 
-        </div>
-
-        <div id="rodape"></div>
+            <div id="rodape"></div>
     </body>
 </html>

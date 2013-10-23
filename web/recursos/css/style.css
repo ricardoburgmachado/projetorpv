@@ -1122,9 +1122,9 @@ a[href*="projeto_nao_homologa"]{
 }
 
 a[href$=".pdf"]::before {
-    content: url(../imagens/pdf.png);
+    content: url(../imagens/pdf_icon.png);
     vertical-align: -50%;
-    margin: 0px 5px;
+    margin-right: 2px;
     padding: 0px;
 }
 
@@ -1140,3 +1140,110 @@ a[type="application/pdf"]::after{
     color: black;
     cursor: pointer;
 }
+
+.flexbox{
+    display: flex;    
+}
+
+.flex-space{
+    
+    justify-content: space-between;
+}
+
+.flex-grow{
+    
+    flex-grow: 1;
+    flex: 1;
+}
+
+.vertical-align{
+    
+    align-self: center;
+}
+
+.inside-conteudo{
+    
+    display: block;
+    float: left;
+    width: 98%;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.round-border{
+    
+    border-radius: 2%;
+}
+
+.flexbox h2{
+    text-align: center;
+    background-color: whitesmoke;
+}
+
+.lista-objeto{
+    display: block;
+    list-style: none;
+    font-size: 0.8rem;
+    padding: 0px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.div-exibe-objeto{
+    
+    margin: 2px;
+    background-color: darkgrey;
+}
+
+#form-contemplacao{
+    display: box;
+    margin: 5px;
+    padding: 5px;
+}
+
+#form-contemplacao > *{
+    
+    display: block;
+    margin: 2px;
+    font-size: 1.1rem;
+}
+
+#form-contemplacao textarea{
+    
+    margin-left: 0px;
+    width: 60%;
+    height: 150px;
+}
+
+#form-contempacao-container{
+    
+    margin: 5px;
+    background-color: darkgrey;
+}
+
+#form-contempacao-container h2{
+    
+    font-size: 1.5rem;
+    padding: 3px;
+    text-align: center;
+    background-color: whitesmoke;
+}
+
+#form-contemplacao input[type="submit"]{
+    
+    display: inline-block;
+    border-radius: 5px;
+    background-color: #CCCCCC;
+    border: none;
+}
+
+#form-contemplacao input[value="Contemplar"]{
+    color: green;
+}
+
+#form-contemplacao input[value="Não Contemplar"]{
+    color: red;
+}
+
+

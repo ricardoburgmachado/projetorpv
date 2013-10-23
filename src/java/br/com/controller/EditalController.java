@@ -13,7 +13,6 @@ import br.com.model.Arquivo;
 import br.com.model.Edital;
 import br.com.model.Permissao;
 import br.com.model.ProReitor;
-import br.com.model.TipoProjeto;
 import br.com.model.Usuario;
 import br.com.repositorio.RepositorioEdital;
 import br.com.repositorio.RepositorioFacade;
@@ -523,6 +522,26 @@ public class EditalController extends GenericController {
 
         mv = listaInscricoes(request);
         mv.addObject("inconsistencias", inconsistencias);
+        return mv;
+    }
+    
+    @RequestMapping (value = "/projeto_contempla_show")
+    public ModelAndView exibeViewContemplacao(HttpServletRequest request, @RequestParam int id_projeto, @RequestParam int id_edital){
+        
+        ModelAndView mv = new ModelAndView("projeto_contempla");
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        
+        try{
+            
+            mv.addObject("inscricao", this.facade.exibeInscricao(id_edital, id_projeto, user));
+        }catch(AutorizacaoException aex){
+            
+            return new ModelAndView("login");
+        }catch(PrivacidadeException pex){
+            
+            return new ModelAndView("index"); //Trocar para tela de exibição das inscrições
+        }
+        
         return mv;
     }
 }
