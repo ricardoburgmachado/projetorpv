@@ -120,20 +120,13 @@
 
             <div id="conteudo_interno">
 
-                <%
-                    if (request.getAttribute("sucesso") != null) {
-
-                        out.println("<span class=\"sucesso\">" + request.getAttribute("sucesso") + "</span>");
-                    } else if (request.getAttribute("inconsistencias") != null) {
-
-                        List<String> inconsistencias = (List<String>) request.getAttribute("inconsistencias");
-                        out.println("<ul>");
-                        for (String inconsistencia : inconsistencias) {
-                            out.println("<li>" + inconsistencia + "</li>");
-                        }
-                        out.println("</ul>");
-                    }
-                %>
+                <c:if test="${not empty inconsistencias}">
+                    <ul class="inconsistencias">
+                        <c:forEach var="inconsistencia" items="${inconsistencias}">
+                            <li>${inconsistencia}</li>
+                            </c:forEach>
+                    </ul>
+                </c:if>
 
 
                 <form:form action="projeto_adiciona" modelAttribute="projeto" id="form_addprojeto" enctype="multipart/form-data">
