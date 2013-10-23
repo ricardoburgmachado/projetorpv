@@ -48,28 +48,30 @@ INSERT INTO permissao(id_perm, descricao)VALUES(10, 'PRESTAR_CONTAS');
 INSERT INTO permissao(id_perm, descricao)VALUES(11, 'DOWNLOAD_EDITAL');
 INSERT INTO permissao(id_perm, descricao)VALUES(12, 'ALTERAR_STATUS_PROJETO');
 INSERT INTO permissao(id_perm, descricao)VALUES(13, 'CONTEMPLACAO_EDITAL');
+INSERT INTO permissao(id_perm, descricao)VALUES(14, 'ACESSAR_PROJ_REGISTRADOS');/** projetos inscritos na tabela inscrito **/
 /***************************** FIM cadastro PERMISSÃO **********************/
 
 
 /***************************** INICIO cadastro PAPEL PERMISSÃO**********************/
-INSERT INTO papel_permissao(id_perm, id_papel) VALUES (2, 1);
-INSERT INTO papel_permissao(id_perm, id_papel) VALUES (2, 2);
-INSERT INTO papel_permissao(id_perm, id_papel) VALUES (2, 3);
-INSERT INTO papel_permissao(id_perm, id_papel) VALUES (2, 4);
-INSERT INTO papel_permissao(id_perm, id_papel) VALUES (2, 5);
-INSERT INTO papel_permissao(id_perm, id_papel) VALUES (1, 3);
-INSERT INTO papel_permissao(id_perm, id_papel) VALUES (3, 1);
-INSERT INTO papel_permissao(id_perm, id_papel) VALUES (4, 3);
-INSERT INTO papel_permissao(id_perm, id_papel) VALUES (5, 3);
-INSERT INTO papel_permissao(id_perm, id_papel) VALUES (6, 3);
-INSERT INTO papel_permissao(id_perm, id_papel) VALUES (7, 3);
-INSERT INTO papel_permissao(id_perm, id_papel) VALUES (8, 3);
-INSERT INTO papel_permissao(id_perm, id_papel) VALUES (9, 3);
-INSERT INTO papel_permissao(id_perm, id_papel) VALUES (1, 1); /** CRUD_PROJETO -> PRO REITOR **/
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (2, 1);  /** ACESSO -> PRO_REITOR **/
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (2, 2);  /** ACESSO -> COORDENADOR **/
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (2, 3);  /** ACESSO -> PROFESSOR **/
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (2, 4);  /** ACESSO -> ALUNO **/
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (2, 5);  /** ACESSO -> EXTERNO **/
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (1, 3);  /** CRUD_PROJETO -> PROFESSOR **/
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (3, 1);  /** CRUD_EDITAL -> PRO_REITOR **/
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (4, 3);  /** INSCRICAO_EDITAL -> PROFESSOR **/
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (5, 3);  /** EXIBE_EDITAL -> PROFESSOR **/
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (6, 3);  /** SUBMISSAO_HOMOLOGACAO ->  PROFESSOR **/
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (7, 3);  /** LISTAGEM_SUBMETIDOS -> PROFESSOR **/
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (8, 3);  /** CANCELAMENTO_INSCRICAO -> PROFESSOR **/
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (9, 3);  /** LISTAGEM_INSCRICOES -> PROFESSOR **/
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (1, 1);  /** CRUD_PROJETO -> PRO REITOR **/
 INSERT INTO papel_permissao(id_perm, id_papel) VALUES (10, 3); /** PRESTAR_CONTAS -> PROFESSOR **/
 INSERT INTO papel_permissao(id_perm, id_papel) VALUES (11, 3); /** DOWNLOAD_EDITAL -> PROFESSOR **/	
 INSERT INTO papel_permissao(id_perm, id_papel) VALUES (12, 2); /** ALTERAR_STATUS_PROJETO -> COORDENADOR **/	
-INSERT INTO papel_permissao(id_perm, id_papel) VALUES (13, 1);
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (13, 1); /** CONTEMPLACAO_EDITAL -> PRO REITOR **/
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (14, 1); /** ACESSAR_PROJ_REGISTRADOS -> PRO REITOR **/
 /***************************** FIM cadastro PAPEL PERMISSÃO **********************/
 
 /***************************** INICIO cadastro usuarios **********************/
