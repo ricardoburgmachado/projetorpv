@@ -66,7 +66,7 @@ INSERT INTO papel_permissao(id_perm, id_papel) VALUES (6, 3);  /** SUBMISSAO_HOM
 INSERT INTO papel_permissao(id_perm, id_papel) VALUES (7, 3);  /** LISTAGEM_SUBMETIDOS -> PROFESSOR **/
 INSERT INTO papel_permissao(id_perm, id_papel) VALUES (8, 3);  /** CANCELAMENTO_INSCRICAO -> PROFESSOR **/
 INSERT INTO papel_permissao(id_perm, id_papel) VALUES (9, 3);  /** LISTAGEM_INSCRICOES -> PROFESSOR **/
-INSERT INTO papel_permissao(id_perm, id_papel) VALUES (1, 1);  /** CRUD_PROJETO -> PRO REITOR **/
+/**INSERT INTO papel_permissao(id_perm, id_papel) VALUES (1, 1); **/ /** CRUD_PROJETO -> PRO REITOR **/
 INSERT INTO papel_permissao(id_perm, id_papel) VALUES (10, 3); /** PRESTAR_CONTAS -> PROFESSOR **/
 INSERT INTO papel_permissao(id_perm, id_papel) VALUES (11, 3); /** DOWNLOAD_EDITAL -> PROFESSOR **/	
 INSERT INTO papel_permissao(id_perm, id_papel) VALUES (12, 2); /** ALTERAR_STATUS_PROJETO -> COORDENADOR **/	
