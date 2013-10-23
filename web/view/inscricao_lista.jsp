@@ -44,33 +44,46 @@
 
                 <div class="listagem">
                     <c:forEach var="inscricao" items="${inscricoes}">
-                        <div class="item-lista <c:if test="${inscricao.aprovada}">inscricao_aprovada</c:if>">
+                        <c:choose>
+                            <c:when test="${inscricao.aprovada}">
+                                <div class="item-lista inscricao_aprovada">
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="item-lista item-lista-background">
+                                    </c:otherwise>
+                                </c:choose>
 
                                 <ul title="Dados da inscrição">
                                     <li><span class="title">Projeto:</span> ${inscricao.projeto.titulo}</li>
-                                <li><span class="title">Edital:</span> ${inscricao.edital.titulo}</li>
-                                    <c:choose>
-                                        <c:when test="${empty inscricao.arquivo.dados}">
-                                        <li><span class="title">Arquivo:</span></li>
-                                        </c:when>
-                                        <c:otherwise>
-                                        <li><span class="title">Arquivo:</span><a class="arquivo" href="down_arquivo_inscricao?id_projeto=${inscricao.projeto.id}&id_edital=${inscricao.edital.id}" title="Download do arquivo" type="${inscricao.arquivo.extensao}"> ${inscricao.arquivo.nomeArquivo}</a></li>
-                                        </c:otherwise>
-                                    </c:choose>
-                                <li><span class="title">Prazo final do edital:</span> <fmt:formatDate type="date" dateStyle="medium" value="${inscricao.edital.prazoFinal}" /></li>
-                            </ul>
+                                    <li><span class="title">Edital:</span> ${inscricao.edital.titulo}</li>
+                                        <c:choose>
+                                            <c:when test="${empty inscricao.arquivo.dados}">
+                                            <li><span class="title">Arquivo:</span></li>
+                                            </c:when>
+                                            <c:otherwise>
+                                            <li><span class="title">Arquivo:</span><a class="arquivo" href="down_arquivo_inscricao?id_projeto=${inscricao.projeto.id}&id_edital=${inscricao.edital.id}" title="Download do arquivo" type="${inscricao.arquivo.extensao}"> ${inscricao.arquivo.nomeArquivo}</a></li>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    <li><span class="title">Prazo final do edital:</span> <fmt:formatDate type="date" dateStyle="medium" value="${inscricao.edital.prazoFinal}" /></li>
+                                </ul>
 
-                            <c:if test="${now <= inscricao.edital.prazoFinal}">
-                                <a class="botao botao-vertical" title="Cancelar inscrição" href="inscricao_cancela?id_projeto=${inscricao.projeto.id}&id_edital=${inscricao.edital.id}">Cancelar</a>
-                            </c:if>
+                                <c:if test="${(now <= inscricao.edital.prazoFinal) && (not inscricao.aprovada)}">
+                                    <a class="botao botao-vertical" title="Cancelar inscrição" href="inscricao_cancela?id_projeto=${inscricao.projeto.id}&id_edital=${inscricao.edital.id}">Cancelar</a>
+                                </c:if>
+                            </div>
+                        </c:forEach>
+                        <div class="legenda_listagem">
+                            <dl>
+                                <dt>Legenda:</dt>
+                                <dd class="legenda_inscricao_aprovada" title="Cor verde">Inscrição aprovada</dd>
+                            </dl>
                         </div>
-                    </c:forEach>
+                    </div>
+
                 </div>
 
             </div>
 
-        </div>
-
-        <div id="rodape"></div>
+            <div id="rodape"></div>
     </body>
 </html>

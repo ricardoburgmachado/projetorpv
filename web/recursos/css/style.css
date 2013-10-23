@@ -1032,27 +1032,33 @@ a[href*="projeto_nao_homologa"]{
     margin-top: 3px;
 }
 
-.listagem > div{
-    width: 100%;
-    float: left;
-    margin-left: 5px;
-    margin-top: 3px;
-    background-color: darkgray;
-    font-size: 1rem;
-}
-
 .inscricao_aprovada{
     
     background-color: lime;
 }
 
-.listagem > div ul{
+.item-lista-background{
+    
+    background-color: darkgray;
+}
+
+.listagem > div{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
     float: left;
+    margin-left: 5px;
+    margin-top: 3px;
+    font-size: 1rem;
+}
+
+.listagem > div ul{
     display: block;
     list-style: none;
     padding: 5px;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin-right: auto;
 }
 
 .listagem > div ul:hover{
@@ -1060,9 +1066,7 @@ a[href*="projeto_nao_homologa"]{
 }
 
 .botao-vertical{
-    float: right;
-    vertical-align: middle;
-    margin-top: 20px;
+    align-self: center;
     margin-right: 5px;
 }
 
@@ -1080,6 +1084,35 @@ a[href*="projeto_nao_homologa"]{
     font-size: 1.5rem;
     padding: 10px;
     color: red;
+}
+
+.legenda_listagem{
+    display: block;
+}
+
+.legenda_listagem dl{
+    display: inline;
+}
+
+.legenda_listagem dl dt{
+    font-weight: bold;
+}
+
+.legenda_listagem dl dd{
+    text-align: center;
+    margin-left: 5px;
+    line-height: 1.5em;
+}
+
+.legenda_inscricao_aprovada::before{
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 0px 3px 0px 0px;
+    padding: 0px;
+    border: 0px;
+    background-color: lime;
 }
 
 .title{
