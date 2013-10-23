@@ -9,6 +9,7 @@ import br.com.repositorio.RepositorioUsuario;
 import br.com.model.AreaConhecimento;
 import br.com.model.Arquivo;
 import br.com.model.Permissao;
+import br.com.model.ProReitor;
 import br.com.model.Professor;
 import br.com.model.Projeto;
 import br.com.model.StatusProjeto;
@@ -84,18 +85,17 @@ public class ProjetoController extends GenericController {
 
         String[] inicio = request.getParameterValues("inicio_xx");
         String[] fim = request.getParameterValues("fim_xx");
-        
-         if(inicio[0] != null && !inicio[0].equals("")) {
+
+        if (inicio[0] != null && !inicio[0].equals("")) {
             String[] pISplit = inicio[0].split("-");
-            //edital.setPrazoInicial(new Date(Integer.parseInt(pISplit[0]) - 1900, Integer.parseInt(pISplit[1]) - 1, Integer.parseInt(pISplit[2])));
             p_projeto.setInicio(new Date(Integer.parseInt(pISplit[0]) - 1900, Integer.parseInt(pISplit[1]) - 1, Integer.parseInt(pISplit[2])));
         }
 
-        if(fim[0] != null && !fim[0].equals("")) {
+        if (fim[0] != null && !fim[0].equals("")) {
             String[] pFSplit = fim[0].split("-");
             p_projeto.setFim(new Date(Integer.parseInt(pFSplit[0]) - 1900, Integer.parseInt(pFSplit[1]) - 1, Integer.parseInt(pFSplit[2])));
         }
-        
+
         //this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
         //this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
         //int idRetorno = repositorioProjeto.inserir(p_projeto);
@@ -620,13 +620,13 @@ public class ProjetoController extends GenericController {
         }
 
         boolean status = Boolean.valueOf(request.getParameter("status_x"));
-        
-        if(status){
+
+        if (status) {
             p_projeto.setStatus(StatusProjeto.HOMOLOGADO);
-        }else{
+        } else {
             p_projeto.setStatus(StatusProjeto.CRIADO);
-        }      
-        
+        }
+
         List<String> inconsistencias = new LinkedList<>();
 
         try {
@@ -658,7 +658,6 @@ public class ProjetoController extends GenericController {
 
         return mv;
     }
-    
 
     @RequestMapping(value = "/projeto_presta_contas_show")
     public ModelAndView projetoPrestaContasShow(HttpServletRequest p_request, @RequestParam int id) {
@@ -671,7 +670,6 @@ public class ProjetoController extends GenericController {
 
         //    return new ModelAndView("login");
         //}
-
         this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
         this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
 
@@ -683,8 +681,6 @@ public class ProjetoController extends GenericController {
         return mv;
     }
 
-    
-    
     @RequestMapping(value = "/projeto_presta_contas", method = RequestMethod.POST)
     public ModelAndView projetoPrestaContas(@ModelAttribute Projeto p_projeto, HttpServletRequest p_request,
             @RequestParam(value = "arquivo_xx", required = false) MultipartFile arquivo) throws IOException {
@@ -692,7 +688,7 @@ public class ProjetoController extends GenericController {
         this.request = p_request;
 
         System.out.println(" *********************** CAIU EM PROJETO PRESTA CONTAS");
-        
+
         Usuario user = (Usuario) request.getSession().getAttribute("usuario");
         if (!verificaAutorizacao(user, Permissao.CRUD_PROJETO)) {
             return new ModelAndView("login");
@@ -706,10 +702,9 @@ public class ProjetoController extends GenericController {
             Arquivo arq = new Arquivo(arquivo.getName(), arquivo.getContentType(), arquivo.getBytes());
             p_projeto.setPrestacaoConta(arq);
         }
-        
+
         List<String> inconsistencias = new LinkedList<>();
-        
-        
+
         try {
             repositorioProjeto.prestaContas(p_projeto);
         } catch (DadoInconsistenteException diex) {
@@ -739,25 +734,25 @@ public class ProjetoController extends GenericController {
 
         return mv;
     }
-    
+
     @RequestMapping(value = "/projetos_registrados_lista_show")
     public ModelAndView projetosRegistradosListaShow(HttpServletRequest p_request) {
 
         this.request = p_request;
-        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        //Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        ProReitor user = (ProReitor) request.getSession().getAttribute("usuario");
         //if(!verificaAutorizacao(user, Permissao.CRUD_PROJETO)) {
 
         //    return new ModelAndView("login");
         //}
-
         RepositorioProjeto rp = new RepositorioPostgresFactory().createRepositorioProjeto();
-        List projetos = rp.listarProjetos(user.getId());
+        List projetos = rp.listarProjetoInscritos(user.getArea());
+        //List projetos = rp.listarProjetoInscritos("PESQUISA");
         ModelAndView mv = new ModelAndView("projetos_registrados_lista");
         if (projetos != null) {
             mv.addObject("projetos", projetos);
         }
         return mv;
     }
-    
 
 }

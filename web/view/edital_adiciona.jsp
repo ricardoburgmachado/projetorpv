@@ -104,17 +104,7 @@
                         <span style="clear: both; display: block;"></span>
 
 
-                        <span class="bloco">
-                            <label for="dataxx">Prazo Inicial(prestar conta):</label>
-                            <input style="width: 175px" class="prazo" type="date" name="prazoInicial_prest_xx" id="prazoInicialxx" value="" />
-                        </span>
-                            
-                        <span class="bloco">
-                            <label for="dataxx">Prazo Final(prestar conta):</label>
-                            <input style="width: 175px" class="prazo" type="date" name="prazoFinal_prest_xx" id="prazoFinalxx" value="" />
-                        </span>    
-
-                        <span style="clear: both; display: block;"></span>
+                        
                         
 
                         <input class="enviar_form" type="submit" value="Adicionar"/>

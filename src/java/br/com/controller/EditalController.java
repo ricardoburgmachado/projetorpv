@@ -99,8 +99,6 @@ public class EditalController extends GenericController {
         String[] pI = request.getParameterValues("prazoInicial_xx");
         String[] pF = request.getParameterValues("prazoFinal_xx");
 
-        String[] pIPrestConta = request.getParameterValues("prazoInicial_prest_xx");
-        String[] pFPrestConta = request.getParameterValues("prazoFinal_prest_xx");
         
         if(pI[0] != null && !pI[0].equals("")) {
             String[] pISplit = pI[0].split("-");
@@ -112,16 +110,6 @@ public class EditalController extends GenericController {
             edital.setPrazoFinal(new Date(Integer.parseInt(pFSplit[0]) - 1900, Integer.parseInt(pFSplit[1]) - 1, Integer.parseInt(pFSplit[2])));
         }
         
-        if(pIPrestConta[0] != null && !pIPrestConta[0].equals("")) {
-            String[] pIPCSplit = pIPrestConta[0].split("-");
-            edital.setPrazoIniPrestCont(new Date(Integer.parseInt(pIPCSplit[0]) - 1900, Integer.parseInt(pIPCSplit[1]) - 1, Integer.parseInt(pIPCSplit[2])));
-        }
-        
-        if(pFPrestConta[0] != null && !pFPrestConta[0].equals("")) {
-            String[] pIPCSplit = pFPrestConta[0].split("-");
-            edital.setPrazoFimPrestCont(new Date(Integer.parseInt(pIPCSplit[0]) - 1900, Integer.parseInt(pIPCSplit[1]) - 1, Integer.parseInt(pIPCSplit[2])));
-        }
-
         
         List<String> inconsistencias = new LinkedList<>();
 
@@ -488,10 +476,10 @@ public class EditalController extends GenericController {
 
         this.request = p_request;
         Usuario user = (Usuario) request.getSession().getAttribute("usuario");
-        if (!verificaAutorizacao(user, Permissao.CRUD_EDITAL)) {
+        //if (!verificaAutorizacao(user, Permissao.CRUD_EDITAL)) {
 
-            return new ModelAndView("login");
-        }
+        //    return new ModelAndView("login");
+        //}
         RepositorioEdital repositorioEdital = new RepositorioPostgresFactory().createRepositorioEdital();
         List<Edital> editais = repositorioEdital.listarEditais();
         ModelAndView mv = new ModelAndView("edital_lista_professor");
@@ -507,13 +495,13 @@ public class EditalController extends GenericController {
 
 
         Usuario user = (Usuario) request.getSession().getAttribute("usuario");
-        if (!verificaAutorizacao(user, Permissao.CRUD_EDITAL)) {
-            return new ModelAndView("login");
-        }
+        //if (!verificaAutorizacao(user, Permissao.CRUD_EDITAL)) {
+        //    return new ModelAndView("login");
+        //}
 
         RepositorioEdital repositorioEdital = new RepositorioPostgresFactory().createRepositorioEdital();
-        RepositorioFacade facade = new RepositorioFacade();
-        Edital edital = facade.obter(id, user);
+        //RepositorioFacade facade = new RepositorioFacade();
+        Edital edital = repositorioEdital.obtemEdital(id);
         ModelAndView mv = new ModelAndView("edital_download_professor");
         mv.addObject("edital", edital);
         return mv;

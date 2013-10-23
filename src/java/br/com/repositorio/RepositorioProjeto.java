@@ -20,6 +20,7 @@ import br.com.model.Projeto;
 import br.com.model.StatusProjeto;
 import br.com.model.Usuario;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -62,6 +63,21 @@ public class RepositorioProjeto {
 
             exception = new DadoInconsistenteException(exception, "Título não informado <br/>");
         }
+        
+        if (verificaNulo(p.getInicio())) {
+            exception = new DadoInconsistenteException(exception, "Data inicio não informada!<br/>");
+        }
+
+        if (!verificaNulo(p.getInicio()) && !verificaNulo(p.getFim())) {
+            if (verificaPrazoMenor(p.getInicio(), p.getFim())) {
+                exception = new DadoInconsistenteException(exception, "Data fim menor que data inicio!<br/>");
+            }
+        }
+        
+        if (verificaNulo(p.getFim())) {
+            exception = new DadoInconsistenteException(exception, "Data fim não informado!<br/>");
+        }
+
 
         if (exception == null) {
 
@@ -404,5 +420,14 @@ public class RepositorioProjeto {
   
      }
   
+     private boolean verificaPrazoMenor(Date ini, Date fim) {
+        return ini.after(fim);
+    }
+     
+    public List listarProjetoInscritos(String tipoProjeto){
     
+         List<Projeto> projetos = this.projDAO.listarProjetosInscritos(tipoProjeto);
+         return projetos;    
+    }
+
 }

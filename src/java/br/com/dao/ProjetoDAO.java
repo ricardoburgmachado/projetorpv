@@ -69,4 +69,6 @@ public interface ProjetoDAO {
 
      public void prestaContas(Projeto projeto)throws PersistenciaException;
      
+     public List<Projeto> listarProjetosInscritos(String tipoProjeto)throws PersistenciaException;
+     
 }

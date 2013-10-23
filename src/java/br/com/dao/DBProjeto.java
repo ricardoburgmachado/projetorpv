@@ -19,6 +19,7 @@ import br.com.model.TipoCusto;
 import br.com.model.TipoProjeto;
 import br.com.model.Usuario;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -49,8 +50,8 @@ public class DBProjeto implements ProjetoDAO {
     @Override
     public int inserir(Projeto p) throws PersistenciaException {
 
-        String query = "INSERT INTO " + PROJETO + " (titulo, palavras_chave, resumo, sigilo, id_area, tipo_proj, status, id_responsavel) "
-                + "VALUES (?,?,?,?,?,?,?,?) ";
+        String query = "INSERT INTO " + PROJETO + " (titulo, palavras_chave, resumo, sigilo, id_area, tipo_proj, status, id_responsavel, inicio, fim) "
+                + "VALUES (?,?,?,?,?,?,?,?,?,?) ";
 
         PreparedStatement stmt;
 
@@ -64,7 +65,9 @@ public class DBProjeto implements ProjetoDAO {
             stmt.setString(6, p.getTipoProjeto().toString());
             stmt.setString(7, "CRIADO");
             stmt.setInt(8, p.getProfessor().getId());
-
+            stmt.setDate(9, new Date(p.getInicio().getTime()));
+            stmt.setDate(10, new Date(p.getFim().getTime()));
+            
             int retorno = stmt.executeUpdate();
 
             if (retorno == 0) {
@@ -116,6 +119,12 @@ public class DBProjeto implements ProjetoDAO {
             Professor prof = new Professor();
             prof.setId(resultSet.getInt("id_responsavel"));
             p.setProfessor(prof);
+            p.setInicio(resultSet.getDate("inicio"));
+            p.setFim(resultSet.getDate("fim"));
+            
+            //System.out.println("################ INICIO: "+p.getInicio());
+            //System.out.println("################ FIM: "+p.getFim());            
+            
             return p;
 
         } catch (SQLException ex) {
@@ -636,11 +645,14 @@ public class DBProjeto implements ProjetoDAO {
                     Professor professor = new Professor(result.getString("nome"), Campus.valueOf(result.getString("campus")));
                     professor.setId(result.getInt("id_responsavel"));
                     projeto.setProfessor(professor);
+                    projeto.setInicio(result.getDate("inicio"));
+                    projeto.setFim(result.getDate("fim"));
 
+                    
                     projetos.add(projeto);
                 } while (result.next());
             } catch (SQLException ex) {
-
+                System.out.println("**************** ERRO SQL, Cause:"+ex.getCause()+" Message:"+ex.getMessage());
                 throw new PersistenciaException("Erro ao acessar propriedades do projeto", ex);
             }
         }
@@ -1009,7 +1021,43 @@ public class DBProjeto implements ProjetoDAO {
         }        
     }
     
+    
+    /**
+     * Método que busca os projetos que estão inscritos(tabela inscrito) em algum edital e que sejam da mesma área do pro-reitor logado
+     * @param tipoProjeto
+     * @return 
+     */
+    public List<Projeto> listarProjetosInscritos(String tipoProjeto){    
         
+        
+        //String sql = "SELECT * FROM projeto NATURAL JOIN inscricao  WHERE projeto.tipo_proj = ? ";
+        //String sql = "SELECT * FROM projeto NATURAL JOIN inscricao inner join area_conhecimento using (id_area) WHERE projeto.tipo_proj = ? ";
+        String sql = "SELECT * FROM projeto NATURAL JOIN inscricao inner join usuario on id_responsavel = id_usuario inner join area_conhecimento using (id_area) WHERE projeto.tipo_proj = ? ";
+        
+        PreparedStatement stmt = null;
+        ResultSet result;
+
+        try {
+
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, tipoProjeto);
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar consulta", sqle);
+        }
+
+        try {
+
+            result = stmt.executeQuery();
+        } catch (SQLException ex) {
+
+            throw new PersistenciaException("Falha ao realizar consulta", ex);
+        }
+
+        return carregaProjetos(result);
+    
+    }
+    
     /*
     SELECT * FROM projeto INNER JOIN usuario
     ON projeto.id_responsavel = usuario.id_usuario

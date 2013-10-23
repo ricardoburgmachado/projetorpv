@@ -2,6 +2,7 @@ package br.com.model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 
 public class Projeto {
@@ -27,7 +28,7 @@ public class Projeto {
     private Arquivo prestacaoConta;
     private Date inicio;
     private Date fim;
-    
+    //private boolean executando;
     public Projeto(){
         
         this.status = StatusProjeto.CRIADO;
@@ -323,11 +324,6 @@ public class Projeto {
         this.prestacaoConta = prestacao_conta;
     }
     
-    public boolean isExecutando(){
-    
-      return false;
-    }
-
     /**
      * @return the inicio
      */
@@ -354,6 +350,20 @@ public class Projeto {
      */
     public void setFim(Date fim) {
         this.fim = fim;
+    }
+    
+    public boolean isExecutando(){
+    
+        //after = depois
+        //before = antes
+        Date dataAtual = new Date();
+        //System.out.println("************** DATA ATUAL: "+dataAtual);
+        //if((dataAtual.after(inicio) && dataAtual.before(fim)) && status.equals("HOMOLOGADO") ){
+        if((dataAtual.after(inicio) && dataAtual.before(fim)) && StatusProjeto.HOMOLOGADO.equals(status) ){
+            return true;
+        }else{        
+            return false;
+        } 
     }
     
 }

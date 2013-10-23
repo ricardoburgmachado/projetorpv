@@ -63,19 +63,6 @@ public class RepositorioEdital {
             exception = new DadoInconsistenteException(exception, "Arquivo não anexado!<br/>");
         }
         
-        if (verificaNulo(edital.getPrazoIniPrestCont())) {
-            exception = new DadoInconsistenteException(exception, "Prazo inicial(prestar contas) não informado!<br/>");
-        }
-
-        if (!verificaNulo(edital.getPrazoIniPrestCont()) && !verificaNulo(edital.getPrazoFimPrestCont())) {
-            if (verificaPrazoMenor(edital.getPrazoIniPrestCont(), edital.getPrazoFimPrestCont())) {
-                exception = new DadoInconsistenteException(exception, "Prazo final(prestar contas) menor que prazo inicial!<br/>");
-            }
-        }
-        
-        if (verificaNulo(edital.getPrazoFimPrestCont())) {
-            exception = new DadoInconsistenteException(exception, "Prazo final(prestar contas) não informado!<br/>");
-        }        
         
         if (exception == null) {
 
@@ -355,6 +342,6 @@ public class RepositorioEdital {
 
         return this.editalDao.listarEditais();
     }
-
+      
     
 }
