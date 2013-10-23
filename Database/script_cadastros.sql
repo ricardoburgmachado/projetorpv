@@ -89,8 +89,8 @@ INSERT INTO usuario VALUES (11, 'jose', 'jose', 'José','ALEGRETE');
 INSERT INTO usuario VALUES (12, 'paulo', 'paulo', 'Paulo','ALEGRETE');
 INSERT INTO usuario VALUES (13, 'carlos', 'carlos', 'Carlos','ALEGRETE');
 INSERT INTO usuario VALUES (14, 'cristiano', 'cristiano', 'cristiano moreira','ALEGRETE', 'EXTENSAO');
-INSERT INTO usuario VALUES (15 'rubia', 'rubia', 'Rubia','ALEGRETE');
-INSERT INTO usuario VALUES (16 'francisco', 'francisco', 'francisco','ALEGRETE');
+INSERT INTO usuario VALUES (15, 'rubia', 'rubia', 'Rubia','ALEGRETE');
+INSERT INTO usuario VALUES (16, 'francisco', 'francisco', 'francisco','ALEGRETE');
 /***************************** FIM cadastro usuarios **********************/
 
 /***************************** INICIO cadastro participantes **********************/
