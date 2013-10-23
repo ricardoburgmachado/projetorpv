@@ -1058,6 +1058,36 @@ public class DBProjeto implements ProjetoDAO {
     
     }
     
+    
+    public List<Projeto> listarProjetos(){
+        
+       
+        //Busca pelos dados do projeto incluindo seus participantes e o papel de cada participante. Também busca pelo nome e id do responsável pelo projeto (Professor)
+        String sql = "select * from projeto inner join usuario on id_responsavel = id_usuario inner join area_conhecimento using (id_area) ";
+
+        PreparedStatement stmt = null;
+        ResultSet result;
+
+        try {
+
+            stmt = connection.prepareStatement(sql);
+            
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar consulta", sqle);
+        }
+
+        try {
+
+            result = stmt.executeQuery();
+        } catch (SQLException ex) {
+
+            throw new PersistenciaException("Falha ao realizar consulta", ex);
+        }
+
+        return carregaProjetos(result);
+    
+    }
     /*
     SELECT * FROM projeto INNER JOIN usuario
     ON projeto.id_responsavel = usuario.id_usuario

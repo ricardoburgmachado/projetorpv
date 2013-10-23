@@ -129,7 +129,10 @@ public class RepositorioEdital {
 
     public Edital obtemEdital(int idEdital) throws PersistenciaException {
 
-        return this.editalDao.obtem(idEdital);
+        Edital edital = this.editalDao.obtem(idEdital);
+        edital.setArquivo(this.editalDao.obtemArquivo(idEdital));
+        edital.setRetificacoes(this.editalDao.obterRetificacoes(idEdital));        
+        return edital;
     }
 
     public void excluiEdital(Edital edital, Usuario user) throws PersistenciaException, PrivacidadeException, DadoInconsistenteException {

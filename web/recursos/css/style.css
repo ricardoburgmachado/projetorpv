@@ -535,6 +535,21 @@ ol#menurel li a {
     border: none;
 } 
 
+#lista_projetos .linealt .altera_status a{
+    display: block;
+    float: left;
+    width: 28px;
+    height: 28px;
+    text-align: center;
+    background:url(../imagens/altera_status.png) no-repeat;
+    border: none;
+    margin-left: 10px;
+} 
+#lista_projetos .linealt .altera_status a:hover{
+    background:url(../imagens/altera_status_hover.png) no-repeat;
+    border: none;
+} 
+
 /* ************** FIM LISTA PROJETOS **************** */
 
 /* *************** INICIO EXIBE PROJETO *************** */

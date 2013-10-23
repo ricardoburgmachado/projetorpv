@@ -71,4 +71,6 @@ public interface ProjetoDAO {
      
      public List<Projeto> listarProjetosInscritos(String tipoProjeto)throws PersistenciaException;
      
+     public List<Projeto> listarProjetos()throws PersistenciaException;
+     
 }

@@ -24,10 +24,10 @@
            permissao = Permissao.ALTERAR_STATUS_PROJETO;
             if(user != null && user.getPermissoes().contains(permissao)) {
         %>
-        <!-- AQUI DEVE SER DISPONIBILIZADO O LINK PARA A LISTAGEM DE PROJETOS QUE O RAFA DEVE FAZSER-->
-        <!-- <li><a href="<c:url value="/projeto_lista_showXXXXX"/>" class="mais">Projetos</a>
+        
+        <li><a href="<c:url value="/projeto_lista_altera_status"/>" class="mais">Projetos</a>
         </li>
-        -->
+        
         <%
             }            
         %>
@@ -55,6 +55,30 @@
         <%
             }
         %>
+        
+        
+        <%           
+            permissao = Permissao.DOWNLOAD_EDITAL;
+            if(user != null && user.getPermissoes().contains(permissao)) {
+        %>
+        
+        <li><a href="<c:url value="/edital_professor_lista_show"/>" class="mais">Editais</a>
+        </li>
+        <%
+            }
+        %>
+        
+        <%           
+            permissao = Permissao.ACESSAR_PROJ_REGISTRADOS;
+            if(user != null && user.getPermissoes().contains(permissao)) {
+        %>
+        
+        <li><a href="<c:url value="/edital_professor_lista_show"/>" class="mais">Projetos registrados</a>
+        </li>
+        <%
+            }
+        %>
+        
         
         
         

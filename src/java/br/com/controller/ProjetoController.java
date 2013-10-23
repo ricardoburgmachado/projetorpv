@@ -690,7 +690,7 @@ public class ProjetoController extends GenericController {
         System.out.println(" *********************** CAIU EM PROJETO PRESTA CONTAS");
 
         Usuario user = (Usuario) request.getSession().getAttribute("usuario");
-        if (!verificaAutorizacao(user, Permissao.CRUD_PROJETO)) {
+        if (!verificaAutorizacao(user, Permissao.PRESTAR_CONTAS)) {
             return new ModelAndView("login");
         }
 
@@ -741,14 +741,32 @@ public class ProjetoController extends GenericController {
         this.request = p_request;
         //Usuario user = (Usuario) request.getSession().getAttribute("usuario");
         ProReitor user = (ProReitor) request.getSession().getAttribute("usuario");
-        //if(!verificaAutorizacao(user, Permissao.CRUD_PROJETO)) {
+        if(!verificaAutorizacao(user, Permissao.ACESSAR_PROJ_REGISTRADOS)) {
 
-        //    return new ModelAndView("login");
-        //}
+            return new ModelAndView("login");
+        }
         RepositorioProjeto rp = new RepositorioPostgresFactory().createRepositorioProjeto();
-        List projetos = rp.listarProjetoInscritos(user.getArea());
-        //List projetos = rp.listarProjetoInscritos("PESQUISA");
+        List projetos = rp.listarProjetoInscritos(user.getArea());        
         ModelAndView mv = new ModelAndView("projetos_registrados_lista");
+        if (projetos != null) {
+            mv.addObject("projetos", projetos);
+        }
+        return mv;
+    }
+
+    @RequestMapping(value = "/projeto_lista_altera_status")
+    public ModelAndView projetoListaAlteraStatus(HttpServletRequest p_request) {
+
+        this.request = p_request;
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        if (!verificaAutorizacao(user, Permissao.ALTERAR_STATUS_PROJETO)) {
+
+            return new ModelAndView("login");
+        }
+
+        RepositorioProjeto rp = new RepositorioPostgresFactory().createRepositorioProjeto();
+        List projetos = rp.listarProjetos();
+        ModelAndView mv = new ModelAndView("projeto_lista_altera_status");
         if (projetos != null) {
             mv.addObject("projetos", projetos);
         }

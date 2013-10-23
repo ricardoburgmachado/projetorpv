@@ -70,7 +70,7 @@
 
                         <span style="clear: both; display: block;"></span>
  
-                        
+                        <br/>
                         <a class="show_edital" href="arquivo_edital_download?id_edital=${edital.id}&id_arquivo=${edital.arquivo.idArquivo}" title="Clique aqui para visualizar o edital">
                             Visualizar Edital
                         </a>
@@ -84,7 +84,6 @@
 
                         <span style="clear: both; display: block"></span>
 
-                        <input class="enviar_form" type="submit" value="Editar"/>
 
 
 

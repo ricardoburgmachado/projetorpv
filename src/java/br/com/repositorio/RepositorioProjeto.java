@@ -430,4 +430,10 @@ public class RepositorioProjeto {
          return projetos;    
     }
 
+    public List<Projeto> listarProjetos(){
+    
+        List<Projeto> projetos = this.projDAO.listarProjetos();
+        return projetos;    
+    }
+    
 }
