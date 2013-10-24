@@ -52,9 +52,9 @@ public class RepositorioFacade {
         return this.repUsuario.autenticaUsuario(login, senha);
     }
     
-    public Edital obter(int idEdital, Usuario usuario) throws PersistenciaException, PrivacidadeException, AutorizacaoException, DadoInconsistenteException {
+    public Edital exibeEdital(int idEdital, Usuario usuario) throws PersistenciaException, PrivacidadeException, AutorizacaoException, DadoInconsistenteException {
         
-        return repEdital.obtemEdital(idEdital, usuario);
+        return repEdital.exibeEdital(idEdital, usuario);
     }
     
     public void excluiEdital(int idEdital, Usuario usuario) throws PersistenciaException, PrivacidadeException, AutorizacaoException, DadoInconsistenteException {

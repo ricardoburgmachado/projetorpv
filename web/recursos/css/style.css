@@ -1149,6 +1149,7 @@ a[href*="projeto_nao_homologa"]{
     font-weight: bold;
     color: white;
     font-size: 1.1rem;
+    margin-left: 5px;
 }
 
 a[type="application/pdf"]::after, a[href$=".pdf"]::before{
@@ -1208,7 +1209,6 @@ a[type="application/pdf"]::after, a[href$=".pdf"]::before{
     list-style: none;
     font-size: 1rem;
     padding: 0px;
-    margin-left: 5px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

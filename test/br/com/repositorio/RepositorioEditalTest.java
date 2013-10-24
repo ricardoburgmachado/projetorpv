@@ -71,7 +71,7 @@ public class RepositorioEditalTest {
     public void testObtemSucesso() {
 
         Usuario user = this.facade.autenticaUsuario("joao", "joao");
-        this.facade.obter(1, user);
+        this.facade.exibeEdital(1, user);
     }
 
     //@Test(expected = DadoInconsistenteException.class)

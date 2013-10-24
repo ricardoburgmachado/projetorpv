@@ -13,6 +13,7 @@ import br.com.model.Arquivo;
 import br.com.model.Edital;
 import br.com.model.Inscricao;
 import br.com.model.Permissao;
+import br.com.model.Professor;
 import br.com.model.StatusProjeto;
 import br.com.model.TipoProjeto;
 import br.com.model.Usuario;
@@ -73,7 +74,7 @@ public class RepositorioEdital {
         }
     }
 
-    public Edital obtemEdital(int idEdital, Usuario user) throws PersistenciaException, DadoInconsistenteException, PrivacidadeException {
+    public Edital exibeEdital(int idEdital, Usuario user) throws PersistenciaException, DadoInconsistenteException, PrivacidadeException {
 
         if (verificaConsistenciaObterEdital(idEdital, user)) {
 
@@ -147,7 +148,7 @@ public class RepositorioEdital {
 
         if (!user.getPermissoes().contains(Permissao.CRUD_EDITAL) && !user.getPermissoes().contains(Permissao.EXIBE_EDITAL)) {
 
-            throw new AutorizacaoException("Usuário sem permissão para excluir edital!");
+            throw new AutorizacaoException("Usuário sem permissão para exibir edital!");
         }
 
         if (!exists(idEdital)) {
@@ -412,7 +413,7 @@ public class RepositorioEdital {
 
     protected boolean verificaConsistenciaDownloadArqInscricao(Inscricao inscricao, Usuario usuario) {
 
-        if (usuario == null || !usuario.getPermissoes().contains(Permissao.LISTAGEM_INSCRICOES)) {
+        if (usuario == null || (!usuario.getPermissoes().contains(Permissao.LISTAGEM_INSCRICOES) && !usuario.getPermissoes().contains(Permissao.VISUALIZAR_INSCRICAO))) {
 
             throw new AutorizacaoException("Usuário sem permissão para obter arquivo da inscrição!");
         }
@@ -422,7 +423,7 @@ public class RepositorioEdital {
             throw new DadoInconsistenteException("Inscrição ou arquivo inexistente!");
         }
 
-        if (inscricao.getProjeto().getProfessor().getId() != usuario.getId()) {
+        if (usuario instanceof Professor && inscricao.getProjeto().getProfessor().getId() != usuario.getId()) {
 
             throw new PrivacidadeException("Inscrição não pertencente ao usuário!");
         }
