@@ -74,6 +74,9 @@
                     <div class="round-border" id="form-contempacao-container">
 
                         <h2>Formulário de contemplação</h2>
+                        
+                        <span class="title">Arquivo da inscrição: </span><a class="arquivo" href="" title="Download do arquivo" type="${inscricao.arquivo.extensao}">${inscricao.arquivo.nomeArquivo}</a>
+                        
                         <form id="form-contemplacao" name="form" title="Formulário de contemplação da inscrição" method="post">
 
                             <input type="hidden"  name="id_projeto" value="${inscricao.projeto.id}"/>

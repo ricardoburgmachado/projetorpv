@@ -11,6 +11,7 @@ import Exceptions.PersistenciaException;
 import Exceptions.PrivacidadeException;
 import br.com.model.Arquivo;
 import br.com.model.Edital;
+import br.com.model.Inscricao;
 import br.com.model.Permissao;
 import br.com.model.ProReitor;
 import br.com.model.Recado;
@@ -533,8 +534,11 @@ public class EditalController extends GenericController {
         Usuario user = (Usuario) request.getSession().getAttribute("usuario");
 
         try {
-
-            mv.addObject("inscricao", this.facade.exibeInscricao(id_edital, id_projeto, user));
+            
+            Inscricao inscricao = this.facade.exibeInscricao(id_edital, id_projeto, user);
+            if(inscricao != null){
+                mv.addObject("inscricao", this.facade.exibeInscricao(id_edital, id_projeto, user));
+            }
         } catch (AutorizacaoException aex) {
 
             return new ModelAndView("login");
