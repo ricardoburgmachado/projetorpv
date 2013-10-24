@@ -149,6 +149,15 @@
                         <textarea style="height: 85px; width: 500px" name=resumo cols=35 rows=5></textarea>
 
 
+                        <span class="bloco">
+                            <label for="dataxx">Inicio(execução do projeto):</label>
+                            <input style="width: 175px" class="prazo" type="date" name="inicio_xx" id="prazoInicialxx" value="" />
+                        </span>
+                            
+                        <span class="bloco">
+                            <label for="dataxx">Fim(execução do projeto):</label>
+                            <input style="width: 175px" class="prazo" type="date" name="fim_xx" id="prazoFinalxx" value="" />
+                        </span>    
 
                         <span style="clear: both; display: block;"></span>
 

@@ -77,7 +77,10 @@
                                     <td class="tipo" >${projeto.tipoProjeto}</td>
                                     <td class="status">${projeto.status.descricao }</td>
                                     <td class="edita"><a title="Clique aqui para editar Projeto" href="projeto_edita_show?id=${projeto.id}"></a></td>
-                                    <td class="exibe"><a title="Clique aqui para exibir detalhes do projeto" href="projeto_exibe?id=${projeto.id}"></a></td>
+                                    <td class="exibe"><a title="Clique aqui para exibir detalhes do projeto" href="projeto_exibe?id=${projeto.id}"></a></td>                                    
+                                    <c:if test="${ !projeto.isExecutando()}">                                        
+                                    <td class="presta_contas"><a title="Clique aqui para realizar a prestação de contas" href="projeto_presta_contas_show?id=${projeto.id}"></a></td>
+                                    </c:if>
                                 </a>
                                 </tr>
                             </c:forEach>

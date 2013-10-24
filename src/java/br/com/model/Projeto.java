@@ -23,6 +23,10 @@ public class Projeto {
     private Campus campus;
     private boolean sigilo;
     private StatusProjeto status;
+    private Arquivo respaldo;
+    private Arquivo prestacaoConta;
+    private Date inicio;
+    private Date fim;
     private List<Recado> recados;
 
     public Projeto() {
@@ -315,5 +319,73 @@ public class Projeto {
         return "Projeto{" + "id=" + id + ", titulo=" + titulo + ", palavrasChave=" + palavrasChave + ", resumo=" + resumo + ", tipoProjeto=" + tipoProjeto + ", participantes=" + participantes + ", participantesString=" + participantesString + ", participantesAluno=" + participantesAluno + ", participantesProfessor=" + participantesProfessor + ", participantesExterno=" + participantesExterno + ", professor=" + professor + ", arquivo=" + arquivo + ", custos=" + custos + ", areaConhecimento=" + areaConhecimento + ", campus=" + campus + ", sigilo=" + sigilo + '}';
     }
 
+    /**
+     * @return the respaldo
+     */
+    public Arquivo getRespaldo() {
+        return respaldo;
+    }
 
+    /**
+     * @param respaldo the respaldo to set
+     */
+    public void setRespaldo(Arquivo respaldo) {
+        this.respaldo = respaldo;
+    }
+
+    /**
+     * @return the prestacao_conta
+     */
+    public Arquivo getPrestacaoConta() {
+        return prestacaoConta;
+    }
+
+    /**
+     * @param prestacao_conta the prestacao_conta to set
+     */
+    public void setPrestacaoConta(Arquivo prestacao_conta) {
+        this.prestacaoConta = prestacao_conta;
+    }
+    
+    /**
+     * @return the inicio
+     */
+    public Date getInicio() {
+        return inicio;
+    }
+
+    /**
+     * @param inicio the inicio to set
+     */
+    public void setInicio(Date inicio) {
+        this.inicio = inicio;
+    }
+
+    /**
+     * @return the fim
+     */
+    public Date getFim() {
+        return fim;
+    }
+
+    /**
+     * @param fim the fim to set
+     */
+    public void setFim(Date fim) {
+        this.fim = fim;
+    }
+    
+    public boolean isExecutando(){
+    
+        //after = depois
+        //before = antes
+        Date dataAtual = new Date();
+        //System.out.println("************** DATA ATUAL: "+dataAtual);
+        //if((dataAtual.after(inicio) && dataAtual.before(fim)) && status.equals("HOMOLOGADO") ){
+        if((dataAtual.after(inicio) && dataAtual.before(fim)) && StatusProjeto.HOMOLOGADO.equals(status) ){
+            return true;
+        }else{        
+            return false;
+        } 
+    }
 }

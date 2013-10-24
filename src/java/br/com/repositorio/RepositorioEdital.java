@@ -46,23 +46,24 @@ public class RepositorioEdital {
         }
 
         if (verificaNulo(edital.getPrazoInicial())) {
-            exception = new DadoInconsistenteException(exception, "Prazo inicial não informado!<br/>");
+            exception = new DadoInconsistenteException(exception, "Prazo inicial(inscrição) não informado!<br/>");
         }
 
         if (!verificaNulo(edital.getPrazoInicial()) && !verificaNulo(edital.getPrazoFinal())) {
             if (verificaPrazoMenor(edital.getPrazoInicial(), edital.getPrazoFinal())) {
-                exception = new DadoInconsistenteException(exception, "Prazo final menor que prazo inicial!<br/>");
+                exception = new DadoInconsistenteException(exception, "Prazo final(inscrição) menor que prazo inicial!<br/>");
             }
         }
-
+        
         if (verificaNulo(edital.getPrazoFinal())) {
-            exception = new DadoInconsistenteException(exception, "Prazo final não informado!<br/>");
+            exception = new DadoInconsistenteException(exception, "Prazo final não(inscrição) informado!<br/>");
         }
 
         if (verificaNulo(edital.getArquivo())) {
             exception = new DadoInconsistenteException(exception, "Arquivo não anexado!<br/>");
         }
-
+        
+        
         if (exception == null) {
 
             this.editalDao.adiciona(edital);
@@ -128,7 +129,10 @@ public class RepositorioEdital {
 
     public Edital obtemEdital(int idEdital) throws PersistenciaException {
 
-        return this.editalDao.obtem(idEdital);
+        Edital edital = this.editalDao.obtem(idEdital);
+        edital.setArquivo(this.editalDao.obtemArquivo(idEdital));
+        edital.setRetificacoes(this.editalDao.obterRetificacoes(idEdital));        
+        return edital;
     }
 
     public void excluiEdital(Edital edital, Usuario user) throws PersistenciaException, PrivacidadeException, DadoInconsistenteException {
@@ -486,4 +490,11 @@ public class RepositorioEdital {
 
         return true;
     }
+    
+    public List<Edital> listarEditais() throws PersistenciaException, DadoInconsistenteException {
+
+        return this.editalDao.listarEditais();
+    }
+      
+    
 }

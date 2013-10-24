@@ -29,57 +29,54 @@
             </div>     
 
             <div id="conteudo_interno">
-                
-                <div id="edital_exibe">
-                <h1>Exibir Edital - ${edital == null ? '' : edital.titulo}</h1>
 
-                <c:if test="${not empty inconsistencias}">
-                    <div id="inconsistencias">
-                        <ul>
-                            <c:forEach var="inconsistencia" items="${inconsistencias}">
-                                <li>${inconsistencia}</li>
-                                </c:forEach>
-                        </ul>
-                    </div>
-                </c:if>
-                <c:if test="${not empty edital}">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Título</th>
-                                <th>Início</th>
-                                <th>Fim</th>
-                                <th>Tipo</th>
-                                <th>Edital/Retificações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>${edital.titulo}</td>
-                                <td><fmt:formatDate type="date" value="${edital.prazoInicial}"/></td>
-                                <td><fmt:formatDate type="date" value="${edital.prazoFinal}"/></td>
-                                <td>${edital.tipo}</td>
-                                <td><a href="arquivo_edital_download?id_edital=${edital.id}&id_arquivo=${edital.arquivo.idArquivo}">${edital.arquivo.nomeArquivo}</a></td>
-                            </tr>
-                            <c:forEach var="retificacao" items="${edital.retificacoes}">
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><a href="arquivo_edital_download?id_edital=${edital.id}&id_arquivo=${retificacao.idArquivo}">${retificacao.nomeArquivo}</a></td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                        <div class="botoes">
+                <div id="edital_exibe">
+                    <h1>Exibir Edital</h1>
+
+                    <c:if test="${not empty inconsistencias}">
+                        <div id="inconsistencias">
                             <ul>
-                                <li><span class="botao"><a href="edital_edita?id=${edital.id}">Editar</a></span></li>
-                                <li><span class="botao"><a href="edital_exclui?id=${edital.id}">Excluir</a></span></li>
+                                <c:forEach var="inconsistencia" items="${inconsistencias}">
+                                    <li>${inconsistencia}</li>
+                                    </c:forEach>
                             </ul>
                         </div>
-                </c:if>
-            </div>
+                    </c:if>
+                    
+                    <c:if test="${not empty edital}">
+                        
+                        
+                        <label>Título:</label>
+                        <input disabled="true" type="text" name="titulo" value="${edital.titulo}" />  
+                        
+                        <label>Início:</label>
+                        <input disabled="true" type="text" name="titulo" value="<fmt:formatDate type="date" value="${edital.prazoInicial}"/>" />  
+                        
+                        <label>Fim:</label>
+                        <input disabled="true" type="text" name="titulo" value="<fmt:formatDate type="date" value="${edital.prazoFinal}"/>" />  
+                        
+                        <label>Tipo:</label>
+                        <input disabled="true" type="text" name="titulo" value="${edital.tipo}" />  
+                        
+                        
+                        <span style="clear: both; display: block;"></span>
+ 
+                        <br/>
+                        <a class="show_edital" href="arquivo_edital_download?id_edital=${edital.id}&id_arquivo=${edital.arquivo.idArquivo}" title="Clique aqui para visualizar o edital">
+                            Visualizar Edital
+                        </a>
+                        <% int count = 1;%>    
+                        <c:forEach var="retificacao" items="${edital.retificacoes}">
+                            <a class="show_retificacao" href="arquivo_edital_download?id_edital=${edital.id}&id_arquivo=${retificacao.idArquivo}" title="Clique aqui para visualizar a retificação">
+                                Visualizar Retificação <%=count%>
+                            </a>        
+                            <% count++;%>        
+                        </c:forEach>
+
+                        <span style="clear: both; display: block"></span>
+                      
+                    </c:if>
+                </div>
             </div>    
         </div>
     </body>

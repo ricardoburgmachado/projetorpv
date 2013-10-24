@@ -18,7 +18,6 @@ import br.com.model.StatusProjeto;
 import br.com.model.TipoProjeto;
 import br.com.model.Usuario;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -61,9 +60,9 @@ public interface ProjetoDAO {
     public void insereArquivo(int idProj) throws PersistenciaException;
 
     public void removeArquivo(int idProj) throws PersistenciaException;
-    
+
     public void adicionaParticipantes(int idProjeto, Set<Usuario> participantes) throws PersistenciaException;
-    
+
     public void removeParticipantes(int idProjeto, Set<Usuario> participantes) throws PersistenciaException;
 
     public void inserirParticipantes(int idProj, String[] idPart) throws PersistenciaException;
@@ -83,9 +82,16 @@ public interface ProjetoDAO {
     public String consultaStatus(int idProj) throws PersistenciaException;
 
     public List<Projeto> listarProjetos(int idResponsavel, Set<StatusProjeto> status, Campus campus, TipoProjeto tipo) throws PersistenciaException;
-    
+
     void addRecado(int idProjeto, Recado recado) throws PersistenciaException;
-    
+
     List<Recado> listarRecados(int idProjeto) throws PersistenciaException;
 
+    public void alteraStatus(Projeto projeto) throws PersistenciaException;
+
+    public void prestaContas(Projeto projeto) throws PersistenciaException;
+
+    public List<Projeto> listarProjetosInscritos(String tipoProjeto) throws PersistenciaException;
+
+    public List<Projeto> listarProjetos() throws PersistenciaException;
 }

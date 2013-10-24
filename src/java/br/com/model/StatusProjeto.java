@@ -21,4 +21,15 @@ public enum StatusProjeto {
     public String getDescricao(){
         return this.descricao;
     }
+    
+    public static StatusProjeto fromString(String text) {
+        if (text != null) {
+            for (StatusProjeto c : StatusProjeto.values()) {
+                if (text.equalsIgnoreCase(c.toString())) {
+                    return c;
+                }
+            }
+        }
+        return null;
+    }
 }

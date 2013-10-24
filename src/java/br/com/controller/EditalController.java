@@ -95,6 +95,7 @@ public class EditalController extends GenericController {
         String[] pI = request.getParameterValues("prazoInicial_xx");
         String[] pF = request.getParameterValues("prazoFinal_xx");
 
+
         if (pI[0] != null && !pI[0].equals("")) {
             String[] pISplit = pI[0].split("-");
             edital.setPrazoInicial(new Date(Integer.parseInt(pISplit[0]) - 1900, Integer.parseInt(pISplit[1]) - 1, Integer.parseInt(pISplit[2])));
@@ -104,6 +105,8 @@ public class EditalController extends GenericController {
             String[] pFSplit = pF[0].split("-");
             edital.setPrazoFinal(new Date(Integer.parseInt(pFSplit[0]) - 1900, Integer.parseInt(pFSplit[1]) - 1, Integer.parseInt(pFSplit[2])));
         }
+
+
         List<String> inconsistencias = new LinkedList<>();
 
         try {
@@ -256,7 +259,7 @@ public class EditalController extends GenericController {
 
         List<String> inconsistencias = new ArrayList<>();
         RepositorioFacade facade = new RepositorioFacade();
-        ModelAndView mv = new ModelAndView("edital_lista");
+        ModelAndView mv = editalListaShow(request);
 
         try {
 
@@ -534,9 +537,9 @@ public class EditalController extends GenericController {
         Usuario user = (Usuario) request.getSession().getAttribute("usuario");
 
         try {
-            
+
             Inscricao inscricao = this.facade.exibeInscricao(id_edital, id_projeto, user);
-            if(inscricao != null){
+            if (inscricao != null) {
                 mv.addObject("inscricao", this.facade.exibeInscricao(id_edital, id_projeto, user));
             }
         } catch (AutorizacaoException aex) {
@@ -582,7 +585,7 @@ public class EditalController extends GenericController {
         mv.addObject("inconsistencias", inconsistencias);
         return mv;
     }
-    
+
     @RequestMapping(value = "/inscricao_nao_contempla")
     public ModelAndView naoContemplaProjeto(HttpServletRequest request, @RequestParam int id_projeto, @RequestParam int id_edital, @RequestParam String recado) {
 
@@ -614,6 +617,42 @@ public class EditalController extends GenericController {
         }
 
         mv.addObject("inconsistencias", inconsistencias);
+        return mv;
+    }
+
+    @RequestMapping(value = "/edital_professor_lista_show")
+    public ModelAndView editalProfessorListaShow(HttpServletRequest p_request) {
+
+        this.request = p_request;
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        //if (!verificaAutorizacao(user, Permissao.CRUD_EDITAL)) {
+
+        //    return new ModelAndView("login");
+        //}
+        RepositorioEdital repositorioEdital = new RepositorioPostgresFactory().createRepositorioEdital();
+        List<Edital> editais = repositorioEdital.listarEditais();
+        ModelAndView mv = new ModelAndView("edital_lista_professor");
+        mv.addObject("editais", editais);
+        return mv;
+    }
+
+    @RequestMapping(value = "/edital_download")
+    public ModelAndView editalDownload(HttpServletRequest p_request, @RequestParam int id) {
+
+        this.request = p_request;
+        System.out.println("************** ID VINDA POR PARAMETRO: " + id);
+
+
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        //if (!verificaAutorizacao(user, Permissao.CRUD_EDITAL)) {
+        //    return new ModelAndView("login");
+        //}
+
+        RepositorioEdital repositorioEdital = new RepositorioPostgresFactory().createRepositorioEdital();
+        //RepositorioFacade facade = new RepositorioFacade();
+        Edital edital = repositorioEdital.obtemEdital(id);
+        ModelAndView mv = new ModelAndView("edital_download_professor");
+        mv.addObject("edital", edital);
         return mv;
     }
 }

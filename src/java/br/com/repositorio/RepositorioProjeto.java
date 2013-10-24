@@ -23,6 +23,7 @@ import br.com.model.Usuario;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -65,6 +66,21 @@ public class RepositorioProjeto {
 
             exception = new DadoInconsistenteException(exception, "Título não informado <br/>");
         }
+        
+        if (verificaNulo(p.getInicio())) {
+            exception = new DadoInconsistenteException(exception, "Data inicio não informada!<br/>");
+        }
+
+        if (!verificaNulo(p.getInicio()) && !verificaNulo(p.getFim())) {
+            if (verificaPrazoMenor(p.getInicio(), p.getFim())) {
+                exception = new DadoInconsistenteException(exception, "Data fim menor que data inicio!<br/>");
+            }
+        }
+        
+        if (verificaNulo(p.getFim())) {
+            exception = new DadoInconsistenteException(exception, "Data fim não informado!<br/>");
+        }
+
 
         if (exception == null) {
 
@@ -112,7 +128,7 @@ public class RepositorioProjeto {
         return projDAO.obter(id);
     }
 
-    protected Projeto obter(int id) throws PersistenciaException {
+    public Projeto obter(int id) throws PersistenciaException {
 
         return projDAO.obter(id);
     }
@@ -463,5 +479,61 @@ public class RepositorioProjeto {
     protected void atualizaStatusProjeto(Projeto projeto){
         
         this.projDAO.atualizaStatus(projeto);
+    }
+    /**
+     * Método utilizado para alterar o status (feito pelo Pro-reitor)
+     * @param p 
+     */
+    public void alteraStatusProjeto(Projeto p){
+         
+         DadoInconsistenteException exception = null;
+
+
+        if (verificaNulo(p.getStatus())) {
+            exception = new DadoInconsistenteException(exception, "Status do projeto não informado <br/>");
+        }
+
+        if (p.getRespaldo() == null) {
+            exception = new DadoInconsistenteException(exception, "Arquivo respaldo não anexado <br/>");
+        }
+
+        if (exception == null) {
+            projDAO.alteraStatus(p);            
+        } else {
+            throw exception;
+        }
+
+    }
+    
+    public void prestaContas(Projeto projeto){
+         DadoInconsistenteException exception = null;
+
+
+        if (projeto.getPrestacaoConta() == null) {
+            exception = new DadoInconsistenteException(exception, "Arquivo não anexado <br/>");
+        }
+
+        if (exception == null) {
+            projDAO.prestaContas(projeto);
+        } else {
+            throw exception;
+        }
+  
+     }
+  
+     private boolean verificaPrazoMenor(Date ini, Date fim) {
+        return ini.after(fim);
+    }
+     
+    public List listarProjetoInscritos(String tipoProjeto){
+    
+         List<Projeto> projetos = this.projDAO.listarProjetosInscritos(tipoProjeto);
+         return projetos;    
+    }
+
+    public List<Projeto> listarProjetos(){
+    
+        List<Projeto> projetos = this.projDAO.listarProjetos();
+        return projetos;    
     }
 }

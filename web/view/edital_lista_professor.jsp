@@ -2,7 +2,6 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -54,7 +53,7 @@
 
             <div id="conteudo_interno">
 
-                <h1>Listar Editais</h1>
+                <h1>Listar Editais para download</h1>
 
                 <table id="lista_projetos">                    
                     <c:choose>
@@ -62,10 +61,6 @@
 
                             <tr class="sub_titulo">
                                 <td class="titulo">TITULO</td>
-                                <td class="tipo">TIPO</td>
-                                <td class="tipo">PRAZOS</td>
-                                
-                                <!--<td class="status">STATUS</td>-->
                                 <td class="funcoes" colspan="3">AÇÕES</td>
                             </tr>
                             <c:forEach items="${editais}" var="edital">
@@ -73,13 +68,9 @@
                                 <tr class="linealt">
                                 <a>
                                     <td class="titulo">${edital.titulo}</td>
-                                    <td class="tipo" >${edital.tipo}</td>
-                                    <td class="tipo" >Inicial: <fmt:formatDate type="date" value="${edital.prazoInicial}"/> <br/>Final: <fmt:formatDate type="date" value="${edital.prazoFinal}"/></td>                                    
-                                    <!--<td class="status">${projeto.status.descricao }</td>-->
-                                    <td class="edita"><a title="Clique aqui para editar Edital" href="edital_edita_show?id=${edital.id}"></a></td>
-                                    <td class="exclui"><a href="edital_exclui?id=${edital.id}"></a></td>
-                                    <td class="exibe"><a href="edital_exibe?id=${edital.id}"></a></td>
-                                    <!--<td class="exibe"><a title="Clique aqui para exibir detalhes do projeto" href="projeto_exibe?id=${edital.id}"></a></td>-->
+                                    
+                                    <td class="exibe"><a title="Clique aqui para baixar os editais" href="edital_download?id=${edital.id}"></a></td>
+
                                 </a>
                                 </tr>
                             </c:forEach>

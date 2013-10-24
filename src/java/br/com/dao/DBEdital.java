@@ -58,6 +58,7 @@ public class DBEdital implements EditalDAO {
             } else {
                 stmt.setInt(6, 0);
             }
+
         } catch (SQLException sqle) {
 
             throw new PersistenciaException("Falha ao configurar inserção do edital!", sqle);
@@ -727,31 +728,31 @@ public class DBEdital implements EditalDAO {
 
         return nextInscricao(result, true);
     }
-    
+
     @Override
-    public boolean existeInscricao(int idProjeto) throws PersistenciaException{
-        
+    public boolean existeInscricao(int idProjeto) throws PersistenciaException {
+
         String sql = "select id_proj from inscricao where id_proj=?";
         Connection conn = this.factory.createConnection();
         PreparedStatement stmt;
-        
-        try{
-            
+
+        try {
+
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, idProjeto);
-        }catch(SQLException sqle){
-            
+        } catch (SQLException sqle) {
+
             throw new PersistenciaException("Falha ao preparar consulta por inscrições pendentes!", sqle);
         }
-        
-        try{
-            
+
+        try {
+
             return stmt.executeQuery().next();
-        }catch(SQLException sqle){
-            
+        } catch (SQLException sqle) {
+
             throw new PersistenciaException("Falha ao consultar por inscrições pendentes!", sqle);
-        }finally{
-            
+        } finally {
+
             this.factory.close(conn);
         }
     }
@@ -767,8 +768,10 @@ public class DBEdital implements EditalDAO {
                 Inscricao inscricao = new Inscricao(projeto, edital);
                 inscricao.setAprovada(result.getBoolean("aprovada"));
 
-                if (carregaArquivo) inscricao.setArquivo(createArquivo(result));
-                
+                if (carregaArquivo) {
+                    inscricao.setArquivo(createArquivo(result));
+                }
+
                 return inscricao;
             }
         } catch (SQLException sqle) {
@@ -871,7 +874,6 @@ public class DBEdital implements EditalDAO {
 
             result = stmt.executeQuery();
             Inscricao inscricao;
-
             while ((inscricao = nextInscricao(result, true)) != null) {
 
                 inscricoes.add(inscricao);
@@ -885,6 +887,33 @@ public class DBEdital implements EditalDAO {
         }
 
         return inscricoes;
+    }
+
+    @Override
+    public List<Edital> listarEditais() throws PersistenciaException {
+
+        String sql = "select * from edital";
+
+        PreparedStatement stmt = null;
+        ResultSet result;
+
+        try {
+            Connection connection = factory.createConnection();
+            stmt = connection.prepareStatement(sql);
+        } catch (SQLException ex) {
+            throw new PersistenciaException("Falha ao preparar consulta", ex);
+        }
+
+        try {
+
+            result = stmt.executeQuery();
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao realizar consulta", sqle);
+        }
+
+        return carregaEditais(result);
+
     }
 
     private Arquivo createArquivo(ResultSet result) throws SQLException {
@@ -901,8 +930,6 @@ public class DBEdital implements EditalDAO {
 
         return arquivo;
     }
-
-    
 
     @Override
     public void atualizaStatusInscricao(int idEdital, int idProjeto, boolean aprovada) throws PersistenciaException {

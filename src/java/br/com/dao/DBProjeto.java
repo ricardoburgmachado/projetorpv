@@ -8,6 +8,7 @@ package br.com.dao;
 import Exceptions.PersistenciaException;
 import br.com.model.Aluno;
 import br.com.model.AreaConhecimento;
+import br.com.model.Arquivo;
 import br.com.model.Campus;
 import br.com.model.Custo;
 import br.com.model.Externo;
@@ -52,8 +53,8 @@ public class DBProjeto implements ProjetoDAO {
     @Override
     public int inserir(Projeto p) throws PersistenciaException {
 
-        String query = "INSERT INTO " + PROJETO + " (titulo, palavras_chave, resumo, sigilo, id_area, tipo_proj, status, id_responsavel) "
-                + "VALUES (?,?,?,?,?,?,?,?) ";
+        String query = "INSERT INTO " + PROJETO + " (titulo, palavras_chave, resumo, sigilo, id_area, tipo_proj, status, id_responsavel, inicio, fim) "
+                + "VALUES (?,?,?,?,?,?,?,?,?,?) ";
 
         PreparedStatement stmt;
 
@@ -67,6 +68,8 @@ public class DBProjeto implements ProjetoDAO {
             stmt.setString(6, p.getTipoProjeto().toString());
             stmt.setString(7, "CRIADO");
             stmt.setInt(8, p.getProfessor().getId());
+            stmt.setDate(9, new Date(p.getInicio().getTime()));
+            stmt.setDate(10, new Date(p.getFim().getTime()));
 
             int retorno = stmt.executeUpdate();
 
@@ -119,6 +122,12 @@ public class DBProjeto implements ProjetoDAO {
             Professor prof = new Professor();
             prof.setId(resultSet.getInt("id_responsavel"));
             p.setProfessor(prof);
+            p.setInicio(resultSet.getDate("inicio"));
+            p.setFim(resultSet.getDate("fim"));
+
+            //System.out.println("################ INICIO: "+p.getInicio());
+            //System.out.println("################ FIM: "+p.getFim());            
+
             return p;
 
         } catch (SQLException ex) {
@@ -694,11 +703,14 @@ public class DBProjeto implements ProjetoDAO {
                     Professor professor = new Professor(result.getString("nome"), Campus.valueOf(result.getString("campus")));
                     professor.setId(result.getInt("id_responsavel"));
                     projeto.setProfessor(professor);
+                    projeto.setInicio(result.getDate("inicio"));
+                    projeto.setFim(result.getDate("fim"));
+
 
                     projetos.add(projeto);
                 } while (result.next());
             } catch (SQLException ex) {
-
+                System.out.println("**************** ERRO SQL, Cause:" + ex.getCause() + " Message:" + ex.getMessage());
                 throw new PersistenciaException("Erro ao acessar propriedades do projeto", ex);
             }
         }
@@ -961,7 +973,6 @@ public class DBProjeto implements ProjetoDAO {
 
             throw new PersistenciaException("Falha ao preparar consulta por projetos!", sqle);
         }
-
         try {
 
             result = stmt.executeQuery();
@@ -972,12 +983,64 @@ public class DBProjeto implements ProjetoDAO {
 
         return carregaProjetos(result);
     }
-    
+
+    public void respalda(int idArquivo, int idProjeto) {
+
+        String sql = "INSERT INTO respaldo (id_arquivo, id_proj) VALUES (?,?)";
+        //Connection conn = factory.createConnection();
+        PreparedStatement stmt;
+        try {
+            stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, idArquivo);
+            stmt.setInt(2, idProjeto);
+
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao configurar retificação do edital!", sqle);
+        }
+
+        try {
+
+            stmt.execute();
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao retificar edital!", sqle);
+        } finally {
+            //factory.close(conn);
+        }
+    }
+
+    @Override
+    public void alteraStatus(Projeto projeto) throws PersistenciaException {
+
+        String sql = "update " + PROJETO + " set status=? where id_proj=?";
+        PreparedStatement stmt = null;
+
+        try {
+
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, projeto.getStatus().toString());
+            stmt.setInt(2, projeto.getId());
+            respalda(adicionaArquivo(projeto.getRespaldo()), projeto.getId());
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar atualização");
+        }
+
+        try {
+            stmt.executeUpdate();
+        } catch (SQLException sqle) {
+
+            System.out.println(sqle);
+            throw new PersistenciaException("Falha ao atualizar registro");
+        }
+    }
+
     @Override
     public void addRecado(int idProjeto, Recado recado) throws PersistenciaException {
 
         String sql = "insert into recado (conteudo, data_envio, id_usuario, id_proj) values (?, ?, ?, ?)";
-        PreparedStatement stmt;
+        PreparedStatement stmt = null;
         Connection conn = this.connection;
 
         try {
@@ -985,7 +1048,7 @@ public class DBProjeto implements ProjetoDAO {
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, recado.getConteudo());
             stmt.setDate(2, new Date(recado.getDataEnvio().getTime()));
-            stmt.setInt(3, recado.getRemetente().getId());            
+            stmt.setInt(3, recado.getRemetente().getId());
             stmt.setInt(4, idProjeto);
         } catch (SQLException sqle) {
 
@@ -1000,7 +1063,41 @@ public class DBProjeto implements ProjetoDAO {
             throw new PersistenciaException("Falha ao adicionar recado ao projeto!", sqle);
         }
     }
-    
+
+    private int adicionaArquivo(Arquivo arquivo) throws PersistenciaException {
+
+        if (arquivo == null) {
+
+            return 0;
+        }
+
+        String sql = "insert into arquivo (nome_arquivo, extensao, dados) values (?, ?, ?)";
+        //Connection conn = factory.createConnection();
+        PreparedStatement stmt;
+
+        try {
+
+            //stmt = conn.prepareStatement(sql);
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, arquivo.getNomeArquivo());
+            stmt.setString(2, arquivo.getExtensao());
+            stmt.setBytes(3, arquivo.getDados());
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao configurar inserção do arquivo!", sqle);
+        }
+
+        try {
+            stmt.execute();
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao inserir arquivo!", sqle);
+        }
+
+        return getMaxIDArquivo();
+
+    }
+
     @Override
     public List<Recado> listarRecados(int idProjeto) throws PersistenciaException {
 
@@ -1017,10 +1114,10 @@ public class DBProjeto implements ProjetoDAO {
         } catch (SQLException sqle) {
 
             throw new PersistenciaException("Falha ao preparar consulta por recados do projeto!", sqle);
+
         }
 
         try {
-
             ResultSet result = stmt.executeQuery();
             recados = carregaRecados(result);
         } catch (SQLException sqle) {
@@ -1029,6 +1126,52 @@ public class DBProjeto implements ProjetoDAO {
         }
 
         return recados;
+    }
+
+    private int getMaxIDArquivo() throws PersistenciaException {
+
+        String sql = "select max(id_arquivo) as id from arquivo";
+        //Connection conn = factory.createConnection();
+        PreparedStatement stmt;
+        try {
+
+            //stmt = conn.prepareStatement(sql);
+            stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+
+                return rs.getInt("id");
+            }
+        } catch (SQLException sqle) {
+            throw new PersistenciaException("Falha ao obter id máximo de arquivo!", sqle);
+        }
+
+        return 0;
+    }
+
+    @Override
+    public void prestaContas(Projeto projeto) throws PersistenciaException {
+
+        String sql = "INSERT INTO prestacao_contas (id_arquivo, id_proj) VALUES (?,?)";
+        //Connection conn = factory.createConnection();
+        PreparedStatement stmt;
+        try {
+            stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, adicionaArquivo(projeto.getPrestacaoConta()));
+            stmt.setInt(2, projeto.getId());
+
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao configurar retificação do edital!", sqle);
+        }
+
+        try {
+            stmt.execute();
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao retificar edital!", sqle);
+        }
     }
 
     private List<Recado> carregaRecados(ResultSet result) throws PersistenciaException {
@@ -1065,5 +1208,71 @@ public class DBProjeto implements ProjetoDAO {
         }
 
         return recado;
+    }
+
+    /**
+     * Método que busca os projetos que estão inscritos(tabela inscrito) em
+     * algum edital e que sejam da mesma área do pro-reitor logado
+     *
+     * @param tipoProjeto
+     * @return
+     */
+    public List<Projeto> listarProjetosInscritos(String tipoProjeto) {
+
+
+        //String sql = "SELECT * FROM projeto NATURAL JOIN inscricao  WHERE projeto.tipo_proj = ? ";
+        //String sql = "SELECT * FROM projeto NATURAL JOIN inscricao inner join area_conhecimento using (id_area) WHERE projeto.tipo_proj = ? ";
+        String sql = "SELECT * FROM projeto NATURAL JOIN inscricao inner join usuario on id_responsavel = id_usuario inner join area_conhecimento using (id_area) WHERE projeto.tipo_proj = ? ";
+
+        PreparedStatement stmt = null;
+        ResultSet result;
+
+        try {
+
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, tipoProjeto);
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar consulta", sqle);
+        }
+
+        try {
+
+            result = stmt.executeQuery();
+        } catch (SQLException ex) {
+
+            throw new PersistenciaException("Falha ao realizar consulta", ex);
+        }
+
+        return carregaProjetos(result);
+
+    }
+
+    @Override
+    public List<Projeto> listarProjetos() {
+        //Busca pelos dados do projeto incluindo seus participantes e o papel de cada participante. Também busca pelo nome e id do responsável pelo projeto (Professor)
+        String sql = "select * from projeto inner join usuario on id_responsavel = id_usuario inner join area_conhecimento using (id_area) ";
+
+        PreparedStatement stmt = null;
+        ResultSet result;
+
+        try {
+
+            stmt = connection.prepareStatement(sql);
+
+        } catch (SQLException sqle) {
+
+            throw new PersistenciaException("Falha ao preparar consulta", sqle);
+        }
+
+        try {
+
+            result = stmt.executeQuery();
+        } catch (SQLException ex) {
+
+            throw new PersistenciaException("Falha ao realizar consulta", ex);
+        }
+
+        return carregaProjetos(result);
     }
 }
