@@ -114,7 +114,7 @@ public class RepositorioFacade {
         projeto.setParticipantesProfessor(repProjeto.getParticProfessores(idProjeto));
         projeto.setParticipantesExterno(repProjeto.getParticExternos(idProjeto));
         projeto.setCustos(repProjeto.getCustos(idProjeto));
-        projeto.setRecados(repProjeto.listarRecados(idProjeto));
+        projeto.setRecados(repProjeto.listarRecados(idProjeto, usuario));
         
         return projeto;
     }
@@ -161,5 +161,17 @@ public class RepositorioFacade {
     public Inscricao exibeInscricao(int idEdital, int idProjeto, Usuario usuario) throws AutorizacaoException, PrivacidadeException, PersistenciaException {
         
         return this.repEdital.exibeInscricao(idProjeto, idEdital, usuario);
+    }
+    
+    public List<Recado> listarRecadosProjeto(int idProjeto, Usuario usuario) throws PrivacidadeException, PersistenciaException{
+        
+        List<Recado> recados = this.repProjeto.listarRecados(idProjeto, usuario);
+        
+        for(Recado recado: recados){
+            
+            recado.setRemetente(this.repUsuario.obterUsuario(recado.getRemetente().getId()));
+        }
+        
+        return recados;
     }
 }

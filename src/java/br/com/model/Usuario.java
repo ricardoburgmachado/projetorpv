@@ -1,6 +1,5 @@
 package br.com.model;
 
-import br.com.repositorio.RepositorioEdital;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -163,5 +162,10 @@ public abstract class Usuario {
      */
     public void setArea(TipoProjeto area) {
         this.area = area;
+    }
+    
+    public String getPapel(){
+        
+        return "Anônimo";
     }
 }

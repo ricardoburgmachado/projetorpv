@@ -453,7 +453,7 @@ ol#menurel li a {
 #lista_projetos .linealt .titulo {
     display: block;
     float: left;
-    width: 370px;
+    width: 350px;
     text-align: center;
 } 
 
@@ -549,6 +549,16 @@ ol#menurel li a {
     background:url(../imagens/altera_status_hover.png) no-repeat;
     border: none;
 } 
+
+#lista_projetos .linealt .recados_icon a{
+    background: url(../imagens/notes.png) no-repeat;
+    display: block;
+    float: left;
+    width: 28px;
+    height: 28px;
+    text-align: center;
+    border: none;
+}
 
 /* ************** FIM LISTA PROJETOS **************** */
 
@@ -1063,12 +1073,12 @@ a[href*="projeto_nao_homologa"]{
 }
 
 .inscricao_aprovada{
-    
+
     background-color: lime;
 }
 
 .item-lista-background{
-    
+
     background-color: darkgray;
 }
 
@@ -1170,23 +1180,26 @@ a[type="application/pdf"]::after, a[href$=".pdf"]::before{
 }
 
 .flex-space{
-    
+
     justify-content: space-between;
 }
 
 .flex-grow{
-    
+
     flex-grow: 1;
-    flex: 1;
+}
+
+.flex-wrap{
+    flex-wrap: wrap;
 }
 
 .vertical-align{
-    
+
     align-self: center;
 }
 
 .inside-conteudo{
-    
+
     display: block;
     float: left;
     width: 98%;
@@ -1195,7 +1208,7 @@ a[type="application/pdf"]::after, a[href$=".pdf"]::before{
 }
 
 .round-border{
-    
+
     border-radius: 10px;
 }
 
@@ -1215,7 +1228,7 @@ a[type="application/pdf"]::after, a[href$=".pdf"]::before{
 }
 
 .div-exibe-objeto{
-    
+
     margin: 2px;
     background-color: darkgrey;
 }
@@ -1227,14 +1240,14 @@ a[type="application/pdf"]::after, a[href$=".pdf"]::before{
 }
 
 #form-contemplacao > *{
-    
+
     display: block;
     margin: 2px;
     font-size: 1.1rem;
 }
 
 #form-contemplacao textarea{
-    
+
     margin-left: 0px;
     width: 60%;
     height: 150px;
@@ -1242,13 +1255,13 @@ a[type="application/pdf"]::after, a[href$=".pdf"]::before{
 }
 
 #form-contempacao-container{
-    
+
     margin: 5px;
     background-color: darkgrey;
 }
 
 .inside-conteudo h2{
-    
+
     font-size: 1.5rem;
     padding: 3px;
     text-align: center;
@@ -1256,7 +1269,7 @@ a[type="application/pdf"]::after, a[href$=".pdf"]::before{
 }
 
 #form-contemplacao input[type="submit"]{
-    
+
     display: inline-block;
     border-radius: 5px;
     background-color: #CCCCCC;
@@ -1342,3 +1355,8 @@ a[type="application/pdf"]::after, a[href$=".pdf"]::before{
     border: 1px solid #303030;   
 }
 /* *************** FIM EDITAL EXIBE*************** */
+
+.recados_icon{
+    
+    
+}

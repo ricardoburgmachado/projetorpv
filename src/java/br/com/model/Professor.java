@@ -28,5 +28,11 @@ public class Professor extends Usuario {
     public Professor(String nome, Campus campus) {
         super(nome, campus);
     }
+    
+    @Override
+    public String getPapel(){
+        
+        return "Professor";
+    }
 
 }

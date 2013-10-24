@@ -15,5 +15,7 @@ public interface UsuarioDAO {
     public void obter(Projeto p) throws PersistenciaException;
     
     public Usuario autentica(String login, String senha) throws PersistenciaException;
+    
+    public Usuario obtem(int idUsuario) throws PersistenciaException;
 
 }

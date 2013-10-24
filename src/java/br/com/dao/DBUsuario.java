@@ -15,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,27 +24,26 @@ import java.util.logging.Logger;
  * @author Ricardo
  */
 public class DBUsuario implements UsuarioDAO {
-
+    
     private Connection connection;
     private Statement statement = null;
     private static final String USUARIO = "usuario";
     private PostgresConnectionFactory connectionFactory;
-
-    public DBUsuario(){}
+    
+    public DBUsuario() {
+    }
     
     public DBUsuario(PostgresConnectionFactory connectionFactory) {
-
+        
         this.connectionFactory = connectionFactory;
     }
-
     
-
     @Override
     public ArrayList<Usuario> listar(String papel) throws PersistenciaException {
-
-        String query = "SELECT * FROM usuario NATURAL JOIN usuario_papel NATURAL JOIN papel where papel.descricao = '"+papel.toString()+"'";
         
-        System.out.println("******************** QUERY -> "+query);
+        String query = "SELECT * FROM usuario NATURAL JOIN usuario_papel NATURAL JOIN papel where papel.descricao = '" + papel.toString() + "'";
+        
+        System.out.println("******************** QUERY -> " + query);
         
         this.connection = connectionFactory.createConnection();
         
@@ -51,69 +51,75 @@ public class DBUsuario implements UsuarioDAO {
         ResultSet resultSet;
         ArrayList<Usuario> listaRetorno = new ArrayList<Usuario>();
         try {
-
+            
             stmt = connection.prepareStatement(query);
             resultSet = stmt.executeQuery();
             while (resultSet.next()) {
                 
-
-                if (papel.toString().equalsIgnoreCase("PROFESSOR")) {                    
+                
+                if (papel.toString().equalsIgnoreCase("PROFESSOR")) {
                     Professor a = new Professor();
                     a.setId(resultSet.getInt("id_usuario"));
-                    a.setNome(resultSet.getString("nome").toString());                    
+                    a.setNome(resultSet.getString("nome").toString());
                     listaRetorno.add(a);
-                } else if (papel.toString().equalsIgnoreCase("ALUNO")) {                    
+                } else if (papel.toString().equalsIgnoreCase("ALUNO")) {
                     Aluno a = new Aluno();
                     a.setId(resultSet.getInt("id_usuario"));
-                    a.setNome(resultSet.getString("nome").toString());                    
+                    a.setNome(resultSet.getString("nome").toString());
                     listaRetorno.add(a);
-                }else if (papel.toString().equalsIgnoreCase("EXTERNO")) {                    
+                } else if (papel.toString().equalsIgnoreCase("EXTERNO")) {
                     Externo a = new Externo();
                     a.setId(resultSet.getInt("id_usuario"));
-                    a.setNome(resultSet.getString("nome").toString());                    
+                    a.setNome(resultSet.getString("nome").toString());
                     listaRetorno.add(a);
                 }
             }
-
+            
         } catch (Exception ex) {
-            System.err.println("ERRO: "+ex.getMessage()+ " -> causa:  "+ex.getCause());
+            System.err.println("ERRO: " + ex.getMessage() + " -> causa:  " + ex.getCause());
             throw new PersistenciaException("Não foi possível listar os usuários cadastrados no banco", ex);
         }
         return listaRetorno;
     }
-
+    
     @Override
     public void obter(Projeto p) throws PersistenciaException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-
+    
     @Override
     public Usuario autentica(String login, String senha) throws PersistenciaException {
-
+        
         Connection con = connectionFactory.createConnection();
         Usuario user = null;
         PreparedStatement stmt = null;
         ResultSet result;
-
+        
         try {
-
+            
             stmt = con.prepareStatement("select area, id_usuario, login, senha, nome, campus, papel.descricao as papel, permissao.descricao as permissao from usuario inner join usuario_papel using (id_usuario) inner join papel using(id_papel) inner join papel_permissao using (id_papel) inner join permissao using(id_perm) where login=? and senha=?");
             stmt.setString(1, login);
             stmt.setString(2, senha);
         } catch (SQLException sqle) {
-
+            
             throw new PersistenciaException("Não foi possível acessar o banco de dados para autenticação", sqle);
         }
-
+        
         try {
-
+            
             result = stmt.executeQuery();
-            return createUsuario(result);
+            if (!result.next()) {
+                
+                throw new PersistenciaException("Login e senha não conferem!");
+            }
+            
+            Usuario usuario = createUsuario(result);
+            usuario.setPermissoes(carregaPermissoes(result));
+            return usuario;
         } catch (SQLException sqle) {
-
+            
             throw new PersistenciaException("Erro ao buscar por usuário no banco de dados", sqle);
-        }finally{
+        } finally {
             
             try {
                 con.close();
@@ -121,23 +127,13 @@ public class DBUsuario implements UsuarioDAO {
                 
                 throw new PersistenciaException("Erro ao fechar conexão com o banco de dados", sqle);
             }
-        } 
-    }
-
-    private Usuario createUsuario(ResultSet result) throws PersistenciaException {
-
-        try {
-            if (!result.next()) {
-
-                throw new PersistenciaException("Login e senha não conferem!");
-            }
-        } catch (SQLException ex) {
-            
-            throw new PersistenciaException("Erro ao acessar o resultado da consulta", ex);
         }
-
+    }
+    
+    private Usuario createUsuario(ResultSet result) throws PersistenciaException {
+        
         try {
-
+            
             String papelUsuario = result.getString("papel");
             Usuario user = Usuario.instantiateUsuario(papelUsuario);
             user.setId(result.getInt("id_usuario"));
@@ -146,25 +142,66 @@ public class DBUsuario implements UsuarioDAO {
             user.setSenha(result.getString("senha"));
             user.setCampus(Campus.valueOf(result.getString("campus")));
             
-            if(result.getString("area") != null) 
+            if (result.getString("area") != null) {
                 user.setArea(TipoProjeto.valueOf(result.getString("area")));
-
-            do {
-
-                user.addPermissao(Permissao.valueOf(result.getString("permissao")));
-            } while (result.next());
-
+            }
+            
             return user;
         } catch (SQLException sqle) {
-
+            
             throw new PersistenciaException("Não foi possível atribuir as propriedades ao usuário", sqle);
-        } finally {
-
-            try {
-                result.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(DBUsuario.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
+    }
+    
+    private List<Permissao> carregaPermissoes(ResultSet result) {
+        
+        List<Permissao> permissoes = new ArrayList<Permissao>();
+        
+        try {
+            
+            do {
+                
+                permissoes.add(Permissao.valueOf(result.getString("permissao")));
+            } while (result.next());
+        } catch (SQLException sqle) {
+            
+            throw new PersistenciaException("Falha ao carregar permissões do usuário!", sqle);
+        }
+        
+        return permissoes;
+    }
+    
+    @Override
+    public Usuario obtem(int idUsuario) throws PersistenciaException {
+        
+        String sql = "select *, papel.descricao as papel from usuario natural join usuario_papel natural join papel where id_usuario = ?";
+        Connection conn = this.connectionFactory.createConnection();
+        PreparedStatement stmt;
+        
+        try {
+            
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idUsuario);
+        } catch (SQLException sqle) {
+            
+            throw new PersistenciaException("Falha ao preparar consulta por usuario!", sqle);
+        }
+        
+        try {
+            
+            ResultSet result = stmt.executeQuery();
+            if (result.next()) {
+                
+                return createUsuario(result);
+            }
+        } catch (SQLException sqle) {
+            
+            throw new PersistenciaException("Falha ao preparar consulta por usuario!", sqle);
+        } finally {
+            
+            this.connectionFactory.close(conn);
+        }
+        
+        return null;
     }
 }

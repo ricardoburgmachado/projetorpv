@@ -26,5 +26,11 @@ public class ProReitor extends Usuario {
     public ProReitor(String nome, Campus campus) {
         super(nome, campus);
     }
+    
+    @Override
+    public String getPapel(){
+        
+        return "Pró-reitor";
+    }
 
 }

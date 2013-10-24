@@ -482,9 +482,25 @@ public class RepositorioProjeto {
         this.projDAO.addRecado(projeto.getId(), recado);
     }
     
-    protected List<Recado> listarRecados(int idProjeto) throws PersistenciaException{
+    protected List<Recado> listarRecados(int idProjeto, Usuario usuario) throws PersistenciaException, PrivacidadeException{
         
-        return this.projDAO.listarRecados(idProjeto);
+        Projeto projeto = this.projDAO.obter(idProjeto);
+        if(verificaConsistenciaListarRecados(projeto, usuario)){
+            
+            return this.projDAO.listarRecados(idProjeto);
+        }        
+        
+        return null;
+    }
+    
+    private boolean verificaConsistenciaListarRecados(Projeto projeto, Usuario usuario) throws PrivacidadeException, DadoInconsistenteException{
+        
+        if(!projeto.getProfessor().equals(usuario)){
+            
+            throw new PrivacidadeException("Usuário sem autorização para visualizar recados do projeto!");
+        }
+        
+        return true;
     }
 
     /**

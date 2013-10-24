@@ -42,5 +42,11 @@ public class Aluno extends Usuario {
     public void setMatricula(int matricula) {
         this.matricula = matricula;
     }
+    
+    @Override
+    public String getPapel(){
+        
+        return "Aluno";
+    }
 
 }
