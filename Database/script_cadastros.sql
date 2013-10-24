@@ -47,7 +47,7 @@ INSERT INTO permissao(id_perm, descricao)VALUES(9, 'LISTAGEM_INSCRICOES');
 INSERT INTO permissao(id_perm, descricao)VALUES(10, 'PRESTAR_CONTAS');
 INSERT INTO permissao(id_perm, descricao)VALUES(11, 'DOWNLOAD_EDITAL');
 INSERT INTO permissao(id_perm, descricao)VALUES(12, 'ALTERAR_STATUS_PROJETO');
-INSERT INTO permissao(id_perm, descricao)VALUES(13, 'CONTEMPLACAO_EDITAL');
+INSERT INTO permissao(id_perm, descricao)VALUES(13, 'CONTEMPLACAO_PROJETO');
 INSERT INTO permissao(id_perm, descricao)VALUES(14, 'ACESSAR_PROJ_REGISTRADOS');/** projetos inscritos na tabela inscrito **/
 /***************************** FIM cadastro PERMISSÃO **********************/
 
