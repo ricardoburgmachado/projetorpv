@@ -49,6 +49,8 @@ INSERT INTO permissao(id_perm, descricao)VALUES(11, 'DOWNLOAD_EDITAL');
 INSERT INTO permissao(id_perm, descricao)VALUES(12, 'ALTERAR_STATUS_PROJETO');
 INSERT INTO permissao(id_perm, descricao)VALUES(13, 'CONTEMPLACAO_PROJETO');
 INSERT INTO permissao(id_perm, descricao)VALUES(14, 'ACESSAR_PROJ_REGISTRADOS');/** projetos inscritos na tabela inscrito **/
+INSERT INTO permissao(id_perm, descricao)VALUES(15, 'VISUALIZAR_PROJETO');
+INSERT INTO permissao(id_perm, descricao)VALUES(16, 'VISUALIZAR_INSCRICAO');
 /***************************** FIM cadastro PERMISSÃO **********************/
 
 
@@ -72,6 +74,8 @@ INSERT INTO papel_permissao(id_perm, id_papel) VALUES (11, 3); /** DOWNLOAD_EDIT
 INSERT INTO papel_permissao(id_perm, id_papel) VALUES (12, 2); /** ALTERAR_STATUS_PROJETO -> COORDENADOR **/	
 INSERT INTO papel_permissao(id_perm, id_papel) VALUES (13, 1); /** CONTEMPLACAO_EDITAL -> PRO REITOR **/
 INSERT INTO papel_permissao(id_perm, id_papel) VALUES (14, 1); /** ACESSAR_PROJ_REGISTRADOS -> PRO REITOR **/
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (15, 1); /** VISUALIZAR_PROJETO -> PRO REITOR **/
+INSERT INTO papel_permissao(id_perm, id_papel) VALUES (16, 1); /** VISUALIZAR_INSCRICAO -> PRO REITOR **/
 /***************************** FIM cadastro PAPEL PERMISSÃO **********************/
 
 /***************************** INICIO cadastro usuarios **********************/
