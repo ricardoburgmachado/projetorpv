@@ -731,7 +731,7 @@ public class DBEdital implements EditalDAO {
     @Override
     public boolean existeInscricao(int idProjeto) throws PersistenciaException{
         
-        String sql = "select id_inscricao from inscricao where id_proj=?";
+        String sql = "select id_proj from inscricao where id_proj=?";
         Connection conn = this.factory.createConnection();
         PreparedStatement stmt;
         

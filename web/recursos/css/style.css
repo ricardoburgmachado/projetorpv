@@ -1121,14 +1121,7 @@ a[href*="projeto_nao_homologa"]{
     font-size: 1.1rem;
 }
 
-a[href$=".pdf"]::before {
-    content: url(../imagens/pdf_icon.png);
-    vertical-align: -50%;
-    margin-right: 2px;
-    padding: 0px;
-}
-
-a[type="application/pdf"]::after{
+a[type="application/pdf"]::after, a[href$=".pdf"]::before{
     content: url(../imagens/pdf_icon.png);
     vertical-align: -30%;
     margin: 0px 5px;
@@ -1183,8 +1176,9 @@ a[type="application/pdf"]::after{
 .lista-objeto{
     display: block;
     list-style: none;
-    font-size: 0.8rem;
+    font-size: 1rem;
     padding: 0px;
+    margin-left: 5px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1214,6 +1208,7 @@ a[type="application/pdf"]::after{
     margin-left: 0px;
     width: 60%;
     height: 150px;
+    font-size: 0.75rem;
 }
 
 #form-contempacao-container{
@@ -1222,7 +1217,7 @@ a[type="application/pdf"]::after{
     background-color: darkgrey;
 }
 
-#form-contempacao-container h2{
+.inside-conteudo h2{
     
     font-size: 1.5rem;
     padding: 3px;
@@ -1236,6 +1231,7 @@ a[type="application/pdf"]::after{
     border-radius: 5px;
     background-color: #CCCCCC;
     border: none;
+    cursor: pointer;
 }
 
 #form-contemplacao input[value="Contemplar"]{

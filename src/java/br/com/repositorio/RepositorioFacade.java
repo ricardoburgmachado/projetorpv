@@ -134,18 +134,20 @@ public class RepositorioFacade {
         this.repProjeto.editaProjetoEmExecucao(projeto, usuario);
     }
     
-    public void contemplarProjeto(int idProjeto, int idEdital, Usuario usuario, Recado recado) throws AutorizacaoException, DadoInconsistenteException, PersistenciaException {
+    public void contemplaProjeto(int idProjeto, int idEdital, Usuario usuario, Recado recado) throws AutorizacaoException, DadoInconsistenteException, PersistenciaException {
         
         Inscricao inscricao = this.repEdital.obtemInscricao(idProjeto, idEdital);
+        inscricao.setProjeto(this.repProjeto.obter(idProjeto));
         this.repEdital.contemplar(inscricao, usuario);
         inscricao.getProjeto().setStatus(StatusProjeto.CONTEMPLADO);
         this.repProjeto.atualizaStatus(inscricao.getProjeto());
         this.repProjeto.addRecado(inscricao.getProjeto(), recado);
     }
     
-    public void naoContemplarProjeto(int idProjeto, int idEdital, Usuario usuario, Recado recado) throws AutorizacaoException, DadoInconsistenteException, PersistenciaException {
+    public void naoContemplaProjeto(int idProjeto, int idEdital, Usuario usuario, Recado recado) throws AutorizacaoException, DadoInconsistenteException, PersistenciaException {
         
         Inscricao inscricao = this.repEdital.obtemInscricao(idProjeto, idEdital);
+        inscricao.setProjeto(this.repProjeto.obter(idProjeto));
         
         if (this.repEdital.naoContemplar(inscricao, usuario)) {
             

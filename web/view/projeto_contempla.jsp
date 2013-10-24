@@ -43,47 +43,45 @@
                         </ul>
                     </c:if>
 
-                    <div class="flexbox flex-space">
-                        <div class="round-border flex-grow div-exibe-objeto">
-                            <h2>Projeto</h2>
+                    <div class="round-border div-exibe-objeto">
+                        <h2>Projeto</h2>
 
-                            <div class="flexbox flex-space">
-
-                                <ul class="lista-objeto">
-                                    <li><span class="title">Título: </span>${inscricao.projeto.titulo}</li>
-                                    <li><span class="title">Palavras-chave: </span>${inscricao.projeto.palavrasChave}</li>
-                                    <li><span class="title">Arquivo: </span><c:if test="${inscricao.projeto.arquivo}"><a title="Clique aqui para visualizar o arquivo" href="<c:url value="/arquivos/${projeto.id }/${projeto.id}.pdf"/>">Clique aqui para visualizar o arquivo</a></c:if></li>
-                                    </ul>
-
-                                    <a class="botao botao-vertical" href="">Visualizar</a>
-                                </div>
-
-                            </div>
-
-                            <div class="round-border flex-grow div-exibe-objeto">
-                                <h2>Edital</h2>
-
-                                <div class="flexbox flex-space">
-                                    <ul class="lista-objeto">
-                                        <li><span class="title">Título: </span>${inscricao.edital.titulo}</li>
-                                    <li><span class="title">Prazo Final: </span><fmt:formatDate type="date" dateStyle="medium" value="${inscricao.edital.prazoFinal}" /></li>
-                                    <li><span class="title">Arquivo: </span><a class="arquivo" href="" title="Download do arquivo" type="${inscricao.edital.arquivo.extensao}">${inscricao.edital.arquivo.nomeArquivo}</a></li>
+                        <div class="flexbox flex-space">
+                            <ul class="lista-objeto">
+                                <li><span class="title">Título: </span>${inscricao.projeto.titulo}</li>
+                                <li><span class="title">Palavras-chave: </span>${inscricao.projeto.palavrasChave}</li>
+                                <li><span class="title">Arquivo: </span><c:if test="${inscricao.projeto.arquivo}"><a title="Clique aqui para visualizar o arquivo" href="<c:url value="/arquivos/${projeto.id }/${projeto.id}.pdf"/>">Clique aqui para visualizar o arquivo</a></c:if></li>
                                 </ul>
 
                                 <a class="botao botao-vertical" href="">Visualizar</a>
                             </div>
+                        </div>
+
+                        <div class="round-border div-exibe-objeto">
+                            <h2>Edital</h2>
+
+                            <div class="flexbox flex-space">
+                                <ul class="lista-objeto">
+                                    <li><span class="title">Título: </span>${inscricao.edital.titulo}</li>
+                                <li><span class="title">Prazo Final: </span><fmt:formatDate type="date" dateStyle="medium" value="${inscricao.edital.prazoFinal}" /></li>
+                                <li><span class="title">Arquivo: </span><a class="arquivo" href="" title="Download do arquivo" type="${inscricao.edital.arquivo.extensao}">${inscricao.edital.arquivo.nomeArquivo}</a></li>
+                            </ul>
+
+                            <a class="botao botao-vertical" href="">Visualizar</a>
                         </div>
                     </div>
 
                     <div class="round-border" id="form-contempacao-container">
 
                         <h2>Formulário de contemplação</h2>
-                        <form id="form-contemplacao" title="Formulário de contemplação da inscrição" method="post">
+                        <form id="form-contemplacao" name="form" title="Formulário de contemplação da inscrição" method="post">
 
-                            <label for="recado">Recado: </label>
+                            <input type="hidden"  name="id_projeto" value="${inscricao.projeto.id}"/>
+                            <input type="hidden"  name="id_edital" value="${inscricao.edital.id}"/>                                                 
+                            <label for="recado">Recado: </label>    
                             <textarea id="recado" name="recado"></textarea>
-                            <input class="botao round-border" type="submit" value="Contemplar" onclick="this.form.action = 'inscricao_contempla';"/>
-                            <input class="botao round-border" type="submit" value="Não Contemplar" onclick="this.form.action = 'inscricao_nao_contempla';"/>
+                            <input class="botao round-border" type="submit" value="Contemplar" onclick="this.form.action='inscricao_contempla';"/>
+                            <input class="botao round-border" type="submit" value="Não Contemplar" onclick="this.form.action='inscricao_nao_contempla';"/>
                         </form>
                     </div>
                 </div>

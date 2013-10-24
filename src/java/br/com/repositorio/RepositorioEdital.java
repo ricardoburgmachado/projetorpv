@@ -448,7 +448,7 @@ public class RepositorioEdital {
 
         if (verificaConsistenciaContemplacao(inscricao, usuario)) {
 
-            this.editalDao.excluiInscricao(inscricao.getProjeto().getId(), inscricao.getProjeto().getId());
+            this.editalDao.excluiInscricao(inscricao.getProjeto().getId(), inscricao.getEdital().getId());
             return this.editalDao.existeInscricao(inscricao.getProjeto().getId());
         }
 

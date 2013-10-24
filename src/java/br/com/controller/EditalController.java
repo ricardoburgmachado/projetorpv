@@ -13,6 +13,7 @@ import br.com.model.Arquivo;
 import br.com.model.Edital;
 import br.com.model.Permissao;
 import br.com.model.ProReitor;
+import br.com.model.Recado;
 import br.com.model.Usuario;
 import br.com.repositorio.RepositorioEdital;
 import br.com.repositorio.RepositorioFacade;
@@ -524,24 +525,91 @@ public class EditalController extends GenericController {
         mv.addObject("inconsistencias", inconsistencias);
         return mv;
     }
-    
-    @RequestMapping (value = "/projeto_contempla_show")
-    public ModelAndView exibeViewContemplacao(HttpServletRequest request, @RequestParam int id_projeto, @RequestParam int id_edital){
-        
+
+    @RequestMapping(value = "/projeto_contempla_show")
+    public ModelAndView exibeViewContemplacao(HttpServletRequest request, @RequestParam int id_projeto, @RequestParam int id_edital) {
+
         ModelAndView mv = new ModelAndView("projeto_contempla");
         Usuario user = (Usuario) request.getSession().getAttribute("usuario");
-        
-        try{
-            
+
+        try {
+
             mv.addObject("inscricao", this.facade.exibeInscricao(id_edital, id_projeto, user));
-        }catch(AutorizacaoException aex){
-            
+        } catch (AutorizacaoException aex) {
+
             return new ModelAndView("login");
-        }catch(PrivacidadeException pex){
-            
+        } catch (PrivacidadeException pex) {
+
             return new ModelAndView("index"); //Trocar para tela de exibição das inscrições
         }
-        
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/inscricao_contempla")
+    public ModelAndView contemplaProjeto(HttpServletRequest request, @RequestParam int id_projeto, @RequestParam int id_edital, @RequestParam String recado) {
+
+        ModelAndView mv = this.exibeViewContemplacao(request, id_projeto, id_edital);
+        List<String> inconsistencias = new ArrayList<>();
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        Recado note = null;
+        if (recado != null && !recado.equals("")) {
+
+            note = new Recado(recado, user, new Date());
+        }
+
+        try {
+
+            this.facade.contemplaProjeto(id_projeto, id_edital, user, note);
+        } catch (AutorizacaoException aex) {
+
+            return new ModelAndView("login");
+        } catch (PrivacidadeException pex) {
+
+            inconsistencias.add(pex.getMessage());
+        } catch (DadoInconsistenteException diex) {
+
+            do {
+                inconsistencias.add(diex.getMessage());
+                diex = diex.getException();
+            } while (diex != null);
+        }
+
+        mv.addObject("inconsistencias", inconsistencias);
+        return mv;
+    }
+    
+    @RequestMapping(value = "/inscricao_nao_contempla")
+    public ModelAndView naoContemplaProjeto(HttpServletRequest request, @RequestParam int id_projeto, @RequestParam int id_edital, @RequestParam String recado) {
+
+        System.out.println("processando requisição");
+        ModelAndView mv = this.exibeViewContemplacao(request, id_projeto, id_edital);
+        List<String> inconsistencias = new ArrayList<>();
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        Recado note = null;
+        if (recado != null && !recado.equals("")) {
+
+            note = new Recado(recado, user, new Date());
+        }
+
+        try {
+
+            this.facade.naoContemplaProjeto(id_projeto, id_edital, user, note);
+        } catch (AutorizacaoException aex) {
+
+            return new ModelAndView("login");
+        } catch (PrivacidadeException pex) {
+
+            inconsistencias.add(pex.getMessage());
+        } catch (DadoInconsistenteException diex) {
+
+            do {
+                inconsistencias.add(diex.getMessage());
+                diex = diex.getException();
+            } while (diex != null);
+        }
+
+        mv.addObject("inconsistencias", inconsistencias);
         return mv;
     }
 }

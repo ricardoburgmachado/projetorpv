@@ -976,7 +976,7 @@ public class DBProjeto implements ProjetoDAO {
     @Override
     public void addRecado(int idProjeto, Recado recado) throws PersistenciaException {
 
-        String sql = "intert into recado (conteudo, data_envio, id_usuario, id_proj) values (?, ?, ?, ?)";
+        String sql = "insert into recado (conteudo, data_envio, id_usuario, id_proj) values (?, ?, ?, ?)";
         PreparedStatement stmt;
         Connection conn = this.connection;
 
