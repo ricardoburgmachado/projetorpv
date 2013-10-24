@@ -21,6 +21,8 @@ import br.com.repositorio.RepositorioFacade;
 import br.com.repositorio.RepositorioPostgresFactory;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
@@ -156,7 +158,7 @@ public class EditalController extends GenericController {
 
         RepositorioEdital repositorioEdital = new RepositorioPostgresFactory().createRepositorioEdital();
         RepositorioFacade facade = new RepositorioFacade();
-        Edital edital = facade.obter(id, user);
+        Edital edital = facade.exibeEdital(id, user);
         ModelAndView mv = new ModelAndView("edital_edita");
         mv.addObject("edital", edital);
         return mv;
@@ -232,7 +234,7 @@ public class EditalController extends GenericController {
         if (inconsistencias.size() > 0) {
             RepositorioEdital repositorioEdital = new RepositorioPostgresFactory().createRepositorioEdital();
             RepositorioFacade facade = new RepositorioFacade();
-            Edital editalBD = facade.obter(edital.getId(), user);
+            Edital editalBD = facade.exibeEdital(edital.getId(), user);
             mv = new ModelAndView("edital_edita");
             mv.addObject("edital", editalBD);
             mv.addObject("mensagem", inconsistencias);
@@ -303,7 +305,7 @@ public class EditalController extends GenericController {
 
         try {
 
-            mv.addObject("edital", facade.obter(id, user));
+            mv.addObject("edital", facade.exibeEdital(id, user));
         } catch (AutorizacaoException aex) {
 
             return new ModelAndView("login");
@@ -426,33 +428,12 @@ public class EditalController extends GenericController {
             return mv;
         }
 
-        iniciaDownload(response, arquivo);
+        DownloadUtil.iniciaDownload(response, arquivo);
 
         return null;
     }
 
-    private void iniciaDownload(HttpServletResponse response, Arquivo arquivo) {
-
-        response.reset();
-        response.setContentType(arquivo.getExtensao());
-        response.setHeader("Content-disposition", "attachment; filename=" + arquivo.getNomeArquivo());
-        OutputStream output = null;
-
-        try {
-            output = response.getOutputStream();
-            output.write(arquivo.getDados());
-        } catch (IOException ex) {
-
-            System.out.println(ex.getMessage());
-        } finally {
-
-            try {
-                output.close();
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
-            }
-        }
-    }
+    
 
     @RequestMapping(value = "/inscricao_lista")
     public ModelAndView listaInscricoes(HttpServletRequest request) {
@@ -510,7 +491,7 @@ public class EditalController extends GenericController {
         try {
 
             Arquivo arquivo = this.facade.obtemArquivoInscricao(user, id_edital, id_projeto);
-            this.iniciaDownload(response, arquivo);
+            DownloadUtil.iniciaDownload(response, arquivo);
         } catch (AutorizacaoException aex) {
 
             return new ModelAndView("login");
