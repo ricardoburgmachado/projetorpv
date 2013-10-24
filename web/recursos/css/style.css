@@ -945,4 +945,74 @@ ol#menurel li a {
     border: 1px solid #444444;
 }
 
+
+#conteudo_interno #edital_exibe .show_edital {
+    display:block;
+    float:left;
+    clear: both;
+    text-decoration: none;
+    font-size: 16px;
+    color: black;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left:7px;
+}
+#conteudo_interno #edital_exibe .show_edital:hover {
+    color: green;
+}
+
+#conteudo_interno #edital_exibe .show_retificacao {
+    display:block;
+    float:left;
+    clear: both;
+    text-decoration: none;
+    font-size: 16px;
+    color: black;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left:7px;
+}
+#conteudo_interno #edital_exibe .show_retificacao:hover {
+    color: green;
+}
+
+#conteudo_interno #edital_exibe label {
+
+    display:block;
+    float:left;
+    width:100%;
+    height:16px;
+    font-size:16px;
+    font-weight:bold;
+    clear:both;
+    color:#303030;
+    margin-top:12px;
+    margin-left:7px;
+    margin-bottom: 5px;
+}
+
+#conteudo_interno #edital_exibe .bloco {
+
+    display:block;
+    float:left;
+    width:235px;
+    font-weight:bold;    
+    color:#303030; 
+
+}
+
+#conteudo_interno #edital_exibe input {
+
+    display:block;
+    float:left;
+    width:350px;
+    height:25px;
+    font-size:16px;
+    font-weight:bold;
+    clear:both;
+    color:#303030;
+    margin-top:5px;
+    margin-left:7px;
+    border: 1px solid #303030;   
+}
 /* *************** FIM EDITAL EXIBE*************** */
