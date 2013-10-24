@@ -493,16 +493,9 @@ public class ProjetoController extends GenericController {
 
         this.request = p_request;
         Usuario user = (Usuario) request.getSession().getAttribute("usuario");
-        if (!verificaAutorizacao(user, Permissao.CRUD_PROJETO)) {
-
-            return new ModelAndView("login");
-        }
 
         this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
         Projeto projetoBD = facade.obtemProjeto(user, id);
-        projetoBD.setParticipantesAluno(repositorioProjeto.getParticAlunos(id));
-        projetoBD.setParticipantesProfessor(repositorioProjeto.getParticProfessores(id));
-        projetoBD.setParticipantesExterno(repositorioProjeto.getParticExternos(id));
 
         ModelAndView mv = new ModelAndView("projeto_exibe");
         mv.addObject("projeto", projetoBD);

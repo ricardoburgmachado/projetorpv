@@ -1,3 +1,4 @@
+<%@page import="br.com.model.Usuario"%>
 <%@page import="java.util.List"%>
 <%@page import="br.com.model.Permissao"%>
 <%@page import="br.com.controller.ProjetoController"%>
@@ -271,6 +272,9 @@
 
                         <tr>
                             <td style="display: block; float: left; ">
+                                <% Usuario user =  (Usuario) session.getAttribute("usuario"); 
+                                    if(user != null && user.getPermissoes().contains(Permissao.CRUD_PROJETO))
+                                %>
                                 <a id="excluir_projeto" href="projeto_exclui?id=${projeto.id}" >Deletar projeto</a>
                             </td>
                         </tr>

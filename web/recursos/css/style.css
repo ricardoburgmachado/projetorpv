@@ -994,7 +994,7 @@ a[href$=".pdf"]::before{
     margin-right: 5px;
 }
 
-a[href*="projeto_exibe"]{
+td a[href*="projeto_exibe"]{
     color: transparent;
     display: block;
     width: 28px;
@@ -1195,7 +1195,7 @@ a[type="application/pdf"]::after, a[href$=".pdf"]::before{
 
 .round-border{
     
-    border-radius: 2%;
+    border-radius: 10px;
 }
 
 .flexbox h2{

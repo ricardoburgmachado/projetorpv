@@ -53,7 +53,7 @@
                                 <li><span class="title">Arquivo: </span><c:if test="${inscricao.projeto.arquivo}"><a title="Clique aqui para visualizar o arquivo" href="<c:url value="/arquivos/${projeto.id }/${projeto.id}.pdf"/>">Clique aqui para visualizar o arquivo</a></c:if></li>
                                 </ul>
 
-                                <a class="botao botao-vertical" href="">Visualizar</a>
+                                <a class="botao botao-vertical" title="Visualizar dados do projeto" href="projeto_exibe?id=${inscricao.projeto.id}">Visualizar</a>
                             </div>
                         </div>
 
@@ -67,7 +67,7 @@
                                 <li><span class="title">Arquivo: </span><a class="arquivo" href="" title="Download do arquivo" type="${inscricao.edital.arquivo.extensao}">${inscricao.edital.arquivo.nomeArquivo}</a></li>
                             </ul>
 
-                            <a class="botao botao-vertical" href="">Visualizar</a>
+                            <a class="botao botao-vertical" title="Visualizar dados do edital" href="">Visualizar</a>
                         </div>
                     </div>
 
