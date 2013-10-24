@@ -73,7 +73,7 @@
             if(user != null && user.getPermissoes().contains(permissao)) {
         %>
         
-        <li><a href="<c:url value="/edital_professor_lista_show"/>" class="mais">Projetos registrados</a>
+        <li><a href="<c:url value="/projetos_registrados_lista_show"/>" class="mais">Projetos registrados</a>
         </li>
         <%
             }
