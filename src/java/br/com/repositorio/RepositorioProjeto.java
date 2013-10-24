@@ -125,14 +125,43 @@ public class RepositorioProjeto {
         }
     }
 
-    public Projeto obter(int id, Usuario usuario) throws PersistenciaException, AutorizacaoException {
-
-        if (usuario == null || !usuario.getPermissoes().contains(Permissao.CRUD_PROJETO)) {
+    protected Projeto exibe(int id, Usuario usuario) throws PersistenciaException, AutorizacaoException, PrivacidadeException, DadoInconsistenteException {
+        
+        Projeto projeto = projDAO.obter(id);
+        
+        if(verificaConsistenciaExibirProjeto(projeto, usuario)){
+            
+            return projeto;
+        }
+        
+        return null;
+    }
+    
+    private boolean verificaConsistenciaExibirProjeto(Projeto projeto, Usuario usuario) throws DadoInconsistenteException, PrivacidadeException, AutorizacaoException{
+        
+        DadoInconsistenteException diex = null;
+        
+        if (usuario == null || (!usuario.getPermissoes().contains(Permissao.CRUD_PROJETO) && !usuario.getPermissoes().contains(Permissao.VISUALIZAR_PROJETO))) {
 
             throw new AutorizacaoException("Usuário sem permissão para visualizar projeto!");
         }
-
-        return projDAO.obter(id);
+        
+        if(projeto == null){
+            
+            throw new DadoInconsistenteException("Projeto inexistente");
+        }
+        
+        if(!(usuario instanceof Professor) && !usuario.getArea().equals(projeto.getTipoProjeto())){
+            
+            throw new DadoInconsistenteException("Usuário responsável por uma área diferente da do projeto!");
+        }
+        
+        if(usuario instanceof Professor &&  !projeto.getProfessor().equals(usuario)){
+            
+            throw new PrivacidadeException(diex, "Professor não responsável pelo projeto!");
+        }
+        
+        return true;
     }
 
     public Projeto obter(int id) throws PersistenciaException {
@@ -296,7 +325,7 @@ public class RepositorioProjeto {
 
     public void submeterHomologacao(int idProjeto, Usuario usuario) throws PersistenciaException, DadoInconsistenteException {
 
-        Projeto projeto = obter(idProjeto, usuario);
+        Projeto projeto = exibe(idProjeto, usuario);
 
         submeterHomologacao(projeto, usuario.getId());
     }

@@ -109,7 +109,7 @@ public class RepositorioFacade {
     
     public Projeto obtemProjeto(Usuario usuario, int idProjeto) throws PersistenciaException, AutorizacaoException {
         
-        Projeto projeto = this.repProjeto.obter(idProjeto, usuario);
+        Projeto projeto = this.repProjeto.exibe(idProjeto, usuario);
         projeto.setParticipantesAluno(repProjeto.getParticAlunos(idProjeto));
         projeto.setParticipantesProfessor(repProjeto.getParticProfessores(idProjeto));
         projeto.setParticipantesExterno(repProjeto.getParticExternos(idProjeto));
