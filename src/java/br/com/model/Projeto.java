@@ -132,7 +132,7 @@ public class Projeto {
     public void setProfessor(Professor professor) {
         this.professor = professor;
     }
-
+                            
     public void setCustos(int idProj, TipoCusto tipoC, String[] custoVal, String[] custoDesc) {
         for (int i = 0; i < custoVal.length; i++) {
             if (valorValido(custoVal[i]) && descricaoValida(custoDesc[i])) {

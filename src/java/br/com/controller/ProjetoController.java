@@ -87,33 +87,14 @@ public class ProjetoController extends GenericController {
 
         Professor prof = (Professor) request.getSession().getAttribute("usuario");
         p_projeto.setProfessor(prof);
+        p_projeto.setInicio(ConversaoUtil.stringToDate(request.getParameter("inicio_projeto")));
+        p_projeto.setFim(ConversaoUtil.stringToDate(request.getParameter("fim_projeto")));
 
-        String[] inicio = request.getParameterValues("inicio_xx");
-        String[] fim = request.getParameterValues("fim_xx");
-
-        if (inicio[0] != null && !inicio[0].equals("")) {
-            String[] pISplit = inicio[0].split("-");
-            p_projeto.setInicio(new Date(Integer.parseInt(pISplit[0]) - 1900, Integer.parseInt(pISplit[1]) - 1, Integer.parseInt(pISplit[2])));
-        }
-
-        if (fim[0] != null && !fim[0].equals("")) {
-            String[] pFSplit = fim[0].split("-");
-            p_projeto.setFim(new Date(Integer.parseInt(pFSplit[0]) - 1900, Integer.parseInt(pFSplit[1]) - 1, Integer.parseInt(pFSplit[2])));
-        }
-
-        //this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
-        //this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
-        //int idRetorno = repositorioProjeto.inserir(p_projeto);
         int idRetorno = -1;
-
-        /**
-         * **************************************** *
-         */
         List<String> inconsistencias = new LinkedList<>();
 
         try {
-            this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
-            this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
+            this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();            
             idRetorno = repositorioProjeto.inserir(p_projeto);
         } catch (DadoInconsistenteException diex) {
             do {
@@ -125,9 +106,6 @@ public class ProjetoController extends GenericController {
             inconsistencias.add(pex.getMessage());
         }
 
-        /**
-         * **************************************** *
-         */
         if (idRetorno != -1) {
             if (capitais_val != null && capitais_desc != null) {
                 p_projeto.setCustos(idRetorno, TipoCusto.CAPITAL, capitais_val, capitais_desc);
@@ -136,7 +114,6 @@ public class ProjetoController extends GenericController {
                 p_projeto.setCustos(idRetorno, TipoCusto.CUSTEIO, custeios_val, custeios_desc);
             }
             repositorioProjeto.inserirCustos(p_projeto.getCustos());
-
             repositorioProjeto.inserirParticipantes(idRetorno, participantes_aluno);
             repositorioProjeto.inserirParticipantes(idRetorno, participantes_prof);
             repositorioProjeto.inserirParticipantes(idRetorno, participantes_externo);
@@ -148,21 +125,13 @@ public class ProjetoController extends GenericController {
 
         ModelAndView mv;
         if (inconsistencias.size() > 0) {
-            this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
-            this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
-            mv = new ModelAndView("projeto_adiciona");
-            mv.addObject("participantes_aluno", repositorioUsuario.listar("ALUNO"));
-            mv.addObject("participantes_externo", repositorioUsuario.listar("EXTERNO"));
-            mv.addObject("participantes_professor", repositorioUsuario.listar("PROFESSOR"));
-            mv.addObject("area_conhecimento", repositorioProjeto.listarAreas());
-            mv.addObject("tipo_projeto", TipoProjeto.values());
+            mv = this.projetoAdicionaShow(p_request);
             mv.addObject("mensagem", inconsistencias);
         } else {
-            List projetos = this.repositorioProjeto.listarProjetos(p_projeto.getProfessor().getId());
-            mv = new ModelAndView("lista_projeto");
+            mv = this.projetoListaShow(p_request);
             mv.addObject("mensagem", "Projeto cadastrado com sucesso");
-            mv.addObject("projetos", projetos);
         }
+        
         return mv;
     }
 
@@ -360,6 +329,8 @@ public class ProjetoController extends GenericController {
 
         Professor prof = (Professor) this.request.getSession().getAttribute("usuario");
         p_projeto.setProfessor(prof);
+        p_projeto.setInicio(ConversaoUtil.stringToDate(request.getParameter("inicio_projeto")));
+        p_projeto.setFim(ConversaoUtil.stringToDate(request.getParameter("fim_projeto")));
 
         this.repositorioProjeto = new RepositorioPostgresFactory().createRepositorioProjeto();
         this.repositorioUsuario = new RepositorioPostgresFactory().createRepositorioUsuario();
@@ -407,26 +378,12 @@ public class ProjetoController extends GenericController {
 
         ModelAndView mv;
         if (inconsistencias.size() > 0) {
-
-            Projeto projetoBD = facade.obtemProjeto(user, p_projeto.getId());
-
-            projetoBD.setParticipantesAluno(repositorioProjeto.getParticAlunos(p_projeto.getId()));
-            projetoBD.setParticipantesProfessor(repositorioProjeto.getParticProfessores(p_projeto.getId()));
-            projetoBD.setParticipantesExterno(repositorioProjeto.getParticExternos(p_projeto.getId()));
-            mv = new ModelAndView("projeto_edita");
-            mv.addObject("projeto", projetoBD);
-            mv.addObject("area_conhecimento", repositorioProjeto.listarAreas());
-            mv.addObject("custos", repositorioProjeto.getCustos(p_projeto.getId()));
-            mv.addObject("participantes_aluno", repositorioUsuario.listar("ALUNO"));
-            mv.addObject("participantes_externo", repositorioUsuario.listar("EXTERNO"));
-            mv.addObject("participantes_professor", repositorioUsuario.listar("PROFESSOR"));
+            
+            mv = this.projetoEditaShow(p_request, p_projeto.getId());
             mv.addObject("mensagem", inconsistencias);
         } else {
-
-            List projetos = this.repositorioProjeto.listarProjetos(p_projeto.getProfessor().getId());
-            //mv = new ModelAndView("lista_projeto");
-            mv = this.projetoEditaShow(request, p_projeto.getId());
-            mv.addObject("projetos", projetos);
+            
+            mv = this.projetoListaShow(p_request);
             mv.addObject("mensagem", "Projeto editado com sucesso!");
         }
 

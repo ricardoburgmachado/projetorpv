@@ -150,13 +150,13 @@
 
 
                         <span class="bloco">
-                            <label for="dataxx">Inicio(execução do projeto):</label>
-                            <input style="width: 175px" class="prazo" type="date" name="inicio_xx" id="prazoInicialxx" value="" />
+                            <label for="inicio_projeto">Inicio(execução do projeto):</label>
+                            <input style="width: 175px" class="prazo" type="date" name="inicio_projeto" id="prazoInicialxx" value="" />
                         </span>
                             
                         <span class="bloco">
-                            <label for="dataxx">Fim(execução do projeto):</label>
-                            <input style="width: 175px" class="prazo" type="date" name="fim_xx" id="prazoFinalxx" value="" />
+                            <label for="fim_projeto">Fim(execução do projeto):</label>
+                            <input style="width: 175px" class="prazo" type="date" name="fim_projeto" id="prazoFinalxx" value="" />
                         </span>    
 
                         <span style="clear: both; display: block;"></span>

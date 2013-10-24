@@ -50,46 +50,53 @@ public class RepositorioProjeto {
 
     public int inserir(Projeto p) throws PersistenciaException, DadoInconsistenteException {
 
+        if (verificaConsistenciaAtualizarProjeto(p)) {
+
+            return projDAO.inserir(p);
+        }
+
+        return 0;
+    }
+
+    private boolean verificaConsistenciaAtualizarProjeto(Projeto projeto) throws DadoInconsistenteException {
+
         DadoInconsistenteException exception = null;
 
-        if (verificaAreaConhecimentoInvalida(p.getAreaConhecimento())) {
+        if (verificaAreaConhecimentoInvalida(projeto.getAreaConhecimento())) {
 
             exception = new DadoInconsistenteException(exception, "Área de conhecimento não informada <br/>");
         }
 
-        if (verificaNulo(p.getTipoProjeto())) {
+        if (verificaNulo(projeto.getTipoProjeto())) {
 
             exception = new DadoInconsistenteException(exception, "Tipo de projeto não informado <br/>");
         }
 
-        if (verificaVazio(p.getTitulo())) {
+        if (verificaVazio(projeto.getTitulo())) {
 
             exception = new DadoInconsistenteException(exception, "Título não informado <br/>");
         }
-        
-        if (verificaNulo(p.getInicio())) {
+
+        if (verificaNulo(projeto.getInicio())) {
             exception = new DadoInconsistenteException(exception, "Data inicio não informada!<br/>");
         }
 
-        if (!verificaNulo(p.getInicio()) && !verificaNulo(p.getFim())) {
-            if (verificaPrazoMenor(p.getInicio(), p.getFim())) {
+        if (!verificaNulo(projeto.getInicio()) && !verificaNulo(projeto.getFim())) {
+            if (verificaPrazoMenor(projeto.getInicio(), projeto.getFim())) {
                 exception = new DadoInconsistenteException(exception, "Data fim menor que data inicio!<br/>");
             }
         }
-        
-        if (verificaNulo(p.getFim())) {
+
+        if (verificaNulo(projeto.getFim())) {
             exception = new DadoInconsistenteException(exception, "Data fim não informado!<br/>");
         }
 
-
-        if (exception == null) {
-
-            return projDAO.inserir(p);
-        } else {
+        if (exception != null) {
 
             throw exception;
         }
 
+        return true;
     }
 
     public ArrayList<AreaConhecimento> listarAreas() {
@@ -162,34 +169,32 @@ public class RepositorioProjeto {
         projDAO.removeArquivo(idProj);
     }
 
-    public void editar(Projeto p) {
-        
-        if (verificaVazio(p.getTitulo())) {
+    public void editar(Projeto p) throws PersistenciaException, DadoInconsistenteException {
 
-            throw new DadoInconsistenteException("Título não informado <br/>");
+        if (verificaConsistenciaAtualizarProjeto(p)) {
+
+            projDAO.editar(p);
+            projDAO.atualizaCustos(p.getId(), p.getCustos());
+            projDAO.atualizaParticipantes(p.getId(), p.getParticipantesString());
         }
-
-        projDAO.editar(p);
-        projDAO.atualizaCustos(p.getId(), p.getCustos());
-        projDAO.atualizaParticipantes(p.getId(), p.getParticipantesString());
     }
-    
-    public void editaProjetoEmExecucao(Projeto projeto, Usuario usuario)  throws DadoInconsistenteException, PrivacidadeException, AutorizacaoException, PersistenciaException{
-        
-        if(verificaConsistenciaEditaProjetoExec(projeto, usuario)){
-            
+
+    public void editaProjetoEmExecucao(Projeto projeto, Usuario usuario) throws DadoInconsistenteException, PrivacidadeException, AutorizacaoException, PersistenciaException {
+
+        if (verificaConsistenciaEditaProjetoExec(projeto, usuario)) {
+
             this.projDAO.editar(projeto);
             this.atualizaParticipantes(projeto.getId(), this.projDAO.carregaParticipantes(projeto.getId()), projeto.getParticipantes());
         }
     }
-    
-    private void atualizaParticipantes(int idProjeto, Collection<Usuario> antigosParticips, Collection<Usuario> novosParticips){
-        
+
+    private void atualizaParticipantes(int idProjeto, Collection<Usuario> antigosParticips, Collection<Usuario> novosParticips) {
+
         Set<Usuario> antigos = new HashSet<>(antigosParticips);
         antigos.removeAll(novosParticips);
         this.projDAO.removeParticipantes(idProjeto, antigos);
-        
-        Set<Usuario> novos  = new HashSet<>(novosParticips);
+
+        Set<Usuario> novos = new HashSet<>(novosParticips);
         novos.removeAll(antigosParticips);
         this.projDAO.adicionaParticipantes(idProjeto, novos);
     }
@@ -447,14 +452,14 @@ public class RepositorioProjeto {
             throw exception;
         }
     }
-    
-    protected void addRecado(Projeto projeto, Recado recado) throws PersistenciaException{
-        
+
+    protected void addRecado(Projeto projeto, Recado recado) throws PersistenciaException {
+
         this.projDAO.addRecado(projeto.getId(), recado);
     }
-    
-    protected List<Recado> listarRecados(int idProjeto) throws PersistenciaException{
-        
+
+    protected List<Recado> listarRecados(int idProjeto) throws PersistenciaException {
+
         return this.projDAO.listarRecados(idProjeto);
     }
 
@@ -475,18 +480,20 @@ public class RepositorioProjeto {
             return true;
         }
     }
-    
-    protected void atualizaStatusProjeto(Projeto projeto){
-        
+
+    protected void atualizaStatusProjeto(Projeto projeto) {
+
         this.projDAO.atualizaStatus(projeto);
     }
+
     /**
      * Método utilizado para alterar o status (feito pelo Pro-reitor)
-     * @param p 
+     *
+     * @param p
      */
-    public void alteraStatusProjeto(Projeto p){
-         
-         DadoInconsistenteException exception = null;
+    public void alteraStatusProjeto(Projeto p) {
+
+        DadoInconsistenteException exception = null;
 
 
         if (verificaNulo(p.getStatus())) {
@@ -498,15 +505,15 @@ public class RepositorioProjeto {
         }
 
         if (exception == null) {
-            projDAO.alteraStatus(p);            
+            projDAO.alteraStatus(p);
         } else {
             throw exception;
         }
 
     }
-    
-    public void prestaContas(Projeto projeto){
-         DadoInconsistenteException exception = null;
+
+    public void prestaContas(Projeto projeto) {
+        DadoInconsistenteException exception = null;
 
 
         if (projeto.getPrestacaoConta() == null) {
@@ -518,22 +525,22 @@ public class RepositorioProjeto {
         } else {
             throw exception;
         }
-  
-     }
-  
-     private boolean verificaPrazoMenor(Date ini, Date fim) {
-        return ini.after(fim);
-    }
-     
-    public List listarProjetoInscritos(String tipoProjeto){
-    
-         List<Projeto> projetos = this.projDAO.listarProjetosInscritos(tipoProjeto);
-         return projetos;    
+
     }
 
-    public List<Projeto> listarProjetos(){
-    
+    private boolean verificaPrazoMenor(Date ini, Date fim) {
+        return ini.after(fim);
+    }
+
+    public List listarProjetoInscritos(String tipoProjeto) {
+
+        List<Projeto> projetos = this.projDAO.listarProjetosInscritos(tipoProjeto);
+        return projetos;
+    }
+
+    public List<Projeto> listarProjetos() {
+
         List<Projeto> projetos = this.projDAO.listarProjetos();
-        return projetos;    
+        return projetos;
     }
 }

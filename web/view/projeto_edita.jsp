@@ -4,6 +4,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -132,6 +133,16 @@
                         <label>Resumo:</label>
                         <textarea style="height: 85px; width: 500px" name=resumo cols=35 rows=5>${projeto.resumo}</textarea>
 
+                        <span class="bloco">
+                            <label for="inicio_projeto">Inicio(execução do projeto):</label>
+                            <input style="width: 175px" class="prazo" type="date" name="inicio_projeto" id="prazoInicialxx" value="<fmt:formatDate type="date" pattern="dd-MM-yyyy" value="${projeto.inicio}"/>"/>
+                        </span>
+                            
+                        <span class="bloco">
+                            
+                            <label for="fim_projeto">Fim(execução do projeto):</label>
+                            <input style="width: 175px" class="prazo" type="date" name="fim_projeto" id="prazoFinalxx" value="<fmt:formatDate type="date" pattern="dd-MM-yyyy" value="${projeto.fim}"/>" />
+                        </span>    
 
                         <span style="clear: both; display: block;"></span>
 
@@ -217,9 +228,9 @@
                                             <input onkeydown="Mascara(this, Valor);" style="width: 75px; display: block; float: left" type="text" name="capital_val_x" value="${custoBD.valor}"/> 
                                             <textarea style="width: 150px; height: 35px; display: block; float: left; clear: none; margin-left: 10px; margin-top: 0px" name=capital_desc_x cols=35 rows=3>${custoBD.descricao}</textarea> 
                                             <a style="width:100px;text-decoration:none;color:black;display:block;float:left;margin-top:10px;margin-left:5px" href="#" onclick="deletarCapital('campo_capital_<%=countCapitais_x%>');
-                                                    return false;">Remover Capital</a>
+                return false;">Remover Capital</a>
                                         </p>
-                                        <% countCapitais_x++; %>
+                                        <% countCapitais_x++;%>
                                     </c:if>
                                 </c:forEach>
                             </div>         
@@ -240,7 +251,7 @@
                                             <input onkeydown="Mascara(this, Valor);" style="width: 75px; display: block; float: left" type="text" name="custeio_val_x" value="${custoBD.valor}"/> 
                                             <textarea style="width: 150px; height: 35px; display: block; float: left; clear: none; margin-left: 10px; margin-top: 0px" name=custeio_desc_x cols=35 rows=3>${custoBD.descricao}</textarea> 
                                             <a style="width:100px;text-decoration:none;color:black;display:block;float:left;margin-top:10px;margin-left:5px" href="#" onclick="deletarCusteio('campo_custeio_<%=countCusteios_x%>');
-                                                    return false;">Remover Custeio</a>
+                return false;">Remover Custeio</a>
                                         </p>
                                         <% countCusteios_x++;%>
                                     </c:if>

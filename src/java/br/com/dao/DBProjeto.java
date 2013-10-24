@@ -100,12 +100,14 @@ public class DBProjeto implements ProjetoDAO {
 
         System.out.println("****************** ENTROU NO MÉTODO OBTER");
 
-        String query = "SELECT * FROM " + PROJETO + " WHERE id_proj = " + id;
+        String query = "SELECT * FROM " + PROJETO + " WHERE id_proj = ? ";
         System.out.println("******************** QUERY -> " + query);
         PreparedStatement stmt;
         ResultSet resultSet;
         try {
+            
             stmt = connection.prepareStatement(query);
+            stmt.setInt(1, id);
             resultSet = stmt.executeQuery();
             resultSet.next();
             Projeto p = new Projeto();
@@ -177,7 +179,7 @@ public class DBProjeto implements ProjetoDAO {
 
     @Override
     public void editar(Projeto p) throws PersistenciaException {
-        String query = "UPDATE " + PROJETO + " SET titulo=?, palavras_chave=?, resumo=?, sigilo=?, id_area=?, tipo_proj=?, id_responsavel=? WHERE id_proj = ?";
+        String query = "UPDATE " + PROJETO + " SET titulo=?, palavras_chave=?, resumo=?, sigilo=?, id_area=?, tipo_proj=?, id_responsavel=?, inicio=?, fim=? WHERE id_proj = ?";
 
         System.out.println("******************** QUERY -> " + query);
 
@@ -193,7 +195,9 @@ public class DBProjeto implements ProjetoDAO {
             stmt.setString(6, p.getTipoProjeto().toString());
             stmt.setInt(7, p.getProfessor().getId());
             System.out.println("********************** ID PROFESSOR: " + p.getProfessor().getId());
-            stmt.setInt(8, p.getId());
+            stmt.setDate(8, new Date(p.getInicio().getTime()));
+            stmt.setDate(9, new Date(p.getFim().getTime()));
+            stmt.setInt(10, p.getId());
             System.out.println("******************** QUERY -> " + query);
             int retorno = stmt.executeUpdate();
 
