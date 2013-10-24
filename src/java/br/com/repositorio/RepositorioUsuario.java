@@ -31,5 +31,10 @@ public class RepositorioUsuario {
     public ArrayList<Usuario> listar(String papel) {
         return usuarioDAO.listar(papel);
     }
+    
+    protected Usuario obterUsuario(int idUsuario) throws PersistenciaException{
+        
+        return this.usuarioDAO.obtem(idUsuario);
+    }
 
 }

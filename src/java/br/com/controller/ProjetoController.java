@@ -798,5 +798,25 @@ public class ProjetoController extends GenericController {
         }
         return mv;
     }
+    
+    @RequestMapping (value = "/recados_lista")
+    public ModelAndView listaRecados(HttpServletRequest request, @RequestParam int id_projeto){
+        
+        ModelAndView mv = new ModelAndView("recados_lista");
+        Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+        List<String> inconsistencias = new ArrayList<>();
+        
+        try{
+            
+            mv.addObject("recados", this.facade.listarRecadosProjeto(id_projeto, user));
+        }catch(PrivacidadeException pex){
+            
+            mv = this.projetoListaShow(request);
+            inconsistencias.add(pex.getMessage());
+            mv.addObject("inconsistencias", inconsistencias);
+        }
+        
+        return mv;
+    }
 
 }

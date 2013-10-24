@@ -1107,7 +1107,7 @@ public class DBProjeto implements ProjetoDAO {
 
         List<Recado> recados;
 
-        String sql = "select * from recado where id_proj = ?";
+        String sql = "select * from recado natural join usuario where id_proj = ?";
         PreparedStatement stmt;
         Connection conn = this.connection;
 

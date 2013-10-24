@@ -26,4 +26,10 @@ public class Coordenador extends Usuario {
     public Coordenador(String nome, Campus campus) {
         super(nome, campus);
     }
+    
+    @Override
+    public String getPapel(){
+        
+        return "Coordenador";
+    }
 }
